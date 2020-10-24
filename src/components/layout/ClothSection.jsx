@@ -1,43 +1,43 @@
-import React from 'react'
-import moduleName from './'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios'
+import Clothing from './Clothing';
 
-const ClothSection = ({ clothSection, sectionId }) => {
-  const { title } = clothSection;
+const ClothSection = () => {
+  // { clothSection, sectionId }
+  // The clothSection will have an array of products
+  const [clothes, setClothes] = useState([]);
 
+  // The clothSection will have a title 
+  // const { title } = clothSection;
+
+  const baseUrl =  'https://afternoon-chamber-08446.herokuapp.com/clothing'
+
+  useEffect(() => {
+    const fetchClothes = async (url) => {
+      const result = await axios.get(url)
+      // console.log(result.data);
+      setClothes(result.data)
+    }
+    fetchClothes(baseUrl)
+  }, [])
+
+  console.log('pulled clothes: ', clothes);
  return (
   //  <section id="genesis" className="wow fadeInUpBig category">
-    <section id={sectionId} className="wow fadeInUpBig category">
-        <div className="title">
-          <h2>{ title }</h2> 
-        </div>
-        <div className="owl-carousel owl-theme">
-          <div className="item">
-            <img src="images/sweat01-removebg.png" alt="" srcSet />
-            <span className="price"><ion-icon name="pricetags-outline" /> N12,000</span>
-            <a href="https://api.whatsapp.com/send?phone=2348130267643&text=Hi,%20I%20want%20to%20buy%20the%20red%20sweatshirt%20for%20N12,000" className="buy">BUY NOW</a>
-          </div>
-          <div className="item">
-            <img src="images/sweat02 1t.png" alt="" srcSet />
-            <span className="price"><ion-icon name="pricetags-outline" /> N14,000</span>
-            <a href="https://api.whatsapp.com/send?phone=2348130267643&text=Hi,%20I%20want%20to%20buy%20the%20yellow%20sweatshirt%20for%20N14,000" className="buy">BUY NOW</a>
-          </div>
-          <div className="item">
-            <img src="images/sweat03 1.png" alt="" srcSet />
-            <span className="price"><ion-icon name="pricetags-outline" /> N12,000</span>
-            <a href="https://api.whatsapp.com/send?phone=2348130267643&text=Hi,%20I%20want%20to%20buy%20the%20gray%20sweatshirt%20for%20N12,000" className="buy">BUY NOW</a>
-          </div>
-          <div className="item">
-            <img src="images/sweat04 1.png" alt="" srcSet />
-            <span className="price"><ion-icon name="pricetags-outline" /> N12,000</span>
-            <a href="https://api.whatsapp.com/send?phone=2348130267643&text=Hi,%20I%20want%20to%20buy%20the%20light%20blue%20sweatshirt%20for%20N12,000" className="buy">BUY NOW</a>
-          </div>  
-          <div className="item">
-            <img src="images/sweat05 1.png" alt="" srcSet />
-            <span className="price"><ion-icon name="pricetags-outline" /> N11,000</span>
-            <a href="https://api.whatsapp.com/send?phone=2348130267643&text=Hi,%20I%20want%20to%20buy%20the%20white%20sweatshirt%20for%20N11,000" className="buy">BUY NOW</a>
-          </div>
-        </div>          
-      </section>
+  
+    <div>
+      { clothes.map(cloth => <Clothing clothes={cloth} />) }
+    </div>
+    
    )
 }
 export default ClothSection
+
+// <section id={sectionId} className="wow fadeInUpBig category">
+//         <div className="title">
+//           <h2>{ title }</h2> 
+//         </div>
+//         <div className="owl-carousel owl-theme">
+//           { /* In here we loop through clothes and */}
+//         </div>          
+//       </section>

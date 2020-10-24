@@ -1,9 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 
-const Clothing = ({ clothing }) => {
-  const { imgUrl, name, orderLink, price } = clothing;                     
+const Clothing = ({clothes: { name, imgUrl, price, orderLink }}) => {
+  // const [name, setName] = useState(clothing.name);
+  // const [imgUrl, setImgUrl] = useState(clothing.imgUrl);
+  // const [orderLink, setOrderLink] = useState(clothing.orderLink);
+  // const [price, setPrice] = useState(clothing.price);
+  
+  // console.log('inside Cloth Prop: ', props)
+
  return (
-   <div className="item">
+   <div className="item">   
+    <p>{name}</p>
+
     <img 
       src={imgUrl} 
       alt={name} 
@@ -14,8 +23,8 @@ const Clothing = ({ clothing }) => {
       {price}
     </span>
 
-    <Link  
-      to={orderLink} 
+    <a  
+      href={orderLink} 
       className="buy">
       BUY NOW
     </a>
@@ -23,3 +32,4 @@ const Clothing = ({ clothing }) => {
    )
 }
 export default Clothing
+
