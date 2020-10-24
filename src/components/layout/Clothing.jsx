@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-const Clothing = ({clothes: { name, imgUrl, price, orderLink }}) => {
+const Clothing = ({clothes: { id, name, imgUrl, category, price, orderLink }}) => {
   // const [name, setName] = useState(clothing.name);
   // const [imgUrl, setImgUrl] = useState(clothing.imgUrl);
   // const [orderLink, setOrderLink] = useState(clothing.orderLink);
@@ -10,13 +10,17 @@ const Clothing = ({clothes: { name, imgUrl, price, orderLink }}) => {
   // console.log('inside Cloth Prop: ', props)
 
  return (
-   <div className="item">   
+   <div className="item" key={id}>   
     <p>{name}</p>
 
     <img 
       src={imgUrl} 
       alt={name} 
-      srcSet />
+      />
+
+    <p>
+      { category }
+    </p>
 
     <span className="price">
       <ion-icon name="pricetags-outline" />

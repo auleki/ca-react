@@ -26,7 +26,7 @@ const ClothSection = () => {
   //  <section id="genesis" className="wow fadeInUpBig category">
   
     <div>
-      { clothes.map(cloth => <Clothing clothes={cloth} />) }
+      { clothes.map((cloth, i) => <Clothing key={i} clothes={cloth} />) }
     </div>
     
    )
