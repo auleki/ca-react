@@ -1,8 +1,9 @@
-export { default as CarouselItem } from './CarouselItem'
-export { default as Clothing } from './Clothing'
-export { default as ClothSection } from './ClothSection'
-export { default as Footer } from './Footer'
-export { default as Navbar } from './Navbar'
-export { default as SubscribeForm } from './SubscribeForm'
-export { default as SubscribeSuccess } from './SubscribeSuccess'
-export { default as Header } from './Header'
+export { default as CarouselItem } from './CarouselItem';
+export { default as Clothing } from './Clothing';
+export { default as ClothSection } from './ClothSection';
+export { default as Footer } from './Footer';
+export { default as Navbar } from './Navbar';
+export { default as SubscribeForm } from './SubscribeForm';
+export { default as SubscribeSuccess } from './SubscribeSuccess';
+export { default as Header } from './Header';
+export { default as ClothListings } from './ClothListings';

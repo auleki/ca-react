@@ -1,26 +1,25 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-const Clothing = ({clothes: { id, name, imgUrl, category, price, orderLink }}) => {
-  // const [name, setName] = useState(clothing.name);
-  // const [imgUrl, setImgUrl] = useState(clothing.imgUrl);
-  // const [orderLink, setOrderLink] = useState(clothing.orderLink);
-  // const [price, setPrice] = useState(clothing.price);
+const Clothing = ({ clothes }) => {
+  const [name, setName] = useState(clothes.name);
+  const [imageUrl, setImageUrl] = useState(clothes.imageUrl);
+  const [orderLink, setOrderLink] = useState(clothes.orderLink);
+  const [price, setPrice] = useState(clothes.price);
+  const [id, setId] = useState(clothes.id);
   
   // console.log('inside Cloth Prop: ', props)
+
+  console.log(name);
 
  return (
    <div className="item" key={id}>   
     <p>{name}</p>
 
     <img 
-      src={imgUrl} 
+      src={imageUrl}
       alt={name} 
       />
-
-    <p>
-      { category }
-    </p>
 
     <span className="price">
       <ion-icon name="pricetags-outline" />

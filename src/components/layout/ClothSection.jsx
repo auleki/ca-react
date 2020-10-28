@@ -1,32 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios'
+// import axios from 'axios' 
 import Clothing from './Clothing';
 
-const ClothSection = () => {
-  const [clothes, setClothes] = useState([]);
+const ClothSection = ({ clothes: { products, title } }) => {
 
-  // The clothSection will have a title 
-  // const { title } = clothSection;
+  const [merchs, setMerchs] = useState(products);
 
-  const baseUrl =  'https://afternoon-chamber-08446.herokuapp.com/api/clothing';
 
-  useEffect(() => {
-    const fetchClothes = async (url) => {
-      const result = await axios.get(url)
-      // console.log(result.data);
-      setClothes(result.data)
-    }
-    fetchClothes(baseUrl)
-  }, [])
-
-  console.log('pulled clothes: ', clothes);
+  console.log('pulled clothes: ', products);
  return (
-  //  <section id="genesis" className="wow fadeInUpBig category">
-  
+  //  <section id="genesis" className="wow fadeInUpBig category">  
     <div>
-      { clothes.map((cloth, i) => <Clothing key={i} clothes={cloth} />) }
-    </div>
-    
+      <div>
+        <h3>{ title }</h3>
+      </div>
+        {/* clothes.map((cloth, i) => <Clothing key={i} clothes={cloth} />) */}
+        {merchs.map((cloth, i) => <Clothing key={i} clothes={cloth}/>)}
+    </div>    
    )
 }
 export default ClothSection
