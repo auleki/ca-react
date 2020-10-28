@@ -3,14 +3,12 @@ import axios from 'axios'
 import Clothing from './Clothing';
 
 const ClothSection = () => {
-  // { clothSection, sectionId }
-  // The clothSection will have an array of products
   const [clothes, setClothes] = useState([]);
 
   // The clothSection will have a title 
   // const { title } = clothSection;
 
-  const baseUrl =  'https://afternoon-chamber-08446.herokuapp.com/clothing'
+  const baseUrl =  'https://afternoon-chamber-08446.herokuapp.com/api/clothing';
 
   useEffect(() => {
     const fetchClothes = async (url) => {
