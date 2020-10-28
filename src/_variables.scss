@@ -1,0 +1,56 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Allerta+Stencil&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chivo&family=Roboto+Condensed:wght@400;700&display=swap');
+
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  border: 0; 
+}
+
+
+
+$header-img: "https://res.cloudinary.com/checkadigs/image/upload/v1601241771/header00_e1dkhx.webp";
+$f1: Chivo;
+$f2: "Roboto Condensed";
+$f3: "Allerta Stencil";
+$c1: #F36B2B;
+$c2: #F4F4F4;
+$c3: #6A6A6A;
+$c4: rgb(31, 27, 27);
+$c5: #FFFFFF; 
+$c6: #E33D3D;
+
+:export {      
+    f1: $f1;
+    f2: $f2;
+    f3: $f3;
+    c1: $c1;
+    c2: $c2;
+    c3: $c3;
+    c4: $c4;
+    c5: $c5;
+    c6: $c6;
+}
+
+// .button { 
+//     position: absolute;
+//     left: 10%;
+//     top: 10%;p
+//     padding: 2rem 2.5rem;
+//     border-radius: 11px;
+//     transition:  250ms ease-out;
+//     // background: #55b9f3;
+//     // box-shadow:  9px 9px 18px #489dcf, 
+//     //             -5px -4px 8px #217897;
+
+//     &:hover {
+//         box-shadow: inset 12px 12px 18px #a1a1a11e, 
+//         inset -5px -4px 8px #333333;
+//         color: #fff;
+//         transform: translateY(-10px);
+//         background-color: rgb(19, 17, 17);
+//     }
+// }

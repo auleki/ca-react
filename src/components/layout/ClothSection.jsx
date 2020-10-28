@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-// import axios from 'axios' 
+import Carousel from 'react-elastic-carousel';
+
 import Clothing from './Clothing';
 
 const ClothSection = ({ clothes: { products, title } }) => {
@@ -10,12 +11,16 @@ const ClothSection = ({ clothes: { products, title } }) => {
   console.log('pulled clothes: ', products);
  return (
   //  <section id="genesis" className="wow fadeInUpBig category">  
-    <div>
+    <div className="cloth-section">
       <div>
         <h3>{ title }</h3>
       </div>
-        {/* clothes.map((cloth, i) => <Clothing key={i} clothes={cloth} />) */}
-        {merchs.map((cloth, i) => <Clothing key={i} clothes={cloth}/>)}
+      <Carousel>
+        {merchs.map(
+          (cloth, i) => 
+          <Clothing key={i} clothes={cloth}/>
+          )}
+      </Carousel>
     </div>    
    )
 }

@@ -1,13 +1,16 @@
 import styled from 'styled-components'; 
+// @import '../../variables.scss';
 
 export default styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 250px;
-  width: 100%;
-  background-color: #000000;
+  height: 100%;
+  padding: 2rem;
+  width: 25rem;
+  background-color: $c5;
   color: #fff;
   margin: 15px;
-  font-size: 4em;
+  /* font-size: 4em; */
 `
+

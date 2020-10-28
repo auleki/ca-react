@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import Item from './Item'
 
 const Clothing = ({ clothes }) => {
   const [name, setName] = useState(clothes.name);
@@ -9,29 +10,35 @@ const Clothing = ({ clothes }) => {
   const [id, setId] = useState(clothes.id);
   
   // console.log('inside Cloth Prop: ', props)
+  // <ion-icon name="pricetags-outline" />
 
   console.log(name);
 
  return (
-   <div className="item" key={id}>   
-    <p>{name}</p>
-
-    <img 
-      src={imageUrl}
-      alt={name} 
-      />
-
-    <span className="price">
-      <ion-icon name="pricetags-outline" />
-      {price}
-    </span>
-
-    <a  
-      href={orderLink} 
-      className="buy">
-      BUY NOW
-    </a>
-  </div>
+   <Item>
+     <div className="item" key={id}>   
+     
+       <img 
+       src={imageUrl}
+       alt={name}
+       />
+       
+       
+       <div className="item-info">
+         <span className="price">
+         {price}
+         </span>
+         <p>{name}</p>
+         
+         <a
+           href={orderLink} 
+           className="buy">
+         BUY NOW
+          </a>
+       </div>
+      
+    </div>
+  </Item>
    )
 }
 export default Clothing
