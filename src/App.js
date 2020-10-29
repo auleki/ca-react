@@ -7,20 +7,22 @@ import './App.scss';
 import CarouselElastic from './components/layout/CarouselElastic'
 // import { ClothSection } from './components/layout'
 import { Header, Navbar, Footer, SubscribeForm, ClothListings } from './components/layout'
+import StyledTest from './components/layout/StyledTest';
 
 
 const App = () => { 
-
+  
+  // <Navbar />  
+  // <Header /> 
+  // <ClothListings />
+  // <SubscribeForm /> 
+  // <Footer />
   // <CarouselElastic />
-  {/* <CarouselItem /> */}
+  // <CarouselItem /> 
   return (
-    <>   
-      <Navbar />  
-      <Header /> 
-      <ClothListings />
-      <SubscribeForm /> 
-      <Footer />
-      </>
+    <> 
+      <StyledTest />
+    </>
       );
     }
     

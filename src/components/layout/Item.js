@@ -1,5 +1,4 @@
 import styled from 'styled-components'; 
-// @import '../../variables.scss';
 
 export default styled.div`
   display: flex;
