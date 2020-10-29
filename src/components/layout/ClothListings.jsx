@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ClothSection from './ClothSection';
+import { CardContainer } from '../StyledComponents'
+import Card from './Card';
 
 
 const ClothListings = () => {
@@ -16,9 +18,13 @@ const ClothListings = () => {
   }, [])     
 
  return (
-   <div>
-    {clothes.map((cloth, i) => <ClothSection key={i} clothes={cloth}/>)}
-   </div>
+   <CardContainer>  
+    <Card number={1}/>
+    <Card number={2}/>
+    <Card number={4}/>
+    <Card number={5}/>
+    {/* {clothes.map((cloth, i) => <ClothSection key={i} clothes={cloth}/>)} */}
+   </CardContainer>
    )
 }
 export default ClothListings

@@ -12,19 +12,19 @@ import StyledTest from './components/layout/StyledTest';
 
 const App = () => { 
   
-  // <Navbar />  
-  // <Header /> 
-  // <ClothListings />
-  // <SubscribeForm /> 
-  // <Footer />
-  // <CarouselElastic />
-  // <CarouselItem /> 
   return (
     <> 
-      <StyledTest />
+      {/* <StyledTest /> */}
+      <Navbar />  
+      <Header /> 
+      <ClothListings /> 
+      <SubscribeForm /> 
+      <Footer />
+      {/* <CarouselElastic /> */}
+      
     </>
       );
     }
     
     export default App;
-    
+  
