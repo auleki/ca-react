@@ -72,22 +72,26 @@ export const Button = ({ primary, children, bgColor }) => {
 }
 
 export const CardContainer = styled.div`
-  /* background-color: #f00; */
-  /* heig */
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
   justify-content: center;
-  height: 100vh;
+  height: 100%;
+  padding: 0 1rem;
 `
 
 export const CardStyle = styled.div`
-  height: 100%;
-  width: 50%;
+  height: 30rem;
+  width: 100%;
   text-align: center;
   margin: 2rem 0;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #909;
+
+  img {
+    height: auto;
+    width: 50%;
+  }
 `

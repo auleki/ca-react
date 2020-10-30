@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Item from './Item'
+import { CardStyle } from '../StyledComponents';
 
 const Clothing = ({ clothes }) => {
   const [name, setName] = useState(clothes.name);
@@ -15,8 +16,9 @@ const Clothing = ({ clothes }) => {
   console.log(name);
 
  return (
-   <Item>
-     <div className="item" key={id}>   
+   <CardStyle>
+     {/* <div className="item" key={id}>    */}
+     <div key={id}>
      
        <img 
        src={imageUrl}
@@ -38,7 +40,7 @@ const Clothing = ({ clothes }) => {
        </div>
       
     </div>
-  </Item>
+  </CardStyle>
    )
 }
 export default Clothing
