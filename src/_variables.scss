@@ -1,7 +1,5 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Allerta+Stencil&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Chivo&family=Roboto+Condensed:wght@400;700&display=swap');
-
 
 * {
   padding: 0;
@@ -9,8 +7,6 @@
   box-sizing: border-box;
   border: 0; 
 }
-
-
 
 $header-img: "https://res.cloudinary.com/checkadigs/image/upload/v1601241771/header00_e1dkhx.webp";
 $f1: Chivo;
@@ -22,18 +18,6 @@ $c3: #6A6A6A;
 $c4: rgb(31, 27, 27);
 $c5: #FFFFFF; 
 $c6: #E33D3D;
-
-// :export {      
-//     f1: $f1;
-//     f2: $f2;
-//     f3: $f3;
-//     c1: $c1;
-//     c2: $c2;
-//     c3: $c3;
-//     c4: $c4;
-//     c5: $c5;
-//     c6: $c6;
-// }
 
 // .button { 
 //     position: absolute;

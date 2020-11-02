@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 
+import CartIcon from '../../cart-01.svg'
+
 const Navbar = ({ admin }) => {
 
-  const [isAdmin, setIsAdmin] = useState(admin)
+  // const [isAdmin, setIsAdmin] = useState(admin)
 
  return (
     <>
@@ -15,6 +17,9 @@ const Navbar = ({ admin }) => {
           </div>
           <div className="hamburger">
             <ion-icon name="menu-outline" />
+          </div>
+          <div>
+            {/* <CartIcon /> */}
           </div>
           <ul className="navbar">
             <li className="dropdown">

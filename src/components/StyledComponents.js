@@ -31,13 +31,15 @@ const StyledButton = styled.button`
       css`
         color: #fff;
         /* background-color: ${({ bgColor }) => bgColor}; */
-        background-color: palevioletred;
-        transition: box-shadow 250ms ease-out;
+        background-color: #F36B2B;
+        transition: box-shadow 250ms ease-out, background-color 200ms ease-in;
 
         &:hover {
           box-shadow: none;
           animation: 500ms ${FadeIn} ease-in infinite;
-          background-color: #333;
+          ${'' /* background-color: #333; */}
+          background-color: #fff;
+          color: #000;
           // use the shadow to add a pulse animation.
           /* box-shadow: 0 0 .5rem .4rem rgba(0, 0, 0, .3); */
         }
@@ -85,8 +87,8 @@ export const CardContainer = styled.div`
 export const CardStyle = styled.div`
   /* height: 30rem; */
   height: 100%;
-  padding: 3rem 0;
-  width: 60%;
+  padding: 3rem 0 2rem ;
+  width: 40%;
   text-align: center;
   margin: 1rem 0;
   border-radius: .4rem;
@@ -110,7 +112,7 @@ export const CardStyle = styled.div`
 
   img {
     height: auto;
-    width: 50%;
+    width: 30rem;
   }
 `
 
@@ -170,4 +172,95 @@ export const IconStyle = styled.div`
     height: 1.5rem;
     width: 1.5rem;
   }
+`
+
+export const ShopCartContainer = styled.div`
+  height: 100%;
+  width: 100%;
+  /* background-color: #ff0; */
+  /* text-align: center; */
+  display: flex;
+  justify-content: center;
+  color: #fff;
+  min-height: 100vh;
+`
+
+export const CartItemStyle = styled.div`
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  grid-gap: 2.5rem;
+  width: 85%;
+  justify-content: space-between;
+  padding: 3rem;
+  /* background: #333; */
+
+  .shopping-list {
+    /* background-color: #fff; */
+    width: 100%;
+    /* color: #000; */
+    margin-right: 1rem;
+  }
+  
+  .checkout {
+    width: 100%;
+    border-radius: .2rem;
+    /* background-color: #212121; */
+    text-align: center;
+    /* background-color: #000; */
+    color: #fff;
+    padding: 1rem;
+
+    
+  }
+`
+
+export const CartCard = styled.div`
+  background-color: #212121;
+  color: #fff;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-around;
+  border-radius: .2rem;
+  align-items: center;
+  padding: 1rem;
+
+  img {
+    height: auto;
+    width: 10%;
+  }
+`
+
+export const CheckoutCard = styled.div`
+  background-color: #212121;
+  color: #fff;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  height: 30%;
+  padding: 0 3rem;
+
+  div {
+    margin: 1rem 0;
+
+    p {
+      display: block;
+      font-size: 1.3rem;
+      padding: .5rem 0;
+    }
+
+    p:nth-child(2) {
+      /* margin-left: 1rem; */
+      /* color: black; */
+      font-weight: 800;
+    }
+  }
+`
+
+export const RowLayout = styled.div`
+  align-items: center;
+  display: flex;
+  /* background: #ff0; */
+  padding: 3rem;
 `

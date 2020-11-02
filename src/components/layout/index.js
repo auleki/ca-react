@@ -7,3 +7,4 @@ export { default as SubscribeForm } from './SubscribeForm';
 export { default as SubscribeSuccess } from './SubscribeSuccess';
 export { default as Header } from './Header';
 export { default as ClothListings } from './ClothListings';
+export { default as ShoppingCart } from './ShoppingCart'

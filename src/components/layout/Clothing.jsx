@@ -29,6 +29,7 @@ const Clothing = ({ clothes }) => {
        
        {/* <div className="item-info"> */}
        <CardInfo>
+       
          <span className="price">
          <Icon svg={Naira}/> {price}  
          </span>
