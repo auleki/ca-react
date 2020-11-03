@@ -1,4 +1,7 @@
 import React, { useState } from 'react'
+import ShoppingBasketOutlinedIcon from '@material-ui/icons/ShoppingBasketOutlined';
+
+import ShoppingBasketSharpIcon from '@material-ui/icons/ShoppingBasketSharp';
 
 import CartIcon from '../../cart-01.svg'
 
@@ -39,6 +42,7 @@ const Navbar = ({ admin }) => {
             <li><a href="quiz.html" className="links quiz">Quiz</a></li>
             <li><a href="#aboutUs" className="links contact">About Us</a></li>
           </ul>
+          <ShoppingBasketSharpIcon/>
         </nav>
     </>
    )

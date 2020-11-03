@@ -139,17 +139,20 @@ nav {
 
       .links {
           color: $c5;
-          // background-color: $c3;
+          background-color: transparent;
           padding: 1rem;
           text-decoration: none;
+          border-bottom: solid 5px transparent;
           display: flex;
           align-items: center;
           // transition: 450ms ease-in-out;
           // ion-icon {
-          //     margin: 0 .2rem;
-          // }
-          &:hover {
-              color: $c1;
+              //     margin: 0 .2rem;
+              // }
+              &:hover {
+            //   background-color: #000;
+              color: $c5;
+              border-bottom: solid 5px $c1;
               text-decoration: wavy;
               // ion-icon {
               //     color: $c1;
@@ -681,13 +684,40 @@ footer {
 }
 
 // EMERGENCY STYLING FOR CLOTH SECTION
-
 .cloth-section {
     h3 {
         padding: 2rem 0 1rem;
         // border-bottom: 1.4em solid #000;
+        // background: #000;
         font-weight: 400;
         font-size: 2.5rem;
+    }
+}
+
+.link-button {
+    color: #fff;
+    background-color: #F36B2B;
+    // height: rem; 
+    padding: .5em 1.5em;
+    // width: 4rem; 
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    justify-content: center;
+    border-radius: 5%;
+    border-top: transparent solid 3px;
+    transition: 200ms ease-in;
+    position: relative;
+
+    span {
+        margin-left: .8em;
+    }
+
+    &:hover {
+        background-color: #000;
+        border-top: #F36B2B solid 3px;
+        // color: #F36B2B;
+        color: #fff;
     }
 }
 
@@ -914,7 +944,7 @@ footer {
 
 // CHANGES TO MAIN 
 
-// .item img {
+// .item img { 
 //   height: auto;
 //   width: 80%;
 // }
@@ -923,16 +953,16 @@ footer {
 .rec {
     .rec-dot {
         // background-color: #b9b9b9;
-        // box-shadow: none;              
+        // box-shadow: none;
     }
-    
+
     .rec-dot_active {
         background-color: #e54819;
         // border: 1px solid rgb(236, 236, 236);
         // box-shadow: 0 0 1px 2px rgba(245, 245, 245, 0.2);b
         box-shadow: none;
     } 
-    
+
     .rec-arrow {
        background-color: #333333;
        color: #fff;
@@ -940,7 +970,7 @@ footer {
        // transition: border-radius 550ms ease-in;    
        &:disabled {
            visibility: hidden;
-       }    
+       }
        &:hover {
            border-radius: 50%;
        }

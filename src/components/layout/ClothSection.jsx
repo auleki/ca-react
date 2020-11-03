@@ -7,8 +7,8 @@ const ClothSection = ({ clothes: { products, title } }) => {
 
   const [merchs, setMerchs] = useState(products);
 
-
   console.log('pulled clothes: ', products);
+
  return (
   //  <section id="genesis" className="wow fadeInUpBig category">  
     <div className="cloth-section">
@@ -24,13 +24,5 @@ const ClothSection = ({ clothes: { products, title } }) => {
     </div>    
    )
 }
-export default ClothSection
 
-// <section id={sectionId} className="wow fadeInUpBig category">
-//         <div className="title">
-//           <h2>{ title }</h2> 
-//         </div>
-//         <div className="owl-carousel owl-theme">
-//           { /* In here we loop through clothes and */}
-//         </div>          
-//       </section>
+export default ClothSection

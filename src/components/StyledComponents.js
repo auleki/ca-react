@@ -87,8 +87,8 @@ export const CardContainer = styled.div`
 export const CardStyle = styled.div`
   /* height: 30rem; */
   height: 100%;
-  padding: 3rem 0 2rem ;
-  width: 40%;
+  padding: 3rem 0;
+  width: 60%;
   text-align: center;
   margin: 1rem 0;
   border-radius: .4rem;
@@ -112,7 +112,7 @@ export const CardStyle = styled.div`
 
   img {
     height: auto;
-    width: 30rem;
+    width: 60%;
   }
 `
 
