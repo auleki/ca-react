@@ -5,9 +5,11 @@ const Homepage = () => {
                      
  return (
        <>
+       
           <Header />
           <ClothListings />
           <SubscribeForm />
+
        </>
    )
 }

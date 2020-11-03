@@ -19,7 +19,7 @@ const ShoppingCart = (props) => {
                      
  return (
    <>
-   <Navbar />
+   {/* <Navbar /> */}
    <RowLayout>
      <ShopCartContainer>
       <CartItemStyle>
@@ -36,7 +36,11 @@ const ShoppingCart = (props) => {
           <CartItem product={productInfo}/>          
         </div>
         
-        <Checkout />
+        <div className="checkout">
+          <Checkout />
+
+        </div>
+
 
       </CartItemStyle>
     {/* <h2>Raise Hell.</h2> */}

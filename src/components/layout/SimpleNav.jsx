@@ -20,9 +20,9 @@ const SimpleNav = ({ admin }) => {
               <h1 className="text">CHECKADIGS</h1>
             </a>
           </div>
-          <div className="hamburger">            
+          {/* <div className="hamburger">            
             <MenuRoundedIcon />
-          </div>
+          </div> */}
           <div>
             {/* <CartIcon /> */}
           </div>
@@ -41,7 +41,14 @@ const SimpleNav = ({ admin }) => {
               </ul>
             </li> */}
             {/* <li><a href="" class="links">About Us</a></li> */}
-            <li><a href="quiz.html" className="links quiz">Quiz</a></li>
+
+
+            {/* Reactivate Quiz Link Here  */}
+            {/* <li><a href="quiz.html" className="links quiz">Quiz</a></li> */}
+
+
+
+
             {/* <li><a href="#aboutUs" className="links contact">About Us</a></li> */}
             
               {/* <a className="link-button" href="/shopping-cart">
@@ -50,10 +57,10 @@ const SimpleNav = ({ admin }) => {
               </a> */}
           </ul>
           
-          <a className="link-button" href="/shopping-cart">
+          <Link className="link-button" to="/shopping">
                 <ShoppingBasketSharpIcon/>
-                <span className="badge">0</span>
-              </a>
+                <span className="badge">7</span>
+          </Link>
         </nav>
     </>
    )

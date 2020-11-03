@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button, CheckoutCard } from '../StyledComponents'
+
 const Checkout = () => {
                      
  return (
@@ -12,10 +13,11 @@ const Checkout = () => {
         </div>
 
         <Button primary>
-          Proceed To Checkout
+          Checkout
         </Button>
      </CheckoutCard>
     //  </div>
    )
 }
+
 export default Checkout

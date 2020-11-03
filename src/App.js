@@ -21,11 +21,11 @@ const App = () => {
     <>   
       <SimpleNav />
       {/* <Homepage />  */}
-
       <Switch>
         <Route exact path='/' component={Homepage}/>
-        <Route path="/shopping" component={SubscribeSuccess} />
-      </Switch>     
+        <Route path="/shopping" component={ShoppingCart} />
+      </Switch>
+
       <Footer />
 
       {/* <ShoppingCart /> */}      

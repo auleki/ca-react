@@ -195,7 +195,7 @@ export const ShopCartContainer = styled.div`
 export const CartItemStyle = styled.div`
   height: 100%;
   display: grid;
-  grid-template-columns: 1.5fr 1fr;
+  grid-template-columns: 1.5fr .7fr;
   grid-gap: 2.5rem;
   width: 85%;
   justify-content: space-between;
@@ -206,6 +206,7 @@ export const CartItemStyle = styled.div`
     /* background-color: #fff; */
     width: 100%;
     /* color: #000; */
+
     margin-right: 1rem;
   }
   
@@ -216,7 +217,7 @@ export const CartItemStyle = styled.div`
     text-align: center;
     /* background-color: #000; */
     color: #fff;
-    padding: 1rem;
+    /* padding: 1rem; */
 
     
   }
@@ -226,33 +227,71 @@ export const CartCard = styled.div`
   background-color: #212121;
   color: #fff;
   margin-bottom: 2rem;
+  /* display: grid; */
+  /* grid-template-columns: 2fr 1fr 1fr; */
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   border-radius: .2rem;
   align-items: center;
   padding: 1rem;
 
+  .card-info {
+    display: flex;
+    /* background: #fff; */
+    align-items: center;
+    justify-content: space-between;
+    padding: 1em;
+
+    p {
+      margin: 0 1em;
+    }
+  }
+
+  input {
+    padding: .8em .5rem;
+    width: 30%;
+    color: #fff;
+    border-radius: .5em;
+    background-color: #444;
+  }
+
   img {
     height: auto;
-    width: 10%;
+    width: 15%;
+    border: 2px solid #fff;
+    border-radius: 100%;
+    padding: .5em;
+  }
+
+  @media (min-width: 318px) and (max-width: 480px) {
+    .card-info {
+      display: flex; 
+      flex-direction: column;
+    }
   }
 `
 
 export const CheckoutCard = styled.div`
   background-color: #212121;
   color: #fff;
-  text-align: center;
-  justify-content: center;
+  text-align: left;
+  /* justify-content: center; */
   display: flex;
+  width: 100%;
   flex-direction: column;
-  height: 30%;
-  padding: 0 3rem;
+
+  /* height: %; */
+  padding: 1em 3rem;
 
   div {
     margin: 1rem 0;
+    /* background: #000; */
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
 
     p {
-      display: block;
+      /* display: block; */
       font-size: 1.3rem;
       padding: .5rem 0;
     }

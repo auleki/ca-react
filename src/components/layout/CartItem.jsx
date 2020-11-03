@@ -7,13 +7,16 @@ const CartItem = ({ product: { image, name, id, price } }) => {
      <CartCard key={id}>
        <img src={image} alt={name}/>
        <p>{ name }</p>
-       <p>₦ { price }</p>
-       <input 
-        type="number" 
-        name="qty" 
-        id="qty" 
-        onChange={null}
-        value={null}/>
+       <div className="card-info">
+         <p>₦ { price }</p>
+         <input 
+          type="number" 
+          name="qty" 
+          id="qty" 
+          placeholder="Quantity"
+          onChange={null}
+          value={3}/>
+       </div>
      </CartCard>    
    )
 }
