@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import ShoppingBasketOutlinedIcon from '@material-ui/icons/ShoppingBasketOutlined';
+// import ShoppingBasketOutlinedIcon from '@material-ui/icons/ShoppingBasketOutlined';
 import { Link } from 'react-router-dom'
+import MenuRoundedIcon from '@material-ui/icons/MenuRounded';
 
 import ShoppingBasketSharpIcon from '@material-ui/icons/ShoppingBasketSharp';
 
-import CartIcon from '../../cart-01.svg'
+// import CartIcon from '../../cart-01.svg'
 
 const SimpleNav = ({ admin }) => {
 
@@ -19,8 +20,8 @@ const SimpleNav = ({ admin }) => {
               <h1 className="text">CHECKADIGS</h1>
             </a>
           </div>
-          <div className="hamburger">
-            <ion-icon name="menu-outline" />
+          <div className="hamburger">            
+            <MenuRoundedIcon />
           </div>
           <div>
             {/* <CartIcon /> */}
@@ -43,12 +44,16 @@ const SimpleNav = ({ admin }) => {
             <li><a href="quiz.html" className="links quiz">Quiz</a></li>
             {/* <li><a href="#aboutUs" className="links contact">About Us</a></li> */}
             
-              <a className="link-button" href="/shopping-cart">
+              {/* <a className="link-button" href="/shopping-cart">
                 <ShoppingBasketSharpIcon/>
-                <span className="badge">1</span>
-              </a>
+                <span className="badge">0</span>
+              </a> */}
           </ul>
           
+          <a className="link-button" href="/shopping-cart">
+                <ShoppingBasketSharpIcon/>
+                <span className="badge">0</span>
+              </a>
         </nav>
     </>
    )

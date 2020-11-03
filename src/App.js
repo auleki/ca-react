@@ -1,34 +1,34 @@
 import React from 'react';
 
 import './App.scss';
-import CarouselElastic from './components/layout/CarouselElastic'
+// import CarouselElastic from './components/layout/CarouselElastic'
 // import { ClothSection } from './components/layout'
 import { 
   ShoppingCart, Header, 
-  Navbar, Footer, 
+  Footer, 
   SubscribeForm, 
-  ClothListings, MaterialNav, 
-  SimpleNav } from './components/layout'
-import StyledTest from './components/layout/StyledTest';
+  SubscribeSuccess,
+  ClothListings, 
+  SimpleNav, Homepage } from './components/layout'
+
+import { Route, Switch } from 'react-router-dom';
+
 
 
 const App = () => { 
   
   return (
-    <> 
-      {/* <StyledTest /> */}
-      {/* <Navbar />   */}
+    <>   
       <SimpleNav />
-      {/* <MaterialNav /> */}
-      <Header /> 
-      <ClothListings /> 
-      <SubscribeForm /> 
+      {/* <Homepage />  */}
+
+      <Switch>
+        <Route exact path='/' component={Homepage}/>
+        <Route path="/shopping" component={SubscribeSuccess} />
+      </Switch>     
       <Footer />
 
-      {/* <ShoppingCart /> */}
-
-      {/* <CarouselElastic /> */}
-      
+      {/* <ShoppingCart /> */}      
     </>
       );
     }
