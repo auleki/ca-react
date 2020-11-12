@@ -14,8 +14,9 @@ const CartItem = ({ product: { image, name, id, price } }) => {
           name="qty" 
           id="qty" 
           placeholder="Quantity"
-          onChange={null}
-          value={3}/>
+          // onChange={null}
+          // value={3}
+          />
        </div>
      </CartCard>    
    )

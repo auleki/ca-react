@@ -282,13 +282,18 @@ export const CheckoutCard = styled.div`
 
   /* height: %; */
   padding: 1em 3rem;
+  h2 {
+    font-weight: 400;
+  }
 
   div {
     margin: 1rem 0;
     /* background: #000; */
     display: flex;
     justify-content: space-between;
+    color: #ddd;
     text-align: center;
+
 
     p {
       /* display: block; */

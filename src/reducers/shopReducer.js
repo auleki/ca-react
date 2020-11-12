@@ -6,8 +6,13 @@ const INITIAL_STATE = {
   currentItem: null
 }
 
-const shopReducer = (state = INITIAL_STATE, action) => {
+const shopReducer = (state = [], action) => {
   switch (action.type) {
+    case 'NEW_PRODUCT':
+      return [...state, action.data]
+    // case "INIT_NOTES":
+    case actionTypes.INIT_PRODUCTS:
+      return [...state, action.data];
     case actionTypes.ADD_TO_CART:
       return {};
     case actionTypes.REMOVE_FROM_CART:
@@ -20,6 +25,8 @@ const shopReducer = (state = INITIAL_STATE, action) => {
       return state
   }
 }
+
+
 
 export default shopReducer
 
