@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useField } from '../../hooks/'
 import SimpleNav from './SimpleNav'
-import { BasicCard } from "../StyledComponents";
+import { BasicCard, Form, RowLayout } from "../StyledComponents";
 import { Input } from '../StyledComponents'
 // import InputField from '../forms/InputField'
 
@@ -17,40 +17,60 @@ const CreateOrder = () => {
   return (
     <div>
       <SimpleNav />
-      <BasicCard>
-        <form>
-          <Input 
-            placeholder="First Name"
-            onChange={firstName.onChange}
-            value={firstName.value}
-            />
+      {/* <BasicCard> */}
+        <Form>          
+            <RowLayout>
+            {/* <FormGroup> */}
+              <Input 
+                placeholder="First Name"
+                onChange={firstName.onChange}
+                value={firstName.value}
+                />
+            {/* </FormGroup> */}
+            
+            {/* <FormGroup>               */}
+              <Input 
+                className="push-left"
+                placeholder="Last Name"
+                onChange={lastName.onChange}
+                value={lastName.value}
+                />
+            {/* </FormGroup> */}
+            </RowLayout>
 
-          <Input 
-            placeholder="Last Name"
-            onChange={lastName.onChange}
-            value={lastName.value}
-            />
+          {/* <FormGroup> */}
+            <Input 
+              placeholder="Email"
+              onChange={email.onChange}
+              value={email.value}
+              />
 
-          <Input 
-            placeholder="Email"
-            onChange={email.onChange}
-            value={email.value}
-            />
+          {/* </FormGroup> */}
 
-          <Input 
-            placeholder="Phone Number"
-            onChange={phone.onChange}
-            value={phone.value}
-            />
+          {/* <FormGroup> */}
+            <Input 
+              placeholder="Phone Number"
+              onChange={phone.onChange}
+              value={phone.value}
+              />
 
-          <Input 
-            placeholder="Location"
-            onChange={location.onChange}
-            value={location.value}
-            />
+          {/* </FormGroup> */}
 
-        </form>
-      </BasicCard>
+          {/* <FormGroup> */}
+            <Input 
+              placeholder="Location"
+              onChange={location.onChange}
+              value={location.value}
+              />
+
+          {/* </FormGroup> */}
+
+        </Form>
+
+
+      
+        
+      {/* </BasicCard> */}
       
             
     </div>

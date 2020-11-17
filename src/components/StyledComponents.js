@@ -229,15 +229,19 @@ export const CartItemStyle = styled.div`
 export const BasicCard = styled.div`
   height: 100%;
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   margin: 0 auto;
 
-  width: 80%;
+  width: 50%;
   /* width: 100%; */
   justify-content: space-between;
-  padding: 3rem;
+  /* padding: 3rem; */
   background: rgb(33, 33, 33);
 
+  form {
+    display: flex;
+    flex-direction: column;
+  }
 
   @media (max-width: 512px) {
     padding: 0;
@@ -368,16 +372,35 @@ export const CartCard = styled.div`
     }
   }
 `
+export const FormGroup = styled.div`
+  width: 100%;
+  /* background-color: #fff; */
+`
+
+export const Form = styled.form`
+  height: 100%;
+  display: flex;
+  padding: 0 2rem;
+  flex-direction: column;
+  margin: 0 auto;
+
+  width: 45%;
+  /* width: 100%; */
+  justify-content: space-between;
+  /* padding: 3rem; */
+  background: rgb(33, 33, 33);
+
+`
 
 export const Input = styled.input`
   
     padding: 1rem .3rem;
-    width: 50%;
+    width: 100%;
     font-size: 1rem;
     color: #fff;
     border-bottom: solid 3px #444;
     background-color: #000;
-    margin: 1rem 1rem;
+    margin: 1rem 0;
     transition: background-color 700ms ease-in;
     border-bottom-left-radius: .3rem;
     border-bottom-right-radius: .3rem;
@@ -391,8 +414,13 @@ export const Input = styled.input`
       border-bottom: solid 3px #F36B2B;
       box-shadow: 10px 10px 22px -12px rgba(0,0,0,0.75);
       background-color: transparent;
-
     }
+/* 
+    .push-left {
+      margin-left: 5rem;
+      font-size: 50px;
+      background-color: #F36B2B;
+    } */
   `
 
 
@@ -423,7 +451,9 @@ export const RowLayout = styled.div`
   align-items: center;
   display: flex;
   /* background: #ff0; */
-  padding: 3rem;
+
+  // * Make sure to pass this rule value as a PROP!
+  /* padding: 3rem; */
 `
 
 export const ActionRow = styled.div`
