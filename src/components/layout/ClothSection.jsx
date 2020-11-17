@@ -7,7 +7,7 @@ const ClothSection = ({ clothes: { products, title } }) => {
 
   const [merchs, setMerchs] = useState(products);
 
-  console.log('pulled clothes: ', products);
+  // console.log('pulled clothes: ', products);
 
  return (
   //  <section id="genesis" className="wow fadeInUpBig category">  

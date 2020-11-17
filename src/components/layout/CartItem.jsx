@@ -1,24 +1,36 @@
 import React from 'react'
-import { CartCard } from '../StyledComponents'
+import { CartCard, Button } from '../StyledComponents'
+import { formatToComma } from "../../api/operationsAPI";
 
-const CartItem = ({ product: { image, name, id, price } }) => {
+const CartItem = ({ product: { imageUrl, name, id, price } }) => {
                      
  return (
      <CartCard key={id}>
-       <img src={image} alt={name}/>
-       <p>{ name }</p>
-       <div className="card-info">
-         <p>₦ { price }</p>
-         <input 
-          type="number" 
-          name="qty" 
-          id="qty" 
-          placeholder="Quantity"
-          // onChange={null}
-          // value={3}
-          />
+       <div className="cart-image">
+        <img src={imageUrl} alt={name}/>
        </div>
-     </CartCard>    
+       <div className="name">
+        <p>{ name }</p>
+
+       </div>
+       <div className="card-info">
+         <p>₦ { formatToComma(price) }</p>
+       </div>
+       <div className="item-actions">
+        <Button> + </Button>
+          <input 
+            type="number" 
+            name="qty" 
+            id="qty" 
+            placeholder="Quantity"
+            // onChange={null}
+            // value={3}
+            />
+        <Button> - </Button>
+        </div>
+      
+     </CartCard>
    )
 }
 export default CartItem
+

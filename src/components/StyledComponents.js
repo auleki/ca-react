@@ -13,17 +13,32 @@ const FadeIn = keyframes`
   }
 `
 
+const HoverObj = keyframes`
+0% {
+  transform: translateY(5px);
+} 
+
+50% {
+  transform: translateY(-5px)
+}
+
+100% {
+  transform: translateY(5px);
+}
+`
+
 const StyledButton = styled.button`
   padding: 1rem 1.5rem;
-  font-size: 1.5rem;
+  font-size: 1.2em;
   font-family: Helvetica;
   border-radius: .2rem; 
   transition: background-color 150ms ease-in;
   border: none;
-  margin: 1.5rem 0;
+  margin: .5rem 0;
   &:hover {
     cursor: pointer;
-    background-color: #43a047;
+    /* background-color: #43a047; */
+    background-color: #000;
     color: #fff;
   }
   ${({ primary }) => 
@@ -38,13 +53,15 @@ const StyledButton = styled.button`
           box-shadow: none;
           animation: 500ms ${FadeIn} ease-in infinite;
           ${'' /* background-color: #333; */}
-          background-color: #fff;
-          color: #000;
+          /* background-color: #fff; */
+          background-color: #43a047;
+
+          color: #fff;
           // use the shadow to add a pulse animation.
           /* box-shadow: 0 0 .5rem .4rem rgba(0, 0, 0, .3); */
         }
       `
-    }  
+    }
 `
 
 export const Title = styled.h1`
@@ -82,8 +99,6 @@ export const CardContainer = styled.div`
   height: 100%;
   text-align: center;
   padding: 0 1rem;
-
-  
 `
 
 export const CardStyle = styled.div`
@@ -194,119 +209,170 @@ export const ShopCartContainer = styled.div`
 
 export const CartItemStyle = styled.div`
   height: 100%;
-  display: grid;
+  /* display: grid;
   grid-template-columns: 1.5fr .7fr;
-  grid-gap: 2.5rem;
-  width: 85%;
+  grid-gap: 2.5rem; */
+  display: flex;
+  flex-direction: column-reverse;
+
+  width: 100%;
+  /* width: 100%; */
   justify-content: space-between;
   padding: 3rem;
-  /* background: #333; */
+  /* background: #ff0; */
 
-  .shopping-list {
-    /* background-color: #fff; */
-    width: 100%;
-    /* color: #000; */
-
-    margin-right: 1rem;
-  }
-  
-  .checkout {
-    width: 100%;
-    border-radius: .2rem;
-    /* background-color: #212121; */
-    text-align: center;
-    /* background-color: #000; */
-    color: #fff;
-    /* padding: 1rem; */
-
-    
+  @media (max-width: 512px) {
+    padding: 0;
   }
 `
 
 export const CartCard = styled.div`
   background-color: #212121;
   color: #fff;
-  margin-bottom: 2rem;
-  /* display: grid; */
-  /* grid-template-columns: 2fr 1fr 1fr; */
+  /* line that added the 3d look to cart card */
+  margin: 2rem 1rem;
+  overflow: hidden;
   display: flex;
   justify-content: space-between;
   border-radius: .2rem;
   align-items: center;
   padding: 1rem;
+  transition: box-shadow 300ms ease-in-out;
+  /* width: 100%; */
+
+  .item-actions {
+    display: flex;
+    align-items: center;
+  }
+
 
   .card-info {
     display: flex;
     /* background: #fff; */
     align-items: center;
     justify-content: space-between;
-    padding: 1em;
+    /* padding: 1em; */
 
     p {
-      margin: 0 1em;
+      /* margin: 0 1em; */
     }
   }
 
   input {
-    padding: .8em .5rem;
-    width: 30%;
+    padding: 1rem .3rem;
+    width: 50%;
+    font-size: 1rem;
     color: #fff;
-    border-radius: .5em;
-    background-color: #444;
+    border-bottom: solid 3px #444;
+    background-color: transparent;
+    margin: 0 1rem;
+    transition: border-bottom 200ms ease-in-out;
+    z-index: 1000;
+
+    &:focus {
+      outline: 0;
+      border-bottom: solid 3px #F36B2B;
+
+    }
   }
 
+  /* add a slight animation to clothing */
+  .cart-image {
+    border: 5px solid #ff9c59;
+    border-radius: 100%;
+    background-color: #F36B2B;
+    /* padding: .5em; */
+    height: 8rem;
+    width: 8rem;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+  }
+  
   img {
     height: auto;
-    width: 15%;
-    border: 2px solid #fff;
-    border-radius: 100%;
-    padding: .5em;
+    width: 100%;
   }
 
+  &:hover {
+    /* box-shadow: 0 0 3px 10px #ff9c59; */
+    box-shadow: 0 0 3px 10px #2c2c2c;
+    img {
+      animation: ${HoverObj} 600ms ease-in-out infinite;
+    }
+
+  }
+/* 
   @media (min-width: 318px) and (max-width: 480px) {
     .card-info {
       display: flex; 
       flex-direction: column;
     }
+  } */
+
+
+  @media (min-width: 315px) and (max-width: 779px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0;
+    width: 100%;
+
+    .name {
+      margin: 1rem 0;
+    }
+
+    p {
+      font-size: 1.3rem;
+    }
+
+    /* .card-info {
+      margin: .5rem 0;
+    } */
+    
+    &:hover {
+      box-shadow: none;
+    }
+
+    input {
+      text-align: center;
+    }
+    
+  }
+
+  @media (max-width: 388px) {
+    /* margin: 0; */
+    .item-actions {
+      display: flex;
+      flex-direction: column;
+    }
   }
 `
+
+
 
 export const CheckoutCard = styled.div`
   background-color: #212121;
   color: #fff;
   text-align: left;
-  /* justify-content: center; */
   display: flex;
   width: 100%;
   flex-direction: column;
-
-  /* height: %; */
   padding: 1em 3rem;
+
   h2 {
     font-weight: 400;
-  }
-
-  div {
-    margin: 1rem 0;
-    /* background: #000; */
-    display: flex;
-    justify-content: space-between;
-    color: #ddd;
     text-align: center;
-
-
-    p {
-      /* display: block; */
-      font-size: 1.3rem;
-      padding: .5rem 0;
-    }
-
-    p:nth-child(2) {
-      /* margin-left: 1rem; */
-      /* color: black; */
-      font-weight: 800;
-    }
+    padding: 1rem 0;
   }
+
+
+  /* @media (max-width: 720px) {
+    position: sticky;
+    top: 0;
+  } */
 `
 
 export const RowLayout = styled.div`
@@ -314,4 +380,43 @@ export const RowLayout = styled.div`
   display: flex;
   /* background: #ff0; */
   padding: 3rem;
+`
+
+export const ActionRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  p {
+    text-align: center;
+    font-size: 1.3rem;
+  }
+
+
+  @media (min-width: 315px) and (max-width: 626px) {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    padding: 1.5rem 0;
+
+    
+    .items-length {
+      p {
+          display: none;
+      }
+    }
+
+    .total-price {
+      p {
+        font-size: 1.5rem;
+      }
+    }
+
+
+    /* div:last-child {
+      display: flex;
+      flex-direction: column-reverse;
+    } */
+
+  } 
+
 `

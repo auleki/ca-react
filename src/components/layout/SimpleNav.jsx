@@ -2,13 +2,15 @@ import React, { useState } from 'react'
 // import ShoppingBasketOutlinedIcon from '@material-ui/icons/ShoppingBasketOutlined';
 import { Link } from 'react-router-dom'
 import MenuRoundedIcon from '@material-ui/icons/MenuRounded';
-
+import { useSelector } from 'react-redux'
 import ShoppingBasketSharpIcon from '@material-ui/icons/ShoppingBasketSharp';
 
 // import CartIcon from '../../cart-01.svg'
 
 const SimpleNav = ({ admin }) => {
 
+  const cartState = useSelector(state => state.cart.cartItems)
+  
   // const [isAdmin, setIsAdmin] = useState(admin)
 
  return (
@@ -16,9 +18,9 @@ const SimpleNav = ({ admin }) => {
       <nav className="wow fadeInDown">
           <div className="logo">
             {/* <img src="images/CA Logo.png" alt="logo"> */}
-            <a href="/">
+            <Link to="/">
               <h1 className="text">CHECKADIGS</h1>
-            </a>
+            </Link>
           </div>
           {/* <div className="hamburger">            
             <MenuRoundedIcon />
@@ -59,7 +61,7 @@ const SimpleNav = ({ admin }) => {
           
           <Link className="link-button" to="/shopping">
                 <ShoppingBasketSharpIcon/>
-                <span className="badge">7</span>
+              <span className="badge">{cartState.length}</span>
           </Link>
         </nav>
     </>

@@ -1,37 +1,47 @@
 import React, { useState, useEffect } from 'react';
-// import axios from 'axios';
 import ClothSection from './ClothSection';
 import { CardContainer } from '../StyledComponents';
-// import Card from './Card';
+import { css } from "@emotion/core";
+import PuffLoader from "react-spinners/PuffLoader";
+// import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux'
+import { fetchRecipes } from "../../features/clothes/clothesSlice";
 
-import { connect } from 'react-redux';
+const ClothListings = () => {
+  const baseUrl = 'https://afternoon-chamber-08446.herokuapp.com/api/clothing';
+  const [clothes, setClothes] = useState([]);
+
+  const dispatch = useDispatch();
+
+  const { clothing, hasErrors, loading } = useSelector((state) => state.clothes)
+
+  useEffect(() => {
+    dispatch(fetchRecipes())
+  } ,[dispatch])
+
+  const override = css`
+    display: block;
+    margin: 0 auto;
+    border-color: red;
+  `
 
 
-const ClothListings = ({ clothes }) => {
-  console.log(clothes);
-  // const [clothes, setClothes] = useState([]);
-  // const baseUrl =  'https://afternoon-chamber-08446.herokuapp.com/api/clothing';
+  return (
+    <CardContainer>
 
-  // useEffect(() => {
-  //   const fetchClothes = async (url) => {
-  //     const result = await axios.get(url)
-  //     setClothes(result.data)
-  //     console.log(result.data)
-  //   }
-  //   fetchClothes(baseUrl)
-  // }, [])     
-
- return (
-   <CardContainer>
-    {clothes.map((cloth, i) => <ClothSection key={i} clothes={cloth}/>)}
-   </CardContainer>
-   )
+      {loading 
+        ? <PuffLoader 
+            loading={loading}
+            css={override}
+            size={200}
+            color={"#F36B2B"}
+            /> 
+        : hasErrors 
+        ? "Can't load clothes, refresh your browser"
+        : clothing.map((cloth, i) => <ClothSection key={i} clothes={cloth}/>) }
+    </CardContainer>
+  )
 }
 
-const mapStateToProps = state => {
-  return {
-    clothes: state.shop
-  }
-}
 
-export default connect(mapStateToProps)(ClothListings)
+export default ClothListings
