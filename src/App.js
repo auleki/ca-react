@@ -10,6 +10,8 @@ import {
   SubscribeSuccess,
   ClothListings, 
   SimpleNav, Homepage } from './components/layout'
+import CreateOrder from './components/layout/CreateOrder'
+
 
 import { Route, Switch } from 'react-router-dom';
 
@@ -19,14 +21,14 @@ const App = () => {
   
   return (
     <>   
-      <SimpleNav />
       {/* <Homepage />  */}
+      {/* <SimpleNav />
       <Switch>
         <Route exact path='/' component={Homepage}/>
         <Route path="/shopping" component={ShoppingCart} />
       </Switch>
-
-      <Footer />
+      <Footer /> */}
+      <CreateOrder />
 
       {/* <ShoppingCart /> */}      
     </>

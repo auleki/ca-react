@@ -8,13 +8,6 @@ import { fetchClothes } from "../../api/operationsAPI";
 //     const { products } = action.payload      
 //   }
 
-// const cartState = [
-//   // {
-//   //   cartItemName: "Bournvita",
-//   //   id: 1
-//   // }
-// ]
-
 export const initialState = {
   loading: false,
   hasErrors: false,
