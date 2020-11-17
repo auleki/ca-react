@@ -226,6 +226,24 @@ export const CartItemStyle = styled.div`
   }
 `
 
+export const BasicCard = styled.div`
+  height: 100%;
+  display: flex;
+  flex-direction: column-reverse;
+  margin: 0 auto;
+
+  width: 80%;
+  /* width: 100%; */
+  justify-content: space-between;
+  padding: 3rem;
+  background: rgb(33, 33, 33);
+
+
+  @media (max-width: 512px) {
+    padding: 0;
+  }
+`
+
 export const CartCard = styled.div`
   background-color: #212121;
   color: #fff;
@@ -350,6 +368,32 @@ export const CartCard = styled.div`
     }
   }
 `
+
+export const Input = styled.input`
+  
+    padding: 1rem .3rem;
+    width: 50%;
+    font-size: 1rem;
+    color: #fff;
+    border-bottom: solid 3px #444;
+    background-color: #000;
+    margin: 1rem 1rem;
+    transition: background-color 700ms ease-in;
+    border-bottom-left-radius: .3rem;
+    border-bottom-right-radius: .3rem;
+    border-top-left-radius: .1rem;
+    border-top-right-radius: .1rem;
+    transition: border-bottom 200ms ease-in-out;
+    z-index: 1000;
+
+    &:focus {
+      outline: 0;
+      border-bottom: solid 3px #F36B2B;
+      box-shadow: 10px 10px 22px -12px rgba(0,0,0,0.75);
+      background-color: transparent;
+
+    }
+  `
 
 
 

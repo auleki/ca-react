@@ -1,6 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useField } from '../../hooks/'
 import SimpleNav from './SimpleNav'
+import { BasicCard } from "../StyledComponents";
+import { Input } from '../StyledComponents'
+// import InputField from '../forms/InputField'
+
+
 
 const CreateOrder = () => {
   const firstName = useField('text')
@@ -9,17 +14,44 @@ const CreateOrder = () => {
   const phone = useField('number')
   const location = useField('text')
 
-  
   return (
     <div>
       <SimpleNav />
-      <form>
-        <input type={firstName.type} placeholder="First Name"/>
-        <input type={lastName.type} placeholder="Last Name"/>
-        <input type={email.type} placeholder="Email"/>
-        <input type={phone.type} placeholder="Phone Number"/>
-        <input type={location.type} placeholder="Location"/>
-      </form>
+      <BasicCard>
+        <form>
+          <Input 
+            placeholder="First Name"
+            onChange={firstName.onChange}
+            value={firstName.value}
+            />
+
+          <Input 
+            placeholder="Last Name"
+            onChange={lastName.onChange}
+            value={lastName.value}
+            />
+
+          <Input 
+            placeholder="Email"
+            onChange={email.onChange}
+            value={email.value}
+            />
+
+          <Input 
+            placeholder="Phone Number"
+            onChange={phone.onChange}
+            value={phone.value}
+            />
+
+          <Input 
+            placeholder="Location"
+            onChange={location.onChange}
+            value={location.value}
+            />
+
+        </form>
+      </BasicCard>
+      
             
     </div>
   )
