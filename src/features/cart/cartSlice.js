@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axios from 'axios'
-
+import { useSelector } from 'react-redux'
 
 export const initialState = {
     loading: false,
@@ -11,20 +10,41 @@ export const initialState = {
     // totalPrice: 0
 }
 
+
+
 const cartSlice = createSlice({
     name: "cartSlice",
     initialState,
     reducers: {
-        addToCart: {
-            reducer(state, { payload: cartItem }) {
-                // const { name, price, imageUrl } = payload
-                state.cartItems.push(cartItem)
-            }, 
-            // prepare(cartItemOL) {
-            //     return {
-            //         payload: { cartItemOL }
-            //     }
+        addToCart: (state, { payload: cartItem }) => {
+            const products = useSelector(state => state.clothes)
+            const item = products.find(prod => prod.name === cartItem.name)
+            const inCart = state.cartItems.find(item => (
+                item.name === cartItem.name ? true : false
+                ))
+
+            return {
+                ...state, 
+                cartItems: inCart 
+                    ? state.cartItems.map(item => 
+                        item.name === cartItem.name
+                            ? {...item, qty: item.qty + 1}
+                            : item
+                        )
+                    : [...state.cartItems, {...item, qty: 1}]
+            }
+            
+            // if (!inCart) {
+            //     return [...state.cartItems, {...item, qty: 1}]
+            //     // Give a quantity of one 
+            // } else {
+            //     return state.cartItems.map(item => {
+            //         item.name === cartItem.name 
+            //             ? { ...item, qty: item.qty + 1 }
+            //             : item
+            //     })
             // }
+            // state.cartItems.push(cartItem)
         },
         loadCart: (state, { payload }) => {
             state.cartItems = payload

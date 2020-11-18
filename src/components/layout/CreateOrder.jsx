@@ -115,7 +115,7 @@ const CreateOrder = () => {
             <span>N</span>{formatToComma(price)}            
           </p>
           <p className="info">
-            You have selected {cartItems.length} clothes
+            You have selected {cartItems.length} product(s)
           </p>
         </SummaryCard>
       </BasicCard>

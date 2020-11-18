@@ -19,5 +19,8 @@ checkout form
 
 - - add icons to the forms, especially the credit card sections
 
+- - The "Cant load clothes, refresh browser" error message can be improved to be a gif or some animated svg, indicating you are not connected to the internet. 
+
+
 
 

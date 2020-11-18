@@ -119,8 +119,8 @@ export const CardContainer = styled.div`
   padding: 0 1rem;
 `
 export const SummaryHeader = styled.div`
-  margin: 1.5rem;
-  width: 50%
+  margin: 1.5rem 0 2rem 11rem;
+  width: 40%
 `
 
 export const SummaryCard = styled.div`
