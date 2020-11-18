@@ -7,7 +7,7 @@ import ShoppingBasketSharpIcon from '@material-ui/icons/ShoppingBasketSharp';
 
 // import CartIcon from '../../cart-01.svg'
 
-const SimpleNav = ({ admin }) => {
+const SimpleNav = () => {
 
   const cartState = useSelector(state => state.cart.cartItems)
   

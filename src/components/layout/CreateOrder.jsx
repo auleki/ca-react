@@ -1,14 +1,19 @@
 import React, { useState } from 'react'
 import { useField } from '../../hooks/'
 import SimpleNav from './SimpleNav'
+import { useDispatch, useSelector } from 'react-redux'
 import { 
   BasicCard, 
   Form, 
   RowLayout, 
-  CardStyle, 
+  SubTitle,
+  Paragraph, 
+  Title,
+  Input,
+  Button,
+  SummaryHeader,
   SummaryCard } from "../StyledComponents";
-import { Input } from '../StyledComponents'
-// import InputField from '../forms/InputField'
+// import { Input } from '../StyledComponents'
 
 
 
@@ -25,8 +30,20 @@ const CreateOrder = () => {
   return (
     <div>
       <SimpleNav />
-      <BasicCard shadow>
+
+      <SummaryHeader>
+        <Title>Confirm order and pay</Title>
+        <Paragraph>
+          Once payment is confirmed, we call to confirm then we dispatch your order. All under 2 hours.
+
+        </Paragraph>
+      </SummaryHeader>
+      
+      <BasicCard>
         <Form> 
+          <SubTitle uppercase>
+            PAYMENT INFO
+          </SubTitle>
           <RowLayout>
               
             <Input 
@@ -85,16 +102,22 @@ const CreateOrder = () => {
               value={location.value}
               />
 
+          <div>
+            <Button primary>
+              Confirm Order
+            </Button>
+          </div>
+
         </Form>
         
 
         <SummaryCard>
           <h3>You are to pay</h3>
           <p className="totalPrice">
-            N45,000
+            <span>N</span>45,000            
           </p>
           <p className="info">
-            You have selected 13 items 
+            You have selected 13 clothes
           </p>
         </SummaryCard>
       </BasicCard>

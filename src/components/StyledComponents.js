@@ -65,8 +65,26 @@ const StyledButton = styled.button`
 `
 
 export const Title = styled.h1`
-  color: cadetblue;
+  color: #fff;
+  padding: 0;
   font-size: 2.5rem;
+`
+
+export const SubTitle = styled.h2`
+  color: #ddd;
+  font-size: 1.1rem;
+  margin-top: 1rem;
+
+  ${({ uppercase }) => 
+    uppercase && css`
+      text-transform: uppercase;
+    `
+  }
+`
+
+export const Paragraph = styled.p`
+  color: #ddd;
+  font-size: 1.1rem;
 `
 
 export const Wrapper = styled.div`
@@ -100,23 +118,39 @@ export const CardContainer = styled.div`
   text-align: center;
   padding: 0 1rem;
 `
+export const SummaryHeader = styled.div`
+  margin: 1.5rem;
+  width: 50%
+`
+
 export const SummaryCard = styled.div`
   height: 100%;
-  /* padding: 3rem 0; */
+  padding: 1rem;
   /* width: 40%; */
   width: 30%;
   /* text-align: center; */
-  margin: 1rem 0;
-  border-radius: .4rem;
+  /* margin: 1rem 0; */
+  border-radius: .2rem;
   /* display: flex;
   align-items: center;
   justify-content: center; */
-  background-color: #F36B2B;
+  /* background-color: #F36B2B; */
+  background-color: #f36b2b;
+  background-image: linear-gradient(163deg, #f36b2b 0%, #F7CE68 100%);
   box-shadow: 0px 2px 16px 6px rgba(243, 107, 43, .2);
   transition: transform 200ms ease-in, box-shadow 300ms ease-in;
 
   .totalPrice {
     font-size: 45px;
+    display: flex;
+    /* background-color: thistle; */
+    /* padding: 0; */
+
+    span {
+      font-size: 1.1rem;
+      margin-top: .5rem;
+      font-weight: 800;
+    }
   }
   
 
@@ -250,14 +284,9 @@ export const CartItemStyle = styled.div`
 export const BasicCard = styled.div`
   height: 100%;
   display: flex;
-  justify-content: space-around;
-  align-items: center;
-  /* flex-direction: column; */
-  /* margin: 0 auto; */
-
-  /* width: 80%; */
-  /* width: 100%; */
-  justify-content: space-between;
+  width: 100%;
+  justify-content: center;
+  
   /* padding: 3rem; */
   /* background: rgb(33, 33, 33); */
 
@@ -303,11 +332,7 @@ export const CartCard = styled.div`
     /* background: #fff; */
     align-items: center;
     justify-content: space-between;
-    /* padding: 1em; */
-
-    p {
-      /* margin: 0 1em; */
-    }
+    
   }
 
   input {
@@ -412,7 +437,8 @@ export const Form = styled.form`
   display: flex;
   padding: 0 2rem;
   flex-direction: column;
-  margin: 0 auto;
+  margin: 0 1rem;
+  border-radius: .2rem;
 
   width: 45%;
   /* width: 100%; */
@@ -437,7 +463,7 @@ export const Input = styled.input`
     border-top-left-radius: .1rem;
     border-top-right-radius: .1rem;
     transition: border-bottom 200ms ease-in-out;
-    z-index: 1000;
+    /* z-index: 1000; */
 
     &:focus {
       outline: 0;
