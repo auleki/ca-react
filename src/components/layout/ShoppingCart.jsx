@@ -4,7 +4,6 @@ import {
   CartItemStyle, 
   Button,
   RowLayout } from '../StyledComponents'
-import Navbar from './Navbar'
 import CartItem from './CartItem'
 import Checkout from './Checkout'
 import { useSelector } from "react-redux";

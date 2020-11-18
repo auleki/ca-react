@@ -6,10 +6,9 @@ export const initialState = {
     loading: false,
     hasErrors: false,
     cartItems: [],
+    price: 0
     // rethink where this will come from
-    // totalPrice: 0,
-    // will pass in the values in view
-    // cartLength: 0
+    // totalPrice: 0
 }
 
 const cartSlice = createSlice({
@@ -31,7 +30,9 @@ const cartSlice = createSlice({
             state.cartItems = payload
             state.hasErrors = false
             state.loading = false
-            // state.totalPrice = payload
+        },
+        updatePrice: (state, { payload }) => {
+            state.price = payload
         }
     }
 })
@@ -39,6 +40,9 @@ const cartSlice = createSlice({
 
 const { actions, reducer } = cartSlice
 
-export const { addToCart, loadCart } = actions
+export const { 
+    addToCart, 
+    loadCart, 
+    updatePrice } = actions
 
 export default reducer 

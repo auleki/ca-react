@@ -22,13 +22,17 @@ const App = () => {
   return (
     <>   
       {/* <Homepage />  */}
-      {/* <SimpleNav />
-      <Switch>
-        <Route exact path='/' component={Homepage}/>
-        <Route path="/shopping" component={ShoppingCart} />
-      </Switch>
-      <Footer /> */}
-      <CreateOrder />
+      <SimpleNav />
+        <Switch>
+          <Route exact path='/' component={Homepage}/>
+          <Route path="/shopping" component={ShoppingCart} />
+          <Route path="/confirm" component={CreateOrder}/>
+        </Switch>
+        <Footer />
+
+      {/* Returning to complete the UI for ORDER FORM  */}
+
+      {/* <CreateOrder /> */}
 
       {/* <ShoppingCart /> */}      
     </>

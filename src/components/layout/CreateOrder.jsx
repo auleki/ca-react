@@ -13,9 +13,7 @@ import {
   Button,
   SummaryHeader,
   SummaryCard } from "../StyledComponents";
-// import { Input } from '../StyledComponents'
-
-
+import { formatToComma } from "../../api/operationsAPI";
 
 const CreateOrder = () => {
   const cardNumber = useField('number')
@@ -27,10 +25,10 @@ const CreateOrder = () => {
   const phone = useField('number')
   const location = useField('text')
 
+  const { cartItems, price } = useSelector(state => state.cart)  
+
   return (
     <div>
-      <SimpleNav />
-
       <SummaryHeader>
         <Title>Confirm order and pay</Title>
         <Paragraph>
@@ -114,10 +112,10 @@ const CreateOrder = () => {
         <SummaryCard>
           <h3>You are to pay</h3>
           <p className="totalPrice">
-            <span>N</span>45,000            
+            <span>N</span>{formatToComma(price)}            
           </p>
           <p className="info">
-            You have selected 13 clothes
+            You have selected {cartItems.length} clothes
           </p>
         </SummaryCard>
       </BasicCard>

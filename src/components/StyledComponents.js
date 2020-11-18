@@ -302,9 +302,11 @@ export const BasicCard = styled.div`
     `
   } 
 
-  /* @media (max-width: 512px) {
-    padding: 0;
-  } */
+  @media (min-width: 315px) and (max-width: 900px) {
+    display: flex;
+    flex-direction: column-reverse;
+    
+  }
 `
 
 export const CartCard = styled.div`
@@ -344,7 +346,7 @@ export const CartCard = styled.div`
     background-color: transparent;
     margin: 0 1rem;
     transition: border-bottom 200ms ease-in-out;
-    z-index: 1000;
+    z-index: 500;
 
     &:focus {
       outline: 0;
