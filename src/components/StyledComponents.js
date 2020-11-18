@@ -100,6 +100,27 @@ export const CardContainer = styled.div`
   text-align: center;
   padding: 0 1rem;
 `
+export const SummaryCard = styled.div`
+  height: 100%;
+  /* padding: 3rem 0; */
+  /* width: 40%; */
+  width: 30%;
+  /* text-align: center; */
+  margin: 1rem 0;
+  border-radius: .4rem;
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+  background-color: #F36B2B;
+  box-shadow: 0px 2px 16px 6px rgba(243, 107, 43, .2);
+  transition: transform 200ms ease-in, box-shadow 300ms ease-in;
+
+  .totalPrice {
+    font-size: 45px;
+  }
+  
+
+`
 
 export const CardStyle = styled.div`
   /* height: 30rem; */
@@ -229,23 +250,32 @@ export const CartItemStyle = styled.div`
 export const BasicCard = styled.div`
   height: 100%;
   display: flex;
-  flex-direction: column;
-  margin: 0 auto;
+  justify-content: space-around;
+  align-items: center;
+  /* flex-direction: column; */
+  /* margin: 0 auto; */
 
-  width: 50%;
+  /* width: 80%; */
   /* width: 100%; */
   justify-content: space-between;
   /* padding: 3rem; */
-  background: rgb(33, 33, 33);
+  /* background: rgb(33, 33, 33); */
 
-  form {
-    display: flex;
-    flex-direction: column;
-  }
+  ${({ shadow, bgColor }) => 
+    shadow && 
+    css`
+      box-shadow: 2px 3px 19px 0px rgba(0,0,0,0.75);
+      transition: box-shadow 300ms ease-in-out;
+      background-color: ${bgColor};
+      &:hover {
+        box-shadow: none;
+      }
+    `
+  } 
 
-  @media (max-width: 512px) {
+  /* @media (max-width: 512px) {
     padding: 0;
-  }
+  } */
 `
 
 export const CartCard = styled.div`
@@ -394,7 +424,7 @@ export const Form = styled.form`
 
 export const Input = styled.input`
   
-    padding: 1rem .3rem;
+    padding: 1rem .5rem;
     width: 100%;
     font-size: 1rem;
     color: #fff;
@@ -454,6 +484,11 @@ export const RowLayout = styled.div`
 
   // * Make sure to pass this rule value as a PROP!
   /* padding: 3rem; */
+
+  input:nth-child(2) {
+    margin-left: 1rem;
+  }
+  
 `
 
 export const ActionRow = styled.div`

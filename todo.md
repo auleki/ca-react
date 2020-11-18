@@ -15,5 +15,9 @@ checkout form
 
 - - charge their account with the total amount
 
-- - show user a confirmation page with the option to go back to the store.  
+- - show user a confirmation page with the option to go back to the store. 
+
+- - add icons to the forms, especially the credit card sections
+
+
 
