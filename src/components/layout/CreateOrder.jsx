@@ -16,9 +16,6 @@ import {
 import { formatToComma } from "../../api/operationsAPI";
 
 const CreateOrder = () => {
-  const cardNumber = useField('number')
-  const expiryDate = useField('date')
-  const cvv = useField('number')
   const firstName = useField('text')
   const lastName = useField('text')
   const email = useField('text')
@@ -26,6 +23,15 @@ const CreateOrder = () => {
   const location = useField('text')
 
   const { cartItems, price } = useSelector(state => state.cart)  
+
+  const makeOrder = async (cartItems, price) => {
+    // order object for database
+    const newOrder = {}
+
+    const baseUrl = `https://api.paystack.co/transaction/initialize`
+      
+  }
+
 
   return (
     <div>
@@ -42,30 +48,7 @@ const CreateOrder = () => {
           <SubTitle uppercase>
             PAYMENT INFO
           </SubTitle>
-          <RowLayout>
-              
-            <Input 
-              placeholder="Date card expires"
-              value={expiryDate.value}
-              onChange={expiryDate.onChange}
-              type={expiryDate.type}
-              />
-                      
-            <Input 
-              placeholder="CVV"
-              onChange={cvv.onChange}
-              value={cvv.value}
-              type={cvv.type}
-              />
 
-            
-            </RowLayout>         
-                <Input 
-                  placeholder="Card Number"
-                  onChange={cardNumber.onChange}
-                  type={cardNumber.type}
-                  value={cardNumber.value}
-                  />
             <RowLayout>
             
               <Input 
@@ -101,7 +84,7 @@ const CreateOrder = () => {
               />
 
           <div>
-            <Button primary>
+            <Button onClick={makeOrder} primary>
               Confirm Order
             </Button>
           </div>

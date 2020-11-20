@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { useSelector } from 'react-redux'
+// import { useSelector } from 'react-redux'
 
 export const initialState = {
     loading: false,
@@ -17,34 +17,34 @@ const cartSlice = createSlice({
     initialState,
     reducers: {
         addToCart: (state, { payload: cartItem }) => {
-            const products = useSelector(state => state.clothes)
-            const item = products.find(prod => prod.name === cartItem.name)
-            const inCart = state.cartItems.find(item => (
-                item.name === cartItem.name ? true : false
-                ))
+            // const products = useSelector(state => state.clothes)
+            // const item = products.find(prod => prod.name === cartItem.name)
+            // const inCart = state.cartItems.find(item => (
+            //     item.name === cartItem.name ? true : false
+            //     ))
 
-            return {
-                ...state, 
-                cartItems: inCart 
-                    ? state.cartItems.map(item => 
-                        item.name === cartItem.name
-                            ? {...item, qty: item.qty + 1}
-                            : item
-                        )
-                    : [...state.cartItems, {...item, qty: 1}]
-            }
-            
-            // if (!inCart) {
-            //     return [...state.cartItems, {...item, qty: 1}]
-            //     // Give a quantity of one 
-            // } else {
-            //     return state.cartItems.map(item => {
-            //         item.name === cartItem.name 
-            //             ? { ...item, qty: item.qty + 1 }
-            //             : item
-            //     })
+            // return {
+            //     ...state, 
+            //     cartItems: inCart 
+            //         ? state.cartItems.map(item => 
+            //             item.name === cartItem.name
+            //                 ? {...item, qty: item.qty + 1}
+            //                 : item
+            //             )
+            //         : [...state.cartItems, {...item, qty: 1}]
             // }
-            // state.cartItems.push(cartItem)
+            
+            // // if (!inCart) {
+            // //     return [...state.cartItems, {...item, qty: 1}]
+            // //     // Give a quantity of one 
+            // // } else {
+            // //     return state.cartItems.map(item => {
+            // //         item.name === cartItem.name 
+            // //             ? { ...item, qty: item.qty + 1 }
+            // //             : item
+            // //     })
+            // // }
+            state.cartItems.push(cartItem)
         },
         loadCart: (state, { payload }) => {
             state.cartItems = payload

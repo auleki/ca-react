@@ -1,0 +1,7 @@
+POST https://api.paystack.co/transaction/initialize 
+Authorization: Bearer sk_test_a3150b31e7a217d2488132a436e6df8d28dec651
+Content-Type: application/jsone
+{
+  "email": "vicio0s@gmail.com",
+  "amount": 5000
+}
