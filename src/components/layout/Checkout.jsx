@@ -13,7 +13,7 @@ const Checkout = () => {
 
   // const [total, setTotal] = useState(0)
   
-  console.log(cartItems)
+  // console.log(cartItems)
   let totalPrice = 0
   
   useEffect(() => {
