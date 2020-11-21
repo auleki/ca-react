@@ -52,19 +52,9 @@ const ShoppingCart = (props) => {
    <RowLayout>
      <ShopCartContainer>
       <CartItemStyle>
-        {/* <div className="shopping-list"> */}
-          {/* Loop through CartItems */}
-
           { cartItems.map((item, i) => <CartItem key={i} product={item} />) }
-          {/* { products.map(item => <CartItem product={item} />) } */}
-          
-        {/* </div> */}
-        
-        {/* <div className="checkout"> */}
+          {/* { products.map(item => <CartItem product={item} />) } */}    
           <Checkout />
-        {/* </div> */}
-
-
       </CartItemStyle>
     {/* <h2>Raise Hell.</h2> */}
     </ShopCartContainer>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Carousel from 'react-elastic-carousel';
 
 import Clothing from './Clothing';

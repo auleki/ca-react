@@ -3,13 +3,12 @@ import ClothSection from './ClothSection';
 import { CardContainer } from '../StyledComponents';
 import { css } from "@emotion/core";
 import PuffLoader from "react-spinners/PuffLoader";
-// import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchRecipes } from "../../features/clothes/clothesSlice";
 
 const ClothListings = () => {
-  const baseUrl = 'https://afternoon-chamber-08446.herokuapp.com/api/clothing';
-  const [clothes, setClothes] = useState([]);
+  // const baseUrl = 'https://afternoon-chamber-08446.herokuapp.com/api/clothing';
+  // const [clothes, setClothes] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -24,8 +23,6 @@ const ClothListings = () => {
     margin: 0 auto;
     /* border-color: red; */
   `
-
-
   return (
     <CardContainer>
 
