@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const CartLength = () => {
     
-    const cartItems = useSelector(state => state.cart.cartItems)
+    const cartItems = useSelector(state => state.cartItems)
     return (
         <div className="items-length">
             {cartItems.length === 0

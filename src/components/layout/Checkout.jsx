@@ -8,7 +8,7 @@ import { updatePrice } from '../../features/cart/cartSlice'
 
 const Checkout = () => {
                     
-  const { price, cartItems } = useSelector(state => state.cart)
+  const { price, cartItems } = useSelector(state => state)
   const dispatch = useDispatch()
 
   // const [total, setTotal] = useState(0)

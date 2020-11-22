@@ -123,15 +123,15 @@ export const CardContainer = styled.div`
   padding: 0 1rem;
 `
 export const SummaryHeader = styled.div`
-  margin: 1.5rem 0 2rem 11rem;
-  width: 40%
+  margin: 1.5rem 1rem;
+  /* width: 0%; */
 `
 
 export const SummaryCard = styled.div`
   height: 100%;
   padding: 1rem;
   /* width: 40%; */
-  width: 30%;
+  width: 50%;
   /* text-align: center; */
   /* margin: 1rem 0; */
   border-radius: .2rem;
@@ -156,8 +156,12 @@ export const SummaryCard = styled.div`
       font-weight: 800;
     }
   }
-  
 
+  @media (max-width: 368px) {
+    width: 100%;
+    box-shadow: none;
+  }
+  
 `
 
 export const CardStyle = styled.div`
@@ -288,10 +292,10 @@ export const CartItemStyle = styled.div`
 export const BasicCard = styled.div`
   height: 100%;
   display: flex;
-  width: 100%;
+  /* width: 100%; */
   justify-content: center;
   /* padding: 3rem; */
-  background: rgb(33, 33, 33);
+  /* background: rgb(33, 33, 33); */
 
   ${({ shadow, bgColor }) => 
     shadow && 
@@ -307,8 +311,7 @@ export const BasicCard = styled.div`
 
   @media (min-width: 315px) and (max-width: 900px) {
     display: flex;
-    flex-direction: column-reverse;
-    
+    flex-direction: column-reverse;  
   }
 `
 
@@ -440,16 +443,23 @@ export const FormGroup = styled.div`
 export const Form = styled.form`
   height: 100%;
   display: flex;
-  padding: 0 2rem;
+  padding: 1rem 2rem;
   flex-direction: column;
   margin: 0 1rem;
   border-radius: .2rem;
-
-  width: 45%;
+  width: 100%;
   /* width: 100%; */
   justify-content: space-between;
   /* padding: 3rem; */
   background: rgb(33, 33, 33);
+
+  @media (min-width: 315px) and (max-width: 900px) {
+    margin: 1rem 0;
+  }
+
+  @media (max-width: 368px) {
+    margin: 0;
+  }
 
 `
 
@@ -505,20 +515,39 @@ export const CheckoutCard = styled.div`
   /* @media (max-width: 720px) {
     position: sticky;
     top: 0;
-  } */
+  } */  
 `
 
 export const RowLayout = styled.div`
   align-items: center;
   display: flex;
+  overflow-x: hidden;
   /* background: #ff0; */
 
   // * Make sure to pass this rule value as a PROP!
   /* padding: 3rem; */
 
+  input {
+    width: 50%;
+  }
+
   input:nth-child(2) {
     margin-left: 1rem;
   }
+
+  @media (max-width: 566px) {
+   display: flex;
+   flex-direction: column; 
+
+   input {
+     width: 100%;
+   }
+
+   input:nth-child(2) {
+     margin: 0;
+   }
+  }
+
   
 `
 
@@ -538,25 +567,31 @@ export const ActionRow = styled.div`
     align-items: center;
     padding: 1.5rem 0;
 
-    
     .items-length {
       p {
           display: none;
       }
     }
-
     .total-price {
       p {
         font-size: 1.5rem;
       }
     }
-
-
     /* div:last-child {
       display: flex;
       flex-direction: column-reverse;
     } */
-
   } 
+`
+
+export const Page = styled.div`
+  padding: 0 5rem;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+
+  @media (max-width: 558px) {
+    padding: 0;
+  }
 
 `

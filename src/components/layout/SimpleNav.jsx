@@ -9,7 +9,7 @@ import ShoppingBasketSharpIcon from '@material-ui/icons/ShoppingBasketSharp';
 
 const SimpleNav = () => {
 
-  const cartState = useSelector(state => state.cart.cartItems)
+  const cartItems = useSelector(state => state.cartItems)
   
   // const [isAdmin, setIsAdmin] = useState(admin)
 
@@ -61,7 +61,7 @@ const SimpleNav = () => {
           
           <Link className="link-button" to="/shopping">
                 <ShoppingBasketSharpIcon/>
-              <span className="badge">{cartState.length}</span>
+              <span className="badge">{cartItems.length}</span>
           </Link>
         </nav>
     </>

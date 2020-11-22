@@ -9,12 +9,13 @@ import { fetchRecipes } from "../../features/cart/cartSlice";
 const ClothListings = () => {
   // const baseUrl = 'https://afternoon-chamber-08446.herokuapp.com/api/clothing';
   // const [clothes, setClothes] = useState([]);
-
   const dispatch = useDispatch();
 
-  const { clothing, hasErrors, loading } = useSelector((state) => state.clothes)
-
+  // const { clothing, hasErrors, loading } = useSelector((state) => state.cart)
+  const { products, loading, hasErrors } = useSelector((state) => state)
+  
   useEffect(() => {
+    
     dispatch(fetchRecipes())
   } ,[dispatch])
 
@@ -35,7 +36,7 @@ const ClothListings = () => {
             /> 
         : hasErrors 
         ? "Can't load clothes, refresh your browser"
-        : clothing.map((cloth, i) => <ClothSection key={i} clothes={cloth}/>) }
+        : products.map((cloth, i) => <ClothSection key={i} clothes={cloth}/>) }
     </CardContainer>
   )
 }

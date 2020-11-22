@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 
 const ShoppingCart = (props) => {
 
-  const cartItems = useSelector(state => state.cart.cartItems)
+  const { cartItems } = useSelector(state => state)
   // console.log(cartItems)
 
   const products = [
