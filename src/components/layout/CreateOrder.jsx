@@ -26,6 +26,7 @@ const CreateOrder = () => {
   const phone = useField('number')
   const location = useField('text')
   const [ordered, setOrdered] = useState(false)
+  const [reference, setReference] = useState('')
 
   // const uuid = uuidv4()
 
@@ -83,8 +84,8 @@ const CreateOrder = () => {
       tRef = result.data.data.reference
       console.log(`Transaction successful for ${tRef}`)
       console.log("DB LOAD:", dbLoad)
+      setReference(tRef)
       window.open(paymentUrl)
-
     } else {
       console.log("Transaction failed " + firstName.value + ' please try again')
     }
@@ -92,6 +93,12 @@ const CreateOrder = () => {
     //else we tell user transaction failed and have them try again
     // verify transaction
 
+  }
+
+  const verifyPayment = (e) => {
+    // const baseUrl = `https://api.paystack.co/transaction/verify/:${reference}`
+    console.log("Binto")
+    // console.log(reference)
   }
 
 
@@ -106,14 +113,15 @@ const CreateOrder = () => {
       <SummaryHeader>
         <Title>Confirm order and pay</Title>
         <Paragraph>
-          Once payment is confirmed, we call to confirm then we dispatch your order. All under 2 hours.
-
+          A new window will be opened for you to pay, come back here to verify your payment
         </Paragraph>
       </SummaryHeader>
 
       <BasicCard>
          {ordered 
-          ? <Button>Verify Order</Button>
+          ? <Button onClick={verifyPayment}>
+              Verify Order
+            </Button>
           : <Form onSubmit={makeOrder}>
           <SubTitle uppercase>
             PAYMENT INFO
@@ -158,11 +166,7 @@ const CreateOrder = () => {
           <div>
             <Button primary>
               Pay for order
-            </Button>
-
-              
-
-              
+            </Button>              
           </div>
 
         </Form>}

@@ -1,12 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
-
-// import { AppThunk } from "../../app/store";
-
 import { fetchClothes } from "../../api/operationsAPI";
-// getProducts(state, action) {
-//     const { products } = action.payload      
-//   }
+
 
 export const initialState = {
   loading: false,
@@ -70,8 +65,5 @@ export const fetchRecipes = () => {
   }
 }
 
-// export const createOrder = (order) => {
-
-// }
 
 export default reducer

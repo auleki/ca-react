@@ -1,13 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-// import { useSelector } from 'react-redux'
+import axios from 'axios'
 
 export const initialState = {
     loading: false,
     hasErrors: false,
     cartItems: [],
+    products: [],
     price: 0
-    // rethink where this will come from
-    // totalPrice: 0
 }
 
 
@@ -35,7 +34,7 @@ const cartSlice = createSlice({
             // }
 
             // ______________________________________________________
-            
+
             // if (!inCart) {
             //     return [...state.cartItems, {...item, qty: 1}]
             //     // Give a quantity of one 
@@ -55,16 +54,48 @@ const cartSlice = createSlice({
         },
         updatePrice: (state, { payload }) => {
             state.price = payload
+        },
+        getClothes: state => {
+            state.loading = true
+        },
+        getClothesSuccess: (state, { payload }) => {
+            state.clothing = payload
+            state.loading = false
+            state.hasErrors = false
+        },
+        getClothesFailure: state => {
+            state.loading = false
+            state.hasErrors = true
         }
+
     }
 })
 
 
 const { actions, reducer } = cartSlice
 
-export const { 
-    addToCart, 
-    loadCart, 
-    updatePrice } = actions
+export const {
+    addToCart,
+    loadCart,
+    updatePrice,
+    getClothes,
+    getClothesSuccess,
+    getClothesFailure
+} = actions
+
+
+export const fetchRecipes = () => {
+    return async dispatch => {
+        dispatch(getClothes())
+        const uri = "https://afternoon-chamber-08446.herokuapp.com/api/clothing"
+        try {            
+            const { data } = await axios.get(uri)
+            dispatch(getClothesSuccess(data))
+        } catch (error) {
+            dispatch(getClothesFailure())
+        }
+    }
+}
+
 
 export default reducer 

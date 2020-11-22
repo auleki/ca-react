@@ -4,7 +4,7 @@ import { CardContainer } from '../StyledComponents';
 import { css } from "@emotion/core";
 import PuffLoader from "react-spinners/PuffLoader";
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchRecipes } from "../../features/clothes/clothesSlice";
+import { fetchRecipes } from "../../features/cart/cartSlice";
 
 const ClothListings = () => {
   // const baseUrl = 'https://afternoon-chamber-08446.herokuapp.com/api/clothing';

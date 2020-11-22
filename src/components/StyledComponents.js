@@ -41,6 +41,10 @@ const StyledButton = styled.button`
     background-color: #000;
     color: #fff;
   }
+
+  &:active, &:focus  {
+    outline: 0;
+  }
   ${({ primary }) => 
       primary && 
       css`
@@ -286,9 +290,8 @@ export const BasicCard = styled.div`
   display: flex;
   width: 100%;
   justify-content: center;
-  
   /* padding: 3rem; */
-  /* background: rgb(33, 33, 33); */
+  background: rgb(33, 33, 33);
 
   ${({ shadow, bgColor }) => 
     shadow && 
