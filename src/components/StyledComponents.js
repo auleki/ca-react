@@ -71,7 +71,8 @@ const StyledButton = styled.button`
 export const Title = styled.h1`
   color: #fff;
   padding: 0;
-  font-size: 2.5rem;
+  font-size: 2.2rem;
+  
 `
 
 export const SubTitle = styled.h2`
@@ -124,7 +125,28 @@ export const CardContainer = styled.div`
 `
 export const SummaryHeader = styled.div`
   margin: 1.5rem 1rem;
-  /* width: 0%; */
+  width: 60%;
+
+
+/* 
+  p {
+    width: 80vw;
+  } */
+
+ 
+
+  @media (max-width: 586px) {    
+    width: 100%;
+
+    h1 {
+      font-size: 1.5rem;
+      margin: .5rem 0;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+  }
 `
 
 export const SummaryCard = styled.div`
@@ -157,7 +179,7 @@ export const SummaryCard = styled.div`
     }
   }
 
-  @media (max-width: 368px) {
+  @media (max-width: 582px) {
     width: 100%;
     box-shadow: none;
   }
@@ -451,7 +473,7 @@ export const Form = styled.form`
   /* width: 100%; */
   justify-content: space-between;
   /* padding: 3rem; */
-  background: rgb(33, 33, 33);
+  background: #1a1a1a;
 
   @media (min-width: 315px) and (max-width: 900px) {
     margin: 1rem 0;
@@ -541,6 +563,7 @@ export const RowLayout = styled.div`
 
    input {
      width: 100%;
+     margin: 1.5rem 0
    }
 
    input:nth-child(2) {
@@ -591,7 +614,11 @@ export const Page = styled.div`
   /* align-items: center; */
 
   @media (max-width: 558px) {
-    padding: 0;
+    padding: 0 2rem;
+  }
+
+  @media (max-width: 340px) {
+    padding: 0 .5rem;
   }
 
 `

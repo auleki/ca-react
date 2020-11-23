@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useField } from '../../hooks/'
 import SimpleNav from './SimpleNav'
@@ -31,6 +31,11 @@ const CreateOrder = () => {
 
   // const uuid = uuidv4()
 
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);    
+  }, [])
+  
   const { cartItems, price } = useSelector(state => state)
 
   const GOLDEN = 'sk_test_a3150b31e7a217d2488132a436e6df8d28dec651'
@@ -105,7 +110,6 @@ const CreateOrder = () => {
 
   return (
     <Page>
-
       <SummaryHeader>
         <Title>Confirm order and pay</Title>
         <Paragraph>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { 
   ShopCartContainer, 
   CartItemStyle, 
@@ -12,6 +12,10 @@ const ShoppingCart = (props) => {
 
   const { cartItems } = useSelector(state => state)
   // console.log(cartItems)
+
+  useEffect(() => {
+    window.scrollTo(0, 0);    
+  }, [])
 
   const products = [
     {
