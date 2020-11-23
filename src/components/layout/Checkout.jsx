@@ -18,7 +18,7 @@ const Checkout = () => {
   
   useEffect(() => {
     cartItems.map(item => {
-      totalPrice += item.price
+      totalPrice += item.price * item.qty 
     })
     // setTotal(totalPrice)
     dispatch(updatePrice(totalPrice))

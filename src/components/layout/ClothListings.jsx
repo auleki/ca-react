@@ -13,10 +13,12 @@ const ClothListings = () => {
 
   // const { clothing, hasErrors, loading } = useSelector((state) => state.cart)
   const { products, loading, hasErrors } = useSelector((state) => state)
+
+  // console.log('CLOTH-LISTINGS:', products)
   
   useEffect(() => {
     
-    dispatch(fetchRecipes())
+    // dispatch(fetchRecipes())
   } ,[dispatch])
 
   const override = css`
