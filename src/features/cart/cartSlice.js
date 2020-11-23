@@ -1,48 +1,61 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from 'axios'
 
+const products = [
+    {
+        name: "Shirt 1",
+        id: 91,
+        price: 7000,
+    },
+    {
+        name: "Tie 9",
+        id: 99,
+        price: 2600,
+    },
+    {
+        name: "Playsuit 2",
+        id: 661,
+        price: 14000,
+    },
+    {
+        name: "Jean 2",
+        id: 78,
+        price: 9000,
+    },
+    {
+        name: "Jumpsuit 3",
+        id: 155,
+        price: 3500,
+    },
+    {
+        name: "Short 4",
+        id: 81,
+        price: 4000,
+    }
+]
+
 export const initialState = {
     loading: false,
     hasErrors: false,
     cartItems: [],
-    products: [],
+    products,
+    // products: [],
     price: 0
 }
-
-
-
 
 const cartSlice = createSlice({
     name: "cartSlice",
     initialState,
     reducers: {
         addToCart: (state, { payload }) => {
-            const productItem = state.products.find(prod => prod.name === payload.name)
-            // console.log("CI Defined?", payload.name)
-            // console.log('in reducer::::', payload)
+            const productItem = state.products.find(
+                prod => prod.name === payload.name
+            )
             const inCart = state.cartItems.find(item => (
-                item.name === payload.name ? console.log("equal") : console.log("not")
-                // if (item.name === payload.name) {
-                //     console.log("equal")
-                //     console.log("Item Name", item.name)
-                //     console.log("Item Name", payload.name)
-                //     // console.log(cartItem.name)
-                //     return true
-                // } else {
-                //     console.log("not")
-                //     console.log("cart Name", payload.name)
-                //     // console.log(cartItem.name)
-                //     return false
-                // }
-                
-                // item.name === cartItem.name ? console.log(item) : console.log("False", item)
-                // if (item.name === cartItem.name) {
-                    //     console.log("matchItem:", item)
-                //     return true
-                // }
-                // return false
-))
-            console.log(inCart)
+                item.name === payload.name ? true : false
+            ))
+
+            inCart ? console.log("YaaaaaY!(:") : console.log('Boooo! :(')
 
             return {
                 ...state,
@@ -54,20 +67,6 @@ const cartSlice = createSlice({
                     )
                     : [...state.cartItems, { ...productItem, qty: 1 }]
             }
-
-            // ______________________________________________________
-
-            // if (!inCart) {
-            //     return [...state.cartItems, {...item, qty: 1}]
-            //     // Give a quantity of one 
-            // } else {
-            //     return state.cartItems.map(item => {
-            //         item.name === payload.name 
-            //             ? { ...item, qty: item.qty + 1 }
-            //             : item
-            //     })
-            // }
-            // state.cartItems.push(cartItem)
         },
         loadCart: (state, { payload }) => {
             state.cartItems = payload
@@ -76,6 +75,16 @@ const cartSlice = createSlice({
         },
         updatePrice: (state, { payload }) => {
             state.price = payload
+        },
+        updateQuantity: (state, { payload }) => {
+            return {
+                ...state,
+                cartItems: state.cartItems.map(item => 
+                    item.name === payload.name
+                        ? {...item, qty: +payload.qty}
+                        : item
+                    )
+            }
         },
         getClothes: state => {
             state.loading = true
@@ -102,7 +111,8 @@ export const {
     updatePrice,
     getClothes,
     getClothesSuccess,
-    getClothesFailure
+    getClothesFailure,
+    updateQuantity
 } = actions
 
 
