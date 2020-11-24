@@ -92,10 +92,23 @@ const cartSlice = createSlice({
             // ))
             // )
         },
-        // increaseQty: (state, { payload }) => {
+        adjustQty: (state, { payload }) => {
+            return {
+                ...state,
+                cartItems: state.cartItems.map(item => {
+                    if (item.name === payload.name) {
+                        if (payload.type === 'increase') {
+                            return {...item, qty: item.qty + 1}
+                        } else if (payload.type === 'decrease' && item.qty !== 1) {
 
-        // },
-        // decreaseQty: 
+                            return {...item, qty: item.qty - 1}
+                        }
+                    } 
+                    return item 
+
+                })
+            }
+        },
         getClothes: state => {
             state.loading = true
         },
@@ -120,6 +133,7 @@ export const {
     loadCart,
     updatePrice,
     getClothes,
+    adjustQty: increaseQty,
     getClothesSuccess,
     getClothesFailure,
     updateQuantity

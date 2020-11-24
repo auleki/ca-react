@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { CartCard, Button, FButton } from '../StyledComponents'
 import { formatToComma } from "../../api/operationsAPI";
 import { useDispatch } from "react-redux";
+import { increaseQty } from "../../features/cart/cartSlice";
 import { updateQuantity } from "../../features/cart/cartSlice";
 
 const CartItem = ({ product: { imageUrl, name, id, price, qty } }) => {
@@ -13,6 +14,8 @@ const CartItem = ({ product: { imageUrl, name, id, price, qty } }) => {
     setSqty(value)
     dispatch(updateQuantity(value, name))
   }
+
+
  return (
      <CartCard key={id}>
        <div className="cart-image">
@@ -27,18 +30,22 @@ const CartItem = ({ product: { imageUrl, name, id, price, qty } }) => {
        </div>
        <div className="item-actions">
         {/* <Button onClick={}> + </Button> */}
-        <FButton onClick={() => alert('YO')}>
+        <FButton 
+          onClick={() => dispatch(increaseQty({ name, type: "increase" }))}>
           +
         </FButton>
           <input 
             type="number" 
-            value={sQty}
+            value={qty}
             id="qty" 
             placeholder="Quantity"
-            onChange={qtyHandler}
+            // onChange={qtyHandler}
             // value={3}
             />
-        <Button> - </Button>
+        <FButton
+          onClick={() => dispatch(increaseQty({ name, type: "decrease" }))}>
+             - 
+        </FButton>
         </div>
       
      </CartCard>
