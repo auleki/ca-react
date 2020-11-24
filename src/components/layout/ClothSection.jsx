@@ -3,12 +3,12 @@ import Carousel from 'react-elastic-carousel';
 import { useSelector } from "react-redux";
 import Clothing from './Clothing';
 
-// const ClothSection = ({ clothes: { products, title } }) => {
-const ClothSection = () => {
+const ClothSection = ({ clothes: { products, title } }) => {
+// const ClothSection = () => {
 
-  // const [merchs, setMerchs] = useState(products);
+  const [merchs, setMerchs] = useState(products);
 
-  const merch = useSelector(state => state.products)
+  // const merch = useSelector(state => state.products)
 
   // const [merch, setMerch] = useState(products)
 
@@ -23,14 +23,14 @@ const ClothSection = () => {
         {/* <h3>{ title }</h3> */}
       </div>
       <Carousel>
-        {/* {merchs.map(
+        {merchs.map(
           (cloth, i) => 
           <Clothing key={i} clothes={cloth}/>
-          )} */}
-
+          )}
+{/* 
           {
             merch.map((cloth, i) => <Clothing key={i} clothes={cloth} />)
-          }
+          } */}
 
 
       </Carousel>

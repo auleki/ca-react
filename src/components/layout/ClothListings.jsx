@@ -18,7 +18,7 @@ const ClothListings = () => {
   
   useEffect(() => {
     
-    // dispatch(fetchRecipes())
+    dispatch(fetchRecipes())
   } ,[dispatch])
 
   const override = css`
