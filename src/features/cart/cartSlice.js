@@ -81,11 +81,21 @@ const cartSlice = createSlice({
                 ...state,
                 cartItems: state.cartItems.map(item => 
                     item.name === payload.name
-                        ? {...item, qty: +payload.qty}
+                        ? {...item, qty: +payload.value}
                         : item
                     )
             }
+            // return (state.cartItems.map(item => (
+            //     item.name === payload.name 
+            //         ? item.qty = payload.value
+            //         : item
+            // ))
+            // )
         },
+        // increaseQty: (state, { payload }) => {
+
+        // },
+        // decreaseQty: 
         getClothes: state => {
             state.loading = true
         },

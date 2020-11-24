@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { CartCard, Button } from '../StyledComponents'
+import { CartCard, Button, FButton } from '../StyledComponents'
 import { formatToComma } from "../../api/operationsAPI";
 import { useDispatch } from "react-redux";
 import { updateQuantity } from "../../features/cart/cartSlice";
@@ -9,8 +9,9 @@ const CartItem = ({ product: { imageUrl, name, id, price, qty } }) => {
   const dispatch = useDispatch()
                      
   const qtyHandler = (e) => {
-    setSqty(e.target.value)
-    dispatch(updateQuantity(e.target.value, name))
+    const value = e.target.value
+    setSqty(value)
+    dispatch(updateQuantity(value, name))
   }
  return (
      <CartCard key={id}>
@@ -25,7 +26,10 @@ const CartItem = ({ product: { imageUrl, name, id, price, qty } }) => {
          <p>₦ { formatToComma(price) }</p>
        </div>
        <div className="item-actions">
-        <Button> + </Button>
+        {/* <Button onClick={}> + </Button> */}
+        <FButton onClick={() => alert('YO')}>
+          +
+        </FButton>
           <input 
             type="number" 
             value={sQty}

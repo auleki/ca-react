@@ -102,6 +102,47 @@ export const Wrapper = styled.div`
   justify-content: center;
 `
 
+export const FButton = styled.button`
+  padding: 1rem 1.5rem;
+  font-size: 1.2em;
+  font-family: Helvetica;
+  border-radius: .2rem; 
+  transition: background-color 150ms ease-in;
+  border: none;
+  margin: .5rem 0;
+  &:hover {
+    cursor: pointer;
+    /* background-color: #43a047; */
+    background-color: #000;
+    color: #fff;
+  }
+
+  &:active, &:focus  {
+    outline: 0;
+  }
+  ${({ primary }) => 
+      primary && 
+      css`
+        color: #fff;
+        /* background-color: ${({ bgColor }) => bgColor}; */
+        background-color: #F36B2B;
+        transition: box-shadow 250ms ease-out, background-color 200ms ease-in;
+
+        &:hover {
+          box-shadow: none;
+          animation: 500ms ${FadeIn} ease-in infinite;
+          ${'' /* background-color: #333; */}
+          /* background-color: #fff; */
+          background-color: #43a047;
+
+          color: #fff;
+          // use the shadow to add a pulse animation.
+          /* box-shadow: 0 0 .5rem .4rem rgba(0, 0, 0, .3); */
+        }
+      `
+    }
+`
+
 export const Button = ({ primary, children, bgColor }) => {
   return (
     <StyledButton 
@@ -116,7 +157,6 @@ export const Button = ({ primary, children, bgColor }) => {
 export const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
   justify-content: center;
   margin: 3rem 0;
   height: 100%;

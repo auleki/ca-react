@@ -13,6 +13,7 @@ import {
   Title,
   Input,
   Button,
+  FButton,
   SummaryHeader,
   SummaryCard,
   Page
@@ -60,6 +61,7 @@ const CreateOrder = () => {
         phone: phone.value,
         location: location.value
       },
+      discountCode: null,
       orderNumber: `${vuid}CA`
     }
 
@@ -99,10 +101,15 @@ const CreateOrder = () => {
 
   }
 
-  const verifyPayment = () => {
-    // const baseUrl = `https://api.paystack.co/transaction/verify/:${reference}`
-    console.log("Binto")
-    // console.log(reference)
+  const verifyPayment = async () => {
+    const verifyUri = `https://api.paystack.co/transaction/verify/${reference}`
+    const currentToken = returnToken(GOLDEN)
+    const config = {
+      headers: { Authorization: currentToken }
+    }
+    const res = await axios.get(verifyUri, config)
+    console.log(res)
+    
   }
 
 
@@ -119,9 +126,9 @@ const CreateOrder = () => {
 
       <BasicCard>
          {ordered 
-          ? <Button onClick={verifyPayment}>
+          ? <FButton onClick={verifyPayment}>
               Verify Order
-            </Button>
+            </FButton>
           : <Form onSubmit={makeOrder}>
           <SubTitle uppercase>
             PAYMENT INFO
