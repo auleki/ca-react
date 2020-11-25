@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useField } from '../../hooks/'
-import { Redirect, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import SimpleNav from './SimpleNav'
 import { generateId } from '../../services/idGen'
 import { useDispatch, useSelector } from 'react-redux'
@@ -31,9 +31,7 @@ const CreateOrder = () => {
   const location = useField('text')
   const [ordered, setOrdered] = useState(false)
   const [reference, setReference] = useState('')
-
   // const uuid = uuidv4()
-
   const history = useHistory()
   
   useEffect(() => {
@@ -80,13 +78,16 @@ const CreateOrder = () => {
     const result = await axios.post(baseUrl, paystackLoad, config)
     console.log(result)
     paymentUrl = result.data.data.authorization_url
-    console.log(paymentUrl)
+    // console.log(paymentUrl)
     // console.log(vuid)
     if (result.status === 200) {
       tRef = result.data.data.reference
       // save to database
       saveOrder(dbLoad)
-      console.log(`Transaction successful for ${tRef}`)
+        .then(data => console.log(data))
+        .catch(e => console.log(e))
+      
+      // console.log(`Transaction successful for ${tRef}`)
       console.log("DB LOAD:", dbLoad)
       setReference(tRef)
       window.open(paymentUrl)

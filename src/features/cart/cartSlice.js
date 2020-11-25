@@ -48,7 +48,7 @@ const cartSlice = createSlice({
     initialState,
     reducers: {
         addToCart: (state, { payload }) => {
-            const productItem = state.products.find(prod => 
+            const productItem = state.products.find(prod =>
                 prod.name === payload.name
             )
             const inCart = state.cartItems.find(item => (
@@ -65,7 +65,7 @@ const cartSlice = createSlice({
                             ? { ...item, qty: item.qty + 1 }
                             : item
                     )
-                    : [...state.cartItems, {...payload, qty: 1}]
+                    : [...state.cartItems, { ...payload, qty: 1 }]
             }
         },
         loadCart: (state, { payload }) => {
@@ -76,36 +76,29 @@ const cartSlice = createSlice({
         updatePrice: (state, { payload }) => {
             state.price = payload
         },
-        // updateQuantity: (state, { payload }) => {
-        //     return {
-        //         ...state,
-        //         cartItems: state.cartItems.map(item => 
-        //             item.name === payload.name
-        //                 ? {...item, qty: +payload.value}
-        //                 : item
-        //             )
-        //     }
-        //     // return (state.cartItems.map(item => (
-        //     //     item.name === payload.name 
-        //     //         ? item.qty = payload.value
-        //     //         : item
-        //     // ))
-        //     // )
-        // },
+        updateQuantity: (state, { payload }) => {
+            return {
+                ...state,
+                cartItems: state.cartItems.map(item =>
+                    item.name === payload.name
+                        ? { ...item, qty: +payload.value }
+                        : item
+                )
+            }
+        },
         adjustQty: (state, { payload }) => {
             return {
                 ...state,
                 cartItems: state.cartItems.map(item => {
                     if (item.name === payload.name) {
                         if (payload.type === 'increase') {
-                            return {...item, qty: item.qty + 1}
+                            return { ...item, qty: item.qty + 1 }
                         } else if (payload.type === 'decrease' && item.qty !== 1) {
 
-                            return {...item, qty: item.qty - 1}
+                            return { ...item, qty: item.qty - 1 }
                         }
-                    } 
-                    return item 
-
+                    }
+                    return item
                 })
             }
         },
@@ -121,12 +114,8 @@ const cartSlice = createSlice({
             state.loading = false
             state.hasErrors = true
         },
-
-
-
     }
 })
-
 
 const { actions, reducer } = cartSlice
 
@@ -138,7 +127,7 @@ export const {
     adjustQty,
     getClothesSuccess,
     getClothesFailure,
-    // updateQuantity
+    updateQuantity
 } = actions
 
 
@@ -154,12 +143,5 @@ export const fetchRecipes = () => {
         }
     }
 }
-
-// export const saveOrder = (order) => {
-//     return async dispatch => {
-//         try
-//     }
-// }
-
 
 export default reducer 
