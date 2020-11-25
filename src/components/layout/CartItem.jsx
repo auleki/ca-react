@@ -1,17 +1,21 @@
 import React, { useState } from 'react'
-import { CartCard, Button } from '../StyledComponents'
+import { CartCard, Button, FButton } from '../StyledComponents'
 import { formatToComma } from "../../api/operationsAPI";
 import { useDispatch } from "react-redux";
+import { adjustQty } from "../../features/cart/cartSlice";
 import { updateQuantity } from "../../features/cart/cartSlice";
 
 const CartItem = ({ product: { imageUrl, name, id, price, qty } }) => {
   const [sQty, setSqty] = useState(qty)
   const dispatch = useDispatch()
                      
-  const qtyHandler = (e) => {
-    setSqty(e.target.value)
-    dispatch(updateQuantity(e.target.value, name))
-  }
+  // const qtyHandler = (e) => {
+  //   const value = e.target.value
+  //   setSqty(value)
+  //   dispatch(updateQuantity(value, name))
+  // }
+
+
  return (
      <CartCard key={id}>
        <div className="cart-image">
@@ -25,16 +29,23 @@ const CartItem = ({ product: { imageUrl, name, id, price, qty } }) => {
          <p>₦ { formatToComma(price) }</p>
        </div>
        <div className="item-actions">
-        <Button> + </Button>
+        {/* <Button onClick={}> + </Button> */}
+        <FButton 
+          onClick={() => dispatch(adjustQty({ name, type: "increase" }))}>
+          +
+        </FButton>
           <input 
             type="number" 
-            value={sQty}
+            value={qty}
             id="qty" 
             placeholder="Quantity"
-            onChange={qtyHandler}
+            // onChange={qtyHandler}
             // value={3}
             />
-        <Button> - </Button>
+        <FButton
+          onClick={() => dispatch(adjustQty({ name, type: "decrease" }))}>
+             - 
+        </FButton>
         </div>
       
      </CartCard>
