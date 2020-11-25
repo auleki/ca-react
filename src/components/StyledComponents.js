@@ -662,3 +662,7 @@ export const Page = styled.div`
   }
 
 `
+
+export const ItemForCart = styled.div`
+  background-color: #9C27B0;
+`

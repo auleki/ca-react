@@ -42,6 +42,20 @@ const CreateOrder = () => {
 
   const GOLDEN = 'sk_test_a3150b31e7a217d2488132a436e6df8d28dec651'
 
+  const dbLoad = {
+    products: cartItems,
+    userInfo: {
+      firstName: firstName.value,
+      lastName: lastName.value,
+      email: email.value,
+      phone: phone.value,
+      location: location.value
+    },
+    discountCode: null,
+    orderNumber: `${vuid}CA`,
+    price,
+  }
+
   const returnToken = token => `Bearer ${token}`
 
   const vuid = generateId().toUpperCase()
@@ -51,21 +65,6 @@ const CreateOrder = () => {
     e.preventDefault()
     setOrdered(true)
     let tRef, paymentUrl
-    const dbLoad = {
-      products: cartItems,
-      userInfo: {
-        firstName: firstName.value,
-        lastName: lastName.value,
-        email: email.value,
-        phone: phone.value,
-        location: location.value
-      },
-      discountCode: null,
-      orderNumber: `${vuid}CA`,
-      price,
-    }
-
-    // make api call to paystack
     let baseUrl = 'https://api.paystack.co/transaction/initialize'
     const paystackLoad = {
       amount: 5000,
@@ -78,15 +77,13 @@ const CreateOrder = () => {
     const result = await axios.post(baseUrl, paystackLoad, config)
     console.log(result)
     paymentUrl = result.data.data.authorization_url
-    // console.log(paymentUrl)
-    // console.log(vuid)
+
     if (result.status === 200) {
       tRef = result.data.data.reference
       // save to database
       saveOrder(dbLoad)
-        .then(data => console.log(data))
+        .then(data => data)
         .catch(e => console.log(e))
-      
       // console.log(`Transaction successful for ${tRef}`)
       console.log("DB LOAD:", dbLoad)
       setReference(tRef)
