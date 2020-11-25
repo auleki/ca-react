@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useField } from '../../hooks/'
+import { Redirect, useHistory } from "react-router-dom";
 import SimpleNav from './SimpleNav'
 import { generateId } from '../../services/idGen'
 import { useDispatch, useSelector } from 'react-redux'
+import { saveOrder } from "../../services/operations";
 import {
   BasicCard,
   Form,
@@ -32,6 +34,7 @@ const CreateOrder = () => {
 
   // const uuid = uuidv4()
 
+  const history = useHistory()
   
   useEffect(() => {
     window.scrollTo(0, 0);    
@@ -50,8 +53,6 @@ const CreateOrder = () => {
     e.preventDefault()
     setOrdered(true)
     let tRef, paymentUrl
-    // uid = nanoid().toLocaleUpperCase()
-    // create order object for db
     const dbLoad = {
       products: cartItems,
       userInfo: {
@@ -62,32 +63,29 @@ const CreateOrder = () => {
         location: location.value
       },
       discountCode: null,
-      orderNumber: `${vuid}CA`
+      orderNumber: `${vuid}CA`,
+      price,
     }
 
     // make api call to paystack
     let baseUrl = 'https://api.paystack.co/transaction/initialize'
-
     const paystackLoad = {
       amount: 5000,
       email: "customer@email.com",
     }
-
     const currentToken = returnToken(GOLDEN)
     const config = {
       headers: { Authorization: currentToken }
     }
     const result = await axios.post(baseUrl, paystackLoad, config)
-
     console.log(result)
-
     paymentUrl = result.data.data.authorization_url
-
     console.log(paymentUrl)
     // console.log(vuid)
-
     if (result.status === 200) {
       tRef = result.data.data.reference
+      // save to database
+      saveOrder(dbLoad)
       console.log(`Transaction successful for ${tRef}`)
       console.log("DB LOAD:", dbLoad)
       setReference(tRef)
@@ -98,22 +96,23 @@ const CreateOrder = () => {
     // if transaction successful, then we save new order to database
     //else we tell user transaction failed and have them try again
     // verify transaction
-
   }
 
   const verifyPayment = async () => {
+    console.log('Verifying order...')
     const verifyUri = `https://api.paystack.co/transaction/verify/${reference}`
     const currentToken = returnToken(GOLDEN)
     const config = {
       headers: { Authorization: currentToken }
     }
     const res = await axios.get(verifyUri, config)
-    console.log(res)
-    
+    const status = res.status    
+    if (status === 200) {
+      history.push('/order-complete')
+    } else {
+      console.log('not complete')
+    }
   }
-
-
-  
 
   return (
     <Page>

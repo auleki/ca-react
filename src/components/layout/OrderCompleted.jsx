@@ -4,7 +4,8 @@ import { Page } from "../StyledComponents";
 const OrderCompleted = () => {
   return (
     <Page>
-        <h1>Order Completed</h1>
+        <h1>Congrats!</h1>
+        <p>Your order has been received</p>
     </Page>
   )
 }

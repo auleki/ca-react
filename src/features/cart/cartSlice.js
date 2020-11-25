@@ -131,7 +131,9 @@ const cartSlice = createSlice({
         getClothesFailure: state => {
             state.loading = false
             state.hasErrors = true
-        }
+        },
+
+
 
     }
 })
@@ -163,6 +165,12 @@ export const fetchRecipes = () => {
         }
     }
 }
+
+// export const saveOrder = (order) => {
+//     return async dispatch => {
+//         try
+//     }
+// }
 
 
 export default reducer 
