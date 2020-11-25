@@ -51,17 +51,6 @@ const cartSlice = createSlice({
             const productItem = state.products.find(prod => 
                 prod.name === payload.name
             )
-
-            console.log(productItem)
-            
-            // const productItem = state.products.find(prod => {
-            //     if (prod.name !== payload.name) {
-            //         console.log("Product: ", original(prod.products))
-            //         console.log("Payload: ", payload.name)
-            //     } else {
-            //         console.log('Something is up')
-            //     }
-            // })
             const inCart = state.cartItems.find(item => (
                 item.name === payload.name ? true : false
             ))
@@ -76,7 +65,7 @@ const cartSlice = createSlice({
                             ? { ...item, qty: item.qty + 1 }
                             : item
                     )
-                    : [...state.cartItems, {...productItem, qty: 1}]
+                    : [...state.cartItems, {...payload, qty: 1}]
             }
         },
         loadCart: (state, { payload }) => {
