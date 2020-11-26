@@ -2,45 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 import { original } from 'immer'
 import axios from 'axios'
 
-// const products = [
-//     {
-//         name: "Shirt 1",
-//         id: 91,
-//         price: 7000,
-//     },
-//     {
-//         name: "Tie 9",
-//         id: 99,
-//         price: 2600,
-//     },
-//     {
-//         name: "Playsuit 2",
-//         id: 661,
-//         price: 14000,
-//     },
-//     {
-//         name: "Jean 2",
-//         id: 78,
-//         price: 9000,
-//     },
-//     {
-//         name: "Jumpsuit 3",
-//         id: 155,
-//         price: 3500,
-//     },
-//     {
-//         name: "Short 4",
-//         id: 81,
-//         price: 4000,
-//     }
-// ]
-
 export const initialState = {
     loading: false,
     hasErrors: false,
     cartItems: [],
     products: [],
-    price: 0
+    price: 0,
+    items: 0
 }
 
 const cartSlice = createSlice({
@@ -75,6 +43,9 @@ const cartSlice = createSlice({
         },
         updatePrice: (state, { payload }) => {
             state.price = payload
+        },
+        updateItems: (state, { payload }) => {
+            state.items = payload
         },
         updateQuantity: (state, { payload }) => {
             return {
@@ -127,7 +98,8 @@ export const {
     adjustQty,
     getClothesSuccess,
     getClothesFailure,
-    updateQuantity
+    updateQuantity,
+    updateItems
 } = actions
 
 

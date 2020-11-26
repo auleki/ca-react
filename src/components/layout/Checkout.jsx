@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import CartLength from './CartLength'
 import { formatToComma } from "../../api/operationsAPI";
-import { updatePrice } from '../../features/cart/cartSlice'
+import { updatePrice, updateItems } from '../../features/cart/cartSlice'
 
 const Checkout = () => {
                     
@@ -15,12 +15,15 @@ const Checkout = () => {
   
   // console.log(cartItems)
   let totalPrice = 0
+  let items = 0
   
   useEffect(() => {
     cartItems.map(item => {
+      items += item.qty
       totalPrice += item.price * item.qty 
     })
     // setTotal(totalPrice)
+    dispatch(updateItems(items))
     dispatch(updatePrice(totalPrice))
   
   }, [cartItems, totalPrice])

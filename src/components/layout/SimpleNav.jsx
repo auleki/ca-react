@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 // import ShoppingBasketOutlinedIcon from '@material-ui/icons/ShoppingBasketOutlined';
 import { Link } from 'react-router-dom'
 import MenuRoundedIcon from '@material-ui/icons/MenuRounded';
@@ -9,9 +9,14 @@ import ShoppingBasketSharpIcon from '@material-ui/icons/ShoppingBasketSharp';
 
 const SimpleNav = () => {
 
-  const cartItems = useSelector(state => state.cartItems)
+  const items = useSelector(state => state.items)
+  const [itemCount, setItemCount] = useState(0)
   
   // const [isAdmin, setIsAdmin] = useState(admin)
+
+  useEffect(() => {
+    setItemCount(items)
+  }, [items])
 
  return (
     <>
@@ -61,7 +66,7 @@ const SimpleNav = () => {
           
           <Link className="link-button" to="/shopping">
                 <ShoppingBasketSharpIcon/>
-              <span className="badge">{cartItems.length}</span>
+              <span className="badge">{itemCount}</span>
           </Link>
         </nav>
     </>
