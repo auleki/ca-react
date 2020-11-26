@@ -39,9 +39,10 @@ const CreateOrder = () => {
   }, [])
   
   const { cartItems, price } = useSelector(state => state)
-
+  
   const GOLDEN = 'sk_test_a3150b31e7a217d2488132a436e6df8d28dec651'
-
+  const vuid = generateId().toUpperCase()
+  
   const dbLoad = {
     products: cartItems,
     userInfo: {
@@ -58,7 +59,6 @@ const CreateOrder = () => {
 
   const returnToken = token => `Bearer ${token}`
 
-  const vuid = generateId().toUpperCase()
 
   // speak to paystack API  
   const makeOrder = async (e) => {
