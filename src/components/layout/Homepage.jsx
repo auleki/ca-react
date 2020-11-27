@@ -4,7 +4,7 @@ import { Header, ClothListings, SubscribeForm } from './index'
 const Homepage = () => {
                      
  return (
-       <>
+      <>
        
           <Header />
           <ClothListings />

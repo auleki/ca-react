@@ -1,12 +1,17 @@
 import React from 'react'
-import { Page } from "../StyledComponents";
+import { Page, SuccessCard, Title, Paragraph, FButton } from "../StyledComponents";
 
 const OrderCompleted = () => {
   return (
-    <Page>
-        <h1>Congrats!</h1>
-        <p>Your order has been received</p>
-    </Page>
+      <SuccessCard>
+        <Title>Congrats!</Title>
+        <Paragraph>
+          Your order has been received, we will be in touch
+        </Paragraph>
+        <FButton primary>
+          Return to Shop
+        </FButton>
+      </SuccessCard>    
   )
 }
 

@@ -2,45 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 import { original } from 'immer'
 import axios from 'axios'
 
-// const products = [
-//     {
-//         name: "Shirt 1",
-//         id: 91,
-//         price: 7000,
-//     },
-//     {
-//         name: "Tie 9",
-//         id: 99,
-//         price: 2600,
-//     },
-//     {
-//         name: "Playsuit 2",
-//         id: 661,
-//         price: 14000,
-//     },
-//     {
-//         name: "Jean 2",
-//         id: 78,
-//         price: 9000,
-//     },
-//     {
-//         name: "Jumpsuit 3",
-//         id: 155,
-//         price: 3500,
-//     },
-//     {
-//         name: "Short 4",
-//         id: 81,
-//         price: 4000,
-//     }
-// ]
-
 export const initialState = {
     loading: false,
     hasErrors: false,
     cartItems: [],
     products: [],
-    price: 0
+    price: 0,
+    items: 0
 }
 
 const cartSlice = createSlice({
@@ -48,7 +16,7 @@ const cartSlice = createSlice({
     initialState,
     reducers: {
         addToCart: (state, { payload }) => {
-            const productItem = state.products.find(prod => 
+            const productItem = state.products.find(prod =>
                 prod.name === payload.name
             )
             const inCart = state.cartItems.find(item => (
@@ -65,7 +33,7 @@ const cartSlice = createSlice({
                             ? { ...item, qty: item.qty + 1 }
                             : item
                     )
-                    : [...state.cartItems, {...payload, qty: 1}]
+                    : [...state.cartItems, { ...payload, qty: 1 }]
             }
         },
         loadCart: (state, { payload }) => {
@@ -76,37 +44,39 @@ const cartSlice = createSlice({
         updatePrice: (state, { payload }) => {
             state.price = payload
         },
-        // updateQuantity: (state, { payload }) => {
-        //     return {
-        //         ...state,
-        //         cartItems: state.cartItems.map(item => 
-        //             item.name === payload.name
-        //                 ? {...item, qty: +payload.value}
-        //                 : item
-        //             )
-        //     }
-        //     // return (state.cartItems.map(item => (
-        //     //     item.name === payload.name 
-        //     //         ? item.qty = payload.value
-        //     //         : item
-        //     // ))
-        //     // )
-        // },
+        updateItems: (state, { payload }) => {
+            state.items = payload
+        },
+        updateQuantity: (state, { payload }) => {
+            return {
+                ...state,
+                cartItems: state.cartItems.map(item =>
+                    item.name === payload.name
+                        ? { ...item, qty: +payload.value }
+                        : item
+                )
+            }
+        },
         adjustQty: (state, { payload }) => {
             return {
                 ...state,
                 cartItems: state.cartItems.map(item => {
                     if (item.name === payload.name) {
                         if (payload.type === 'increase') {
-                            return {...item, qty: item.qty + 1}
+                            return { ...item, qty: item.qty + 1 }
                         } else if (payload.type === 'decrease' && item.qty !== 1) {
 
-                            return {...item, qty: item.qty - 1}
+                            return { ...item, qty: item.qty - 1 }
                         }
-                    } 
-                    return item 
-
+                    }
+                    return item
                 })
+            }
+        },
+        removeFromCart: (state, { payload }) => {
+            return {
+                ...state, 
+                cartItems: state.cartItems.filter(item => item.name !== payload)
             }
         },
         getClothes: state => {
@@ -121,12 +91,8 @@ const cartSlice = createSlice({
             state.loading = false
             state.hasErrors = true
         },
-
-
-
     }
 })
-
 
 const { actions, reducer } = cartSlice
 
@@ -138,7 +104,9 @@ export const {
     adjustQty,
     getClothesSuccess,
     getClothesFailure,
-    // updateQuantity
+    updateQuantity,
+    updateItems, 
+    removeFromCart
 } = actions
 
 
@@ -154,12 +122,5 @@ export const fetchRecipes = () => {
         }
     }
 }
-
-// export const saveOrder = (order) => {
-//     return async dispatch => {
-//         try
-//     }
-// }
-
 
 export default reducer 

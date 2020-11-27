@@ -5,12 +5,12 @@ import { Link } from "react-router-dom";
 
 const CartLength = () => {
     
-    const cartItems = useSelector(state => state.cartItems)
+    const { items } = useSelector(state => state)
     return (
         <div className="items-length">
-            {cartItems.length === 0
+            {items === 0
               ? <p>Cart is empty</p>
-              : <p>Items: {cartItems.length}</p>
+              : <p>Items: {items}</p>
             }
             <Link to="/">
               <Button>

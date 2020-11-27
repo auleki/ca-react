@@ -556,10 +556,9 @@ export const Input = styled.input`
     } */
   `
 
-
-
 export const CheckoutCard = styled.div`
-  background-color: #212121;
+  /* Return the gray background on mobile ... MAYBE?  */
+  /* background-color: #212121; */
   color: #fff;
   text-align: left;
   display: flex;
@@ -648,6 +647,7 @@ export const ActionRow = styled.div`
 `
 
 export const Page = styled.div`
+  /* height: 100vh; */
   padding: 0 5rem;
   display: flex;
   flex-direction: column;
@@ -660,5 +660,43 @@ export const Page = styled.div`
   @media (max-width: 340px) {
     padding: 0 .5rem;
   }
-
 `
+
+export const ItemForCarousel = styled.div`
+  /* background-color: #9C27B0; */
+  height: 100vh;
+  width: 100%;
+  ${({ bgColor }) => 
+  bgColor && css`
+    background: linear-gradient(to right, #fdc83040, #f3733570), url(${bgColor}) no-repeat; 
+    background-position-y: 45%;
+    background-size: cover;
+  `
+} 
+
+  &:focus, &:active {
+    outline: 0;
+    border: 0;
+  }
+
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+`
+
+export const SuccessCard = styled.div`
+  text-align: center;
+  padding: 2rem 0;
+  width: 100%;
+  background: linear-gradient(to right, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5) ), url("https://res.cloudinary.com/checkadigs-cloud/image/upload/v1606402883/Taieri_z4cz7f.png") fixed no-repeat;
+  background-size: cover;
+  /* linear-gradient(to right, rgba(253, 200, 48, .2), rgba(243, 115, 53, .4)), */
+  p {
+    margin: 1rem 0;
+    color: #fff;
+    font-weight: 800;
+  }
+`
+

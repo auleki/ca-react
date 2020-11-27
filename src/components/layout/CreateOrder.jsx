@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useField } from '../../hooks/'
-import { Redirect, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import SimpleNav from './SimpleNav'
 import { generateId } from '../../services/idGen'
 import { useDispatch, useSelector } from 'react-redux'
@@ -31,43 +31,40 @@ const CreateOrder = () => {
   const location = useField('text')
   const [ordered, setOrdered] = useState(false)
   const [reference, setReference] = useState('')
-
   // const uuid = uuidv4()
-
   const history = useHistory()
-  
+
   useEffect(() => {
-    window.scrollTo(0, 0);    
+    window.scrollTo(0, 0);
   }, [])
-  
+
   const { cartItems, price } = useSelector(state => state)
 
   const GOLDEN = 'sk_test_a3150b31e7a217d2488132a436e6df8d28dec651'
+  const vuid = generateId().toUpperCase()
+
+  const dbLoad = {
+    products: cartItems,
+    userInfo: {
+      firstName: firstName.value,
+      lastName: lastName.value,
+      email: email.value,
+      phone: phone.value,
+      location: location.value
+    },
+    discountCode: null,
+    orderNumber: `${vuid}CA`,
+    price,
+  }
 
   const returnToken = token => `Bearer ${token}`
 
-  const vuid = generateId().toUpperCase()
 
   // speak to paystack API  
   const makeOrder = async (e) => {
     e.preventDefault()
     setOrdered(true)
     let tRef, paymentUrl
-    const dbLoad = {
-      products: cartItems,
-      userInfo: {
-        firstName: firstName.value,
-        lastName: lastName.value,
-        email: email.value,
-        phone: phone.value,
-        location: location.value
-      },
-      discountCode: null,
-      orderNumber: `${vuid}CA`,
-      price,
-    }
-
-    // make api call to paystack
     let baseUrl = 'https://api.paystack.co/transaction/initialize'
     const paystackLoad = {
       amount: 5000,
@@ -80,13 +77,14 @@ const CreateOrder = () => {
     const result = await axios.post(baseUrl, paystackLoad, config)
     console.log(result)
     paymentUrl = result.data.data.authorization_url
-    console.log(paymentUrl)
-    // console.log(vuid)
+
     if (result.status === 200) {
       tRef = result.data.data.reference
       // save to database
       saveOrder(dbLoad)
-      console.log(`Transaction successful for ${tRef}`)
+        .then(data => data)
+        .catch(e => console.log(e))
+      // console.log(`Transaction successful for ${tRef}`)
       console.log("DB LOAD:", dbLoad)
       setReference(tRef)
       window.open(paymentUrl)
@@ -106,7 +104,7 @@ const CreateOrder = () => {
       headers: { Authorization: currentToken }
     }
     const res = await axios.get(verifyUri, config)
-    const status = res.status    
+    const status = res.status
     if (status === 200) {
       history.push('/order-complete')
     } else {
@@ -115,82 +113,85 @@ const CreateOrder = () => {
   }
 
   return (
-    <Page>
-      <SummaryHeader>
-        <Title>Confirm order and pay</Title>
-        <Paragraph>
-          A new window will be opened for you to pay, come back here to verify your payment
+    <div className="full">
+      <Page>
+        <SummaryHeader>
+          <Title>Confirm order and pay</Title>
+          <Paragraph>
+            A new window will be opened for you to pay, come back here to verify your payment
         </Paragraph>
-      </SummaryHeader>
+        </SummaryHeader>
 
-      <BasicCard>
-         {ordered 
-          ? <FButton onClick={verifyPayment}>
+        <BasicCard>
+          {ordered
+            ? <FButton onClick={verifyPayment}>
               Verify Order
             </FButton>
-          : <Form onSubmit={makeOrder}>
-          <SubTitle uppercase>
-            PAYMENT INFO
+            : <Form onSubmit={makeOrder}>
+              <SubTitle uppercase>
+                PAYMENT INFO
           </SubTitle>
 
-          <RowLayout>
+              <RowLayout>
 
-            <Input
-              placeholder="First Name"
-              onChange={firstName.onChange}
-              value={firstName.value}
-            // required
-            />
+                <Input
+                  placeholder="First Name"
+                  onChange={firstName.onChange}
+                  value={firstName.value}
+                // required
+                />
 
-            <Input
-              placeholder="Last Name"
-              onChange={lastName.onChange}
-              value={lastName.value}
-            // required
-            />
+                <Input
+                  placeholder="Last Name"
+                  onChange={lastName.onChange}
+                  value={lastName.value}
+                // required
+                />
 
-          </RowLayout>
+              </RowLayout>
 
-          <Input
-            placeholder="Email"
-            onChange={email.onChange}
-            value={email.value}
-          />
+              <Input
+                placeholder="Email"
+                onChange={email.onChange}
+                value={email.value}
+              />
 
-          <Input
-            placeholder="Phone Number"
-            onChange={phone.onChange}
-            value={phone.value}
-          />
+              <Input
+                placeholder="Phone Number"
+                onChange={phone.onChange}
+                value={phone.value}
+              />
 
-          <Input
-            placeholder="Location"
-            onChange={location.onChange}
-            value={location.value}
-          />
+              <Input
+                placeholder="Location"
+                onChange={location.onChange}
+                value={location.value}
+              />
 
-          <div>
-            <Button primary>
-              Pay for order
-            </Button>              
-          </div>
+              <div>
+                <Button primary>
+                  Pay for order
+            </Button>
+              </div>
 
-        </Form>}
+            </Form>}
 
 
-        <SummaryCard>
-          <h3>You are to pay</h3>
-          <p className="totalPrice">
-            <span>N</span>{formatToComma(price)}
+          <SummaryCard>
+            <h3>You are to pay</h3>
+            <p className="totalPrice">
+              <span>N</span>{formatToComma(price)}
+            </p>
+            <p className="info">
+              You have selected {cartItems.length} product(s)
           </p>
-          <p className="info">
-            You have selected {cartItems.length} product(s)
-          </p>
-        </SummaryCard>
-      </BasicCard>
+          </SummaryCard>
+        </BasicCard>
 
 
-    </Page>
+      </Page>
+    </div>
+
   )
 }
 

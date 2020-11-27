@@ -7,7 +7,8 @@ const returnToken = token => `Bearer ${token}`
 
 const currentToken = returnToken(GOLDEN)
 
-const baseUrl =  'https://afternoon-chamber-08446.herokuapp.com/api/clothing';
+// const baseUrl =  'https://afternoon-chamber-08446.herokuapp.com/api/orders';
+const baseUrl =  'http://localhost:6500/api/orders';
 
 const config = {
   headers: { Authorization: currentToken }
