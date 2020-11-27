@@ -664,8 +664,20 @@ export const Page = styled.div`
 
 export const ItemForCarousel = styled.div`
   /* background-color: #9C27B0; */
-  height: 89vh;
+  height: 100vh;
   width: 100%;
+  ${({ bgColor }) => 
+  bgColor && css`
+    background: linear-gradient(to right, #fdc83040, #f3733570), url(${bgColor}) no-repeat; 
+    background-position-y: 45%;
+    background-size: cover;
+  `
+} 
+
+  &:focus, &:active {
+    outline: 0;
+    border: 0;
+  }
 
   img {
     height: 100%;
