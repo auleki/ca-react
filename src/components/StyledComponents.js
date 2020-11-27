@@ -556,10 +556,9 @@ export const Input = styled.input`
     } */
   `
 
-
-
 export const CheckoutCard = styled.div`
-  background-color: #212121;
+  /* Return the gray background on mobile ... MAYBE?  */
+  /* background-color: #212121; */
   color: #fff;
   text-align: left;
   display: flex;

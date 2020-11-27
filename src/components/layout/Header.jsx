@@ -15,7 +15,9 @@ const Header = () => {
       className="carousel"
       showArrows={false}
       enableSwipe={false}
+      autoPlaySpeed={4000}
       enableAutoPlay={true}>
+        
       {/* <ItemForCart>
         <header className="wow fadeInDownBig">
           <div className="left">

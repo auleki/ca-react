@@ -73,6 +73,12 @@ const cartSlice = createSlice({
                 })
             }
         },
+        removeFromCart: (state, { payload }) => {
+            return {
+                ...state, 
+                cartItems: state.cartItems.filter(item => item.name !== payload)
+            }
+        },
         getClothes: state => {
             state.loading = true
         },
@@ -99,7 +105,8 @@ export const {
     getClothesSuccess,
     getClothesFailure,
     updateQuantity,
-    updateItems
+    updateItems, 
+    removeFromCart
 } = actions
 
 

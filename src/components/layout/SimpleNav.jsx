@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-// import ShoppingBasketOutlinedIcon from '@material-ui/icons/ShoppingBasketOutlined';
+import ShoppingBasketOutlinedIcon from '@material-ui/icons/ShoppingBasketOutlined';
 import { Link } from 'react-router-dom'
 import MenuRoundedIcon from '@material-ui/icons/MenuRounded';
 import { useSelector } from 'react-redux'
@@ -8,15 +8,14 @@ import ShoppingBasketSharpIcon from '@material-ui/icons/ShoppingBasketSharp';
 // import CartIcon from '../../cart-01.svg'
 
 const SimpleNav = () => {
-
   const items = useSelector(state => state.items)
-  const [itemCount, setItemCount] = useState(0)
+  // const [itemCount, setItemCount] = useState(0)
   
   // const [isAdmin, setIsAdmin] = useState(admin)
 
-  useEffect(() => {
-    setItemCount(items)
-  }, [items])
+  // useEffect(() => {
+  //   setItemCount(items)
+  // }, [items])
 
  return (
     <>
@@ -65,8 +64,9 @@ const SimpleNav = () => {
           </ul>
           
           <Link className="link-button" to="/shopping">
-                <ShoppingBasketSharpIcon/>
-              <span className="badge">{itemCount}</span>
+                {/* <ShoppingBasketSharpIcon/> */}
+                <ShoppingBasketOutlinedIcon />
+              <span className="badge">{items}</span>
           </Link>
         </nav>
     </>
