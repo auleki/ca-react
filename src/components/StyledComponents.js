@@ -2,6 +2,7 @@ import React from 'react'
 import styled, { css, keyframes } from 'styled-components';
 import { Link } from 'react-router-dom';
 
+// @import './variables';
 
 const FadeIn = keyframes`
   0% {
@@ -45,9 +46,9 @@ const StyledButton = styled.button`
   &:active, &:focus  {
     outline: 0;
   }
-  ${({ primary }) => 
-      primary && 
-      css`
+  ${({ primary }) =>
+    primary &&
+    css`
         color: #fff;
         /* background-color: ${({ bgColor }) => bgColor}; */
         background-color: #F36B2B;
@@ -65,7 +66,7 @@ const StyledButton = styled.button`
           /* box-shadow: 0 0 .5rem .4rem rgba(0, 0, 0, .3); */
         }
       `
-    }
+  }
 `
 
 export const Title = styled.h1`
@@ -80,7 +81,7 @@ export const SubTitle = styled.h2`
   font-size: 1.1rem;
   margin-top: 1rem;
 
-  ${({ uppercase }) => 
+  ${({ uppercase }) =>
     uppercase && css`
       text-transform: uppercase;
     `
@@ -120,9 +121,9 @@ export const FButton = styled.button`
   &:active, &:focus  {
     outline: 0;
   }
-  ${({ primary }) => 
-      primary && 
-      css`
+  ${({ primary }) =>
+    primary &&
+    css`
         color: #fff;
         /* background-color: ${({ bgColor }) => bgColor}; */
         background-color: #F36B2B;
@@ -140,18 +141,18 @@ export const FButton = styled.button`
           /* box-shadow: 0 0 .5rem .4rem rgba(0, 0, 0, .3); */
         }
       `
-    }
+  }
 `
 
 export const Button = ({ primary, children, bgColor }) => {
   return (
-    <StyledButton 
+    <StyledButton
       primary={primary}
       bgColor={bgColor}
-      >
-      { children }
+    >
+      { children}
     </StyledButton>
-    )
+  )
 }
 
 export const CardContainer = styled.div`
@@ -239,7 +240,7 @@ export const CardStyle = styled.div`
   align-items: center;
   justify-content: center;
   background-color: #F36B2B;
-  box-shadow: 0px 2px 16px 6px rgba(243, 107, 43, .2);
+  /* box-shadow: 0px 2px 16px 6px rgba(243, 107, 43, .2); */
   transition: transform 200ms ease-in, box-shadow 300ms ease-in;
 
   @media (min-width: 318px) and (max-width: 707px) {
@@ -263,11 +264,12 @@ export const CardStyle = styled.div`
   }
 `
 
-export const LinkButton = styled.a`
+export const LinkButton = styled.button`
   background-color: #fff;
   color: #000;
   text-transform: uppercase;
   padding: .5rem 1.5rem;
+  font-size: 1rem;
   border-radius: .3rem;
   display: flex; 
   align-items: center;
@@ -276,6 +278,12 @@ export const LinkButton = styled.a`
   transition: color 300ms ease-out, background-color 150ms ease-out;
   margin: 1rem 0;
 
+  &:active {
+    outline: 0;
+    border: 3px solid transparent;
+    transform: translateY(3px);
+  }
+
   &:hover {
     background-color: #000;
     color: #ddd;
@@ -283,7 +291,12 @@ export const LinkButton = styled.a`
     svg {
       transform: translateX(5px);
     }
-    /* border: #fff 3px solid; */
+  }
+
+  &:disabled {
+    background-color: #333;
+    color: #ddd;
+    pointer-events: none;
   }
 
   svg {
@@ -359,8 +372,8 @@ export const BasicCard = styled.div`
   /* padding: 3rem; */
   /* background: rgb(33, 33, 33); */
 
-  ${({ shadow, bgColor }) => 
-    shadow && 
+  ${({ shadow, bgColor }) =>
+    shadow &&
     css`
       box-shadow: 2px 3px 19px 0px rgba(0,0,0,0.75);
       transition: box-shadow 300ms ease-in-out;
@@ -388,6 +401,7 @@ export const CartCard = styled.div`
   border-radius: .2rem;
   align-items: center;
   padding: 1rem;
+  position: relative;
   transition: box-shadow 300ms ease-in-out;
   /* width: 100%; */
 
@@ -395,6 +409,12 @@ export const CartCard = styled.div`
     display: flex;
     align-items: center;
   }
+
+  .qty {
+    padding: 0 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+}
 
 
   .card-info {
@@ -429,8 +449,8 @@ export const CartCard = styled.div`
     border-radius: 100%;
     background-color: #F36B2B;
     /* padding: .5em; */
-    height: 8rem;
-    width: 8rem;
+    height: 10rem;
+    width: 10rem;
     display: flex;
     align-items: center;
     text-align: center;
@@ -439,7 +459,7 @@ export const CartCard = styled.div`
   
   img {
     height: auto;
-    width: 100%;
+    width: 80%;
   }
 
   &:hover {
@@ -450,14 +470,6 @@ export const CartCard = styled.div`
     }
 
   }
-/* 
-  @media (min-width: 318px) and (max-width: 480px) {
-    .card-info {
-      display: flex; 
-      flex-direction: column;
-    }
-  } */
-
 
   @media (min-width: 315px) and (max-width: 779px) {
     display: flex;
@@ -479,14 +491,29 @@ export const CartCard = styled.div`
       margin: .5rem 0;
     } */
     
-    &:hover {
-      box-shadow: none;
-    }
-
+    
     input {
       text-align: center;
     }
     
+    .remove {
+      display: none;
+    }
+    
+    
+    
+    &:hover {
+      box-shadow: none;
+      .remove {
+        display: block;
+        position: absolute;
+        top: 3rem;
+      }
+      img {
+        filter: blur(5px);
+        --webkit-filter: blur(5px);
+      }
+    }
   }
 
   @media (max-width: 388px) {
@@ -666,13 +693,18 @@ export const ItemForCarousel = styled.div`
   /* background-color: #9C27B0; */
   height: 100vh;
   width: 100%;
-  ${({ bgColor }) => 
-  bgColor && css`
-    background: linear-gradient(to right, #fdc83040, #f3733570), url(${bgColor}) no-repeat; 
+  ${({ bgColor }) =>
+    bgColor && css`
+    background: linear-gradient(to right, #00000070, #00000090), url(${bgColor}) no-repeat; 
     background-position-y: 45%;
     background-size: cover;
+
+    @media (max-width: 534px) {
+      background-size: contain;
+      background-position-y: 0;
+    }
   `
-} 
+  } 
 
   &:focus, &:active {
     outline: 0;

@@ -23,7 +23,7 @@ const cartSlice = createSlice({
                 item.name === payload.name ? true : false
             ))
 
-            inCart ? console.log("YaaaaaY!") : console.log('Booo')
+            // inCart ? console.log("YaaaaaY!") : console.log('Booo')
 
             return {
                 ...state,

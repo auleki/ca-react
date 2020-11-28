@@ -15,16 +15,14 @@ const Header = () => {
 
   const settings = {
     dots: true,
+    arrows: false,
     lazyLoad: true,
     infinite: true,
-    speed: 1000,
-    fade: true,
+    speed: 300,
     draggable: true,
     autoplay: true,
     autoplaySpeed: 2500,
     cssEase: "linear",
-    // slidesToShow: 1,
-    // slidesToScroll: 1
   }
   
   return (

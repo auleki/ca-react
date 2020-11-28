@@ -64,8 +64,7 @@ const SimpleNav = () => {
           </ul>
           
           <Link className="link-button" to="/shopping">
-                {/* <ShoppingBasketSharpIcon/> */}
-                <ShoppingBasketOutlinedIcon />
+                <ShoppingBasketSharpIcon/>
               <span className="badge">{items}</span>
           </Link>
         </nav>
