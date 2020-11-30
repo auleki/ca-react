@@ -12,9 +12,8 @@ import {
   OrderCompleted,
   SimpleNav, Homepage } from './components/layout'
 import CreateOrder from './components/layout/CreateOrder'
-
-
 import { Route, Switch } from 'react-router-dom';
+import PaymentPage from './components/layout/PaymentPage';
 
 
 
@@ -29,6 +28,7 @@ const App = () => {
           <Route path="/shopping" component={ShoppingCart} />
           <Route path="/confirm" component={CreateOrder}/>
           <Route path="/order-complete" component={OrderCompleted} />
+          <Route path="/payment" component={PaymentPage} />
         </Switch>
         <Footer />
 

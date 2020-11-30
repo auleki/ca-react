@@ -77,20 +77,32 @@ const CreateOrder = () => {
     const result = await axios.post(baseUrl, paystackLoad, config)
     console.log(result)
     paymentUrl = result.data.data.authorization_url
-
-    if (result.status === 200) {
-      tRef = result.data.data.reference
-      // save to database
-      saveOrder(dbLoad)
-        .then(data => data)
-        .catch(e => console.log(e))
-      // console.log(`Transaction successful for ${tRef}`)
-      console.log("DB LOAD:", dbLoad)
-      setReference(tRef)
-      window.open(paymentUrl)
+    // console.log("URL: ", paymentUrl)
+    const saveUrl = localStorage.setItem("frameUrl", paymentUrl)
+    if (!saveUrl) {
+      localStorage.setItem('frameUrl', paymentUrl)
     } else {
-      console.log("Transaction failed " + firstName.value + ' please try again')
+      localStorage.removeItem('frameUrl') 
+      localStorage.setItem('frameUrl', paymentUrl)
     }
+
+    setTimeout(() => {
+      if (result.status === 200) {
+        tRef = result.data.data.reference
+        // save to database
+        saveOrder(dbLoad)
+          .then(data => data)
+          .catch(e => console.log(e))
+        // console.log(`Transaction successful for ${tRef}`)
+        console.log("DB LOAD:", dbLoad)
+        setReference(tRef)
+        history.push("/payment")
+      } else {
+        console.log("Transaction failed " + firstName.value + ' please try again')
+      }
+    }, 1000)
+    
+    
     // if transaction successful, then we save new order to database
     //else we tell user transaction failed and have them try again
     // verify transaction

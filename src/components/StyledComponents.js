@@ -552,8 +552,7 @@ export const Form = styled.form`
 
 `
 
-export const Input = styled.input`
-  
+export const Input = styled.input`  
     padding: 1rem .5rem;
     width: 100%;
     font-size: 1rem;
@@ -695,7 +694,7 @@ export const ItemForCarousel = styled.div`
   width: 100%;
   ${({ bgColor }) =>
     bgColor && css`
-    background: linear-gradient(to right, #00000070, #00000090), url(${bgColor}) no-repeat; 
+    background: linear-gradient(to right, #00000050, #00000040), url(${bgColor}) no-repeat; 
     background-position-y: 45%;
     background-size: cover;
 
@@ -732,3 +731,14 @@ export const SuccessCard = styled.div`
   }
 `
 
+export const IframePage = styled.div`
+  height: 100%;
+  width: 100%;
+  overflow-y: hidden;
+  background-color: #F36B2B;
+  
+
+  @media (max-width: 527px) {
+    background-color: #fff;
+  }
+`
