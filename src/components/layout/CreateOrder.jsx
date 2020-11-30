@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useField } from '../../hooks/'
 import { useHistory } from "react-router-dom";
-import SimpleNav from './SimpleNav'
+// import SimpleNav from './SimpleNav'
 import { generateId } from '../../services/idGen'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { saveOrder } from "../../services/operations";
 import {
   BasicCard,
@@ -40,7 +40,13 @@ const CreateOrder = () => {
 
   const { cartItems, price } = useSelector(state => state)
 
+  function openNewTab(url) {
+    const win = window.open(url, '_blank')
+    win.focus()
+  }
+
   const GOLDEN = 'sk_test_a3150b31e7a217d2488132a436e6df8d28dec651'
+
   const vuid = generateId().toUpperCase()
 
   const dbLoad = {
@@ -60,33 +66,41 @@ const CreateOrder = () => {
   const returnToken = token => `Bearer ${token}`
 
 
+
   // speak to paystack API  
   const makeOrder = async (e) => {
     e.preventDefault()
     setOrdered(true)
     let tRef, paymentUrl
     let baseUrl = 'https://api.paystack.co/transaction/initialize'
+
+    //! ADJUST PAYSTACK LOAD IN PRODUCTION
     const paystackLoad = {
       amount: 5000,
       email: "customer@email.com",
     }
     const currentToken = returnToken(GOLDEN)
-    const config = {
-      headers: { Authorization: currentToken }
-    }
-    const result = await axios.post(baseUrl, paystackLoad, config)
-    console.log(result)
-    paymentUrl = result.data.data.authorization_url
-    // console.log("URL: ", paymentUrl)
-    const saveUrl = localStorage.setItem("frameUrl", paymentUrl)
-    if (!saveUrl) {
-      localStorage.setItem('frameUrl', paymentUrl)
-    } else {
-      localStorage.removeItem('frameUrl') 
-      localStorage.setItem('frameUrl', paymentUrl)
-    }
+    // const config = {
+    //   headers: { Authorization: currentToken }
+    // }
 
-    setTimeout(() => {
+    function saveUrlToStorage (url, key) {
+      if (localStorage.getItem(key)) {
+        localStorage.removeItem(key)
+        localStorage.setItem(key, url)
+      } else {
+        localStorage.setItem(key, url)
+      }
+    }
+    
+    try {
+      const token = 'sk_test_a3150b31e7a217d2488132a436e6df8d28dec651'
+      const config = {
+        headers: { Authorization: `Bearer ${token}` }
+      }
+      const result = await axios.post(baseUrl, paystackLoad, config)
+      console.log(result)
+      paymentUrl = result.data.data.authorization_url
       if (result.status === 200) {
         tRef = result.data.data.reference
         // save to database
@@ -96,13 +110,18 @@ const CreateOrder = () => {
         // console.log(`Transaction successful for ${tRef}`)
         console.log("DB LOAD:", dbLoad)
         setReference(tRef)
+        // openNewTab(paymentUrl)
+        saveUrlToStorage(paymentUrl, "frameUrl")
         history.push("/payment")
       } else {
         console.log("Transaction failed " + firstName.value + ' please try again')
       }
-    }, 1000)
-    
-    
+    } catch (error) {
+      console.log(error)
+    }
+
+
+
     // if transaction successful, then we save new order to database
     //else we tell user transaction failed and have them try again
     // verify transaction

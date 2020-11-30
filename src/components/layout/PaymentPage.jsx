@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Iframe from 'react-iframe'
+// import Iframe from 'react-iframe'
 import { IframePage } from "../StyledComponents";
 
 const PaymentPage = () => {
@@ -10,16 +10,20 @@ const PaymentPage = () => {
   useEffect(() => {
     const data = localStorage.getItem("frameUrl")
     setUrl(data)
-    console.log("FROM PAYMENT  PAGE: ", data)
+    console.log("FROM PAYMENT PAGE: ", data)
   } ,[])
+
+  const settings = {
+    height: "1000px",
+    width: "1000px"
+  }
   
   return (
     <IframePage>
-      <Iframe
-        url={url}
-        width="100%"
-        height="900px"
-        display="initial" />
+      <iframe 
+        {...settings}
+        src={url}>          
+      </iframe>
     </IframePage>
   )
 }

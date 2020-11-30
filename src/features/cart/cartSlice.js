@@ -15,6 +15,9 @@ const cartSlice = createSlice({
     name: "cartSlice",
     initialState,
     reducers: {
+        resetCart: (state) => {
+            state = undefined
+        },
         addToCart: (state, { payload }) => {
             const productItem = state.products.find(prod =>
                 prod.name === payload.name

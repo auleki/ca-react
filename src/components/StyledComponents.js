@@ -734,7 +734,7 @@ export const SuccessCard = styled.div`
 export const IframePage = styled.div`
   height: 100%;
   width: 100%;
-  overflow-y: hidden;
+  overflow: hidden;
   background-color: #F36B2B;
   
 
