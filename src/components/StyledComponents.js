@@ -393,6 +393,7 @@ export const BasicCard = styled.div`
 
 export const CartCard = styled.div`
   background-color: #212121;
+  /* background-color: #F36B2B; */
   color: #fff;
   /* line that added the 3d look to cart card */
   margin: 2rem 1rem;
@@ -404,7 +405,7 @@ export const CartCard = styled.div`
   padding: 1rem;
   position: relative;
   transition: box-shadow 300ms ease-in-out;
-  /* width: 100%; */
+  /* width: 50%; */
 
   .item-actions {
     display: flex;
@@ -478,7 +479,8 @@ export const CartCard = styled.div`
     align-items: center;
     justify-content: center;
     margin: 1rem 0;
-    width: 100%;
+    width: 80%;
+    margin: 2rem auto;
 
     .name {
       margin: 1rem 0;
