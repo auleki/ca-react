@@ -2,16 +2,16 @@ import React, { useEffect } from 'react'
 import { 
   ShopCartContainer, 
   CartItemStyle, 
-  Button,
+  // Button,
   RowLayout } from '../StyledComponents'
 import CartItem from './CartItem'
 import Checkout from './Checkout'
 import { useSelector, useDispatch } from "react-redux";
-import { fetchRecipes, updateItems, updatePrice } from "../../features/cart/cartSlice";
+import { updateItems, updatePrice } from "../../features/cart/cartSlice";
 
 const ShoppingCart = () => {
   const dispatch = useDispatch()  
-  const { products, loading, hasErrors, cartItems } = useSelector((state) => state)
+  const { cartItems } = useSelector((state) => state)
   
   useEffect(() => {
     window.scrollTo(0, 0);    
@@ -21,8 +21,11 @@ const ShoppingCart = () => {
   let items = 0
   
   useEffect(() => {
+    // eslint-disable-next-line
     cartItems.map(item => {
+      // eslint-disable-next-line
       items += item.qty
+      // eslint-disable-next-line
       totalPrice += item.price * item.qty 
     })    
     dispatch(updateItems(items))

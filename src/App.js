@@ -4,11 +4,12 @@ import './App.scss';
 // import CarouselElastic from './components/layout/CarouselElastic'
 // import { ClothSection } from './components/layout'
 import { 
-  ShoppingCart, Header, 
+  ShoppingCart, 
+  // Header, 
   Footer, 
-  SubscribeForm, 
-  SubscribeSuccess,
-  ClothListings, 
+  // SubscribeForm, 
+  // SubscribeSuccess,
+  // ClothListings, 
   OrderCompleted,
   SimpleNav, Homepage } from './components/layout'
 import CreateOrder from './components/layout/CreateOrder'

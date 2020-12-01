@@ -21,6 +21,7 @@ const cartSlice = createSlice({
             state.items = 0
         },
         addToCart: (state, { payload }) => {
+            // eslint-disable-next-line
             const productItem = state.products.find(prod =>
                 prod.name === payload.name
             )

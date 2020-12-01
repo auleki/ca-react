@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
-import Naira from '../../nigeria-naira-currency-symbol (1).svg';
-import Icon from '../Icon'
+import React from 'react'
+// import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+// import Naira from '../../nigeria-naira-currency-symbol (1).svg';
+// import Icon from '../Icon'
 import { CardStyle, LinkButton, CardInfo } from '../StyledComponents';
 import { addToCart } from '../../features/cart/cartSlice';
 import { formatToComma } from "../../api/operationsAPI";
 
-const Price = ({ price }) => `<Icon svg={Naira}/> ${formatToComma(price)}`
+// const Price = ({ price }) => `<Icon svg={Naira}/> ${formatToComma(price)}`
 
 const Clothing = ({ clothes }) => {
   const dispatch = useDispatch()

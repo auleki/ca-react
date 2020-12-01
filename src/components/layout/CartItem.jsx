@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
-import { CartCard, Button, FButton } from '../StyledComponents'
+import React from 'react'
+import { CartCard, FButton } from '../StyledComponents'
 import { formatToComma } from "../../api/operationsAPI";
 import { useDispatch } from "react-redux";
 import DeleteIcon from '@material-ui/icons/Delete';
-import { adjustQty, updateQuantity, removeFromCart } from "../../features/cart/cartSlice";
+import { adjustQty, removeFromCart } from "../../features/cart/cartSlice";
 
 const CartItem = ({ product: { imageUrl, name, id, price, qty } }) => {
-  const [sQty, setSqty] = useState(qty)
+  // const [sQty, setSqty] = useState(qty)
   const dispatch = useDispatch()
 
   // Kill this till input can be regulated to remain a number                    

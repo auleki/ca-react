@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { FButton } from "../StyledComponents";
 import { IframePage } from "../StyledComponents";
 import { returnToken } from "../../services/operations";
@@ -40,11 +40,11 @@ const PaymentPage = () => {
     width: "1000px"
   }
 
-  const styling = {
-    position: "absolute",
-    top: 100,
-    right: 250
-  }
+  // const styling = {
+  //   position: "absolute",
+  //   top: 100,
+  //   right: 250
+  // }
 
   return (
     <IframePage>
@@ -56,6 +56,7 @@ const PaymentPage = () => {
           VERIFY PAYMENT
         </FButton>
       </div>
+      {/* eslint-disable-next-line */}
       <iframe
         {...settings}
         src={paymentUrl}>

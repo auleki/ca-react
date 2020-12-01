@@ -1,12 +1,12 @@
 import React from 'react'
-import Carousel from "react-elastic-carousel";
+// import Carousel from "react-elastic-carousel";
 import { ItemForCarousel, HeaderStyle } from "../StyledComponents";
 import Slider from 'react-slick'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const Header = () => {
-  let wallOne, wallTwo, wallThree, wallFour, wallFive
+  let wallOne, wallTwo, wallThree, wallFour
 
   wallOne = "https://res.cloudinary.com/checkadigs-cloud/image/upload/v1606397477/IMG_20201118_183948_004_m7pato.jpg"
   wallTwo = "https://res.cloudinary.com/checkadigs-cloud/image/upload/v1606397494/IMG_E4430_ypd1zz.jpg"

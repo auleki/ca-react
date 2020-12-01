@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { Button, CheckoutCard, ActionRow, Paragraph } from '../StyledComponents'
+import React, { useEffect } from 'react'
+import { Button, CheckoutCard, ActionRow } from '../StyledComponents'
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import CartLength from './CartLength'
@@ -16,8 +16,11 @@ const Checkout = () => {
   let itemCount = 0
 
   useEffect(() => {
+    // eslint-disable-next-line
     cartItems.map(item => {
+    // eslint-disable-next-line
       itemCount += item.qty
+      // eslint-disable-next-line
       totalPrice += item.price * item.qty 
     })    
     dispatch(updateItems(itemCount))

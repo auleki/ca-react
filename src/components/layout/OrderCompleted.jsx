@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
-import { Page, SuccessCard, Title, Paragraph, FButton } from "../StyledComponents";
+import { SuccessCard, Title, Paragraph, FButton } from "../StyledComponents";
 import { useDispatch } from "react-redux";
 import { resetCart } from "../../features/cart/cartSlice";
 

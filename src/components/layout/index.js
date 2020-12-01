@@ -8,7 +8,7 @@ export { default as SubscribeSuccess } from './SubscribeSuccess';
 export { default as Header } from './Header';
 export { default as ClothListings } from './ClothListings';
 export { default as ShoppingCart } from './ShoppingCart'
-export { default as MaterialNav } from './MaterialNav'
+// export { default as MaterialNav } from './MaterialNav'
 export { default as SimpleNav } from './SimpleNav'
 export { default as Homepage } from './Homepage'
 export { default as OrderCompleted } from './OrderCompleted'

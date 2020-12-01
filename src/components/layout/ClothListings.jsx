@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import ClothSection from './ClothSection';
 import { CardContainer } from '../StyledComponents';
 import { css } from "@emotion/core";
@@ -24,9 +24,11 @@ const ClothListings = () => {
   useEffect(() => {
   const GOLDEN = process.env
   console.log(GOLDEN)
-    
+    // eslint-disable-next-line
     cartItems.map(item => {
+      // eslint-disable-next-line
       items += item.qty
+      // eslint-disable-next-line
       totalPrice += item.price * item.qty
     })
     dispatch(updateItems(items))

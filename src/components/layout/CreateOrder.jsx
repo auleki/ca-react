@@ -14,7 +14,7 @@ import {
   Title,
   Input,
   Button,
-  FButton,
+  // FButton,
   SummaryHeader,
   SummaryCard,
   Page
@@ -28,7 +28,9 @@ const CreateOrder = () => {
   const email = useField('text')
   const phone = useField('number')
   const location = useField('text')
+  // eslint-disable-next-line
   const [ordered, setOrdered] = useState(false)
+  // eslint-disable-next-line
   const [reference, setReference] = useState('')
   const history = useHistory()
 
@@ -37,7 +39,8 @@ const CreateOrder = () => {
   }, [])
 
   const { cartItems, price } = useSelector(state => state)
-
+  
+// eslint-disable-next-line
   function openNewTab(url) {
     const win = window.open(url, '_blank')
     win.focus()

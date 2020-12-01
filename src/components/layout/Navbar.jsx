@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
-import ShoppingBasketOutlinedIcon from '@material-ui/icons/ShoppingBasketOutlined';
+import React from 'react'
+// import ShoppingBasketOutlinedIcon from '@material-ui/icons/ShoppingBasketOutlined';
 
 import ShoppingBasketSharpIcon from '@material-ui/icons/ShoppingBasketSharp';
 
-import CartIcon from '../../cart-01.svg'
+// import CartIcon from '../../cart-01.svg'
 
 const Navbar = ({ admin }) => {
 
@@ -26,10 +26,10 @@ const Navbar = ({ admin }) => {
           </div>
           <ul className="navbar">
             <li className="dropdown">
-              <a href="#" className="links dropbtn">
+              {/* <a href={null} className="links dropbtn">
                 Categories
                 <ion-icon name="caret-down-outline" />
-              </a>
+              </a> */}
               <ul className="dropdown_menu">
                 <li><a href="#genesis" className="menu_items">Sweatshirt</a></li>
                 <li><a href="#polos" className="menu_items">Poloshirts</a></li>
