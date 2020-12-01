@@ -93,6 +93,8 @@ export const Paragraph = styled.p`
   font-size: 1.1rem;
 `
 
+
+
 export const Wrapper = styled.div`
   height: 100vh;
   width: 100%;
@@ -645,6 +647,7 @@ export const RowLayout = styled.div`
 export const ActionRow = styled.div`
   display: flex;
   justify-content: space-between;
+  
 
   p {
     text-align: center;
@@ -657,13 +660,24 @@ export const ActionRow = styled.div`
     flex-direction: column-reverse;
     align-items: center;
     padding: 1.5rem 0;
+    justify-content: center;
 
     .items-length {
+      /* background-color: #904154; */
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       p {
           display: none;
       }
     }
     .total-price {
+      width: 100%;
+      /* background-color: #549815; */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       p {
         font-size: 1.5rem;
       }

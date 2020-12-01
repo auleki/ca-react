@@ -116,7 +116,9 @@ const CreateOrder = () => {
         console.log("Transaction failed " + firstName.value + ' please try again')
       }
     } catch (error) {
+      console.log("WE HAVE A PROBLEM")
       console.log(error)
+      console.log("-------------------")
     }
 
 

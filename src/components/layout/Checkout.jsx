@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, CheckoutCard, ActionRow } from '../StyledComponents'
+import { Button, CheckoutCard, ActionRow, Paragraph } from '../StyledComponents'
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import CartLength from './CartLength'
@@ -25,7 +25,6 @@ const Checkout = () => {
   
   }, [cartItems, totalPrice, itemCount])
   
-
  return (
     <CheckoutCard>
         <ActionRow>

@@ -16,7 +16,7 @@ const config = {
 
  export const saveOrder = async (order) => {
    try {
-     const res = await axios.post(baseUrl, order, config)
+     const res = await axios.post(`${baseUrl}/api/orders`, order, config)
      return res.data 
    } catch (error) {
      console.log('Could not save order')
