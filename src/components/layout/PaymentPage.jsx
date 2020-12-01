@@ -1,29 +1,68 @@
 import React, { useState, useEffect } from 'react'
-// import Iframe from 'react-iframe'
+// import { parse } from 'uuid';
+import { FButton } from "../StyledComponents";
 import { IframePage } from "../StyledComponents";
+import { returnToken } from "../../services/operations";
+import axios from 'axios'
+import { useHistory } from 'react-router-dom'
+import { toast } from 'react-toastify'
+// import 
 
-const PaymentPage = () => {
-  // const goTo = "http://www.youtube.com/embed/xDMP3i36naA"
-  const [url, setUrl] = useState("")
-  const goTo = "https://checkout.paystack.com/e65wpyr0hbngp2k"
+const PaymentPage = () => {    
+  const data = localStorage.getItem("payInfo")
+  const history = useHistory()
+  const { paymentUrl, tRef } = JSON.parse(data)
+  const GOLDEN = 'sk_test_a3150b31e7a217d2488132a436e6df8d28dec651'
 
-  useEffect(() => {
-    const data = localStorage.getItem("frameUrl")
-    setUrl(data)
-    console.log("FROM PAYMENT PAGE: ", data)
-  } ,[])
+  const verifyPayment = async () => {
+    console.log('Verifying order...')
+    try {
+      const verifyUri = `https://api.paystack.co/transaction/verify/${tRef}`
+      const currentToken = returnToken(GOLDEN)
+      const config = {
+        headers: { Authorization: currentToken }
+      }
+      const res = await axios.get(verifyUri, config)
+      const status = res.status
+      if (status === 200) {
+        localStorage.clear()
+        history.push('/order-complete')
+      } else {
+        alert('Could not complete transaction')        
+      }      
+    } catch (error) {      
+      toast.error("Could not complete transaction", {
+        position: toast.POSITION.TOP_LEFT
+      })
+    }
+  }
 
   const settings = {
     height: "1000px",
     width: "1000px"
   }
-  
+
+  const styling = {
+    position: "absolute",
+    top: 100,
+    right: 250
+  }
+
   return (
     <IframePage>
-      <iframe 
+      <div>
+        <FButton 
+          style={styling}
+          onClick={verifyPayment}
+          >
+          VERIFY PAYMENT
+        </FButton>
+      </div>
+      <iframe
         {...settings}
-        src={url}>          
+        src={paymentUrl}>
       </iframe>
+
     </IframePage>
   )
 }

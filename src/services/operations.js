@@ -3,7 +3,7 @@ import axios from 'axios';
 // const axios = require('axios');
 const GOLDEN = 'sk_test_a3150b31e7a217d2488132a436e6df8d28dec651'
 
-const returnToken = token => `Bearer ${token}`
+export const returnToken = token => `Bearer ${token}`
 
 const currentToken = returnToken(GOLDEN)
 

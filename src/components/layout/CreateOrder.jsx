@@ -45,6 +45,17 @@ const CreateOrder = () => {
     win.focus()
   }
 
+  function saveUrlToStorage(load, key) {
+    if (localStorage.getItem(key)) {
+      localStorage.removeItem(key)
+      // JSON.stringify(load)
+      localStorage.setItem(key, JSON.stringify(load))
+    } else {
+      JSON.stringify(load)
+      localStorage.setItem(key, JSON.stringify(load))
+    }
+  }
+
   const GOLDEN = 'sk_test_a3150b31e7a217d2488132a436e6df8d28dec651'
 
   const vuid = generateId().toUpperCase()
@@ -80,29 +91,17 @@ const CreateOrder = () => {
       email: "customer@email.com",
     }
     const currentToken = returnToken(GOLDEN)
-    // const config = {
-    //   headers: { Authorization: currentToken }
-    // }
 
-    function saveUrlToStorage (url, key) {
-      if (localStorage.getItem(key)) {
-        localStorage.removeItem(key)
-        localStorage.setItem(key, url)
-      } else {
-        localStorage.setItem(key, url)
-      }
-    }
-    
     try {
-      const token = 'sk_test_a3150b31e7a217d2488132a436e6df8d28dec651'
       const config = {
-        headers: { Authorization: `Bearer ${token}` }
+        headers: { Authorization: currentToken }
       }
       const result = await axios.post(baseUrl, paystackLoad, config)
       console.log(result)
       paymentUrl = result.data.data.authorization_url
+      tRef = result.data.data.reference
+      const payInfo = { paymentUrl, tRef }
       if (result.status === 200) {
-        tRef = result.data.data.reference
         // save to database
         saveOrder(dbLoad)
           .then(data => data)
@@ -111,7 +110,7 @@ const CreateOrder = () => {
         console.log("DB LOAD:", dbLoad)
         setReference(tRef)
         // openNewTab(paymentUrl)
-        saveUrlToStorage(paymentUrl, "frameUrl")
+        saveUrlToStorage(payInfo, "payInfo")
         history.push("/payment")
       } else {
         console.log("Transaction failed " + firstName.value + ' please try again')
@@ -127,21 +126,6 @@ const CreateOrder = () => {
     // verify transaction
   }
 
-  const verifyPayment = async () => {
-    console.log('Verifying order...')
-    const verifyUri = `https://api.paystack.co/transaction/verify/${reference}`
-    const currentToken = returnToken(GOLDEN)
-    const config = {
-      headers: { Authorization: currentToken }
-    }
-    const res = await axios.get(verifyUri, config)
-    const status = res.status
-    if (status === 200) {
-      history.push('/order-complete')
-    } else {
-      console.log('not complete')
-    }
-  }
 
   return (
     <div className="full">
@@ -154,58 +138,55 @@ const CreateOrder = () => {
         </SummaryHeader>
 
         <BasicCard>
-          {ordered
-            ? <FButton onClick={verifyPayment}>
-              Verify Order
-            </FButton>
-            : <Form onSubmit={makeOrder}>
-              <SubTitle uppercase>
-                PAYMENT INFO
+
+          <Form onSubmit={makeOrder}>
+            <SubTitle uppercase>
+              PAYMENT INFO
           </SubTitle>
 
-              <RowLayout>
-
-                <Input
-                  placeholder="First Name"
-                  onChange={firstName.onChange}
-                  value={firstName.value}
-                // required
-                />
-
-                <Input
-                  placeholder="Last Name"
-                  onChange={lastName.onChange}
-                  value={lastName.value}
-                // required
-                />
-
-              </RowLayout>
+            <RowLayout>
 
               <Input
-                placeholder="Email"
-                onChange={email.onChange}
-                value={email.value}
+                placeholder="First Name"
+                onChange={firstName.onChange}
+                value={firstName.value}
+              // required
               />
 
               <Input
-                placeholder="Phone Number"
-                onChange={phone.onChange}
-                value={phone.value}
+                placeholder="Last Name"
+                onChange={lastName.onChange}
+                value={lastName.value}
+              // required
               />
 
-              <Input
-                placeholder="Location"
-                onChange={location.onChange}
-                value={location.value}
-              />
+            </RowLayout>
 
-              <div>
-                <Button primary>
-                  Pay for order
+            <Input
+              placeholder="Email"
+              onChange={email.onChange}
+              value={email.value}
+            />
+
+            <Input
+              placeholder="Phone Number"
+              onChange={phone.onChange}
+              value={phone.value}
+            />
+
+            <Input
+              placeholder="Location"
+              onChange={location.onChange}
+              value={location.value}
+            />
+
+            <div>
+              <Button primary>
+                Pay for order
             </Button>
-              </div>
+            </div>
 
-            </Form>}
+          </Form>
 
 
           <SummaryCard>

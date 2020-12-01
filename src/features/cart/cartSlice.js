@@ -16,7 +16,9 @@ const cartSlice = createSlice({
     initialState,
     reducers: {
         resetCart: (state) => {
-            state = undefined
+            state.cartItems = []
+            state.price = 0
+            state.items = 0
         },
         addToCart: (state, { payload }) => {
             const productItem = state.products.find(prod =>
@@ -109,7 +111,8 @@ export const {
     getClothesFailure,
     updateQuantity,
     updateItems, 
-    removeFromCart
+    removeFromCart,
+    resetCart
 } = actions
 
 

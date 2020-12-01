@@ -5,17 +5,32 @@ import { css } from "@emotion/core";
 import PuffLoader from "react-spinners/PuffLoader";
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchRecipes } from "../../features/cart/cartSlice";
+import { updateItems, updatePrice } from "../../features/cart/cartSlice";
 
 const ClothListings = () => {
   const dispatch = useDispatch();
 
-  const { items, products, hasErrors, loading } = useSelector((state) => state)
+  const { cartItems, products, hasErrors, loading } = useSelector((state) => state)
 
   const override = css`
     display: block;
     margin: 0 auto;
     /* border-color: red; */
   `
+
+  let totalPrice = 0
+  let items = 0
+
+  useEffect(() => {
+    cartItems.map(item => {
+      items += item.qty
+      totalPrice += item.price * item.qty
+    })
+    dispatch(updateItems(items))
+    dispatch(updatePrice(totalPrice))
+
+  }, [cartItems, totalPrice])
+
 
   useEffect(() => {
     dispatch(fetchRecipes())
