@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react'
-// import { parse } from 'uuid';
 import { FButton } from "../StyledComponents";
 import { IframePage } from "../StyledComponents";
 import { returnToken } from "../../services/operations";
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
 import { toast } from 'react-toastify'
-// import 
 
 const PaymentPage = () => {    
   const data = localStorage.getItem("payInfo")
@@ -36,6 +34,7 @@ const PaymentPage = () => {
     }
   }
 
+  
   const settings = {
     height: "1000px",
     width: "1000px"
@@ -52,6 +51,7 @@ const PaymentPage = () => {
       <div>
         <FButton
           onClick={verifyPayment}
+          // onClick={sendToast}
           >
           VERIFY PAYMENT
         </FButton>
