@@ -1,5 +1,5 @@
+
 import { createSlice } from "@reduxjs/toolkit";
-import { original } from 'immer'
 import axios from 'axios'
 
 export const initialState = {
@@ -119,9 +119,10 @@ export const {
 export const fetchRecipes = () => {
     return async dispatch => {
         dispatch(getClothes())
-        try {
-            const uri = "https://afternoon-chamber-08446.herokuapp.com/api/clothing"
-            const { data } = await axios.get(uri)
+        try {    
+            const uri = process.env.REACT_APP_BASE_URL
+            console.log("ENV URI",process.env)
+            const { data } = await axios.get(`${uri}/api/clothing`)
             dispatch(getClothesSuccess(data))
         } catch (error) {
             dispatch(getClothesFailure())

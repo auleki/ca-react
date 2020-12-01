@@ -10,11 +10,6 @@ import { formatToComma } from "../../api/operationsAPI";
 const Price = ({ price }) => `<Icon svg={Naira}/> ${formatToComma(price)}`
 
 const Clothing = ({ clothes }) => {
-  // const [name, setName] = useState(clothes.name);
-  // const [imageUrl, setImageUrl] = useState(clothes.imageUrl);
-  // const [price, setPrice] = useState(clothes.price);
-  // const [id, setId] = useState(clothes.id);
-
   const dispatch = useDispatch()
   const isDisabled = clothes.inStock ? false : true
 
@@ -30,7 +25,7 @@ const Clothing = ({ clothes }) => {
         <CardInfo>
           <span className="price">
             {clothes.inStock
-              ? `N${formatToComma(clothes.price)}`
+              ? `₦ ${formatToComma(clothes.price)}`
               : <h6>OUT OF STOCK</h6>}
           </span>
           {/* <p>{name}</p> */}

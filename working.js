@@ -8,8 +8,6 @@ const vehicle = {
 
 const vehicleString = JSON.stringify(vehicle)
 
-
-
 localStorage.setItem('car', JSON.stringify(vehicleString))
 
 const savedVehicleString = localStorage.getItem('car')

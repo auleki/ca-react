@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useField } from '../../hooks/'
 import { useHistory } from "react-router-dom";
-// import SimpleNav from './SimpleNav'
 import { generateId } from '../../services/idGen'
 import { useSelector } from 'react-redux'
 import { saveOrder } from "../../services/operations";
@@ -31,7 +30,6 @@ const CreateOrder = () => {
   const location = useField('text')
   const [ordered, setOrdered] = useState(false)
   const [reference, setReference] = useState('')
-  // const uuid = uuidv4()
   const history = useHistory()
 
   useEffect(() => {
@@ -48,7 +46,6 @@ const CreateOrder = () => {
   function saveUrlToStorage(load, key) {
     if (localStorage.getItem(key)) {
       localStorage.removeItem(key)
-      // JSON.stringify(load)
       localStorage.setItem(key, JSON.stringify(load))
     } else {
       JSON.stringify(load)
@@ -56,7 +53,9 @@ const CreateOrder = () => {
     }
   }
 
-  const GOLDEN = 'sk_test_a3150b31e7a217d2488132a436e6df8d28dec651'
+  
+  const GOLDEN = process.env.REACT_APP_PS_SK
+  console.log(GOLDEN)
 
   const vuid = generateId().toUpperCase()
 
@@ -83,7 +82,8 @@ const CreateOrder = () => {
     e.preventDefault()
     setOrdered(true)
     let tRef, paymentUrl
-    let baseUrl = 'https://api.paystack.co/transaction/initialize'
+    // let baseUrl = 'https://api.paystack.co/transaction/initialize'
+    let baseUrl = process.env.REACT_APP_PS_INIT
 
     //! ADJUST PAYSTACK LOAD IN PRODUCTION
     const paystackLoad = {

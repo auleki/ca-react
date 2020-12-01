@@ -22,6 +22,9 @@ const ClothListings = () => {
   let items = 0
 
   useEffect(() => {
+  const GOLDEN = process.env
+  console.log(GOLDEN)
+    
     cartItems.map(item => {
       items += item.qty
       totalPrice += item.price * item.qty

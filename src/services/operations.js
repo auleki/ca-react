@@ -1,14 +1,14 @@
 import axios from 'axios';
 
 // const axios = require('axios');
-const GOLDEN = 'sk_test_a3150b31e7a217d2488132a436e6df8d28dec651'
+const GOLDEN = process.env.REACT_APP_PS_SK
 
 export const returnToken = token => `Bearer ${token}`
 
 const currentToken = returnToken(GOLDEN)
 
-const baseUrl =  'https://afternoon-chamber-08446.herokuapp.com/api/orders';
-// const baseUrl =  'http://localhost:6500/api/orders';
+// const baseUrl =  'https://afternoon-chamber-08446.herokuapp.com/api/orders';
+const baseUrl =  process.env.REACT_APP_BASE_URL
 
 const config = {
   headers: { Authorization: currentToken }

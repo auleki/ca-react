@@ -228,14 +228,14 @@ export const SummaryCard = styled.div`
 `
 
 export const CardStyle = styled.div`
-  /* height: 30rem; */
-  height: 100%;
+  /* height: 35rem; */
+  height: 100%;  
   padding: 3rem 0;
   width: 40%;
   /* width: 100%; */
   text-align: center;
   margin: 1rem 0;
-  border-radius: .4rem;
+  border-radius: .2rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -244,6 +244,7 @@ export const CardStyle = styled.div`
   transition: transform 200ms ease-in, box-shadow 300ms ease-in;
 
   @media (min-width: 318px) and (max-width: 707px) {
+    height: 25rem;
     width: 100%;
   }
 
@@ -699,7 +700,8 @@ export const ItemForCarousel = styled.div`
     background-size: cover;
 
     @media (max-width: 534px) {
-      background-size: contain;
+      background-size: cover;
+      height: 50vh;
       background-position-y: 0;
     }
   `
@@ -740,5 +742,14 @@ export const IframePage = styled.div`
 
   @media (max-width: 527px) {
     background-color: #fff;
+  }
+`
+
+export const HeaderStyle = styled.div`
+  height: 100vh;
+  width: 100%;
+
+  @media (max-width: 530px) {
+    height: 30%;
   }
 `

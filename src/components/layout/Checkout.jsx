@@ -12,10 +12,6 @@ const Checkout = () => {
   const {cartItems, price } = useSelector(state => state)
   const dispatch = useDispatch()
 
-  // useEffect(() => {
-  //   setItemCount(items)
-  // }, [items])
-
   let totalPrice = 0
   let itemCount = 0
 
@@ -35,7 +31,7 @@ const Checkout = () => {
         <ActionRow>
           <CartLength/>
           <div className="total-price">
-            <p>Total: N{formatToComma(price)}</p>
+            <p>Total: ₦ {formatToComma(price)}</p>
             <Link to="/confirm">
               <Button primary>
                 Create Order
