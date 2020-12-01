@@ -753,6 +753,10 @@ export const IframePage = styled.div`
   height: 100%;
   width: 100%;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background-color: #F36B2B;
   
 

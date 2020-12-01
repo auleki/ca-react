@@ -24,7 +24,7 @@ const PaymentPage = () => {
       const res = await axios.get(verifyUri, config)
       const status = res.status
       if (status === 200) {
-        localStorage.clear()
+        // localStorage.clear()
         history.push('/order-complete')
       } else {
         alert('Could not complete transaction')        
@@ -50,8 +50,7 @@ const PaymentPage = () => {
   return (
     <IframePage>
       <div>
-        <FButton 
-          style={styling}
+        <FButton
           onClick={verifyPayment}
           >
           VERIFY PAYMENT

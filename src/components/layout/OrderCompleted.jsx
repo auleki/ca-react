@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Page, SuccessCard, Title, Paragraph, FButton } from "../StyledComponents";
 import { useDispatch } from "react-redux";
@@ -6,20 +6,30 @@ import { resetCart } from "../../features/cart/cartSlice";
 
 const OrderCompleted = () => {
   const dispatch = useDispatch()
+  const { orderNumber } = JSON.parse(localStorage.getItem('payInfo'))
+  console.log(orderNumber)
 
-  function resetStore () {
+  // useEffect(() => {
+  //   // console.log(lsInfo)
+
+  // }, [])
+
+  function resetStore() {
     localStorage.clear()
     dispatch(resetCart())
   }
-  
+
   return (
     <SuccessCard>
       <Title>Congrats!</Title>
       <Paragraph>
-        Your order has been received, we will be in touch
-        </Paragraph>
+        Your order has been received.
+      </Paragraph>
+      <Paragraph>
+        Order number #{orderNumber}.
+      </Paragraph>
       <Link to="/">
-        <FButton 
+        <FButton
           onClick={resetStore}
           primary>
           Return to Shop

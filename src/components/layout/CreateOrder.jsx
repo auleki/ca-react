@@ -100,7 +100,7 @@ const CreateOrder = () => {
       console.log(result)
       paymentUrl = result.data.data.authorization_url
       tRef = result.data.data.reference
-      const payInfo = { paymentUrl, tRef }
+      const payInfo = { paymentUrl, tRef, orderNumber: dbLoad.orderNumber }
       if (result.status === 200) {
         // save to database
         saveOrder(dbLoad)
