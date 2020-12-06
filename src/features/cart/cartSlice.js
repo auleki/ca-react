@@ -122,7 +122,7 @@ export const fetchRecipes = () => {
         dispatch(getClothes())
         try {    
             const uri = process.env.REACT_APP_BASE_URL
-            console.log("ENV URI",process.env)
+            // console.log("ENV URI",process.env)
             const { data } = await axios.get(`${uri}/api/clothing`)
             dispatch(getClothesSuccess(data))
         } catch (error) {

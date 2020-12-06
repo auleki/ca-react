@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import axios from 'axios'
 import { useField } from '../../hooks/'
 import { useHistory } from "react-router-dom";
@@ -29,9 +29,9 @@ const CreateOrder = () => {
   const phone = useField('number')
   const location = useField('text')
   // eslint-disable-next-line
-  const [ordered, setOrdered] = useState(false)
+  // const [ordered, setOrdered] = useState(false)
   // eslint-disable-next-line
-  const [reference, setReference] = useState('')
+  // const [reference, setReference] = useState('')
   const history = useHistory()
 
   useEffect(() => {
@@ -39,7 +39,7 @@ const CreateOrder = () => {
   }, [])
 
   const { cartItems, price } = useSelector(state => state)
-  
+
 // eslint-disable-next-line
   function openNewTab(url) {
     const win = window.open(url, '_blank')
@@ -58,7 +58,7 @@ const CreateOrder = () => {
 
   
   const GOLDEN = process.env.REACT_APP_PS_SK
-  console.log(GOLDEN)
+  // console.log(GOLDEN)
 
   const vuid = generateId().toUpperCase()
 
@@ -83,22 +83,25 @@ const CreateOrder = () => {
   // speak to paystack API  
   const makeOrder = async (e) => {
     e.preventDefault()
-    setOrdered(true)
     let tRef, paymentUrl
     // let baseUrl = 'https://api.paystack.co/transaction/initialize'
     let baseUrl = process.env.REACT_APP_PS_INIT
 
-    //! ADJUST PAYSTACK LOAD IN PRODUCTION
+    //TODO ADJUST PAYSTACK LOAD IN PRODUCTION
+    // const padPrice = parseInt(`${price}00`)
+    // console.log(typeof padPrice)
     const paystackLoad = {
-      amount: 5000,
-      email: "customer@email.com",
+      amount: price,
+      email: "customer@gmail.com",
     }
+    console.log("CHECK PRICE: ", price)
     const currentToken = returnToken(GOLDEN)
 
     try {
       const config = {
         headers: { Authorization: currentToken }
       }
+      // console.log("CURRENT TOKEN: ", currentToken)
       const result = await axios.post(baseUrl, paystackLoad, config)
       console.log(result)
       paymentUrl = result.data.data.authorization_url
@@ -111,7 +114,6 @@ const CreateOrder = () => {
           .catch(e => console.log(e))
         // console.log(`Transaction successful for ${tRef}`)
         console.log("DB LOAD:", dbLoad)
-        setReference(tRef)
         // openNewTab(paymentUrl)
         saveUrlToStorage(payInfo, "payInfo")
         history.push("/payment")
@@ -120,7 +122,7 @@ const CreateOrder = () => {
       }
     } catch (error) {
       console.log("WE HAVE A PROBLEM")
-      console.log(error)
+      console.log(error.message)
       console.log("-------------------")
     }
 
@@ -155,14 +157,14 @@ const CreateOrder = () => {
                 placeholder="First Name"
                 onChange={firstName.onChange}
                 value={firstName.value}
-              // required
+                // required
               />
 
               <Input
                 placeholder="Last Name"
                 onChange={lastName.onChange}
                 value={lastName.value}
-              // required
+                // required
               />
 
             </RowLayout>
@@ -171,18 +173,21 @@ const CreateOrder = () => {
               placeholder="Email"
               onChange={email.onChange}
               value={email.value}
+              // required
             />
 
             <Input
               placeholder="Phone Number"
               onChange={phone.onChange}
               value={phone.value}
+              // required
             />
 
             <Input
               placeholder="Location"
               onChange={location.onChange}
               value={location.value}
+              // required
             />
 
             <div>

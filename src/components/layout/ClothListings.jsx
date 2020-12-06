@@ -22,8 +22,6 @@ const ClothListings = () => {
   let items = 0
 
   useEffect(() => {
-  const GOLDEN = process.env
-  console.log(GOLDEN)
     // eslint-disable-next-line
     cartItems.map(item => {
       // eslint-disable-next-line
