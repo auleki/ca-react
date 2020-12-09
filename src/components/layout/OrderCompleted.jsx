@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { SuccessCard, BasicBox, Title, Paragraph, FButton } from "../StyledComponents";
 import { useDispatch } from "react-redux";
 import { resetCart } from "../../features/cart/cartSlice";
+import Congrats from '../../assets/giphy.webp'
 
 const OrderCompleted = () => {
   const dispatch = useDispatch()
@@ -16,8 +17,7 @@ const OrderCompleted = () => {
 
   return (
     <SuccessCard>
-      <BasicBox>
-        <Title>Congrats!</Title>
+      <BasicBox url={Congrats}>
         <Paragraph>
           Your order has been received
       </Paragraph>

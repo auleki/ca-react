@@ -9,7 +9,7 @@ import {
   Footer, 
   // SubscribeForm, 
   // SubscribeSuccess,
-  // ClothListings, 
+  NotFound,
   OrderCompleted,
   SimpleNav, Homepage } from './components/layout'
 import CreateOrder from './components/layout/CreateOrder'
@@ -30,6 +30,7 @@ const App = () => {
           <Route path="/confirm" component={CreateOrder}/>
           <Route path="/order-complete" component={OrderCompleted} />
           <Route path="/payment" component={PaymentPage} />
+          <Route component={NotFound} />
         </Switch>
         <Footer />
 

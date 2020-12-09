@@ -8,7 +8,7 @@ const Homepage = () => {
        
           <Header />
           <ClothListings />
-          <SubscribeForm />
+          {/* <SubscribeForm /> */}
 
        </>
    )

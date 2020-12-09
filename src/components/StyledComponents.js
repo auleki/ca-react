@@ -93,11 +93,11 @@ export const Paragraph = styled.p`
   font-size: 1.1rem;
 
   .order_number {
-    background-color: #fff;
-    padding: .1em .3em;
+    background-color: #F36B2B;
+    padding: .3em .3em;
     font-size: .8em;
-    border-radius: 100px;
-    color: #333;
+    border-radius: 5px;
+    color: #fff;
   }
 `
 
@@ -121,6 +121,7 @@ export const FButton = styled.button`
   transition: background-color 150ms ease-in;
   border: none;
   margin: .5rem 0;
+  color: #333;
   &:hover {
     cursor: pointer;
     /* background-color: #43a047; */
@@ -802,8 +803,8 @@ export const IframePage = styled.div`
 export const HeaderStyle = styled.div`
   height: 100vh;
   width: 100%;
-  background: linear-gradient(to right, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5) ), url("https://res.cloudinary.com/checkadigs-cloud/image/upload/v1606402883/Taieri_z4cz7f.png") fixed no-repeat;
-  background-size: cover;
+  /* background: linear-gradient(to right, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5) ), url("https://res.cloudinary.com/checkadigs-cloud/image/upload/v1606402883/Taieri_z4cz7f.png") fixed no-repeat; */
+  /* background-size: cover; */
 
   @media (max-width: 530px) {
     height: 30%;
@@ -812,13 +813,29 @@ export const HeaderStyle = styled.div`
 
 export const BasicBox = styled.div`
   background-color: #F36B2B;
+  ${({ url }) => 
+    url && css`
+      background: url(${url}) no-repeat;
+      background-size: cover
+    `
+}
   background-image: linear-gradient(163deg, #f36b2b 0%, #F7CE68 100%);
-  box-shadow: 0px 2px 16px 6px rgba(243, 107, 43, .2);
+  box-shadow: 0px 2px 16px 6px rgba(0, 107, 43, .2);
   padding: 2em;
   border-radius: .3em;
   overflow: hidden;
 
+  img {
+    height: 100px;
+    width: 100px;
+  }
+
   @media (min-width: 320px) and (max-width: 485px) {
     width: 85%;
   }
+`
+
+export const Style404 = styled.div`
+  background: #fff;
+  color: #333;
 `

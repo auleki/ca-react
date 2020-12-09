@@ -17,8 +17,8 @@ const PaymentPage = () => {
     try {
       // "9ndpponcu3" - Our messiah
       
-      // const messiah = "9ndpponcu3"
-      const messiah = "oveuufnxvl"
+      const messiah = "9ndpponcu3"
+      // const messiah = "oveuufnxvl"
       const verifyUri = `${process.env.REACT_APP_PS_VERIFY}/${messiah}`
       console.log("URI: ", verifyUri)
       const currentToken = returnToken(GOLDEN)
