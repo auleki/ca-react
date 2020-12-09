@@ -196,7 +196,8 @@ export const SummaryHeader = styled.div`
 `
 
 export const SummaryCard = styled.div`
-  height: 100%;
+  height: 40%;
+  /* height: 100%; */
   padding: 1rem;
   /* width: 40%; */
   width: 50%;
@@ -552,6 +553,7 @@ export const Form = styled.form`
 
   @media (min-width: 315px) and (max-width: 900px) {
     margin: 1rem 0;
+    width: 100%;
   }
 
   @media (max-width: 368px) {
@@ -642,9 +644,7 @@ export const RowLayout = styled.div`
    input:nth-child(2) {
      margin: 0;
    }
-  }
-
-  
+  }  
 `
 
 export const ActionRow = styled.div`
@@ -713,7 +713,7 @@ export const Page = styled.div`
 `
 
 export const ItemForCarousel = styled.div`
-  /* background-color: #9C27B0; */
+  background-color: #9C27B0;
   height: 100vh;
   width: 100%;
   ${({ bgColor }) =>
@@ -793,6 +793,8 @@ export const IframePage = styled.div`
 export const HeaderStyle = styled.div`
   height: 100vh;
   width: 100%;
+  background: linear-gradient(to right, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5) ), url("https://res.cloudinary.com/checkadigs-cloud/image/upload/v1606402883/Taieri_z4cz7f.png") fixed no-repeat;
+  background-size: cover;
 
   @media (max-width: 530px) {
     height: 30%;

@@ -197,8 +197,6 @@ const CreateOrder = () => {
 
           </Form>
 
-
-        
           <SummaryCard>
             <h3>You are to pay</h3>
             <p className="totalPrice">
@@ -209,8 +207,6 @@ const CreateOrder = () => {
             </p>
           </SummaryCard>
         </BasicCard>
-
-
       </Page>
     </div>
 
