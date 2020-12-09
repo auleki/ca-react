@@ -15,16 +15,20 @@ const PaymentPage = () => {
 
   const verifyPayment = async () => {
     try {
-      const verifyUri = `${process.env.REACT_APP_PS_VERIFY}/${tRef}`
+      // "9ndpponcu3" - Our messiah
+      
+      // const messiah = "9ndpponcu3"
+      const messiah = "oveuufnxvl"
+      const verifyUri = `${process.env.REACT_APP_PS_VERIFY}/${messiah}`
       console.log("URI: ", verifyUri)
       const currentToken = returnToken(GOLDEN)
       const config = {
         headers: { Authorization: currentToken }
       }
       const res = await axios.get(verifyUri, config)
-      const status = res.status
-      console.log("Status Response: ", res)
-      if (status === 200) {
+      const status = res.data.data.status
+      console.log("Status Response: ", res.data.data.status)
+      if (status === 'success') {
         // localStorage.clear()
         history.push('/order-complete')
       } else {

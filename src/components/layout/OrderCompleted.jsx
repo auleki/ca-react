@@ -7,13 +7,8 @@ import { resetCart } from "../../features/cart/cartSlice";
 const OrderCompleted = () => {
   const dispatch = useDispatch()
   const { orderNumber } = JSON.parse(localStorage.getItem('payInfo'))
-  console.log(orderNumber)
-
-  // useEffect(() => {
-  //   // console.log(lsInfo)
-
-  // }, [])
-
+  // console.log(orderNumber)
+  // "9ndpponcu3" - Our messiah
   function resetStore() {
     localStorage.clear()
     dispatch(resetCart())
@@ -24,10 +19,10 @@ const OrderCompleted = () => {
       <BasicBox>
         <Title>Congrats!</Title>
         <Paragraph>
-          Your order has been received.
+          Your order has been received
       </Paragraph>
         <Paragraph>
-          Order number #{orderNumber}.
+          Order number <span className="order_number">#{orderNumber || null}</span>
       </Paragraph>
         <Link to="/">
           <FButton

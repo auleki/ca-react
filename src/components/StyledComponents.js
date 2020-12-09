@@ -91,6 +91,14 @@ export const SubTitle = styled.h2`
 export const Paragraph = styled.p`
   color: #ddd;
   font-size: 1.1rem;
+
+  .order_number {
+    background-color: #fff;
+    padding: .1em .3em;
+    font-size: .8em;
+    border-radius: 100px;
+    color: #333;
+  }
 `
 
 
@@ -765,6 +773,7 @@ export const SuccessCard = styled.div`
   p {
     margin: .3em 0;
     color: #fff;
+    /* font-style: italic; */
     font-size: 1.5em;
     /* font-weight: 800; */
   }
@@ -803,9 +812,13 @@ export const HeaderStyle = styled.div`
 
 export const BasicBox = styled.div`
   background-color: #F36B2B;
-  background: -webkit-linear-gradient(to right, #fc4a1a, #f7b733); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #fc4a1a, #f7b733);
+  background-image: linear-gradient(163deg, #f36b2b 0%, #F7CE68 100%);
+  box-shadow: 0px 2px 16px 6px rgba(243, 107, 43, .2);
   padding: 2em;
   border-radius: .3em;
+  overflow: hidden;
 
+  @media (min-width: 320px) and (max-width: 485px) {
+    width: 85%;
+  }
 `
