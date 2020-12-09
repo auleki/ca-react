@@ -163,6 +163,9 @@ export const CardContainer = styled.div`
   justify-content: center;
   margin: 3rem 0;
   height: 100%;
+  /* background-color: #333; */
+  background: linear-gradient(to right, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5) ), url("https://res.cloudinary.com/checkadigs-cloud/image/upload/v1606402883/Taieri_z4cz7f.png") fixed no-repeat;
+  background-size: cover;
   text-align: center;
   padding: 0 1rem;
 `
@@ -537,11 +540,11 @@ export const FormGroup = styled.div`
 export const Form = styled.form`
   height: 100%;
   display: flex;
-  padding: 1rem 2rem;
+  padding: 3rem 2rem;
   flex-direction: column;
   margin: 0 1rem;
   border-radius: .2rem;
-  width: 100%;
+  width: 70%;
   /* width: 100%; */
   justify-content: space-between;
   /* padding: 3rem; */
@@ -693,7 +696,11 @@ export const Page = styled.div`
   /* height: 100vh; */
   padding: 0 5rem;
   display: flex;
+  /* height: 0vh; */
+  height: 80%;
   flex-direction: column;
+  /* background: linear-gradient(to right, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5) ), url("https://res.cloudinary.com/checkadigs-cloud/image/upload/v1606402883/Taieri_z4cz7f.png") fixed no-repeat; */
+  /* background-size: cover; */
   /* align-items: center; */
 
   @media (max-width: 558px) {
@@ -737,15 +744,33 @@ export const ItemForCarousel = styled.div`
 
 export const SuccessCard = styled.div`
   text-align: center;
+  /* font-family: Lato; */
   padding: 2rem 0;
   width: 100%;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   background: linear-gradient(to right, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5) ), url("https://res.cloudinary.com/checkadigs-cloud/image/upload/v1606402883/Taieri_z4cz7f.png") fixed no-repeat;
   background-size: cover;
   /* linear-gradient(to right, rgba(253, 200, 48, .2), rgba(243, 115, 53, .4)), */
+
+
+  h1 {
+    margin-bottom: .5em;
+  }
+
+  
   p {
-    margin: 1rem 0;
+    margin: .3em 0;
     color: #fff;
-    font-weight: 800;
+    font-size: 1.5em;
+    /* font-weight: 800; */
+  }
+
+  button {
+    margin: 1em;
   }
 `
 
@@ -772,4 +797,13 @@ export const HeaderStyle = styled.div`
   @media (max-width: 530px) {
     height: 30%;
   }
+`
+
+export const BasicBox = styled.div`
+  background-color: #F36B2B;
+  background: -webkit-linear-gradient(to right, #fc4a1a, #f7b733); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #fc4a1a, #f7b733);
+  padding: 2em;
+  border-radius: .3em;
+
 `

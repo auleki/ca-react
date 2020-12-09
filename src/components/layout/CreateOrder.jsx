@@ -40,7 +40,7 @@ const CreateOrder = () => {
 
   const { cartItems, price } = useSelector(state => state)
 
-// eslint-disable-next-line
+  // eslint-disable-next-line
   function openNewTab(url) {
     const win = window.open(url, '_blank')
     win.focus()
@@ -56,7 +56,7 @@ const CreateOrder = () => {
     }
   }
 
-  
+
   const GOLDEN = process.env.REACT_APP_PS_SK
   // console.log(GOLDEN)
 
@@ -78,8 +78,6 @@ const CreateOrder = () => {
 
   const returnToken = token => `Bearer ${token}`
 
-
-
   // speak to paystack API  
   const makeOrder = async (e) => {
     e.preventDefault()
@@ -89,10 +87,14 @@ const CreateOrder = () => {
 
     //TODO ADJUST PAYSTACK LOAD IN PRODUCTION
     // const padPrice = parseInt(`${price}00`)
-    // console.log(typeof padPrice)
+    // console.log("email", email.value)
+    // const paystackLoad = {
+    //   amount: padPrice,
+    //   email: email.value,
+    // }
     const paystackLoad = {
-      amount: price,
-      email: "customer@gmail.com",
+      amount: 10000,
+      email: email.value,
     }
     console.log("CHECK PRICE: ", price)
     const currentToken = returnToken(GOLDEN)
@@ -103,7 +105,7 @@ const CreateOrder = () => {
       }
       // console.log("CURRENT TOKEN: ", currentToken)
       const result = await axios.post(baseUrl, paystackLoad, config)
-      console.log(result)
+      console.log("INIT OBJs", result)
       paymentUrl = result.data.data.authorization_url
       tRef = result.data.data.reference
       const payInfo = { paymentUrl, tRef, orderNumber: dbLoad.orderNumber }
@@ -125,9 +127,6 @@ const CreateOrder = () => {
       console.log(error.message)
       console.log("-------------------")
     }
-
-
-
     // if transaction successful, then we save new order to database
     //else we tell user transaction failed and have them try again
     // verify transaction
@@ -157,14 +156,14 @@ const CreateOrder = () => {
                 placeholder="First Name"
                 onChange={firstName.onChange}
                 value={firstName.value}
-                // required
+              // required
               />
 
               <Input
                 placeholder="Last Name"
                 onChange={lastName.onChange}
                 value={lastName.value}
-                // required
+              // required
               />
 
             </RowLayout>
@@ -173,32 +172,33 @@ const CreateOrder = () => {
               placeholder="Email"
               onChange={email.onChange}
               value={email.value}
-              // required
+              required
             />
 
             <Input
               placeholder="Phone Number"
               onChange={phone.onChange}
               value={phone.value}
-              // required
+            // required
             />
 
             <Input
               placeholder="Location"
               onChange={location.onChange}
               value={location.value}
-              // required
+            // required
             />
 
             <div>
               <Button primary>
                 Pay for order
-            </Button>
+              </Button>
             </div>
 
           </Form>
 
 
+        
           <SummaryCard>
             <h3>You are to pay</h3>
             <p className="totalPrice">
@@ -206,7 +206,7 @@ const CreateOrder = () => {
             </p>
             <p className="info">
               You have selected {cartItems.length} product(s)
-          </p>
+            </p>
           </SummaryCard>
         </BasicCard>
 

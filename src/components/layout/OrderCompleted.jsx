@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { SuccessCard, Title, Paragraph, FButton } from "../StyledComponents";
+import { SuccessCard, BasicBox, Title, Paragraph, FButton } from "../StyledComponents";
 import { useDispatch } from "react-redux";
 import { resetCart } from "../../features/cart/cartSlice";
 
@@ -21,20 +21,22 @@ const OrderCompleted = () => {
 
   return (
     <SuccessCard>
-      <Title>Congrats!</Title>
-      <Paragraph>
-        Your order has been received.
+      <BasicBox>
+        <Title>Congrats!</Title>
+        <Paragraph>
+          Your order has been received.
       </Paragraph>
-      <Paragraph>
-        Order number #{orderNumber}.
+        <Paragraph>
+          Order number #{orderNumber}.
       </Paragraph>
-      <Link to="/">
-        <FButton
-          onClick={resetStore}
-          primary>
-          Return to Shop
+        <Link to="/">
+          <FButton
+            onClick={resetStore}
+            >
+            Return to Shop
         </FButton>
-      </Link>
+        </Link>
+      </BasicBox>
     </SuccessCard>
   )
 }

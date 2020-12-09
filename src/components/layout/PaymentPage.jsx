@@ -10,17 +10,20 @@ const PaymentPage = () => {
   const data = localStorage.getItem("payInfo")
   const history = useHistory()
   const { paymentUrl, tRef } = JSON.parse(data)
-  const GOLDEN = 'sk_test_a3150b31e7a217d2488132a436e6df8d28dec651'
+  // const GOLDEN = 'sk_test_a3150b31e7a217d2488132a436e6df8d28dec651'
+  const GOLDEN = process.env.REACT_APP_PS_SK
 
   const verifyPayment = async () => {
     try {
       const verifyUri = `${process.env.REACT_APP_PS_VERIFY}/${tRef}`
+      console.log("URI: ", verifyUri)
       const currentToken = returnToken(GOLDEN)
       const config = {
         headers: { Authorization: currentToken }
       }
       const res = await axios.get(verifyUri, config)
       const status = res.status
+      console.log("Status Response: ", res)
       if (status === 200) {
         // localStorage.clear()
         history.push('/order-complete')

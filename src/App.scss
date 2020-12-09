@@ -1,5 +1,7 @@
 @import './variables';
 
+
+
 html {
     scroll-behavior: smooth;
 }
@@ -23,6 +25,8 @@ body {
 
 .full {
     height: 100vh;
+    background: linear-gradient(to right, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5) ), url("https://res.cloudinary.com/checkadigs-cloud/image/upload/v1606402883/Taieri_z4cz7f.png") fixed no-repeat;
+    background-size: cover;
 }
 
 @media (max-width: 801px) {
@@ -674,6 +678,7 @@ footer {
     //   height: calc(10vh - 50px);
     //   height: 100%;
     margin-top: 1em;
+    // height: 1em;
     display: flex;
     position: relative;
     bottom: 0;

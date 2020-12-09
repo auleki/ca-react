@@ -3,7 +3,8 @@ import {
   ShopCartContainer, 
   CartItemStyle, 
   // Button,
-  RowLayout } from '../StyledComponents'
+  RowLayout, 
+  CardContainer} from '../StyledComponents'
 import CartItem from './CartItem'
 import Checkout from './Checkout'
 import { useSelector, useDispatch } from "react-redux";
@@ -37,6 +38,7 @@ const ShoppingCart = () => {
              
  return (
    <>
+   <CardContainer>
    <RowLayout>
      <ShopCartContainer>
       <CartItemStyle>
@@ -48,6 +50,7 @@ const ShoppingCart = () => {
     
     </ShopCartContainer>
    </RowLayout>
+   </CardContainer>
    </>
    )
 }
