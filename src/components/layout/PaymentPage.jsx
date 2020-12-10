@@ -12,7 +12,6 @@ const PaymentPage = () => {
   const history = useHistory()
   // eslint-disable-next-line
   const { paymentUrl, tRef } = JSON.parse(data)
-  // const GOLDEN = 'sk_test_a3150b31e7a217d2488132a436e6df8d28dec651'
   const GOLDEN = process.env.REACT_APP_PS_SK
 
   // toast function

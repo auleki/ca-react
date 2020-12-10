@@ -835,8 +835,13 @@ export const IframePage = styled.div`
   }
   
 
-  @media (max-width: 527px) {
+  @media (min-width: 318px) and (max-width: 527px) {
     background-color: #fff;
+
+    button {
+      position: relative;
+      top: .2em;
+    }
   }
 `
 
@@ -846,7 +851,7 @@ export const IframeStyle = styled.iframe`
 
   @media (min-width: 320px) and (max-width: 510px) {
     height: 100vh;
-    width: 100vh;
+    width: 50vh;
   }
 `
 
