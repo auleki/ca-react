@@ -1,4 +1,5 @@
 import React from 'react'
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import { FButton } from "../StyledComponents";
 import { IframePage, IframeStyle } from "../StyledComponents";
 import { returnToken } from "../../services/operations";
@@ -20,10 +21,10 @@ const PaymentPage = () => {
   //verfify payment
   const verifyPayment = async () => {
     try {
-      // "9ndpponcu3" - Our messiah    
+      // Our messiah
       // const messiah = "9ndpponcu3"
-      const messiah = "oveuufnxvl"
-      const verifyUri = `${process.env.REACT_APP_PS_VERIFY}/${messiah}`
+      // const messiah = "oveuufnxvl"
+      const verifyUri = `${process.env.REACT_APP_PS_VERIFY}/${tRef}`
       // console.log("URI: ", verifyUri)
       const currentToken = returnToken(GOLDEN)
       const config = {
@@ -33,17 +34,15 @@ const PaymentPage = () => {
       const status = res.data.data.status
       // console.log("Status Response: ", res.data.data.status)
       if (status === 'success') {
-        
         history.push('/order-complete')
       } else {
         errorAlert(`Transaction ${status}, payment not made`)
       }      
     } catch (error) {      
-      errorAlert("Could not verify transaction") 
+      errorAlert("Could not verify transaction, check your internet connection") 
     }
   }
 
-  
   const settings = {
     height: "1000px",
     width: "1000px"
@@ -62,7 +61,7 @@ const PaymentPage = () => {
           onClick={verifyPayment}
           // onClick={sendToast}
           >
-          VERIFY PAYMENT
+            <span>Verify Payment</span> <CheckCircleIcon />
         </FButton>
         <ToastContainer/>
       </div>

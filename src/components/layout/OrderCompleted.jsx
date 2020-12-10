@@ -1,10 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { SuccessCard, BasicBox, Paragraph, FButton } from "../StyledComponents";
+import { SuccessCard, BasicBox, FButton, SpanText, SubTitle, Title } from "../StyledComponents";
 import { useDispatch } from "react-redux";
 import { resetCart } from "../../features/cart/cartSlice";
 import Congrats from '../../assets/giphy.webp'
-import { ToastContainer, toast } from 'react-toastify'
+import { ToastContainer } from 'react-toastify'
+import ArrowBackRoundedIcon from '@material-ui/icons/ArrowBackRounded';
 
 const OrderCompleted = () => {
   const dispatch = useDispatch()
@@ -21,15 +22,19 @@ const OrderCompleted = () => {
   return (
     <SuccessCard>
       <BasicBox url={Congrats}>
-        <Paragraph>
-          We received your order
-        </Paragraph>
-        <Paragraph>
-          Order number: <span className="order_number">#{orderNumber || null}</span>
-        </Paragraph>
+        <Title>
+          ORDER RECEIVED!
+        </Title>
+        <SubTitle>
+          ORDER NUMBER: <span className="order_number">{orderNumber || null}</span>
+        </SubTitle>
+        <SpanText>
+          We shall contact you shortly
+        </SpanText>
         <Link to="/">
           <FButton primary onClick={resetStore}>
-            Return to Shop
+            <ArrowBackRoundedIcon />
+            <span>Return to Shop</span>
           </FButton>
         </Link>
         <ToastContainer />

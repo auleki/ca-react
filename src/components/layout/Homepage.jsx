@@ -2,7 +2,7 @@ import React from 'react'
 import { 
     Header, 
     ClothListings, 
-    // SubscribeForm 
+    SubscribeForm 
     } from './index'
 
 const Homepage = () => {
@@ -12,7 +12,7 @@ const Homepage = () => {
        
           <Header />
           <ClothListings />
-          {/* <SubscribeForm /> */}
+          <SubscribeForm />
 
        </>
    )

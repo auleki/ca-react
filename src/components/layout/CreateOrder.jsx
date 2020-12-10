@@ -96,7 +96,7 @@ const CreateOrder = () => {
       amount: 10000,
       email: email.value,
     }
-    console.log("CHECK PRICE: ", price)
+    // console.log("CHECK PRICE: ", price)
     const currentToken = returnToken(GOLDEN)
 
     try {
@@ -105,7 +105,7 @@ const CreateOrder = () => {
       }
       // console.log("CURRENT TOKEN: ", currentToken)
       const result = await axios.post(baseUrl, paystackLoad, config)
-      console.log("INIT OBJs", result)
+      // console.log("INIT OBJs", result)
       paymentUrl = result.data.data.authorization_url
       tRef = result.data.data.reference
       const payInfo = { paymentUrl, tRef, orderNumber: dbLoad.orderNumber }
@@ -115,7 +115,7 @@ const CreateOrder = () => {
           .then(data => data)
           .catch(e => console.log(e))
         // console.log(`Transaction successful for ${tRef}`)
-        console.log("DB LOAD:", dbLoad)
+        // console.log("DB LOAD:", dbLoad)
         // openNewTab(paymentUrl)
         saveUrlToStorage(payInfo, "payInfo")
         history.push("/payment")

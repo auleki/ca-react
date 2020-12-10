@@ -73,19 +73,34 @@ export const Title = styled.h1`
   color: #fff;
   padding: 0;
   font-size: 2.2rem;
-  
 `
 
 export const SubTitle = styled.h2`
   color: #ddd;
   font-size: 1.1rem;
-  margin-top: 1rem;
+  /* margin-top: 1rem; */
 
   ${({ uppercase }) =>
     uppercase && css`
       text-transform: uppercase;
     `
   }
+
+  .order_number {
+      background-color: #F36BEE;
+      padding: .3em;
+      font-size: .8em;
+      border-radius: 5px;
+      color: #fff;
+    }
+
+    @media (max-width: 473px) {
+      .order_number {
+        margin: 1em 0;
+        background-color: #F36BEE;
+
+      }
+    }
 `
 
 export const Paragraph = styled.p`
@@ -110,6 +125,10 @@ export const Paragraph = styled.p`
   }
 `
 
+export const SpanText = styled.span`
+  color: #fff; 
+  font-size: 1em;
+`
 
 
 export const Wrapper = styled.div`
@@ -125,6 +144,8 @@ export const Wrapper = styled.div`
 export const FButton = styled.button`
   padding: 1rem 1.5rem;
   font-size: 1.2em;
+  display: flex;
+  align-items: center;
   font-family: Helvetica;
   border-radius: .2rem; 
   transition: background-color 150ms ease-in;
@@ -162,6 +183,10 @@ export const FButton = styled.button`
         }
       `
   }
+
+  span {
+    margin: 0 .5em;
+  }
 `
 
 export const Button = ({ primary, children, bgColor }) => {
@@ -181,15 +206,16 @@ export const CardContainer = styled.div`
   justify-content: center;
   margin: 3rem 0;
   height: 100%;
-  /* background-color: #333; */
-  background: linear-gradient(to right, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5) ), url("https://res.cloudinary.com/checkadigs-cloud/image/upload/v1606402883/Taieri_z4cz7f.png") fixed no-repeat;
-  background-size: cover;
   text-align: center;
   padding: 0 1rem;
 `
 export const SummaryHeader = styled.div`
   margin: 1.5rem 1rem;
   width: 60%;
+
+  h1 {
+    text-align: left;
+  }
 
 
 /* 
@@ -818,10 +844,10 @@ export const IframeStyle = styled.iframe`
   height: 1000px;
   width: 1000px;
 
-  /* @media (min-width: 497px) {
-    height: 100%;
-    width: 80%;
-  } */
+  @media (min-width: 320px) and (max-width: 510px) {
+    height: 100vh;
+    width: 100vh;
+  }
 `
 
 export const HeaderStyle = styled.div`
@@ -837,30 +863,41 @@ export const HeaderStyle = styled.div`
 
 export const BasicBox = styled.div`
   /* height: 70%; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   background-color: #F36B2B;
-  ${({ url }) => 
+  ${({ url }) =>
     url && css`
       background: url(${url}) no-repeat;
       background-size: cover
     `
-}
+  }
   background-image: linear-gradient(163deg, #f36b2b 0%, #F7CE68 100%);
   box-shadow: 0px 2px 16px 6px rgba(0, 1, 3, .2);
   padding: 2em;
+  height: 80%;
   border-radius: .3em;
   overflow: hidden;
 
   p {
     margin: .5em 0;
-    line-height: 45px;
+    line-height: 30px;
   }
 
   @media (min-width: 320px) and (max-width: 485px) {
-    width: 85%;
+    width: 90%;
   }
 `
 
 export const Style404 = styled.div`
   background: #fff;
   color: #333;
+`
+
+export const AppStyle = styled.div`
+  /* background-color: #1a1a1a; */
+  background: linear-gradient(to right, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5) ), url("https://res.cloudinary.com/checkadigs-cloud/image/upload/v1606402883/Taieri_z4cz7f.png") fixed no-repeat;
+  background-size: cover;
 `
