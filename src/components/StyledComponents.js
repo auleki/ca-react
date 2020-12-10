@@ -91,13 +91,22 @@ export const SubTitle = styled.h2`
 export const Paragraph = styled.p`
   color: #ddd;
   font-size: 1.1rem;
+  margin: .6em 0;
 
   .order_number {
-    background-color: #F36B2B;
-    padding: .3em .3em;
+    background-color: #F36BEE;
+    padding: .3em;
     font-size: .8em;
     border-radius: 5px;
     color: #fff;
+  }
+
+  @media (max-width: 473px) {
+    .order_number {
+      margin: 1em 0;
+      background-color: #F36BEE;
+
+    }
   }
 `
 
@@ -793,11 +802,26 @@ export const IframePage = styled.div`
   justify-content: center;
   align-items: center;
   background-color: #F36B2B;
+
+  button {
+    position: relative;
+    top: 4em;
+  }
   
 
   @media (max-width: 527px) {
     background-color: #fff;
   }
+`
+
+export const IframeStyle = styled.iframe`
+  height: 1000px;
+  width: 1000px;
+
+  /* @media (min-width: 497px) {
+    height: 100%;
+    width: 80%;
+  } */
 `
 
 export const HeaderStyle = styled.div`
@@ -812,6 +836,7 @@ export const HeaderStyle = styled.div`
 `
 
 export const BasicBox = styled.div`
+  /* height: 70%; */
   background-color: #F36B2B;
   ${({ url }) => 
     url && css`
@@ -820,14 +845,14 @@ export const BasicBox = styled.div`
     `
 }
   background-image: linear-gradient(163deg, #f36b2b 0%, #F7CE68 100%);
-  box-shadow: 0px 2px 16px 6px rgba(0, 107, 43, .2);
+  box-shadow: 0px 2px 16px 6px rgba(0, 1, 3, .2);
   padding: 2em;
   border-radius: .3em;
   overflow: hidden;
 
-  img {
-    height: 100px;
-    width: 100px;
+  p {
+    margin: .5em 0;
+    line-height: 45px;
   }
 
   @media (min-width: 320px) and (max-width: 485px) {

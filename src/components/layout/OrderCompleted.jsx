@@ -1,9 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { SuccessCard, BasicBox, Title, Paragraph, FButton } from "../StyledComponents";
+import { SuccessCard, BasicBox, Paragraph, FButton } from "../StyledComponents";
 import { useDispatch } from "react-redux";
 import { resetCart } from "../../features/cart/cartSlice";
 import Congrats from '../../assets/giphy.webp'
+import { ToastContainer, toast } from 'react-toastify'
 
 const OrderCompleted = () => {
   const dispatch = useDispatch()
@@ -15,22 +16,23 @@ const OrderCompleted = () => {
     dispatch(resetCart())
   }
 
+  // const infoAlert = (msg) => toast.error(msg)
+
   return (
     <SuccessCard>
       <BasicBox url={Congrats}>
         <Paragraph>
-          Your order has been received
-      </Paragraph>
+          We received your order
+        </Paragraph>
         <Paragraph>
-          Order number <span className="order_number">#{orderNumber || null}</span>
-      </Paragraph>
+          Order number: <span className="order_number">#{orderNumber || null}</span>
+        </Paragraph>
         <Link to="/">
-          <FButton
-            onClick={resetStore}
-            >
+          <FButton primary onClick={resetStore}>
             Return to Shop
-        </FButton>
+          </FButton>
         </Link>
+        <ToastContainer />
       </BasicBox>
     </SuccessCard>
   )

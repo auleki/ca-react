@@ -1,6 +1,8 @@
 import React from 'react';
 
 import './App.scss';
+import 'react-toastify/dist/ReactToastify.css';
+
 // import CarouselElastic from './components/layout/CarouselElastic'
 // import { ClothSection } from './components/layout'
 import { 
