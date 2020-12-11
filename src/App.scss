@@ -27,9 +27,15 @@ a {
 
 // Quick Patch to fix Order page footer look
 
+a,
+button {
+    -webkit-tap-highlight-color: transparent;
+}
+
+
 .full {
     height: 100vh;
-    background: linear-gradient(to right, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5) ), url("https://res.cloudinary.com/checkadigs-cloud/image/upload/v1606402883/Taieri_z4cz7f.png") fixed no-repeat;
+    background: linear-gradient(to right, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url("https://res.cloudinary.com/checkadigs-cloud/image/upload/v1606402883/Taieri_z4cz7f.png") fixed no-repeat;
     background-size: cover;
 }
 
@@ -1090,6 +1096,9 @@ footer {
 .slider {
     // background: linear-gradient(to right, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5) ), url("https://res.cloudinary.com/checkadigs-cloud/image/upload/v1606402883/Taieri_z4cz7f.png") fixed no-repeat;
     // background-size: cover;
+    // background: linear-gradient(to right, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url("https://res.cloudinary.com/checkadigs-cloud/image/upload/v1606397756/IMG_E4430_vzk1ol.jpg") fixed no-repeat;
+    // background-size: cover;
+    // height: 100%;
 }
 
 .slider:focus {

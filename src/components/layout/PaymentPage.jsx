@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import { FButton } from "../StyledComponents";
 import { IframePage, IframeStyle } from "../StyledComponents";
@@ -13,6 +13,10 @@ const PaymentPage = () => {
   // eslint-disable-next-line
   const { paymentUrl, tRef } = JSON.parse(data)
   const GOLDEN = process.env.REACT_APP_PS_SK
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
 
   // toast function
   const errorAlert = (msg) => toast.error(msg)

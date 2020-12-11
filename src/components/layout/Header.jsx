@@ -27,7 +27,7 @@ const Header = () => {
   
   return (
     <HeaderStyle>
-      {/* <Slider {...settings} className="slider">
+      <Slider {...settings} className="slider">
 
       <ItemForCarousel bgColor={wallOne}>
     
@@ -45,7 +45,7 @@ const Header = () => {
         
       </ItemForCarousel>
 
-    </Slider> */}
+    </Slider>
     </HeaderStyle>
     
   )

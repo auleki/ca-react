@@ -147,6 +147,7 @@ export const FButton = styled.button`
   display: flex;
   align-items: center;
   font-family: Helvetica;
+  background-color: #fff;
   border-radius: .2rem; 
   transition: background-color 150ms ease-in;
   border: none;
@@ -757,7 +758,8 @@ export const Page = styled.div`
 `
 
 export const ItemForCarousel = styled.div`
-  background-color: #9C27B0;
+  background-color: url("https://res.cloudinary.com/checkadigs-cloud/image/upload/v1606397756/IMG_E4430_vzk1ol.jpg") fixed no-repeat;
+  background-size: cover;
   height: 100vh;
   width: 100%;
   ${({ bgColor }) =>
@@ -858,7 +860,8 @@ export const IframeStyle = styled.iframe`
 export const HeaderStyle = styled.div`
   height: 100vh;
   width: 100%;
-  background: linear-gradient(to right, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5) ), url("https://res.cloudinary.com/checkadigs-cloud/image/upload/v1606397756/IMG_E4430_vzk1ol.jpg") fixed no-repeat;
+  /* background: linear-gradient(to right, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5) ), url("https://res.cloudinary.com/checkadigs-cloud/image/upload/v1606397756/IMG_E4430_vzk1ol.jpg") fixed no-repeat; */
+  /* background: linear-gradient(to right, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5) ) fixed no-repeat; */
   background-size: cover;
 
   @media (max-width: 530px) {
