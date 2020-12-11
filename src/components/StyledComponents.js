@@ -858,8 +858,8 @@ export const IframeStyle = styled.iframe`
 export const HeaderStyle = styled.div`
   height: 100vh;
   width: 100%;
-  /* background: linear-gradient(to right, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5) ), url("https://res.cloudinary.com/checkadigs-cloud/image/upload/v1606402883/Taieri_z4cz7f.png") fixed no-repeat; */
-  /* background-size: cover; */
+  background: linear-gradient(to right, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5) ), url("https://res.cloudinary.com/checkadigs-cloud/image/upload/v1606397756/IMG_E4430_vzk1ol.jpg") fixed no-repeat;
+  background-size: cover;
 
   @media (max-width: 530px) {
     height: 30%;

@@ -37,8 +37,6 @@ const ShoppingCart = () => {
 
   return (
     <CardContainer>
-        <h2>HUDO FINDS COMPANY</h2>
-
       <RowLayout>
         <ShopCartContainer>
           <CartItemStyle>
