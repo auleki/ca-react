@@ -56,7 +56,7 @@ const PaymentPage = () => {
   //   top: 100,
   //   right: 250
   // }
-
+  
   return (
     <IframePage>
       <div>

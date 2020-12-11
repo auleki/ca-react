@@ -1,15 +1,47 @@
 import React, { useEffect } from 'react'
-import { Button, CheckoutCard, ActionRow } from '../StyledComponents'
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import {
+  Button,
+  Title,
+  CheckoutCard,
+  ActionRow,
+  EmptyCartStyle,
+  FButton
+} from '../StyledComponents'
+import Shopping from '../../assets/shopping.webp'
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import CartLength from './CartLength'
 import { formatToComma } from "../../api/operationsAPI";
 import { updateItems, updatePrice } from "../../features/cart/cartSlice";
 
-const Checkout = () => {
-                    
-  // const [itemCount, setItemCount] = useState(0)
-  const {cartItems, price } = useSelector(state => state)
+const TotalView = ({ price }) => (
+  <div className="total-price">
+    <p>Total: ₦ {formatToComma(price)}</p>
+    <Link to="/confirm">
+      <Button primary>
+        Create Order
+              </Button>
+    </Link>
+  </div>
+)
+
+const EmptyCart = () => (
+  <EmptyCartStyle>
+    <div>
+      <img src={Shopping} alt="empty cart"/>
+    </div>
+    <Title>Empty Cart</Title>
+    <Link to="/">
+      <FButton primary>
+      <ArrowBackIcon /> Go Shopping
+      </FButton>
+    </Link>
+  </EmptyCartStyle>
+)
+
+const TOTAL_ITEMS = () => {
+  const { cartItems, price } = useSelector(state => state)
   const dispatch = useDispatch()
 
   let totalPrice = 0
@@ -18,31 +50,39 @@ const Checkout = () => {
   useEffect(() => {
     // eslint-disable-next-line
     cartItems.map(item => {
-    // eslint-disable-next-line
+      // eslint-disable-next-line
       itemCount += item.qty
       // eslint-disable-next-line
-      totalPrice += item.price * item.qty 
-    })    
+      totalPrice += item.price * item.qty
+    })
     dispatch(updateItems(itemCount))
     dispatch(updatePrice(totalPrice))
-  
+
   }, [cartItems, totalPrice, itemCount])
-  
- return (
+
+  return (
+    <>
+      <CartLength />
+      <TotalView price={price} />
+    </>
+  )
+}
+
+const Checkout = () => {
+  const { cartItems } = useSelector(state => state)
+
+  return (
     <CheckoutCard>
-        <ActionRow>
-          <CartLength/>
-          <div className="total-price">
-            <p>Total: ₦ {formatToComma(price)}</p>
-            <Link to="/confirm">
-              <Button primary>
-                Create Order
-              </Button>
-            </Link>
-          </div>
-        </ActionRow>
-     </CheckoutCard>
-   )
+      <ActionRow>
+        {
+          cartItems.length !== 0
+            ? <TOTAL_ITEMS />
+            : <EmptyCart />
+        }
+
+      </ActionRow>
+    </CheckoutCard>
+  )
 }
 
 export default Checkout

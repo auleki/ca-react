@@ -843,6 +843,8 @@ export const IframePage = styled.div`
     button {
       position: relative;
       top: .2em;
+      background-color: #F36B2B;
+      color: #fff;
     }
   }
 `
@@ -908,4 +910,46 @@ export const AppStyle = styled.div`
   /* background-color: #1a1a1a; */
   background: linear-gradient(to right, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5) ), url("https://res.cloudinary.com/checkadigs-cloud/image/upload/v1606402883/Taieri_z4cz7f.png") fixed no-repeat;
   background-size: cover;
+`
+
+
+export const EmptyCartStyle = styled.div`
+  /* background: #F36B2B; */
+  background-color: #1a1a1a;
+  margin: 0 auto;
+  display: flex; 
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 0 1em 0;
+  border-radius: .2em;
+  position: relative;
+  width: 30em;
+
+  img {
+    height: auto;
+    width: 50%;
+    position: relative;
+  }
+
+  h1 {
+    font-weight: 400;
+  }
+
+  div {
+    background-color: #fff;
+    text-align: center;
+    width: 100%;
+    border-radius: .2em;
+
+  }
+  @media (min-width: 318px) and (max-width: 593px) {
+    width: 100%;
+  }
+
+  @media (max-width: 361px) {
+    h1 {
+      font-size: 1em
+    }
+  }
 `
