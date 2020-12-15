@@ -214,6 +214,10 @@ export const SummaryHeader = styled.div`
   margin: 1.5rem 1rem;
   width: 60%;
 
+  p {
+    margin: 0 1rem;
+  }
+
   h1 {
     text-align: left;
   }
@@ -695,7 +699,10 @@ export const RowLayout = styled.div`
 export const ActionRow = styled.div`
   display: flex;
   justify-content: space-between;
-  
+
+  .back {
+    margin: 0 auto 4em;
+  }  
 
   p {
     text-align: center;
@@ -914,8 +921,8 @@ export const AppStyle = styled.div`
 
 
 export const EmptyCartStyle = styled.div`
-  /* background: #F36B2B; */
-  background-color: #1a1a1a;
+  background: #FFFFFF;
+  /* background-color: #1a1a1a; */
   margin: 0 auto;
   display: flex; 
   align-items: center;
@@ -932,8 +939,9 @@ export const EmptyCartStyle = styled.div`
     position: relative;
   }
 
-  h1 {
+  h2 {
     font-weight: 400;
+    color: #1a1a1a;
   }
 
   div {
@@ -952,4 +960,37 @@ export const EmptyCartStyle = styled.div`
       font-size: 1em
     }
   }
+`
+
+export const QuizPage = styled.div`
+  width: 100%;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1a1a1a;
+`
+export const QuizBox = styled.div`
+  background-color: #F36B2B;
+  height: 80%;
+  width: 60%;
+
+  .quiz-title {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 1.5em 3em;
+    border-bottom: .2em solid #ddd;
+
+    p:nth-child(2) {
+      font-weight: 800;
+    }
+  }
+
+  .row {
+    display: flex;
+    padding: 2em 3em;
+    justify-content: space-between;
+  }
+  
 `

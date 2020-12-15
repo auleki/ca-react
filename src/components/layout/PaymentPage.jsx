@@ -28,14 +28,13 @@ const PaymentPage = () => {
       // const messiah = "9ndpponcu3"
       // const messiah = "oveuufnxvl"
       const verifyUri = `${process.env.REACT_APP_PS_VERIFY}/${tRef}`
-      // console.log("URI: ", verifyUri)
       const currentToken = returnToken(GOLDEN)
       const config = {
         headers: { Authorization: currentToken }
       }
       const res = await axios.get(verifyUri, config)
       const status = res.data.data.status
-      // console.log("Status Response: ", res.data.data.status)
+
       if (status === 'success') {
         history.push('/order-complete')
       } else {
@@ -50,29 +49,17 @@ const PaymentPage = () => {
     height: "1000px",
     width: "1000px"
   }
-
-  // const styling = {
-  //   position: "absolute",
-  //   top: 100,
-  //   right: 250
-  // }
   
   return (
     <IframePage>
       <div>
         <FButton
           onClick={verifyPayment}
-          // onClick={sendToast}
           >
             <span>Verify Payment</span> <CheckCircleIcon />
         </FButton>
         <ToastContainer/>
       </div>
-      {/* eslint-disable-next-line */}
-      {/* <iframe
-        {...settings}
-        src={paymentUrl}>
-      </iframe> */}
       <IframeStyle {...settings} src={paymentUrl}>
 
       </IframeStyle>

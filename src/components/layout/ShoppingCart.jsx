@@ -44,7 +44,7 @@ const ShoppingCart = () => {
             {/* Checkout Summary Card */}
             <Checkout />
           </CartItemStyle>
-
+          
         </ShopCartContainer>
       </RowLayout>
     </CardContainer>

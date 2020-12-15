@@ -6,7 +6,8 @@ import {
   CheckoutCard,
   ActionRow,
   EmptyCartStyle,
-  FButton
+  FButton,
+  SubTitle
 } from '../StyledComponents'
 import Shopping from '../../assets/shopping.webp'
 import { Link } from "react-router-dom";
@@ -31,10 +32,10 @@ const EmptyCart = () => (
     <div>
       <img src={Shopping} alt="empty cart"/>
     </div>
-    <Title>Empty Cart</Title>
+    <SubTitle>Empty Cart</SubTitle>
     <Link to="/">
-      <FButton primary>
-      <ArrowBackIcon /> Go Shopping
+      <FButton>
+      <ArrowBackIcon /> <span>Go Shopping</span> 
       </FButton>
     </Link>
   </EmptyCartStyle>

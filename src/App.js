@@ -19,6 +19,7 @@ import {
 import CreateOrder from './components/layout/CreateOrder'
 import { Route, Switch } from 'react-router-dom';
 import PaymentPage from './components/layout/PaymentPage';
+import Quiz from './components/layout/Quiz'
 import { AppStyle } from "./components/StyledComponents";
 
 
@@ -35,6 +36,7 @@ const App = () => {
           <Route path="/shopping" component={ShoppingCart} />
           <Route path="/confirm" component={CreateOrder} />
           <Route path="/order-complete" component={OrderCompleted} />
+          <Route path="/quiz" component={Quiz} />
           <Route path="/payment" component={PaymentPage} />
           <Route component={NotFound} />
         </Switch>

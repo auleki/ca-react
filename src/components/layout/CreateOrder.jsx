@@ -19,19 +19,14 @@ import {
   SummaryCard,
   Page
 } from "../StyledComponents";
-import { formatToComma } from "../../api/operationsAPI";
-// import { ArrowForward } from '@material-ui/icons'
+import { formatToComma } from "../../api/operationsAPI"
 
 const CreateOrder = () => {
   const firstName = useField('text')
   const lastName = useField('text')
-  const email = useField('text')
+  const email = useField('email')
   const phone = useField('number')
   const location = useField('text')
-  // eslint-disable-next-line
-  // const [ordered, setOrdered] = useState(false)
-  // eslint-disable-next-line
-  // const [reference, setReference] = useState('')
   const history = useHistory()
 
   useEffect(() => {
@@ -56,9 +51,7 @@ const CreateOrder = () => {
     }
   }
 
-
   const GOLDEN = process.env.REACT_APP_PS_SK
-  // console.log(GOLDEN)
 
   const vuid = generateId().toUpperCase()
 
@@ -82,30 +75,22 @@ const CreateOrder = () => {
   const makeOrder = async (e) => {
     e.preventDefault()
     let tRef, paymentUrl
-    // let baseUrl = 'https://api.paystack.co/transaction/initialize'
     let baseUrl = process.env.REACT_APP_PS_INIT
 
     //TODO ADJUST PAYSTACK LOAD IN PRODUCTION
-    // const padPrice = parseInt(`${price}00`)
-    // console.log("email", email.value)
-    // const paystackLoad = {
-    //   amount: padPrice,
-    //   email: email.value,
-    // }
+    const padPrice = parseInt(`${price}00`)
     const paystackLoad = {
-      amount: 10000,
-      email: email.value,
+      amount: padPrice,
+      email: email.value.toLowerCase(),
     }
-    // console.log("CHECK PRICE: ", price)
+
     const currentToken = returnToken(GOLDEN)
 
     try {
       const config = {
         headers: { Authorization: currentToken }
       }
-      // console.log("CURRENT TOKEN: ", currentToken)
       const result = await axios.post(baseUrl, paystackLoad, config)
-      // console.log("INIT OBJs", result)
       paymentUrl = result.data.data.authorization_url
       tRef = result.data.data.reference
       const payInfo = { paymentUrl, tRef, orderNumber: dbLoad.orderNumber }
@@ -114,9 +99,6 @@ const CreateOrder = () => {
         saveOrder(dbLoad)
           .then(data => data)
           .catch(e => console.log(e))
-        // console.log(`Transaction successful for ${tRef}`)
-        // console.log("DB LOAD:", dbLoad)
-        // openNewTab(paymentUrl)
         saveUrlToStorage(payInfo, "payInfo")
         history.push("/payment")
       } else {
@@ -139,7 +121,7 @@ const CreateOrder = () => {
         <SummaryHeader>
           <Title>Confirm order and pay</Title>
           <Paragraph>
-            A new window will be opened for you to pay, come back here to verify your payment
+           Within Lagos we handle 50% of delivery fee
         </Paragraph>
         </SummaryHeader>
 
@@ -156,14 +138,14 @@ const CreateOrder = () => {
                 placeholder="First Name"
                 onChange={firstName.onChange}
                 value={firstName.value}
-              // required
+                required
               />
 
               <Input
                 placeholder="Last Name"
                 onChange={lastName.onChange}
                 value={lastName.value}
-              // required
+                required
               />
 
             </RowLayout>
@@ -179,14 +161,14 @@ const CreateOrder = () => {
               placeholder="Phone Number"
               onChange={phone.onChange}
               value={phone.value}
-            // required
+              required
             />
 
             <Input
               placeholder="Location"
               onChange={location.onChange}
               value={location.value}
-            // required
+              required
             />
 
             <div>
