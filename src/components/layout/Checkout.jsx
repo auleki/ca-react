@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {
   Button,
-  Title,
   CheckoutCard,
   ActionRow,
   EmptyCartStyle,

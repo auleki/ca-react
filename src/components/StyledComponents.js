@@ -975,22 +975,43 @@ export const QuizBox = styled.div`
   height: 80%;
   width: 60%;
 
+  .bold {
+    font-weight: 800;
+  }
+
   .quiz-title {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    padding: 1.5em 3em;
-    border-bottom: .2em solid #ddd;
+    padding: 1.5em 3em 1em;
+    border-bottom: .4em solid #F3B70045;
+    /* ff6201 */
+    /* F3B700 */
 
-    p:nth-child(2) {
-      font-weight: 800;
-    }
   }
 
   .row {
     display: flex;
-    padding: 2em 3em;
+    padding: 0 3em;
+    margin: 3em 0;
     justify-content: space-between;
+
+    p {
+      color: darken(#ddd, 60%);
+    }
+  }
+
+  .question, .options {
+    margin: 0 3rem;
+  }
+
+  .options {
+    margin-top: 3rem;
+  }
+
+  button { 
+    width: 50%; 
+    background-color: #F3B700;
   }
   
 `
