@@ -8,12 +8,12 @@ const Quiz = () => {
 
   const questions = [
     {
-      questionText: 'What is the capital of France?',
+      questionText: "__________ is a general term referring to actual objects related to the human body?",
       answerOptions: [
-        { answerText: 'New York', isCorrect: false },
-        { answerText: 'London', isCorrect: false },
-        { answerText: 'Paris', isCorrect: true },
-        { answerText: 'Dublin', isCorrect: false },
+        { answerText: 'costume', isCorrect: false },
+        { answerText: 'wardrobe', isCorrect: false },
+        { answerText: 'clothing', isCorrect: true },
+        { answerText: 'wear ability', isCorrect: false },
       ],
     },
     {
@@ -35,7 +35,7 @@ const Quiz = () => {
       ],
     },
     {
-      questionText: 'How many Harry Potter books are there?',
+      questionText: 'How many Harry Potter books are there? But then there were no books from Hitler',
       answerOptions: [
         { answerText: '1', isCorrect: false },
         { answerText: '4', isCorrect: false },
@@ -58,7 +58,7 @@ const Quiz = () => {
           <p className="bold">20s Remaining</p>
         </div>
         <div className="question">
-          {questions[currentQuestion].questionText}
+          <p>{questions[currentQuestion].questionText}</p>
         </div>
         <div className="options">
           {questions[currentQuestion].answerOptions.map((option, i) => (

@@ -974,6 +974,7 @@ export const QuizBox = styled.div`
   background-color: #F36B2B;
   height: 80%;
   width: 60%;
+  border-radius: .2em;
 
   .bold {
     font-weight: 800;
@@ -1005,13 +1006,41 @@ export const QuizBox = styled.div`
     margin: 0 3rem;
   }
 
+  .question p {
+    font-size: 1.3em;
+  }
+
   .options {
     margin-top: 3rem;
+    display: grid;
+    grid-template-columns: repeat(2, 2fr);
+    grid-gap: 2em;
   }
 
   button { 
-    width: 50%; 
+    width: 100%; 
     background-color: #F3B700;
+    padding: 1em;
+    font-size: 1em;
+    color: #542E71;
+    outline: none;
+    border: none;
+    transition: 300ms ease-in-out;
+    border-radius: 5em;
+    /* color: #1a1a1a; */
+    /* 542E71 */
+    &:hover {
+      transform: translateY(.2em) scale(1.08);
+      background-color: #1a1a1a;
+      cursor: pointer;
+      color: #F3B700;
+    }
+
+    &:active {
+      transform: translateY(-.5em);
+      outline: none;
+      border: 0;
+    }
   }
   
 `
