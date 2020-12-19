@@ -1,25 +1,28 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { QuizPage, QuizBox, questionList, FButton } from "../StyledComponents";
-
+import RotateLeftIcon from '@material-ui/icons/RotateLeft';
 
 const ScoreView = ({ score, restart }) => {
   return (
     <QuizBox>
-      <div className="quiz-title">
-        <h3>Quiz Score</h3>
+      <div className="score-title">
         <p>JEAN CLAUDE</p>
+        {/* <h3>Quiz Score</h3> */}
+        <FButton onClick={restart}>
+          <RotateLeftIcon />
+        </FButton>
       </div>
-      <div>
+      <div className="score-display">
+        <h2>Score</h2>
         <h3>{score || 9}</h3>
+        <Link to="/">
+          <FButton primary>Back to shop</FButton>
+        </Link>
       </div>
       
-        <FButton onClick={restart}>
-          Play Again
-        </FButton>
-      <Link to="/">
-        <FButton>Back to shop</FButton>
-      </Link>
+        
+      
     </QuizBox>
   )
 }
@@ -29,7 +32,7 @@ const Quiz = () => {
   const randomNumber = Math.floor(Math.random() * questions.length)
   const [score, setScore] = useState(0)
   const [currentQuestion, setCurrentQuestion] = useState(randomNumber)
-  const [showScore, setShowScore] = useState(false)
+  const [showScore, setShowScore] = useState(true)
   const [limit, setLimit] = useState(10)
   const [attempt, setAttempt] = useState(1)
 
@@ -38,11 +41,10 @@ const Quiz = () => {
     if (isCorrect) setScore(score + 1)
     // const nextQuestion = currentQuestion + 1
     // if (questions.length > nextQuestion && limit >= attempt) {
-      if (limit > attempt) {
       setCurrentQuestion(randomNumber)
+      if (limit > attempt) {
       setAttempt(attempt + 1)
       // console.log(nextQuestion)
-      console.log('Length:', questions.length)
     } else {
       setShowScore(true)
     }

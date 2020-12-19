@@ -1321,15 +1321,37 @@ export const QuizBox = styled.div`
     font-weight: 800;
   }
 
-  .quiz-title {
-    display: flex;
-    justify-content: space-between;
+  .score-title, .quiz-title {
     width: 100%;
-    padding: 1.5em 3em 1em;
+    padding: 1.5em 3rem 1em;
+    display: flex;
     border-bottom: .4em solid #F3B70045;
+  }
+
+  .score-title {
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5em 1rem 1em;
+
+    button {
+      margin: 0;
+    }
+  }
+
+  .score-display {
+    display: flex;
+    line-height: 55px;
+    padding-top: 3em;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .quiz-title {
+    justify-content: space-between;
+    padding: 1.5em 3em 1em;
     /* ff6201 */
     /* F3B700 */
-
   }
 
   .row {
