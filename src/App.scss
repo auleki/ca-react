@@ -1099,6 +1099,17 @@ footer {
     // height: 100%;
 }
 
+.side-links {
+    display: flex;
+}
+
+@media (max-width: 365px) {
+    .side-links {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+}
+
 .slider:focus {
     outline: 0;
     border: 0;
