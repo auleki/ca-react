@@ -121,7 +121,7 @@ const CreateOrder = () => {
         <SummaryHeader>
           <Title>Confirm order and pay</Title>
           <Paragraph>
-           Within Lagos we handle 50% of delivery fee
+           Delivery is free within Lagos, outside Lagos we handle 50% of the your fee
         </Paragraph>
         </SummaryHeader>
 

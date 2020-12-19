@@ -1,10 +1,9 @@
-import { current } from 'immer';
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { QuizPage, QuizBox, questionList, FButton } from "../StyledComponents";
 
 
-const ScoreView = ({ score }) => {
+const ScoreView = ({ score, restart }) => {
   return (
     <QuizBox>
       <div className="quiz-title">
@@ -12,36 +11,55 @@ const ScoreView = ({ score }) => {
         <p>JEAN CLAUDE</p>
       </div>
       <div>
-        <h3>{score || 9}</h3>        
+        <h3>{score || 9}</h3>
       </div>
-
+      
+        <FButton onClick={restart}>
+          Play Again
+        </FButton>
+      <Link to="/">
+        <FButton>Back to shop</FButton>
+      </Link>
     </QuizBox>
   )
 }
 
 const Quiz = () => {
-  const [score, setScore] = useState(0)
-  const [currentQuestion, setCurrentQuestion] = useState(3)
-  const [showScore, setShowScore] = useState(true)
   const [questions, setQuestions] = useState(questionList)
-  const [limit, setLimit] = useState(5)
+  const randomNumber = Math.floor(Math.random() * questions.length)
+  const [score, setScore] = useState(0)
+  const [currentQuestion, setCurrentQuestion] = useState(randomNumber)
+  const [showScore, setShowScore] = useState(false)
+  const [limit, setLimit] = useState(10)
   const [attempt, setAttempt] = useState(1)
+
 
   const optionHandler = (isCorrect) => {
     if (isCorrect) setScore(score + 1)
-    const nextQuestion = currentQuestion + 1
-    if (questions.length > nextQuestion && limit !== attempt) {
-      setCurrentQuestion(nextQuestion)
+    // const nextQuestion = currentQuestion + 1
+    // if (questions.length > nextQuestion && limit >= attempt) {
+      if (limit > attempt) {
+      setCurrentQuestion(randomNumber)
       setAttempt(attempt + 1)
+      // console.log(nextQuestion)
+      console.log('Length:', questions.length)
     } else {
       setShowScore(true)
     }
   }
 
+  const resetScore = () => {
+    setShowScore(false)
+    setScore(0)
+    setAttempt(1)
+  }
+
   return (
     <QuizPage>
       {showScore
-        ? <ScoreView score={score} />
+        ? <ScoreView 
+            score={score}
+            restart={resetScore}/>
         : (
           <QuizBox>
             <div className="quiz-title">
@@ -58,7 +76,10 @@ const Quiz = () => {
             </div>
             <div className="options">
               {questions[currentQuestion].answerOptions.map((option, i) => (
-                <button onClick={() => optionHandler(option.isCorrect)}>
+                <button 
+                  key={i}
+                  className="button" 
+                  onClick={() => optionHandler(option.isCorrect)}>
                   {option.answerText}
                   {option.isCorrect ? " R" : ""}
                 </button>))}

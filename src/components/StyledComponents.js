@@ -1306,6 +1306,10 @@ export const QuizPage = styled.div`
   align-items: center;
   justify-content: center;
   background: #1a1a1a;
+
+  @media (min-width: 318px) and (max-width: 860px) {
+    height: 100%;
+  }
 `
 export const QuizBox = styled.div`
   background-color: #F36B2B;
@@ -1354,7 +1358,7 @@ export const QuizBox = styled.div`
     grid-gap: 2em;
   }
 
-  button { 
+  .button { 
     width: 100%; 
     background-color: #F3B700;
     padding: 1em;
@@ -1367,7 +1371,7 @@ export const QuizBox = styled.div`
     /* color: #1a1a1a; */
     /* 542E71 */
     &:hover {
-      transform: translateY(.2em) scale(1.08);
+      transform: translateY(.2em) scale(1.03);
       background-color: #1a1a1a;
       cursor: pointer;
       color: #F3B700;
@@ -1377,6 +1381,26 @@ export const QuizBox = styled.div`
       transform: translateY(-.5em);
       outline: none;
       border: 0;
+    }
+  }
+  @media (min-width: 318px) and (max-width: 450px) {
+    width: 100%;
+    padding-bottom: 3em; 
+
+    .options {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  @media (min-width: 450px) and (max-width: 860px) {
+    height: 100%;
+    width: 80vw;
+    padding-bottom: 3em;
+    margin-bottom: 3em;
+    .options {
+      display: flex;
+      flex-direction: column;
     }
   }
   
