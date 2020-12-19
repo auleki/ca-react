@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'
-import ShoppingBasketOutlinedIcon from '@material-ui/icons/ShoppingBasketOutlined';
+import React from 'react'
+// import ShoppingBasketOutlinedIcon from '@material-ui/icons/ShoppingBasketOutlined';
 import { Link } from 'react-router-dom'
-import MenuRoundedIcon from '@material-ui/icons/MenuRounded';
+// import MenuRoundedIcon from '@material-ui/icons/MenuRounded';
 import { useSelector } from 'react-redux'
 import ShoppingBasketSharpIcon from '@material-ui/icons/ShoppingBasketSharp';
 
@@ -64,8 +64,7 @@ const SimpleNav = () => {
           </ul>
           
           <Link className="link-button" to="/shopping">
-                {/* <ShoppingBasketSharpIcon/> */}
-                <ShoppingBasketOutlinedIcon />
+                <ShoppingBasketSharpIcon/>
               <span className="badge">{items}</span>
           </Link>
         </nav>

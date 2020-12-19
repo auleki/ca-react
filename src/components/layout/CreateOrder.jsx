@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import axios from 'axios'
 import { useField } from '../../hooks/'
 import { useHistory } from "react-router-dom";
-import SimpleNav from './SimpleNav'
 import { generateId } from '../../services/idGen'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { saveOrder } from "../../services/operations";
 import {
   BasicCard,
@@ -15,23 +14,19 @@ import {
   Title,
   Input,
   Button,
-  FButton,
+  // FButton,
   SummaryHeader,
   SummaryCard,
   Page
 } from "../StyledComponents";
-import { formatToComma } from "../../api/operationsAPI";
-// import { ArrowForward } from '@material-ui/icons'
+import { formatToComma } from "../../api/operationsAPI"
 
 const CreateOrder = () => {
   const firstName = useField('text')
   const lastName = useField('text')
-  const email = useField('text')
+  const email = useField('email')
   const phone = useField('number')
   const location = useField('text')
-  const [ordered, setOrdered] = useState(false)
-  const [reference, setReference] = useState('')
-  // const uuid = uuidv4()
   const history = useHistory()
 
   useEffect(() => {
@@ -40,7 +35,24 @@ const CreateOrder = () => {
 
   const { cartItems, price } = useSelector(state => state)
 
-  const GOLDEN = 'sk_test_a3150b31e7a217d2488132a436e6df8d28dec651'
+  // eslint-disable-next-line
+  function openNewTab(url) {
+    const win = window.open(url, '_blank')
+    win.focus()
+  }
+
+  function saveUrlToStorage(load, key) {
+    if (localStorage.getItem(key)) {
+      localStorage.removeItem(key)
+      localStorage.setItem(key, JSON.stringify(load))
+    } else {
+      JSON.stringify(load)
+      localStorage.setItem(key, JSON.stringify(load))
+    }
+  }
+
+  const GOLDEN = process.env.REACT_APP_PS_SK
+
   const vuid = generateId().toUpperCase()
 
   const dbLoad = {
@@ -59,58 +71,49 @@ const CreateOrder = () => {
 
   const returnToken = token => `Bearer ${token}`
 
-
   // speak to paystack API  
   const makeOrder = async (e) => {
     e.preventDefault()
-    setOrdered(true)
     let tRef, paymentUrl
-    let baseUrl = 'https://api.paystack.co/transaction/initialize'
-    const paystackLoad = {
-      amount: 5000,
-      email: "customer@email.com",
-    }
-    const currentToken = returnToken(GOLDEN)
-    const config = {
-      headers: { Authorization: currentToken }
-    }
-    const result = await axios.post(baseUrl, paystackLoad, config)
-    console.log(result)
-    paymentUrl = result.data.data.authorization_url
+    let baseUrl = process.env.REACT_APP_PS_INIT
 
-    if (result.status === 200) {
+    //TODO ADJUST PAYSTACK LOAD IN PRODUCTION
+    const padPrice = parseInt(`${price}00`)
+    const paystackLoad = {
+      amount: padPrice,
+      email: email.value.toLowerCase(),
+    }
+
+    const currentToken = returnToken(GOLDEN)
+
+    try {
+      const config = {
+        headers: { Authorization: currentToken }
+      }
+      const result = await axios.post(baseUrl, paystackLoad, config)
+      paymentUrl = result.data.data.authorization_url
       tRef = result.data.data.reference
-      // save to database
-      saveOrder(dbLoad)
-        .then(data => data)
-        .catch(e => console.log(e))
-      // console.log(`Transaction successful for ${tRef}`)
-      console.log("DB LOAD:", dbLoad)
-      setReference(tRef)
-      window.open(paymentUrl)
-    } else {
-      console.log("Transaction failed " + firstName.value + ' please try again')
+      const payInfo = { paymentUrl, tRef, orderNumber: dbLoad.orderNumber }
+      if (result.status === 200) {
+        // save to database
+        saveOrder(dbLoad)
+          .then(data => data)
+          .catch(e => console.log(e))
+        saveUrlToStorage(payInfo, "payInfo")
+        history.push("/payment")
+      } else {
+        console.log("Transaction failed " + firstName.value + ' please try again')
+      }
+    } catch (error) {
+      console.log("WE HAVE A PROBLEM")
+      console.log(error.message)
+      console.log("-------------------")
     }
     // if transaction successful, then we save new order to database
     //else we tell user transaction failed and have them try again
     // verify transaction
   }
 
-  const verifyPayment = async () => {
-    console.log('Verifying order...')
-    const verifyUri = `https://api.paystack.co/transaction/verify/${reference}`
-    const currentToken = returnToken(GOLDEN)
-    const config = {
-      headers: { Authorization: currentToken }
-    }
-    const res = await axios.get(verifyUri, config)
-    const status = res.status
-    if (status === 200) {
-      history.push('/order-complete')
-    } else {
-      console.log('not complete')
-    }
-  }
 
   return (
     <div className="full">
@@ -118,64 +121,63 @@ const CreateOrder = () => {
         <SummaryHeader>
           <Title>Confirm order and pay</Title>
           <Paragraph>
-            A new window will be opened for you to pay, come back here to verify your payment
+           Within Lagos we handle 50% of delivery fee
         </Paragraph>
         </SummaryHeader>
 
         <BasicCard>
-          {ordered
-            ? <FButton onClick={verifyPayment}>
-              Verify Order
-            </FButton>
-            : <Form onSubmit={makeOrder}>
-              <SubTitle uppercase>
-                PAYMENT INFO
+
+          <Form onSubmit={makeOrder}>
+            <SubTitle uppercase>
+              PAYMENT INFO
           </SubTitle>
 
-              <RowLayout>
-
-                <Input
-                  placeholder="First Name"
-                  onChange={firstName.onChange}
-                  value={firstName.value}
-                // required
-                />
-
-                <Input
-                  placeholder="Last Name"
-                  onChange={lastName.onChange}
-                  value={lastName.value}
-                // required
-                />
-
-              </RowLayout>
+            <RowLayout>
 
               <Input
-                placeholder="Email"
-                onChange={email.onChange}
-                value={email.value}
+                placeholder="First Name"
+                onChange={firstName.onChange}
+                value={firstName.value}
+                required
               />
 
               <Input
-                placeholder="Phone Number"
-                onChange={phone.onChange}
-                value={phone.value}
+                placeholder="Last Name"
+                onChange={lastName.onChange}
+                value={lastName.value}
+                required
               />
 
-              <Input
-                placeholder="Location"
-                onChange={location.onChange}
-                value={location.value}
-              />
+            </RowLayout>
 
-              <div>
-                <Button primary>
-                  Pay for order
-            </Button>
-              </div>
+            <Input
+              placeholder="Email"
+              onChange={email.onChange}
+              value={email.value}
+              required
+            />
 
-            </Form>}
+            <Input
+              placeholder="Phone Number"
+              onChange={phone.onChange}
+              value={phone.value}
+              required
+            />
 
+            <Input
+              placeholder="Location"
+              onChange={location.onChange}
+              value={location.value}
+              required
+            />
+
+            <div>
+              <Button primary>
+                Pay for order
+              </Button>
+            </div>
+
+          </Form>
 
           <SummaryCard>
             <h3>You are to pay</h3>
@@ -184,11 +186,9 @@ const CreateOrder = () => {
             </p>
             <p className="info">
               You have selected {cartItems.length} product(s)
-          </p>
+            </p>
           </SummaryCard>
         </BasicCard>
-
-
       </Page>
     </div>
 

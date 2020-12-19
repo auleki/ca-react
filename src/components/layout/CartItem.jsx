@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
-import { CartCard, Button, FButton } from '../StyledComponents'
+import React from 'react'
+import { CartCard, FButton } from '../StyledComponents'
 import { formatToComma } from "../../api/operationsAPI";
 import { useDispatch } from "react-redux";
-import { adjustQty, updateQuantity, removeFromCart } from "../../features/cart/cartSlice";
+import DeleteIcon from '@material-ui/icons/Delete';
+import { adjustQty, removeFromCart } from "../../features/cart/cartSlice";
 
 const CartItem = ({ product: { imageUrl, name, id, price, qty } }) => {
-  const [sQty, setSqty] = useState(qty)
+  // const [sQty, setSqty] = useState(qty)
   const dispatch = useDispatch()
 
   // Kill this till input can be regulated to remain a number                    
@@ -23,13 +24,15 @@ const CartItem = ({ product: { imageUrl, name, id, price, qty } }) => {
       </div>
       <div className="name">
         <p>{name}</p>
-        <button 
-          onClick={() => dispatch(removeFromCart(name))}>
-          REMOVE FROM CART
-        </button>
       </div>
       <div className="card-info">
         <p>₦ {formatToComma(price)}</p>
+      </div>
+      <div className="remove">
+      <FButton primary 
+          onClick={() => dispatch(removeFromCart(name))}>
+          <DeleteIcon />
+        </FButton>
       </div>
       <div className="item-actions">
         {/* <Button onClick={}> + </Button> */}
@@ -37,13 +40,16 @@ const CartItem = ({ product: { imageUrl, name, id, price, qty } }) => {
           onClick={() => dispatch(adjustQty({ name, type: "increase" }))}>
           +
         </FButton>
-        <input
+        {/* <input
           type="number"
           value={qty}
           id="qty"
           placeholder="Quantity"
           onChange={null}
-        />
+        /> */}
+        <span className="qty">
+          {qty}
+        </span>
         <FButton
           onClick={() => dispatch(adjustQty({ name, type: "decrease" }))}>
           -

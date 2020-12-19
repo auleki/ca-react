@@ -1,5 +1,5 @@
+
 import { createSlice } from "@reduxjs/toolkit";
-import { original } from 'immer'
 import axios from 'axios'
 
 export const initialState = {
@@ -15,7 +15,13 @@ const cartSlice = createSlice({
     name: "cartSlice",
     initialState,
     reducers: {
+        resetCart: (state) => {
+            state.cartItems = []
+            state.price = 0
+            state.items = 0
+        },
         addToCart: (state, { payload }) => {
+            // eslint-disable-next-line
             const productItem = state.products.find(prod =>
                 prod.name === payload.name
             )
@@ -23,7 +29,7 @@ const cartSlice = createSlice({
                 item.name === payload.name ? true : false
             ))
 
-            inCart ? console.log("YaaaaaY!") : console.log('Booo')
+            // inCart ? console.log("YaaaaaY!") : console.log('Booo')
 
             return {
                 ...state,
@@ -106,16 +112,18 @@ export const {
     getClothesFailure,
     updateQuantity,
     updateItems, 
-    removeFromCart
+    removeFromCart,
+    resetCart
 } = actions
 
 
 export const fetchRecipes = () => {
     return async dispatch => {
         dispatch(getClothes())
-        try {
-            const uri = "https://afternoon-chamber-08446.herokuapp.com/api/clothing"
-            const { data } = await axios.get(uri)
+        try {    
+            const uri = process.env.REACT_APP_BASE_URL
+            // console.log("ENV URI",process.env)
+            const { data } = await axios.get(`${uri}/api/clothing`)
             dispatch(getClothesSuccess(data))
         } catch (error) {
             dispatch(getClothesFailure())

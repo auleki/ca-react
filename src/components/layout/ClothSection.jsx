@@ -3,6 +3,7 @@ import Carousel from 'react-elastic-carousel';
 import Clothing from './Clothing';
 
 const ClothSection = ({ clothes: { products, title } }) => {
+  // eslint-disable-next-line
   const [merchs, setMerchs] = useState(products);
 
  return (

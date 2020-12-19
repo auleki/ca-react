@@ -21,6 +21,8 @@ checkout form
 
 - - [] The "Cant load clothes, refresh browser" error message can be improved to be a gif or some animated svg, indicating you are not connected to the internet. 
 
+- - [] add discountCode and ones not added to the db model
+
 ## Confirmation Page 
 - Put up an emoji of confetti busting, congratulate them on placing an order and inform them about a call to confirm their order
 
