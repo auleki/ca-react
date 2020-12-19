@@ -1,6 +1,7 @@
 import { current } from 'immer';
 import React, { useState } from 'react'
-import { QuizPage, QuizBox, questionList } from "../StyledComponents";
+import { Link } from 'react-router-dom'
+import { QuizPage, QuizBox, questionList, FButton } from "../StyledComponents";
 
 
 const ScoreView = ({ score }) => {
@@ -10,11 +11,13 @@ const ScoreView = ({ score }) => {
         <h3>Quiz Score</h3>
         <p>JEAN CLAUDE</p>
       </div>
-        <h3>{score || 9}</h3>
+      <div>
+        <h3>{score || 9}</h3>        
+      </div>
+
     </QuizBox>
   )
 }
-
 
 const Quiz = () => {
   const [score, setScore] = useState(0)
@@ -34,7 +37,6 @@ const Quiz = () => {
       setShowScore(true)
     }
   }
-
 
   return (
     <QuizPage>
