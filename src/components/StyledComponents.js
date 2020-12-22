@@ -1343,6 +1343,7 @@ export const QuizBox = styled.div`
     line-height: 55px;
     padding-top: 3em;
     align-items: center;
+    // add black color to background
     flex-direction: column;
     height: 100%;
   }

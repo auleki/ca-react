@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { QuizPage, QuizBox, questionList, FButton } from "../StyledComponents";
 import RotateLeftIcon from '@material-ui/icons/RotateLeft';
@@ -29,22 +29,37 @@ const ScoreView = ({ score, restart }) => {
 
 const Quiz = () => {
   const [questions, setQuestions] = useState(questionList)
+  const [questionsSet, setQuestionsSet] = useState([])
   const randomNumber = Math.floor(Math.random() * questions.length)
   const [score, setScore] = useState(0)
   const [currentQuestion, setCurrentQuestion] = useState(randomNumber)
-  const [showScore, setShowScore] = useState(true)
+  const [showScore, setShowScore] = useState(false)
   const [limit, setLimit] = useState(10)
   const [attempt, setAttempt] = useState(1)
+  
+  const shuffleQuestions = (arr) => {
+    // this array takes in another array 
+    // shuffles it and cuts out the first ten questions
+    for(let i = arr.length - 1; i > 0; i--)  {
+      let rand = Math.floor(Math.random() * (i + 1))
+      let temp = arr[i]
+      arr[i] = arr[rand]
+      arr[rand] = temp
+    }
+    const currentQuestions = arr.splice(1, 10)
+    setQuestions(currentQuestions)
+    console.log(currentQuestions)
+    return currentQuestions
+  }
 
+  useEffect(() => {
+    shuffleQuestions(questionList)
+  }, [])
 
   const optionHandler = (isCorrect) => {
     if (isCorrect) setScore(score + 1)
-    // const nextQuestion = currentQuestion + 1
-    // if (questions.length > nextQuestion && limit >= attempt) {
-      setCurrentQuestion(randomNumber)
       if (limit > attempt) {
       setAttempt(attempt + 1)
-      // console.log(nextQuestion)
     } else {
       setShowScore(true)
     }
