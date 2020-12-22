@@ -38,8 +38,8 @@ const Quiz = () => {
   const [attempt, setAttempt] = useState(1)
   
   const shuffleQuestions = (arr) => {
-    // this array takes in another array 
-    // shuffles it and cuts out the first ten questions
+    // this array takes in another array
+   // shuffles it and cuts out the first ten questions
     for(let i = arr.length - 1; i > 0; i--)  {
       let rand = Math.floor(Math.random() * (i + 1))
       let temp = arr[i]
@@ -48,7 +48,6 @@ const Quiz = () => {
     }
     const currentQuestions = arr.splice(1, 10)
     setQuestions(currentQuestions)
-    console.log(currentQuestions)
     return currentQuestions
   }
 
@@ -58,6 +57,7 @@ const Quiz = () => {
 
   const optionHandler = (isCorrect) => {
     if (isCorrect) setScore(score + 1)
+    setCurrentQuestion(randomNumber)
       if (limit > attempt) {
       setAttempt(attempt + 1)
     } else {
