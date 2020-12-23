@@ -1351,8 +1351,6 @@ export const QuizBox = styled.div`
   .quiz-title {
     justify-content: space-between;
     padding: 1.5em 3em 1em;
-    /* ff6201 */
-    /* F3B700 */
   }
 
   .row {
@@ -1390,7 +1388,7 @@ export const QuizBox = styled.div`
     outline: none;
     border: none;
     transition: 300ms ease-in-out;
-    border-radius: 5em;
+    border-radius: .3em;
     /* color: #1a1a1a; */
     /* 542E71 */
     &:hover {

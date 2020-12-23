@@ -30,9 +30,9 @@ const ScoreView = ({ score, restart }) => {
 const Quiz = () => {
   const [questions, setQuestions] = useState(questionList)
   const [questionsSet, setQuestionsSet] = useState([])
-  const randomNumber = Math.floor(Math.random() * questions.length)
+  // const randomNumber = Math.floor(Math.random() * questions.length)
   const [score, setScore] = useState(0)
-  const [currentQuestion, setCurrentQuestion] = useState(randomNumber)
+  const [currentQuestion, setCurrentQuestion] = useState(1)
   const [showScore, setShowScore] = useState(false)
   const [limit, setLimit] = useState(10)
   const [attempt, setAttempt] = useState(1)
@@ -46,7 +46,7 @@ const Quiz = () => {
       arr[i] = arr[rand]
       arr[rand] = temp
     }
-    const currentQuestions = arr.splice(1, 10)
+    const currentQuestions = arr.splice(1, 11)
     setQuestions(currentQuestions)
     return currentQuestions
   }
@@ -55,9 +55,13 @@ const Quiz = () => {
     shuffleQuestions(questionList)
   }, [])
 
+  // console.log("NoW: ", questions)
+  // console.log("Rand : ", randomNumber)
+  
   const optionHandler = (isCorrect) => {
     if (isCorrect) setScore(score + 1)
-    setCurrentQuestion(randomNumber)
+    setCurrentQuestion(currentQuestion + 1)
+    console.log(currentQuestion)
       if (limit > attempt) {
       setAttempt(attempt + 1)
     } else {
@@ -69,6 +73,7 @@ const Quiz = () => {
     setShowScore(false)
     setScore(0)
     setAttempt(1)
+    setCurrentQuestion(1)
   }
 
   return (
