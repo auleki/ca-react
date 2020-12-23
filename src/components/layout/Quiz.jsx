@@ -20,9 +20,6 @@ const ScoreView = ({ score, restart }) => {
           <FButton primary>Back to shop</FButton>
         </Link>
       </div>
-      
-        
-      
     </QuizBox>
   )
 }
@@ -36,6 +33,7 @@ const Quiz = () => {
   const [showScore, setShowScore] = useState(false)
   const [limit, setLimit] = useState(10)
   const [attempt, setAttempt] = useState(1)
+  let timer = 30
   
   const shuffleQuestions = (arr) => {
     // this array takes in another array
@@ -53,27 +51,43 @@ const Quiz = () => {
 
   useEffect(() => {
     shuffleQuestions(questionList)
+    console.log('loaded')
   }, [])
 
-  // console.log("NoW: ", questions)
-  // console.log("Rand : ", randomNumber)
-  
   const optionHandler = (isCorrect) => {
     if (isCorrect) setScore(score + 1)
-    setCurrentQuestion(currentQuestion + 1)
-    console.log(currentQuestion)
-      if (limit > attempt) {
+    if (limit > attempt) {
+      setCurrentQuestion(currentQuestion + 1)
       setAttempt(attempt + 1)
     } else {
       setShowScore(true)
     }
   }
 
+  setInterval(() => {
+    timer -= 1
+  } ,1000)
+
+  console.log("SECONDS: ", timer)
+  
+  // const timerWorker = () => {
+  //   setInterval(() => {
+  //     setTimer(timer - 1)
+  //     // if (timer === 0) {
+  //     //   console.log("Time up")
+  //     //   setCurrentQuestion(currentQuestion + 1)
+  //     // } else {
+  //     //   setTimer(timer - 1)        
+  //     // }
+  //   },1000)
+  // }
+
   const resetScore = () => {
     setShowScore(false)
     setScore(0)
     setAttempt(1)
     setCurrentQuestion(1)
+    shuffleQuestions(questionList)
   }
 
   return (
@@ -91,7 +105,7 @@ const Quiz = () => {
             <div className="row">
               <p>SCORE: <span className="bold">{score}</span></p>
               {/* <p>6 ANSWERS LEFT</p> */}
-              <p className="bold">20s Remaining</p>
+              <p className="bold">{timer}s Remaining</p>
             </div>
             <div className="question">
               <p>{questions[currentQuestion].questionText}</p>
