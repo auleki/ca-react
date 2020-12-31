@@ -948,6 +948,16 @@ export const Form = styled.form`
 
 `
 
+export const QuizInput = styled.input`
+  padding: 1em .5em;
+  background-color: transparent;
+  border-bottom: 3px solid #fff;
+  outline: 0;
+
+`
+
+
+
 export const Input = styled.input`  
     padding: 1rem .5rem;
     width: 100%;
@@ -1317,6 +1327,10 @@ export const QuizBox = styled.div`
   width: 60%;
   border-radius: .2em;
 
+  .light {
+    font-weight: 100;
+  }
+
   .bold {
     font-weight: 800;
   }
@@ -1326,6 +1340,19 @@ export const QuizBox = styled.div`
     padding: 1.5em 3rem 1em;
     display: flex;
     border-bottom: .4em solid #F3B70045;
+  }
+
+  .start-game {
+    background: #1a1a1f;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    input {
+      margin: 1.5em 0;
+    }
   }
 
   .score-title {
