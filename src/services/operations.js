@@ -22,3 +22,12 @@ const config = {
      console.log('Could not save order')
    }
  }
+
+ export const saveQuizUser = async (user) => {
+   try {
+      const res = await axios.post(`${baseUrl}/api/quiz/start`, user, config)
+      return res.data
+   } catch (e) {
+      console.error('Could not save quiz user')
+   }
+ }

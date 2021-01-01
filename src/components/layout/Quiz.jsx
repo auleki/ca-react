@@ -55,7 +55,7 @@ const AddUser = ({ setUser, user }) => {
       email: userInput,
       scores: [],
     };
-    console.table(quizUser);
+    // console.table(quizUser);
     setUser(quizUser);
   };
   return (
@@ -105,7 +105,9 @@ const Quiz = () => {
   const [limit, setLimit] = useState(10);
   const [attempt, setAttempt] = useState(1);
   const [user, setUser] = useState("");
-  let timer = 30;
+  const [timer, setTimer] = useState(30)
+  const [oldUser, setOldUser] = useState(false)
+  // let timer = 30;
 
   const shuffleQuestions = (arr) => {
     // this array takes in another array
@@ -123,9 +125,16 @@ const Quiz = () => {
 
   useEffect(() => {
     shuffleQuestions(questionList);
-    console.log("loaded");
+    // console.log("loaded");
   }, []);
 
+  useEffect(() => {
+    setInterval(() => {
+      setTimer(timer - 1)
+    }, 1000)
+  }, [])
+  console.log("Timer: ", timer)
+  
   const optionHandler = (isCorrect) => {
     if (isCorrect) setScore(score + 1);
     if (limit > attempt) {
@@ -136,12 +145,6 @@ const Quiz = () => {
     }
   };
 
-  // setInterval(() => {
-  //   timer -= 1
-  // } ,1000)
-
-  // console.log("SECONDS: ", timer)
-
   const resetScore = () => {
     setShowScore(false);
     setScore(0);
@@ -149,48 +152,48 @@ const Quiz = () => {
     setCurrentQuestion(1);
     shuffleQuestions(questionList);
   };
-
   // console.log("SHOW ME USER", user)
-  
-
   return (
     <QuizPage>
       {showScore ? (
         <ScoreView user={user} score={score} restart={resetScore} />
       ) : !user ? (
         <AddUser user={user} setUser={setUser} />
-      ) : (
-        <QuizBox>
-          <div className="quiz-title">
-            <p>{user.firstName}</p>
-            <p className="bold">
-              {attempt}/{limit} Questions{" "}
-            </p>
-          </div>
-          <div className="row">
-            <p>
-              SCORE: <span className="bold">{score}</span>
-            </p>
-            {/* <p>6 ANSWERS LEFT</p> */}
-            <p className="bold">{timer}s Remaining</p>
-          </div>
-          <div className="question">
-            <p>{questions[currentQuestion].questionText}</p>
-          </div>
-          <div className="options">
-            {questions[currentQuestion].answerOptions.map((option, i) => (
-              <button
-                key={i}
-                className="button"
-                onClick={() => optionHandler(option.isCorrect)}
-              >
-                {option.answerText}
-                {option.isCorrect ? " R" : ""}
-              </button>
-            ))}
-          </div>
-        </QuizBox>
-      )}
+      ) : oldUser 
+        ? <h3>Put in email</h3>
+        : (
+          <QuizBox>
+            <div className="quiz-title">
+              <p>{user.firstName}</p>
+              <p className="bold">
+                {attempt}/{limit} Questions{" "}
+              </p>
+            </div>
+            <div className="row">
+              <p>
+                SCORE: <span className="bold">{score}</span>
+              </p>
+              {/* <p>6 ANSWERS LEFT</p> */}
+              <p className="bold">{timer}s Remaining</p>
+            </div>
+            <div className="question">
+              <p>{questions[currentQuestion].questionText}</p>
+            </div>
+            <div className="options">
+              {questions[currentQuestion].answerOptions.map((option, i) => (
+                <button
+                  key={i}
+                  className="button"
+                  onClick={() => optionHandler(option.isCorrect)}
+                >
+                  {option.answerText}
+                  {option.isCorrect ? " R" : ""}
+                </button>
+              ))}
+            </div>
+          </QuizBox>
+        )
+      }
     </QuizPage>
   );
 };
