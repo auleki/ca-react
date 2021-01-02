@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
@@ -12,7 +13,8 @@ import {
   Form
 } from "../StyledComponents";
 import RotateLeftIcon from "@material-ui/icons/RotateLeft";
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+// import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import { saveQuizUser, searchForUser } from "../../services/operations";
 import PlayCircleFilledWhiteIcon from '@material-ui/icons/PlayCircleFilledWhite';
 
 const ScoreView = ({ score, restart, user }) => {
@@ -36,13 +38,13 @@ const ScoreView = ({ score, restart, user }) => {
   );
 };
 
-const AddUser = ({ setUser, user, setReturnUser }) => {
-  const [userInput, setUserInput] = useState("");
+const AddUser = ({ setUser, setOldUser, setReturnUser, startGame }) => {
+  const [username, setUsername] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
 
   const onUserInput = (e) => {
-    setUserInput(e.target.value);
+    setUsername(e.target.value);
   };
 
   const onLastName = (e) => {
@@ -52,93 +54,122 @@ const AddUser = ({ setUser, user, setReturnUser }) => {
   const onFirstName = (e) => {
     setFirstName(e.target.value);
   };
+  // const saveUser = () => {
+  //   console.log(`User of email: ${userInput} saved 🎉`);
+  //   const quizUser = {
+  //     firstName: firstName,
+  //     lastName: lastName,
+  //     email: userInput,
+  //     scores: [],
+  //   };
+  //   // console.table(quizUser);
+  //   saveQuizUser(quizUser)
+  //     .then(res => console.log('Quiz User Saved', res))
+  //     .catch(e => console.log('Error saving quiz user', e))
+  //   setUser(quizUser);
+  // };
+  const returningUser = () => setReturnUser(true)
 
-  const isOldUser = () => setReturnUser(true)
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const currentUser = { username, firstName, lastName }
+      setUser(currentUser)
+      saveQuizUser(currentUser)
+      setOldUser(true)
+      setReturnUser(true)
+      setUsername("")
+      setLastName("")
+      setFirstName("")
+    } catch (error) {
+      throw new Error(e)
+    }
+    // const savedUser = saveQuizUser()
+  }
 
-  const saveUser = () => {
-    console.log(`User of email: ${userInput} saved 🎉`);
-    const quizUser = {
-      firstName: firstName,
-      lastName: lastName,
-      email: userInput,
-      scores: [],
-    };
-    // console.table(quizUser);
-    setUser(quizUser);
-  };
-  return (
-    <QuizPage>
-      <AuthPage>
-        <div className="start-game">
-          <h2 className="light">
-
-          </h2>
-          <form>
-            <FormTitle>
-              Fill the form to start the quiz
+return (
+  <QuizPage>
+    <AuthPage>
+      <div className="start-game">
+        <form onSubmit={handleSubmit}>
+          <FormTitle>
+            We need to know you, kindly fill the form
             </FormTitle>
-            <Input
-              autoFocus
-              type="text"
-              placeholder="First Name"
-              onChange={onFirstName}
-              required
-              value={firstName}
-            />
+          <Input
+            autoFocus
+            type="text"
+            placeholder="First Name"
+            onChange={onFirstName}
+            required
+            value={firstName}
+          />
 
-            <Input
-              required
-              autoFocus
-              type="text"
-              placeholder="Last Name"
-              onChange={onLastName}
-              value={lastName}
-            />
+          <Input
+            required
 
-            <Input
-              autoFocus
-              required
-              type="text"
-              placeholder="@"
-              onChange={onUserInput}
-              value={userInput}
-            />
+            type="text"
+            placeholder="Last Name"
+            onChange={onLastName}
+            value={lastName}
+          />
 
-            <FButton
-              primary
-              onClick={saveUser}
-              type="submit">
-              <span>
-                Start Quiz
+          <Input
+
+            required
+            type="text"
+            placeholder="@"
+            onChange={onUserInput}
+            value={username}
+          />
+
+          <FButton
+            primary
+            // onClick={() => startGame("register", user)}
+            type="submit">
+            <span>
+              Start Quiz
               </span>
-              <span>
-                <PlayCircleFilledWhiteIcon />
-              </span>
-            </FButton>
-            <HyperLink onClick={isOldUser}>
-              Not your first time playing ?
+            <span>
+              <PlayCircleFilledWhiteIcon />
+            </span>
+          </FButton>
+          <HyperLink onClick={returningUser}>
+            Not your first time playing ?
           </HyperLink>
-          </form>
-        </div>
-      </AuthPage>
-    </QuizPage>
-  );
+        </form>
+      </div>
+    </AuthPage>
+  </QuizPage>
+);
 };
 
-const OldUser = ({ setReturnUser, user }) => {
+const OldUser = ({ setReturnUser, setOldUser, setUser, startGame }) => {
   const [userInput, setUserInput] = useState("")
 
   const onUserInput = e => setUserInput(e.target.value)
 
   const isOldUser = () => setReturnUser(false)
-
-  const startGame = (mode, user) => {
-    if (mode === "login") {
-      // run login method
-    } else if (mode === 'register') {
-      // run register method
-    } else {
-      return user
+  // const startGame = (mode, user) => {
+  //   if (mode === "login") {
+  //     // run login method
+  //   } else if (mode === 'register') {
+  //     // run register method
+  //   } else {
+  //     return user
+  //   }
+  // }
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    try {
+      const { data } = await searchForUser(userInput)
+      setUserInput("")
+      setUser(data)
+      setReturnUser(true)
+      setOldUser(true)
+      console.log('user fetched!', data)
+      return data
+    } catch (error) {
+      console.error(error)
     }
   }
 
@@ -146,10 +177,7 @@ const OldUser = ({ setReturnUser, user }) => {
     <QuizPage>
       <AuthPage>
         <div className="start-game">
-          {/* <h2 className="light">
-
-          </h2> */}
-          <form>
+          <form onSubmit={handleSubmit}>
             <FormTitle>
               Welcome back, put in your email to start the quiz
             </FormTitle>
@@ -161,10 +189,9 @@ const OldUser = ({ setReturnUser, user }) => {
               onChange={onUserInput}
               value={userInput}
             />
-
             <FButton
               primary
-              onClick={() => startGame("login", user)}
+              // onClick={() => startGame("login", user)}
               type="submit">
               <span>
                 Start Quiz
@@ -227,6 +254,22 @@ const Quiz = () => {
 
   // console.log("Timer: ", timer)
 
+
+
+
+
+  const startGame = (mode, user) => {
+    if (mode === "login") {
+      // run login method
+      console.log("Login...")
+    } else if (mode === 'register') {
+      // run register method
+      console.log("Registering...")
+    } else {
+      return user
+    }
+  }
+
   const optionHandler = (isCorrect) => {
     if (isCorrect) setScore(score + 1);
     if (limit > attempt) {
@@ -251,12 +294,16 @@ const Quiz = () => {
         <ScoreView user={user} score={score} restart={resetScore} />
       ) : !returnUser ? (
         <AddUser
+          setOldUser={setOldUser}
           user={user}
+          startGame={startGame}
           setUser={setUser}
           setReturnUser={setReturnUser} />
       ) : !oldUser
             ? (
               <OldUser
+                setUser={setUser}
+                setOldUser={setOldUser}
                 user={user}
                 setReturnUser={setReturnUser}
               />
@@ -266,7 +313,7 @@ const Quiz = () => {
                 <div className="quiz-title">
                   <p>{user.firstName}</p>
                   <p className="bold">
-                    {attempt}/{limit} Questions{" "}
+                    {attempt}/{limit} Questions
                   </p>
                 </div>
                 <div className="row">
