@@ -412,6 +412,12 @@ export const Title = styled.h1`
   font-size: 2.2rem;
 `
 
+export const FormTitle = styled.h2`
+  font-size: 1.2rem;
+  color: #fff;
+  font-weight: 100;
+`
+
 export const SubTitle = styled.h2`
   color: #ddd;
   font-size: 1.1rem;
@@ -478,11 +484,26 @@ export const Wrapper = styled.div`
   justify-content: center;
 `
 
+export const HyperLink = styled.a`
+  color: #fff;
+  font-size: 1em;
+  padding: .5em 0;
+  /* text-decoration: underline; */
+  /* border-bottom: .2em solid #fff; */
+  margin: 1em 0;
+  transition: 200ms ease-in;
+  &:hover {
+    cursor: pointer;
+    color: #F36B2B;
+  }
+`
+
 export const FButton = styled.button`
   padding: 1rem 1.5rem;
   font-size: 1.2em;
   display: flex;
   align-items: center;
+  justify-content: center;
   font-family: Helvetica;
   background-color: #fff;
   border-radius: .2rem; 
@@ -503,6 +524,9 @@ export const FButton = styled.button`
   ${({ primary }) =>
     primary &&
     css`
+        display: flex;
+        justify-content: center;
+        align-items: center;
         color: #fff;
         /* background-color: ${({ bgColor }) => bgColor}; */
         background-color: #F36B2B;
@@ -523,7 +547,7 @@ export const FButton = styled.button`
   }
 
   span {
-    margin: 0 .5em;
+    margin: 0 .2em;
   }
 `
 
@@ -1309,6 +1333,22 @@ export const EmptyCartStyle = styled.div`
   }
 `
 
+export const AuthPage = styled.div`
+  height: 100%;
+  width: 100%;
+  /* background-color: #fff; */
+  display: flex;
+  align-self: center;
+  justify-content: center;
+
+  form {
+    /* background-color:#fc3; */
+    width: 30rem;
+    display: flex;
+    flex-direction: column;
+  }
+`
+
 export const QuizPage = styled.div`
   width: 100%;
   height: 80vh;
@@ -1343,7 +1383,8 @@ export const QuizBox = styled.div`
   }
 
   .start-game {
-    background: #1a1a1f;
+    background: #1af;
+    /* background: #1a1a1f; */
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -1352,6 +1393,15 @@ export const QuizBox = styled.div`
 
     input {
       margin: 1.5em 0;
+    }
+  }
+
+  form {
+    background-color: transparent;
+    width: 100%;
+
+    button {
+      text-align: center;
     }
   }
 
@@ -1453,3 +1503,4 @@ export const QuizBox = styled.div`
   }
   
 `
+

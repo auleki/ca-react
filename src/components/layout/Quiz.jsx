@@ -2,12 +2,18 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   QuizPage,
+  AuthPage,
   QuizBox,
   questionList,
-  QuizInput,
+  FormTitle,
+  Input,
   FButton,
+  HyperLink,
+  Form
 } from "../StyledComponents";
 import RotateLeftIcon from "@material-ui/icons/RotateLeft";
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import PlayCircleFilledWhiteIcon from '@material-ui/icons/PlayCircleFilledWhite';
 
 const ScoreView = ({ score, restart, user }) => {
   return (
@@ -30,7 +36,7 @@ const ScoreView = ({ score, restart, user }) => {
   );
 };
 
-const AddUser = ({ setUser, user }) => {
+const AddUser = ({ setUser, user, setReturnUser }) => {
   const [userInput, setUserInput] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -47,6 +53,8 @@ const AddUser = ({ setUser, user }) => {
     setFirstName(e.target.value);
   };
 
+  const isOldUser = () => setReturnUser(true)
+
   const saveUser = () => {
     console.log(`User of email: ${userInput} saved 🎉`);
     const quizUser = {
@@ -60,40 +68,121 @@ const AddUser = ({ setUser, user }) => {
   };
   return (
     <QuizPage>
-      <QuizBox>
+      <AuthPage>
         <div className="start-game">
           <h2 className="light">
-            We need to know you, share your email to start the quiz
+
           </h2>
-          <QuizInput
-            autoFocus
-            type="text"
-            placeholder="First Name"
-            onChange={onFirstName}
-            value={firstName}
-          />
-          <QuizInput
-            autoFocus
-            type="text"
-            placeholder="Last Name"
-            onChange={onLastName}
-            value={lastName}
-          />
-          <QuizInput
-            autoFocus
-            type="text"
-            placeholder="@"
-            onChange={onUserInput}
-            value={userInput}
-          />
-          <FButton primary onClick={saveUser}>
-            Start Quiz
-          </FButton>
+          <form>
+            <FormTitle>
+              Fill the form to start the quiz
+            </FormTitle>
+            <Input
+              autoFocus
+              type="text"
+              placeholder="First Name"
+              onChange={onFirstName}
+              required
+              value={firstName}
+            />
+
+            <Input
+              required
+              autoFocus
+              type="text"
+              placeholder="Last Name"
+              onChange={onLastName}
+              value={lastName}
+            />
+
+            <Input
+              autoFocus
+              required
+              type="text"
+              placeholder="@"
+              onChange={onUserInput}
+              value={userInput}
+            />
+
+            <FButton
+              primary
+              onClick={saveUser}
+              type="submit">
+              <span>
+                Start Quiz
+              </span>
+              <span>
+                <PlayCircleFilledWhiteIcon />
+              </span>
+            </FButton>
+            <HyperLink onClick={isOldUser}>
+              Not your first time playing ?
+          </HyperLink>
+          </form>
         </div>
-      </QuizBox>
+      </AuthPage>
     </QuizPage>
   );
 };
+
+const OldUser = ({ setReturnUser, user }) => {
+  const [userInput, setUserInput] = useState("")
+
+  const onUserInput = e => setUserInput(e.target.value)
+
+  const isOldUser = () => setReturnUser(false)
+
+  const startGame = (mode, user) => {
+    if (mode === "login") {
+      // run login method
+    } else if (mode === 'register') {
+      // run register method
+    } else {
+      return user
+    }
+  }
+
+  return (
+    <QuizPage>
+      <AuthPage>
+        <div className="start-game">
+          {/* <h2 className="light">
+
+          </h2> */}
+          <form>
+            <FormTitle>
+              Welcome back, put in your email to start the quiz
+            </FormTitle>
+            <Input
+              autoFocus
+              required
+              type="text"
+              placeholder="@"
+              onChange={onUserInput}
+              value={userInput}
+            />
+
+            <FButton
+              primary
+              onClick={() => startGame("login", user)}
+              type="submit">
+              <span>
+                Start Quiz
+              </span>
+              <span>
+                <PlayCircleFilledWhiteIcon />
+              </span>
+            </FButton>
+            <HyperLink onClick={isOldUser}>
+              First time playing ?
+          </HyperLink>
+          </form>
+        </div>
+      </AuthPage>
+    </QuizPage>
+  )
+};
+
 
 const Quiz = () => {
   const [questions, setQuestions] = useState(questionList);
@@ -105,6 +194,7 @@ const Quiz = () => {
   const [limit, setLimit] = useState(10);
   const [attempt, setAttempt] = useState(1);
   const [user, setUser] = useState("");
+  const [returnUser, setReturnUser] = useState(false)
   const [timer, setTimer] = useState(30)
   const [oldUser, setOldUser] = useState(false)
   // let timer = 30;
@@ -128,13 +218,15 @@ const Quiz = () => {
     // console.log("loaded");
   }, []);
 
-  useEffect(() => {
-    setInterval(() => {
-      setTimer(timer - 1)
-    }, 1000)
-  }, [])
-  console.log("Timer: ", timer)
-  
+  // useEffect(() => {
+  //   setInterval(() => {
+  //     setTimer(timer - 1)
+  //     console.log("NOW", timer)
+  //   }, 1000)
+  // }, [timer])
+
+  // console.log("Timer: ", timer)
+
   const optionHandler = (isCorrect) => {
     if (isCorrect) setScore(score + 1);
     if (limit > attempt) {
@@ -157,42 +249,50 @@ const Quiz = () => {
     <QuizPage>
       {showScore ? (
         <ScoreView user={user} score={score} restart={resetScore} />
-      ) : !user ? (
-        <AddUser user={user} setUser={setUser} />
-      ) : oldUser 
-        ? <h3>Put in email</h3>
-        : (
-          <QuizBox>
-            <div className="quiz-title">
-              <p>{user.firstName}</p>
-              <p className="bold">
-                {attempt}/{limit} Questions{" "}
-              </p>
-            </div>
-            <div className="row">
-              <p>
-                SCORE: <span className="bold">{score}</span>
-              </p>
-              {/* <p>6 ANSWERS LEFT</p> */}
-              <p className="bold">{timer}s Remaining</p>
-            </div>
-            <div className="question">
-              <p>{questions[currentQuestion].questionText}</p>
-            </div>
-            <div className="options">
-              {questions[currentQuestion].answerOptions.map((option, i) => (
-                <button
-                  key={i}
-                  className="button"
-                  onClick={() => optionHandler(option.isCorrect)}
-                >
-                  {option.answerText}
-                  {option.isCorrect ? " R" : ""}
-                </button>
-              ))}
-            </div>
-          </QuizBox>
-        )
+      ) : !returnUser ? (
+        <AddUser
+          user={user}
+          setUser={setUser}
+          setReturnUser={setReturnUser} />
+      ) : !oldUser
+            ? (
+              <OldUser
+                user={user}
+                setReturnUser={setReturnUser}
+              />
+            )
+            : (
+              <QuizBox>
+                <div className="quiz-title">
+                  <p>{user.firstName}</p>
+                  <p className="bold">
+                    {attempt}/{limit} Questions{" "}
+                  </p>
+                </div>
+                <div className="row">
+                  <p>
+                    SCORE: <span className="bold">{score}</span>
+                  </p>
+                  {/* <p>6 ANSWERS LEFT</p> */}
+                  <p className="bold">{timer}s Remaining</p>
+                </div>
+                <div className="question">
+                  <p>{questions[currentQuestion].questionText}</p>
+                </div>
+                <div className="options">
+                  {questions[currentQuestion].answerOptions.map((option, i) => (
+                    <button
+                      key={i}
+                      className="button"
+                      onClick={() => optionHandler(option.isCorrect)}
+                    >
+                      {option.answerText}
+                      {option.isCorrect ? " R" : ""}
+                    </button>
+                  ))}
+                </div>
+              </QuizBox>
+            )
       }
     </QuizPage>
   );
