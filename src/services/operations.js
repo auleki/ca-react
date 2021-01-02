@@ -25,21 +25,12 @@ const config = {
    }
  }
 
-//  export const saveQuizUser = async (userData) => {
- export const saveQuizUser = async () => {
+ export const saveQuizUser = async (userData) => {
    try {
-      // const res = await axios.post(`${baseUrl}/api/quiz/start`, userData, config)
-      const userData = {
-        firstName: "Barrack",
-        lastName: "Obama",
-        username: "barracks@eod.com"
-      }
-
-      const res = await axios.post(`${localUrl}/api/quiz/start`, userData, config)
+      const res = await axios.post(`${localUrl}`, userData, config)
       return res.data
    } catch (e) {
       throw new Error("Error saving user", e)
-      // console.error('Could not save quiz user')
    }
  }
 

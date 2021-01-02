@@ -284,58 +284,58 @@ export const questionList = [
     ]
   },
   {
-  questionText: "What is the name of strong shiny cotton ?",
-  answerOptions: [
-    { answerText: 'Poplin', isCorrect: true },
-    { answerText: 'Violin', isCorrect: false },
-    { answerText: 'Foflin', isCorrect: false },
-    { answerText: 'Shint', isCorrect: false },
-  ]
+    questionText: "What is the name of strong shiny cotton ?",
+    answerOptions: [
+      { answerText: 'Poplin', isCorrect: true },
+      { answerText: 'Violin', isCorrect: false },
+      { answerText: 'Foflin', isCorrect: false },
+      { answerText: 'Shint', isCorrect: false },
+    ]
   },
   {
-  questionText: "What is the colour of aquamarine, a precious stone ?",
-  answerOptions: [
-    { answerText: 'Bluish Green', isCorrect: true },
-    { answerText: 'Pinkish', isCorrect: false },
-    { answerText: 'Greenish', isCorrect: false },
-    { answerText: 'Greenish Blue', isCorrect: false },
-  ]
+    questionText: "What is the colour of aquamarine, a precious stone ?",
+    answerOptions: [
+      { answerText: 'Bluish Green', isCorrect: true },
+      { answerText: 'Pinkish', isCorrect: false },
+      { answerText: 'Greenish', isCorrect: false },
+      { answerText: 'Greenish Blue', isCorrect: false },
+    ]
   },
   {
-  questionText: "What is the name of the garment having a front opening ?",
-  answerOptions: [
-    { answerText: 'Polero', isCorrect: false },
-    { answerText: 'Folero', isCorrect: false },
-    { answerText: 'Bolero', isCorrect: true },
-    { answerText: 'Dolero', isCorrect: false },
-  ]
+    questionText: "What is the name of the garment having a front opening ?",
+    answerOptions: [
+      { answerText: 'Polero', isCorrect: false },
+      { answerText: 'Folero', isCorrect: false },
+      { answerText: 'Bolero', isCorrect: true },
+      { answerText: 'Dolero', isCorrect: false },
+    ]
   },
   {
-  questionText: "Fedora lies in which category of accessories ?",
-  answerOptions: [
-    { answerText: 'A kind of cap', isCorrect: true },
-    { answerText: 'A kind of feather', isCorrect: false },
-    { answerText: 'A kind of clothing material', isCorrect: false },
-    { answerText: 'A kind of weather', isCorrect: false },
-  ]
+    questionText: "Fedora lies in which category of accessories ?",
+    answerOptions: [
+      { answerText: 'A kind of cap', isCorrect: true },
+      { answerText: 'A kind of feather', isCorrect: false },
+      { answerText: 'A kind of clothing material', isCorrect: false },
+      { answerText: 'A kind of weather', isCorrect: false },
+    ]
   },
   {
-  questionText: "Which of the following is suitable for making evening gown ?",
-  answerOptions: [
-    { answerText: 'Satin', isCorrect: true },
-    { answerText: 'Flannel', isCorrect: false },
-    { answerText: 'Garbadine', isCorrect: false },
-    { answerText: 'Silk tweet', isCorrect: false },
-  ]
+    questionText: "Which of the following is suitable for making evening gown ?",
+    answerOptions: [
+      { answerText: 'Satin', isCorrect: true },
+      { answerText: 'Flannel', isCorrect: false },
+      { answerText: 'Garbadine', isCorrect: false },
+      { answerText: 'Silk tweet', isCorrect: false },
+    ]
   },
   {
-  questionText: "A celebrity fashion designer from Florida born in Italy ?",
-  answerOptions: [
-    { answerText: 'Christian Dior', isCorrect: false },
-    { answerText: 'Gianni Versace', isCorrect: true },
-    { answerText: 'Giuseppi Zanotti', isCorrect: false },
-    { answerText: 'Kanye West', isCorrect: false },
-  ]
+    questionText: "A celebrity fashion designer from Florida born in Italy ?",
+    answerOptions: [
+      { answerText: 'Christian Dior', isCorrect: false },
+      { answerText: 'Gianni Versace', isCorrect: true },
+      { answerText: 'Giuseppi Zanotti', isCorrect: false },
+      { answerText: 'Kanye West', isCorrect: false },
+    ]
   }
 ];
 
@@ -1345,6 +1345,15 @@ export const AuthPage = styled.div`
     width: 30rem;
     display: flex;
     flex-direction: column;
+  }
+
+  @media (min-width: 318px) and (max-width: 565px) {
+    /* background: #f01; */
+    form {
+      width: 100%;
+      /* background: #fc3; */
+      padding: 0 1em;
+    }
   }
 `
 

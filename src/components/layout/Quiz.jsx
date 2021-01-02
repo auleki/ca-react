@@ -94,7 +94,7 @@ return (
         <form onSubmit={handleSubmit}>
           <FormTitle>
             We need to know you, kindly fill the form
-            </FormTitle>
+          </FormTitle>
           <Input
             autoFocus
             type="text"
@@ -106,7 +106,6 @@ return (
 
           <Input
             required
-
             type="text"
             placeholder="Last Name"
             onChange={onLastName}
