@@ -525,6 +525,9 @@ export const FButton = styled.button`
   span {
     margin: 0 .5em;
   }
+
+  
+
 `
 
 export const Button = ({ primary, children, bgColor }) => {
@@ -698,7 +701,6 @@ export const LinkButton = styled.button`
     width: 1.5rem;
     transition: transform 300ms ease-in-out;
   }
-
 `
 
 export const CardInfo = styled.div`
@@ -747,10 +749,8 @@ export const CartItemStyle = styled.div`
   flex-direction: column-reverse;
 
   width: 100%;
-  /* width: 100%; */
   justify-content: space-between;
   padding: 3rem;
-  /* background: #ff0; */
 
   @media (max-width: 512px) {
     padding: 0;
@@ -1309,6 +1309,35 @@ export const EmptyCartStyle = styled.div`
   }
 `
 
+export const AuthPage = styled.div`
+  /* height: 70vh; */
+  /* background: #907051; */
+  @media (min-width: 320px) and (max-width: 868px) {
+    .register {}
+    height: 100vh;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+`
+
+export const AuthForm = styled.div`
+  /* background: #995990; */
+  width: 30rem;
+
+  @media (min-width:320px) and (max-width: 558px) {
+    width: 100%;
+    height: 50vh;
+
+    .mobile_raise {
+      /* background-color: #451010; */
+      /* height: 100vh; */
+    }
+  }
+`
+
 export const QuizPage = styled.div`
   width: 100%;
   height: 80vh;
@@ -1453,3 +1482,4 @@ export const QuizBox = styled.div`
   }
   
 `
+

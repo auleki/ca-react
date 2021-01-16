@@ -8,26 +8,43 @@ export const returnToken = token => `Bearer ${token}`
 const currentToken = returnToken(GOLDEN)
 
 // const baseUrl =  'https://afternoon-chamber-08446.herokuapp.com/api/orders';
-const baseUrl =  process.env.REACT_APP_BASE_URL
+const baseUrl = process.env.REACT_APP_BASE_URL
 
 const config = {
   headers: { Authorization: currentToken }
 }
 
- export const saveOrder = async (order) => {
-   try {
-     const res = await axios.post(`${baseUrl}/api/orders`, order, config)
-     return res.data 
-   } catch (error) {
-     console.log('Could not save order')
-   }
- }
+export const saveOrder = async (order) => {
+  try {
+    const res = await axios.post(`${baseUrl}/api/orders`, order, config)
+    return res.data
+  } catch (error) {
+    console.log('Could not save order')
+  }
+}
 
- export const saveQuizUser = async (user) => {
-   try {
-      const res = await axios.post(`${baseUrl}/api/quiz/start`, user, config)
-      return res.data
-   } catch (e) {
-      console.error('Could not save quiz user')
-   }
- }
+export const saveQuizUser = async (user) => {
+  try {
+    const res = await axios.post(`${baseUrl}/api/quiz/start`, user, config)
+    return res.data
+  } catch (e) {
+    console.error('Could not save quiz user')
+  }
+}
+
+export const addSubcriber = async (subscriber) => {
+  try {
+    const res = await axios.post(`${baseUrl}/api/subscribers`, subscriber, config)
+    return res.data
+  } catch (e) {
+    console.error('Could not save subscriber')
+  }
+}
+
+export const saveQuizWinner = async (winner) => {
+  try {
+    // save winner
+  } catch (error) {
+    
+  }
+}

@@ -3,12 +3,15 @@ import { Link } from "react-router-dom";
 import {
   QuizPage,
   QuizBox,
-  Form,
+  // Form,
   questionList,
   Input,
-  QuizInput,
+  // QuizInput,
+  AuthForm,
+  AuthPage,
   FButton,
 } from "../StyledComponents";
+import { addSubscriber } from "../../services/operations";
 import RotateLeftIcon from "@material-ui/icons/RotateLeft";
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -20,7 +23,6 @@ const ScoreView = ({ score, restart, user }) => {
     <QuizBox>
       <div className="score-title">
         <p>{user.firstName}</p>
-        {/* <h3>Quiz Score</h3> */}
         <FButton onClick={restart}>
           <RotateLeftIcon />
         </FButton>
@@ -36,11 +38,12 @@ const ScoreView = ({ score, restart, user }) => {
   );
 };
 
-const AddUser = ({ setUser, user }) => {
+const AddUser = ({ setUser, user, loginOrRegister }) => {
   const [userInput, setUserInput] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [joinMailingList, setJoinMailingList] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const onUserInput = (e) => {
     setUserInput(e.target.value);
@@ -56,16 +59,23 @@ const AddUser = ({ setUser, user }) => {
 
   const saveUser = (e) => {
     e.preventDefault()
-    console.log(`User of email: ${userInput} saved 🎉`);
-    const quizUser = {
-      firstName: firstName,
-      lastName: lastName,
-      email: userInput,
-      toSubscribe: joinMailingList,
-      scores: [],
-    };
-    console.table(quizUser);
-    setUser(quizUser);
+    setLoading(true)
+    try {
+      console.log(`User of email: ${userInput} saved 🎉`);
+      const quizUser = {
+        firstName: firstName,
+        lastName: lastName,
+        email: userInput,
+        toSubscribe: joinMailingList,
+        scores: [],
+      };
+      console.table(quizUser);
+      setUser(quizUser)
+    } catch (error) {
+
+    }
+    // console.table(quizUser);
+    // setUser(quizUser);
   };
 
   const handleMailingList = (e) => setJoinMailingList(!joinMailingList)
@@ -73,55 +83,64 @@ const AddUser = ({ setUser, user }) => {
   return (
     // <QuizPage> 
     //   <QuizBox>
-    <div className="start-game">
-      <h2 className="light">
-        We need to know you, fill the form to start the quiz
-          </h2>
+    <AuthPage>
+      <div className="start-game register">
+        <h2 className="light">
+          We need to know you, fill the form to start the quiz
+      </h2>
 
-      <form onSubmit={saveUser}>
-        <Input
-          autoFocus
-          type="text"
-          placeholder="First Name"
-          onChange={onFirstName}
-          value={firstName}
-        />
-        <Input
-          type="text"
-          placeholder="Last Name"
-          onChange={onLastName}
-          value={lastName}
-        />
-        <Input
-          type="text"
-          placeholder="@"
-          onChange={onUserInput}
-          value={userInput}
-        />
-        <FormControlLabel 
-          control={<Checkbox 
-              checked={joinMailingList} 
-              name="mailingList" 
-              onChange={handleMailingList}/>}
-          label="Join Our Mailing List"
+        <AuthForm onSubmit={saveUser}>
+          <Input
+            autoFocus
+            type="text"
+            placeholder="First Name"
+            onChange={onFirstName}
+            value={firstName}
           />
-        <FButton primary>
+          <Input
+            type="text"
+            placeholder="Last Name"
+            onChange={onLastName}
+            value={lastName}
+          />
+          <Input
+            type="text"
+            placeholder="@"
+            onChange={onUserInput}
+            value={userInput}
+          />
+          <div className="quiz_actions">
+            <FormControlLabel
+              control={<Checkbox
+                checked={joinMailingList}
+                name="mailingList"
+                onChange={handleMailingList} />}
+              label="Join Our Mailing List"
+            />
+            <a
+              className="link"
+              onClick={() => loginOrRegister("login")}>
+              You played before? Login
+          </a>
+          </div>
+
+          <FButton primary>
+            {loading ? <CircularProgress size={23} color="inherit" /> : "Start Quiz"}
+          </FButton>
+
+          {/* <FButton primary>
           Start Quiz
-        </FButton>
-      </form>
-    </div>
-    //   </QuizBox>
-    // </QuizPage>
+        </FButton> */}
+        </AuthForm>
+      </div>
+    </AuthPage>
   );
 };
 
 
-const OldUser = ({ setRegister }) => {
-
-
+const OldUser = ({ loginOrRegister }) => {
   const [email, setEmail] = useState("")
   const [loading, setLoading] = useState(false)
-
   const onUserInput = (e) => setEmail(e.target.value)
 
   const checkUser = (e) => {
@@ -133,25 +152,35 @@ const OldUser = ({ setRegister }) => {
   return (
     // <QuizPage>
     //   <QuizBox>
-    <div className="start-game">
-
-      <form onSubmit={checkUser}>
-        <h2 className="light">
-          Welcome back, start the quiz with your email
+    <AuthPage>
+      <div className="start-game login">
+        <AuthForm onSubmit={checkUser}>
+          <h2 className="light">
+            Welcome back, start the quiz with your email
         </h2>
-        <Input
-          autoFocus
-          type="text"
-          placeholder="@"
-          onChange={onUserInput}
-          value={email}
-        />
-        <FButton primary>
-          {loading ? <CircularProgress /> : "Start Quiz"}
-        </FButton>
-      </form>
-    </div>
+          <div className="mobile_raise">
+            <Input
+              autoFocus
+              type="text"
+              placeholder="@"
+              onChange={onUserInput}
+              value={email}
+            />
+            <div className="quiz_actions">
+              <a
+                className="link"
+                onClick={() => loginOrRegister("register")}>
+                First time playing? Register
+              </a>
+            </div>
+            <FButton primary>
+              {loading ? <CircularProgress size={23} color="inherit" /> : "Start Quiz"}
+            </FButton>
+          </div>
 
+        </AuthForm>
+      </div>
+    </AuthPage>
     //   </QuizBox>
     // </QuizPage>
   )
@@ -191,12 +220,15 @@ const Quiz = () => {
     // console.log("loaded");
   }, []);
 
-  useEffect(() => {
-    setInterval(() => {
-      setTimer(timer - 1)
-    }, 1000)
-  }, [])
-  console.log("Timer: ", timer)
+  const loginOrRegister = (mode) => {
+    if (mode === "login") {
+      setOldUser(true)
+      setRegister(false)
+    } else if (mode === "register") {
+      setOldUser(false)
+      setRegister(true)
+    }
+  }
 
   const optionHandler = (isCorrect) => {
     if (isCorrect) setScore(score + 1);
@@ -219,12 +251,24 @@ const Quiz = () => {
   return (
     <QuizPage>
       {showScore ? (
-        <ScoreView user={user} score={score} restart={resetScore} />
+        <ScoreView
+          user={user}
+          score={score}
+          restart={resetScore}
+        />
       ) : oldUser
           ? (
-            <OldUser setRegister={setRegister} />
+            <OldUser
+              setRegister={setRegister}
+              loginOrRegister={loginOrRegister}
+            />
           ) : register
-            ? <AddUser user={user} setUser={setUser} setOldUser={setOldUser} />
+            ? <AddUser
+              user={user}
+              setUser={setUser}
+              setOldUser={setOldUser}
+              loginOrRegister={loginOrRegister}
+            />
             : (
               <QuizBox>
                 <div className="quiz-title">
