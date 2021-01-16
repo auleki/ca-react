@@ -11,7 +11,7 @@ import {
   AuthPage,
   FButton,
 } from "../StyledComponents";
-import { addSubscriber } from "../../services/operations";
+import { addSubscriber, saveQuizWinner } from "../../services/operations";
 import RotateLeftIcon from "@material-ui/icons/RotateLeft";
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -19,6 +19,19 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 
 const ScoreView = ({ score, restart, user }) => {
+
+  // const saveScore = () => {
+    
+  // }
+
+  console.log("USER DATA:", user)
+
+  useEffect(() => {
+    // saveQuizWinner(user)
+    // saveScore()
+  }, [])
+  
+  
   return (
     <QuizBox>
       <div className="score-title">
@@ -58,22 +71,24 @@ const AddUser = ({ setUser, user, loginOrRegister }) => {
   };
 
   const saveUser = (e) => {
+  // const saveUser = () => {
     e.preventDefault()
-    setLoading(true)
-    try {
-      console.log(`User of email: ${userInput} saved 🎉`);
-      const quizUser = {
-        firstName: firstName,
-        lastName: lastName,
-        email: userInput,
-        toSubscribe: joinMailingList,
-        scores: [],
-      };
-      console.table(quizUser);
-      setUser(quizUser)
-    } catch (error) {
+    // setLoading(true)
+    console.log('Login')
+    // try {
+    //   console.log(`User of email: ${userInput} saved 🎉`);
+    //   const quizUser = {
+    //     firstName: firstName,
+    //     lastName: lastName,
+    //     email: userInput,
+    //     toSubscribe: joinMailingList,
+    //     scores: [],
+    //   };
+    //   console.table(quizUser);
+    //   setUser(quizUser)
+    // } catch (error) {
 
-    }
+    // }
     // console.table(quizUser);
     // setUser(quizUser);
   };
@@ -96,18 +111,21 @@ const AddUser = ({ setUser, user, loginOrRegister }) => {
             placeholder="First Name"
             onChange={onFirstName}
             value={firstName}
+            required
           />
           <Input
             type="text"
             placeholder="Last Name"
             onChange={onLastName}
             value={lastName}
+            required
           />
           <Input
             type="text"
             placeholder="@"
             onChange={onUserInput}
             value={userInput}
+            required
           />
           <div className="quiz_actions">
             <FormControlLabel
@@ -124,7 +142,7 @@ const AddUser = ({ setUser, user, loginOrRegister }) => {
           </a>
           </div>
 
-          <FButton primary>
+          <FButton primary type="submit">
             {loading ? <CircularProgress size={23} color="inherit" /> : "Start Quiz"}
           </FButton>
 

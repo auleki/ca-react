@@ -1314,11 +1314,12 @@ export const AuthPage = styled.div`
   /* background: #907051; */
   @media (min-width: 320px) and (max-width: 868px) {
     .register {}
-    height: 100vh;
+    height: 100%;
+    padding: 5em 0;
     width: 80%;
     display: flex;
     align-items: center;
-    justify-content: center;
+    /* justify-content: center; */
     flex-direction: column;
   }
 `
@@ -1377,7 +1378,7 @@ export const QuizBox = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
 
     input {
       margin: 1.5em 0;
