@@ -988,6 +988,11 @@ export const Input = styled.input`
     } */
   `
 
+export const SubscribeInput = styled.input`
+  background: #1a1a1a;
+  color: red;
+`
+
 export const CheckoutCard = styled.div`
   /* Return the gray background on mobile ... MAYBE?  */
   /* background-color: #212121; */
@@ -1312,6 +1317,21 @@ export const EmptyCartStyle = styled.div`
 export const AuthPage = styled.div`
   /* height: 70vh; */
   /* background: #907051; */
+
+  form {
+    width: 30rem;
+
+    @media (min-width:320px) and (max-width: 558px) {
+      width: 100%;
+      height: 50vh;
+
+      .mobile_raise {
+        /* background-color: #451010; */
+        /* height: 100vh; */
+      }
+    }
+  }
+  
   @media (min-width: 320px) and (max-width: 868px) {
     .register {}
     height: 100%;
@@ -1324,8 +1344,8 @@ export const AuthPage = styled.div`
   }
 `
 
-export const AuthForm = styled.div`
-  /* background: #995990; */
+/* export const AuthForm = styled.div`
+  
   width: 30rem;
 
   @media (min-width:320px) and (max-width: 558px) {
@@ -1333,11 +1353,9 @@ export const AuthForm = styled.div`
     height: 50vh;
 
     .mobile_raise {
-      /* background-color: #451010; */
-      /* height: 100vh; */
     }
   }
-`
+` */
 
 export const QuizPage = styled.div`
   width: 100%;

@@ -11,7 +11,7 @@ import {
   AuthPage,
   FButton,
 } from "../StyledComponents";
-import { addSubscriber, saveQuizWinner } from "../../services/operations";
+import { addSubscriber, saveQuizWinner, fetchUser } from "../../services/operations";
 import RotateLeftIcon from "@material-ui/icons/RotateLeft";
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -20,9 +20,9 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 const ScoreView = ({ score, restart, user }) => {
 
-  // const saveScore = () => {
-    
-  // }
+  const saveScore = () => {
+    // save score method  
+  }
 
   console.log("USER DATA:", user)
 
@@ -51,7 +51,7 @@ const ScoreView = ({ score, restart, user }) => {
   );
 };
 
-const AddUser = ({ setUser, user, loginOrRegister }) => {
+const AddUser = ({ setUser, user, loginOrRegister, setOldUser, setRegister }) => {
   const [userInput, setUserInput] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -71,24 +71,24 @@ const AddUser = ({ setUser, user, loginOrRegister }) => {
   };
 
   const saveUser = (e) => {
-  // const saveUser = () => {
     e.preventDefault()
-    // setLoading(true)
-    console.log('Login')
-    // try {
-    //   console.log(`User of email: ${userInput} saved 🎉`);
-    //   const quizUser = {
-    //     firstName: firstName,
-    //     lastName: lastName,
-    //     email: userInput,
-    //     toSubscribe: joinMailingList,
-    //     scores: [],
-    //   };
-    //   console.table(quizUser);
-    //   setUser(quizUser)
-    // } catch (error) {
-
-    // }
+    setLoading(true)
+    try {
+      console.log(`User of email: ${userInput} saved 🎉`);
+      const quizUser = {
+        firstName: firstName,
+        lastName: lastName,
+        email: userInput,
+        toSubscribe: joinMailingList,
+        scores: [],
+      };
+      console.table(quizUser);
+      setUser(quizUser)
+      setOldUser(false)
+      setRegister(false)
+    } catch (error) {
+      
+    }
     // console.table(quizUser);
     // setUser(quizUser);
   };
@@ -102,9 +102,9 @@ const AddUser = ({ setUser, user, loginOrRegister }) => {
       <div className="start-game register">
         <h2 className="light">
           We need to know you, fill the form to start the quiz
-      </h2>
+        </h2>
 
-        <AuthForm onSubmit={saveUser}>
+        <form onSubmit={saveUser}>
           <Input
             autoFocus
             type="text"
@@ -139,7 +139,7 @@ const AddUser = ({ setUser, user, loginOrRegister }) => {
               className="link"
               onClick={() => loginOrRegister("login")}>
               You played before? Login
-          </a>
+            </a>
           </div>
 
           <FButton primary type="submit">
@@ -149,22 +149,24 @@ const AddUser = ({ setUser, user, loginOrRegister }) => {
           {/* <FButton primary>
           Start Quiz
         </FButton> */}
-        </AuthForm>
+        </form>
       </div>
     </AuthPage>
   );
 };
-
 
 const OldUser = ({ loginOrRegister }) => {
   const [email, setEmail] = useState("")
   const [loading, setLoading] = useState(false)
   const onUserInput = (e) => setEmail(e.target.value)
 
-  const checkUser = (e) => {
+  const loginUser = async (e) => {
     e.preventDefault()
     setLoading(!loading)
-    // setRegister()
+    const fetchedUser = await fetchUser(email)
+    console.log(fetchedUser)
+    // setRegister(false)
+    // setOldUser(false)
   }
 
   return (
@@ -172,7 +174,7 @@ const OldUser = ({ loginOrRegister }) => {
     //   <QuizBox>
     <AuthPage>
       <div className="start-game login">
-        <AuthForm onSubmit={checkUser}>
+        <form onSubmit={loginUser}>
           <h2 className="light">
             Welcome back, start the quiz with your email
         </h2>
@@ -196,7 +198,7 @@ const OldUser = ({ loginOrRegister }) => {
             </FButton>
           </div>
 
-        </AuthForm>
+        </form>
       </div>
     </AuthPage>
     //   </QuizBox>
@@ -235,6 +237,7 @@ const Quiz = () => {
 
   useEffect(() => {
     shuffleQuestions(questionList);
+    console.table("Current User", user);
     // console.log("loaded");
   }, []);
 
@@ -279,12 +282,14 @@ const Quiz = () => {
             <OldUser
               setRegister={setRegister}
               loginOrRegister={loginOrRegister}
+              setOldUser={setOldUser}
             />
           ) : register
             ? <AddUser
               user={user}
               setUser={setUser}
               setOldUser={setOldUser}
+              setRegister={setRegister}
               loginOrRegister={loginOrRegister}
             />
             : (
