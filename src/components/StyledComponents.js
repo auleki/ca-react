@@ -467,6 +467,9 @@ export const SpanText = styled.span`
   font-size: 1em;
 `
 
+export const ParentContainer = styled.div`
+  height: 100vh;
+`
 
 export const Wrapper = styled.div`
   height: 100vh;
@@ -635,12 +638,15 @@ export const CardStyle = styled.div`
   align-items: center;
   justify-content: center;
   background-color: #F36B2B;
+  /* background-color: #e90e2B; */
   /* box-shadow: 0px 2px 16px 6px rgba(243, 107, 43, .2); */
   transition: transform 200ms ease-in, box-shadow 300ms ease-in;
 
   @media (min-width: 318px) and (max-width: 707px) {
-    height: 25rem;
+    height: 100%;
+    /* height: 35vrem; */
     width: 100%;
+    padding: 2em 10em;
   }
 
   svg {
@@ -656,7 +662,7 @@ export const CardStyle = styled.div`
 
   img {
     height: auto;
-    width: 60%;
+    width: 20rem;
   }
 `
 
@@ -988,10 +994,10 @@ export const Input = styled.input`
     } */
   `
 
-export const SubscribeInput = styled.input`
-  background: #1a1a1a;
-  color: red;
-`
+// export const SubscribeInput = styled.input`
+//   background: #1a1a1a;
+//   color: red;
+// `
 
 export const CheckoutCard = styled.div`
   /* Return the gray background on mobile ... MAYBE?  */

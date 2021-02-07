@@ -21,6 +21,37 @@ body {
     //   height: 100%;
 }
 
+
+.timer {
+
+    margin: 2em 0;
+    
+    .timer_button {
+        width: 55rem;
+        background:rgb(24, 231, 51);
+        color: black;
+        border-radius: .2em;
+        padding: 1em 2.5em;
+        margin: 0 .5em;
+    }    
+}
+
+._button {
+    padding: 1em 2em;
+    background: black;
+    color:rgb(233, 233, 233);
+    font-size: 1em;
+    margin: 0 auto;
+    outline: 0;
+    border: 0;
+
+    &:hover {
+        background:rgb(48, 247, 98);
+        color: rgb(39, 36, 36);
+        cursor: pointer;
+    }
+}
+
 a {
     text-decoration: none;
 }
@@ -622,6 +653,7 @@ header {
         margin: 1em 0;
     }
 
+
     .form_group {
         display: flex;
 
@@ -675,9 +707,16 @@ header {
             outline: none;
 
             &:focus {
-                color: $c5;
+                color: $c4;
+                background-color: lighten($c1, 30%);
             }
         }
+
+        .success-message {
+            text-align: center;
+        }
+
+        // @media (min-width: )
     }
 
     .subscribe {
@@ -791,6 +830,15 @@ footer {
 
 // EMERGENCY STYLING FOR CLOTH SECTION
 .cloth-section {
+    // display: flex;
+    // flex-direction: column;
+    // align-items: center;
+    background-color: $c1;
+
+    .center {
+        margin: 0 auto;
+    }
+    
     h3 {
         padding: 2rem 0 1rem;
         // border-bottom: 1.4em solid #000;

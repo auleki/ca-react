@@ -218,7 +218,11 @@ const Quiz = () => {
   const [user, setUser] = useState("");
   const [timer, setTimer] = useState(30)
   const [oldUser, setOldUser] = useState(false)
-  const [register, setRegister] = useState(true)
+  const [register, setRegister] = useState(false)
+  const [secondsLeft, setSecondsLeft] = useState(0)
+  const [isActive, setIsActive] = useState(false)
+  const [seconds, setSeconds] = useState(30)
+  const [questionIndex, setQuestionIndex] = useState(0)
   // let timer = 30;
 
   const shuffleQuestions = (arr) => {
@@ -235,10 +239,11 @@ const Quiz = () => {
     return currentQuestions;
   };
 
+
   useEffect(() => {
     shuffleQuestions(questionList);
-    console.table("Current User", user);
-    // console.log("loaded");
+    // console.table("Current User", user);
+    // timerAct()
   }, []);
 
   const loginOrRegister = (mode) => {
@@ -251,7 +256,67 @@ const Quiz = () => {
     }
   }
 
+  function toggle () {
+    setIsActive(!isActive)
+  }
+  
+  function resetTimer () {
+    setSeconds(30)
+    setIsActive(false)
+  }
+
+  // console.log('Before Effect:', seconds)
+
+  const isTimeUp = () => {
+    if (seconds < 1) {
+      setQuestionIndex(questionIndex + 1)
+    }
+    // setIsActive(true)
+    console.log('I run')
+
+    if (questionIndex !== 0) {
+        resetTimer()
+        setIsActive(true)
+      } else {
+        toggle()
+      } 
+  }
+  
+  useEffect(() => {
+    isTimeUp()
+  }, [])
+  
+  useEffect(() => {
+    let interval = null;
+
+    if (seconds === 25) {
+      setQuestionIndex(questionIndex + 1)
+      console.log('match!')
+    }
+
+    if (isActive) {
+      interval = setInterval(() => {
+        setSeconds(seconds => seconds - 1);
+      }, 1000);
+    } else if (!isActive) {
+    // } else if (!isActive && seconds !== 0) {
+      clearInterval(interval);
+    }
+
+    return () => clearInterval(interval)
+  }, [isActive, seconds])
+
   const optionHandler = (isCorrect) => {
+    // if (questionIndex !== 0) {
+    //   resetTimer()
+    //   setIsActive(true)
+    // } else {
+    //   toggle()
+    // } 
+
+    setQuestionIndex(questionIndex + 1)
+    
+    // startTimer()
     if (isCorrect) setScore(score + 1);
     if (limit > attempt) {
       setCurrentQuestion(currentQuestion + 1);
@@ -266,9 +331,9 @@ const Quiz = () => {
     setScore(0);
     setAttempt(1);
     setCurrentQuestion(1);
-    shuffleQuestions(questionList);
+    shuffleQuestions(questionList); 
   };
-  // console.log("SHOW ME USER", user)
+
   return (
     <QuizPage>
       {showScore ? (
@@ -295,9 +360,9 @@ const Quiz = () => {
             : (
               <QuizBox>
                 <div className="quiz-title">
-                  <p>{user.firstName}</p>
+                  <p>{user.firstName  || "Guest"}</p>
                   <p className="bold">
-                    {attempt}/{limit} Questions{" "}
+                    {attempt}/{limit} Questions
                   </p>
                 </div>
                 <div className="row">
@@ -305,7 +370,7 @@ const Quiz = () => {
                     SCORE: <span className="bold">{score}</span>
                   </p>
                   {/* <p>6 ANSWERS LEFT</p> */}
-                  <p className="bold">{timer}s Remaining</p>
+                  <p className="bold">{seconds}s Remaining</p>
                 </div>
                 <div className="question">
                   <p>{questions[currentQuestion].questionText}</p>

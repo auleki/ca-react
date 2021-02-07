@@ -1,10 +1,23 @@
 import React, { useState } from 'react';
 import Carousel from 'react-elastic-carousel';
 import Clothing from './Clothing';
+import Slider from 'react-slick'
 
 const ClothSection = ({ clothes: { products, title } }) => {
   // eslint-disable-next-line
   const [merchs, setMerchs] = useState(products);
+
+  const settings = {
+    dots: true,
+    arrows: false,
+    lazyLoad: true,
+    infinite: true,
+    speed: 300,
+    draggable: true,
+    autoplay: true,
+    autoplaySpeed: 2500,
+    cssEase: "linear",
+  }
 
  return (
   //  <section id="genesis" className="wow fadeInUpBig category">  
@@ -12,12 +25,12 @@ const ClothSection = ({ clothes: { products, title } }) => {
       <div>
         <h3>{ title }</h3>
       </div>
-      <Carousel>
+      <Slider {...settings} className="center">
         {merchs.map(
           (cloth, i) => 
           <Clothing key={i} clothes={cloth}/>
           )}
-      </Carousel>
+      </Slider>
     </div>    
    )
 }

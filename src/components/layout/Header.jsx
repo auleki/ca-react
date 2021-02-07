@@ -2,8 +2,7 @@ import React from 'react'
 // import Carousel from "react-elastic-carousel";
 import { ItemForCarousel, HeaderStyle } from "../StyledComponents";
 import Slider from 'react-slick'
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+
 
 const Header = () => {
   let wallOne, wallTwo, wallThree, wallFour
