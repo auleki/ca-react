@@ -1321,11 +1321,12 @@ export const EmptyCartStyle = styled.div`
 `
 
 export const AuthPage = styled.div`
-  /* height: 70vh; */
+  /* height: 90vh; */
   /* background: #907051; */
 
   form {
     width: 30rem;
+    height: 70vh;
 
     @media (min-width:320px) and (max-width: 558px) {
       width: 100%;
@@ -1480,7 +1481,6 @@ export const QuizBox = styled.div`
     }
 
     &:active {
-      /* transform: scale(1.1); */
       outline: none;
       border: 0;
     }

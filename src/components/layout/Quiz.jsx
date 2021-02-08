@@ -8,6 +8,7 @@ import {
   Input,
   // QuizInput,
   AuthForm,
+  ParentContainer,
   AuthPage,
   FButton,
 } from "../StyledComponents";
@@ -229,7 +230,7 @@ const Quiz = () => {
   const [oldUser, setOldUser] = useState(false)
   const [register, setRegister] = useState(true)
   const [isActive, setIsActive] = useState(false)
-  const [seconds, setSeconds] = useState(20)
+  const [seconds, setSeconds] = useState(30)
   const [questionIndex, setQuestionIndex] = useState(0)
   // let timer = 30;
 
@@ -295,21 +296,12 @@ const Quiz = () => {
   // console.log('Before Effect:', seconds)
 
   const isTimeUp = () => {
-    while (seconds > 25) {
-      alert('Time Elapsed')
-    }
     toggle()
-    // if (seconds < 1) {
-    //   setQuestionIndex(questionIndex + 1)
-    // }
-    // // setIsActive(true)
-    // if (questionIndex !== 0) {
-    //     resetTimer()
-    //     setIsActive(true)
-    //   } else {
-    //     toggle()
-    //   } 
+    if (seconds === 25) {
+      optionHandler()
+    }
   }
+  // isTimeUp()
   
   useEffect(() => {
     isTimeUp()   
