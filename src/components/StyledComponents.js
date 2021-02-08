@@ -1480,7 +1480,7 @@ export const QuizBox = styled.div`
     }
 
     &:active {
-      transform: translateY(-.5em);
+      /* transform: scale(1.1); */
       outline: none;
       border: 0;
     }

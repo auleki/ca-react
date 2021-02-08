@@ -3,7 +3,7 @@ import { ParentContainer, FButton } from './StyledComponents'
 
 const Experiment = () => { 
   
-  const dateOne = new Date("02/06/2021")
+  const dateOne = new Date("02/07/2021")
   const dateTwo = new Date()
 
   const differenceInTime = dateTwo.getTime() - dateOne.getTime()

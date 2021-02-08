@@ -16,6 +16,7 @@ import RotateLeftIcon from "@material-ui/icons/RotateLeft";
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { CodeSharp } from "@material-ui/icons";
 
 
 const ScoreView = ({ score, restart, user }) => {
@@ -24,7 +25,7 @@ const ScoreView = ({ score, restart, user }) => {
     // save score method  
   }
 
-  console.log("USER DATA:", user)
+  // console.log("USER DATA:", user)
 
   useEffect(() => {
     // saveQuizWinner(user)
@@ -51,7 +52,7 @@ const ScoreView = ({ score, restart, user }) => {
   );
 };
 
-const AddUser = ({ setUser, user, loginOrRegister, setOldUser, setRegister }) => {
+const AddUser = ({ beginQuiz, setUser, user, loginOrRegister, setOldUser, setRegister }) => {
   const [userInput, setUserInput] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -70,6 +71,10 @@ const AddUser = ({ setUser, user, loginOrRegister, setOldUser, setRegister }) =>
     setFirstName(e.target.value);
   };
 
+  // useEffect(() => {
+  //   beginQuiz()
+  // }, [])
+
   const saveUser = (e) => {
     e.preventDefault()
     setLoading(true)
@@ -84,8 +89,9 @@ const AddUser = ({ setUser, user, loginOrRegister, setOldUser, setRegister }) =>
       };
       console.table(quizUser);
       setUser(quizUser)
-      setOldUser(false)
-      setRegister(false)
+      beginQuiz()
+      // setOldUser(false)
+      // setRegister(false)
     } catch (error) {
       
     }
@@ -155,18 +161,22 @@ const AddUser = ({ setUser, user, loginOrRegister, setOldUser, setRegister }) =>
   );
 };
 
-const OldUser = ({ loginOrRegister }) => {
+const OldUser = ({ loginOrRegister, beginQuiz }) => {
   const [email, setEmail] = useState("")
   const [loading, setLoading] = useState(false)
   const onUserInput = (e) => setEmail(e.target.value)
 
   const loginUser = async (e) => {
-    e.preventDefault()
-    setLoading(!loading)
-    const fetchedUser = await fetchUser(email)
-    console.log(fetchedUser)
-    // setRegister(false)
-    // setOldUser(false)
+    try {
+      e.preventDefault()
+      setLoading(true)
+      // const fetchedUser = await fetchUser(email)
+      beginQuiz()
+      // console.log(fetchedUser)
+      setLoading(false)
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   return (
@@ -216,18 +226,18 @@ const Quiz = () => {
   const [limit, setLimit] = useState(10);
   const [attempt, setAttempt] = useState(1);
   const [user, setUser] = useState("");
-  const [timer, setTimer] = useState(30)
   const [oldUser, setOldUser] = useState(false)
-  const [register, setRegister] = useState(false)
-  const [secondsLeft, setSecondsLeft] = useState(0)
+  const [register, setRegister] = useState(true)
   const [isActive, setIsActive] = useState(false)
-  const [seconds, setSeconds] = useState(30)
+  const [seconds, setSeconds] = useState(20)
   const [questionIndex, setQuestionIndex] = useState(0)
   // let timer = 30;
 
   const shuffleQuestions = (arr) => {
-    // this array takes in another array
-    // shuffles it and cuts out the first ten questions
+    /* this array takes in another array
+        shuffles it &       
+        cuts out the first ten questions
+     */
     for (let i = arr.length - 1; i > 0; i--) {
       let rand = Math.floor(Math.random() * (i + 1));
       let temp = arr[i];
@@ -239,9 +249,26 @@ const Quiz = () => {
     return currentQuestions;
   };
 
+  const beginQuiz = () => {
+    setOldUser(false)
+    setRegister(false)
+    // console.log('starting quiz...')
+    let interval;
+    // start timer here 
+    if (isActive) {
+      interval = setInterval(() => {
+        setSeconds(seconds => seconds - 1)
+      }, 1000)
+    } else if (!isActive) {
+      clearInterval(interval)
+    }
+    return () => clearInterval(interval)
+  }
+
 
   useEffect(() => {
     shuffleQuestions(questionList);
+    resetScore()
     // console.table("Current User", user);
     // timerAct()
   }, []);
@@ -256,11 +283,11 @@ const Quiz = () => {
     }
   }
 
-  function toggle () {
+  const toggle = () => {
     setIsActive(!isActive)
   }
   
-  function resetTimer () {
+  const resetTimer = () => {
     setSeconds(30)
     setIsActive(false)
   }
@@ -268,55 +295,54 @@ const Quiz = () => {
   // console.log('Before Effect:', seconds)
 
   const isTimeUp = () => {
-    if (seconds < 1) {
-      setQuestionIndex(questionIndex + 1)
+    while (seconds > 25) {
+      alert('Time Elapsed')
     }
-    // setIsActive(true)
-    console.log('I run')
-
-    if (questionIndex !== 0) {
-        resetTimer()
-        setIsActive(true)
-      } else {
-        toggle()
-      } 
+    toggle()
+    // if (seconds < 1) {
+    //   setQuestionIndex(questionIndex + 1)
+    // }
+    // // setIsActive(true)
+    // if (questionIndex !== 0) {
+    //     resetTimer()
+    //     setIsActive(true)
+    //   } else {
+    //     toggle()
+    //   } 
   }
   
   useEffect(() => {
-    isTimeUp()
+    isTimeUp()   
   }, [])
-  
-  useEffect(() => {
-    let interval = null;
 
-    if (seconds === 25) {
-      setQuestionIndex(questionIndex + 1)
-      console.log('match!')
-    }
+  const canPlay = (date) => {
+    let currentDate = new Date()
+    let lastPlayed = date
+    let differenceInTime = currentDate.getTime() - lastPlayed.getTime() 
+    let differenceInDays = differenceInTime / ( 1000 * 3600 * 24)
+    if (differenceInDays < 1) return false
+    return true 
+  }  
 
-    if (isActive) {
-      interval = setInterval(() => {
-        setSeconds(seconds => seconds - 1);
-      }, 1000);
-    } else if (!isActive) {
-    // } else if (!isActive && seconds !== 0) {
-      clearInterval(interval);
-    }
+  //! Effect for countdown timer
+  // useEffect(() => {
+  //   let interval = null;
 
-    return () => clearInterval(interval)
-  }, [isActive, seconds])
-
-  const optionHandler = (isCorrect) => {
-    // if (questionIndex !== 0) {
-    //   resetTimer()
-    //   setIsActive(true)
-    // } else {
-    //   toggle()
-    // } 
-
-    setQuestionIndex(questionIndex + 1)
+  //   // console.log(canPlay(new Date()))
     
-    // startTimer()
+  //   if (isActive) {
+  //     interval = setInterval(() => {
+  //       setSeconds(seconds => seconds - 1);
+  //     }, 1000);
+  //   } else if (!isActive) {
+  //     clearInterval(interval);
+  //   }
+  //   return () => clearInterval(interval)
+  // }, [isActive, seconds])
+
+  const optionHandler = (isCorrect) => {    
+    setQuestionIndex(questionIndex + 1)
+    setSeconds(30)
     if (isCorrect) setScore(score + 1);
     if (limit > attempt) {
       setCurrentQuestion(currentQuestion + 1);
@@ -346,11 +372,13 @@ const Quiz = () => {
           ? (
             <OldUser
               setRegister={setRegister}
+              beginQuiz={beginQuiz}
               loginOrRegister={loginOrRegister}
               setOldUser={setOldUser}
             />
           ) : register
             ? <AddUser
+              beginQuiz={beginQuiz}
               user={user}
               setUser={setUser}
               setOldUser={setOldUser}
