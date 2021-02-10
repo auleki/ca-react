@@ -57,7 +57,7 @@ const ScoreView = ({ score, restart, user, resetTimer, setIsActive }) => {
   );
 };
 
-const AddUser = ({ transitQuiz, setUser, user, loginOrRegister, setOldUser, setRegister }) => {
+const AddUser = ({ beginQuiz, setUser, user, loginOrRegister, setOldUser, setRegister }) => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -119,7 +119,7 @@ const AddUser = ({ transitQuiz, setUser, user, loginOrRegister, setOldUser, setR
       const savedUser = await saveQuizUser(quizUser)
       console.table("SAVED USER:", savedUser)
       setUser(quizUser)
-      transitQuiz()
+      beginQuiz()
       // setOldUser(false)
       // setRegister(false)
     } catch (error) {
@@ -196,7 +196,7 @@ const AddUser = ({ transitQuiz, setUser, user, loginOrRegister, setOldUser, setR
   );
 };
 
-const OldUser = ({ loginOrRegister, transitQuiz, setUser }) => {
+const OldUser = ({ loginOrRegister, beginQuiz, setUser }) => {
   const [email, setEmail] = useState("")
   const [loading, setLoading] = useState(false)
   const onUserInput = (e) => setEmail(e.target.value)
@@ -206,8 +206,8 @@ const OldUser = ({ loginOrRegister, transitQuiz, setUser }) => {
       e.preventDefault()
       setLoading(true)
       const fetchedUser = await fetchUser(email)
-      // setUser(fetchedUser)
-      transitQuiz()
+      setUser(fetchedUser)
+      beginQuiz()
       setLoading(false)
     } catch (error) {
       console.error(error)
@@ -307,7 +307,6 @@ const Quiz = () => {
     setRegister(false)
   }
 
-
   useEffect(() => {
     shuffleQuestions(questionList);
     resetTimer()
@@ -347,9 +346,9 @@ const Quiz = () => {
     isTimeUp()   
   }, [seconds])
 
-  useEffect(() => {
-    beginQuiz()
-  }, [])
+  // useEffect(() => {
+  //   beginQuiz()
+  // }, [])
 
   // const canPlay = (date) => {
   //   let currentDate = new Date()
@@ -410,7 +409,6 @@ const Quiz = () => {
     )
   }
 
-
   return (
     <QuizPage>
       {showScore ? (
@@ -424,15 +422,17 @@ const Quiz = () => {
       ) : oldUser
           ? (
             <OldUser
-              // setRegister={setRegister}
-              transitQuiz={transitQuiz}
+              setRegister={setRegister}
+              // transitQuiz={transitQuiz}
+              beginQuiz={beginQuiz}
               loginOrRegister={loginOrRegister}
               // setOldUser={setOldUser}
               setUser={setUser}
             />
           ) : register
             ? <AddUser
-              transitQuiz={transitQuiz}
+              // transitQuiz={transitQuiz}
+              beginQuiz={beginQuiz}
               user={user}
               setUser={setUser}
               setOldUser={setOldUser}
