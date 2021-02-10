@@ -23,7 +23,8 @@ export const saveOrder = async (order) => {
 
 export const saveQuizUser = async (user) => {
   try {
-    const res = await axios.post(`${baseUrl}/quiz/start`, user, config)
+    const res = await axios.post(`${baseUrl}/users`, user, config)
+    // const 
     return res.data
   } catch (e) {
     console.error('Could not save quiz user')
@@ -52,9 +53,11 @@ export const fetchUser = async (email) => {
   try {
     // const { data } = await axios.get(`${baseUrl}/${email}`)
     console.log(email)
-    const response = await axios.get(`${localUrl}/user/${email}`)
-    return response
+    const { data } = await axios.get(`${baseUrl}/users/${email}`)
+    return data
   } catch (error) {
     throw new Error('User not found', error)
   }
 }
+
+// export const 

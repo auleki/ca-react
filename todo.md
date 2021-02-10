@@ -7,15 +7,15 @@ checkout form
 
 - - [x] fullname, email, location, address
 
-- - [] pass on the total amount of the order with an option for the user to go back a step
+- - [x] pass on the total amount of the order with an option for the user to go back a step
 
-- - [] checkbox with an option for user to subscribe for newsletter
+- - [x] checkbox with an option for user to subscribe for newsletter
 
-- [] when user completes the forms confirms the order 
+- [x] when user completes the forms confirms the order 
 
 - - [] charge their account with the total amount
 
-- - [] show user a confirmation page with the option to go back to the store. 
+- - [x] show user a confirmation page with the option to go back to the store. 
 
 - - [] add icons to the forms, especially the credit card sections
 
@@ -24,5 +24,7 @@ checkout form
 - - [] add discountCode and ones not added to the db model
 
 ## Confirmation Page 
-- Put up an emoji of confetti busting, congratulate them on placing an order and inform them about a call to confirm their order
+- Put up an emoji of confetti bursting, congratulate them on placing an order and inform them about a call to confirm their order
 
+## Quiz Page 
+[ ] Save scores on all quiz -> Transfer winner into the winner collection 

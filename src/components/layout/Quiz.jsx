@@ -12,25 +12,29 @@ import {
   AuthPage,
   FButton,
 } from "../StyledComponents";
-import { addSubscriber, saveQuizWinner, fetchUser } from "../../services/operations";
+import { addSubscriber, saveQuizWinner, fetchUser, saveOrder, saveQuizUser } from "../../services/operations";
 import RotateLeftIcon from "@material-ui/icons/RotateLeft";
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { CodeSharp } from "@material-ui/icons";
+// import { CodeSharp } from "@material-ui/icons";
 
 
-const ScoreView = ({ score, restart, user }) => {
+const ScoreView = ({ score, restart, user, resetTimer, setIsActive }) => {
 
   const saveScore = () => {
     // save score method  
+    console.table("USER ON SCORE PAGE", user)
   }
 
   // console.log("USER DATA:", user)
 
   useEffect(() => {
     // saveQuizWinner(user)
-    // saveScore()
+    console.log('Score Page Loaded')
+    saveScore()
+    setIsActive(true)
+    resetTimer()
   }, [])
   
   
@@ -53,16 +57,21 @@ const ScoreView = ({ score, restart, user }) => {
   );
 };
 
-const AddUser = ({ beginQuiz, setUser, user, loginOrRegister, setOldUser, setRegister }) => {
-  const [userInput, setUserInput] = useState("");
+const AddUser = ({ transitQuiz, setUser, user, loginOrRegister, setOldUser, setRegister }) => {
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [joinMailingList, setJoinMailingList] = useState(true);
   const [loading, setLoading] = useState(false);
 
-  const onUserInput = (e) => {
-    setUserInput(e.target.value);
+  const onEmailInput = (e) => {
+    setEmail(e.target.value);
   };
+  
+  const onUsernameInput = (e) => {
+    setUsername(e.target.value)
+  }
 
   const onLastName = (e) => {
     setLastName(e.target.value);
@@ -76,28 +85,46 @@ const AddUser = ({ beginQuiz, setUser, user, loginOrRegister, setOldUser, setReg
   //   beginQuiz()
   // }, [])
 
-  const saveUser = (e) => {
+  useEffect(() => {
+    // console.log(ISODate())
+  }, [])
+
+  const saveUser = async (e) => {
     e.preventDefault()
     setLoading(true)
     try {
-      console.log(`User of email: ${userInput} saved 🎉`);
+      console.log(`User of email: ${email} saved 🎉`);
       const quizUser = {
-        firstName: firstName,
-        lastName: lastName,
-        email: userInput,
+        firstName,
+        lastName,
+        username,
+        email,
         toSubscribe: joinMailingList,
         scores: [],
       };
+
+      if (quizUser.toSubscribe) {
+
+        console.log("Saving" + quizUser.email + " to subscriber's list")
+      }
+
+      //! Check if email exists
+      // const emailExists = await fetchUser(email)
+      // console.log("Value of emailExists:", emailExists)
+      // if (emailExists) {
+      //   throw new Error("Email already exists, try a new one")
+      // }
+
       console.table(quizUser);
+      const savedUser = await saveQuizUser(quizUser)
+      console.table("SAVED USER:", savedUser)
       setUser(quizUser)
-      beginQuiz()
+      transitQuiz()
       // setOldUser(false)
       // setRegister(false)
     } catch (error) {
-      
+      console.log(error)
     }
-    // console.table(quizUser);
-    // setUser(quizUser);
   };
 
   const handleMailingList = (e) => setJoinMailingList(!joinMailingList)
@@ -129,9 +156,16 @@ const AddUser = ({ beginQuiz, setUser, user, loginOrRegister, setOldUser, setReg
           />
           <Input
             type="text"
+            placeholder="Username"
+            onChange={onUsernameInput}
+            value={username}
+            required
+          />
+          <Input
+            type="text"
             placeholder="@"
-            onChange={onUserInput}
-            value={userInput}
+            onChange={onEmailInput}
+            value={email}
             required
           />
           <div className="quiz_actions">
@@ -162,7 +196,7 @@ const AddUser = ({ beginQuiz, setUser, user, loginOrRegister, setOldUser, setReg
   );
 };
 
-const OldUser = ({ loginOrRegister, beginQuiz }) => {
+const OldUser = ({ loginOrRegister, transitQuiz, setUser }) => {
   const [email, setEmail] = useState("")
   const [loading, setLoading] = useState(false)
   const onUserInput = (e) => setEmail(e.target.value)
@@ -171,9 +205,9 @@ const OldUser = ({ loginOrRegister, beginQuiz }) => {
     try {
       e.preventDefault()
       setLoading(true)
-      // const fetchedUser = await fetchUser(email)
-      beginQuiz()
-      // console.log(fetchedUser)
+      const fetchedUser = await fetchUser(email)
+      // setUser(fetchedUser)
+      transitQuiz()
       setLoading(false)
     } catch (error) {
       console.error(error)
@@ -189,6 +223,7 @@ const OldUser = ({ loginOrRegister, beginQuiz }) => {
           <h2 className="light">
             Welcome back, start the quiz with your email
         </h2>
+          {/* padding added in css !styled-comp */}
           <div className="mobile_raise">
             <Input
               autoFocus
@@ -196,6 +231,7 @@ const OldUser = ({ loginOrRegister, beginQuiz }) => {
               placeholder="@"
               onChange={onUserInput}
               value={email}
+              required
             />
             <div className="quiz_actions">
               <a
@@ -266,12 +302,15 @@ const Quiz = () => {
     return () => clearInterval(interval)
   }
 
+  const transitQuiz = () => {
+    setOldUser(false)
+    setRegister(false)
+  }
+
 
   useEffect(() => {
     shuffleQuestions(questionList);
-    resetScore()
-    // console.table("Current User", user);
-    // timerAct()
+    resetTimer()
   }, []);
 
   const loginOrRegister = (mode) => {
@@ -285,10 +324,12 @@ const Quiz = () => {
   }
 
   const toggle = () => {
+    console.log('Back to timer')
     setIsActive(!isActive)
   }
   
   const resetTimer = () => {
+    console.log('resetting timer...')
     setSeconds(30)
     setIsActive(false)
   }
@@ -297,25 +338,29 @@ const Quiz = () => {
 
   const isTimeUp = () => {
     toggle()
-    if (seconds === 25) {
+    if (seconds === -1) {
       optionHandler()
     }
   }
-  // isTimeUp()
   
   useEffect(() => {
     isTimeUp()   
+  }, [seconds])
+
+  useEffect(() => {
+    beginQuiz()
   }, [])
 
-  const canPlay = (date) => {
-    let currentDate = new Date()
-    let lastPlayed = date
-    let differenceInTime = currentDate.getTime() - lastPlayed.getTime() 
-    let differenceInDays = differenceInTime / ( 1000 * 3600 * 24)
-    if (differenceInDays < 1) return false
-    return true 
-  }  
+  // const canPlay = (date) => {
+  //   let currentDate = new Date()
+  //   let lastPlayed = date
+  //   let differenceInTime = currentDate.getTime() - lastPlayed.getTime() 
+  //   let differenceInDays = differenceInTime / ( 1000 * 3600 * 24)
+  //   if (differenceInDays < 1) return false
+  //   return true 
+  // }  
 
+  
   //! Effect for countdown timer
   // useEffect(() => {
   //   let interval = null;
@@ -352,25 +397,42 @@ const Quiz = () => {
     shuffleQuestions(questionList); 
   };
 
+  let canPlay = true
+
+  if (!canPlay) {
+    return (
+      <AuthPage>
+        <div>
+          <h2>Too Soon</h2>
+          <p>You need to rest for a few more hours before coming</p>
+        </div>
+      </AuthPage>
+    )
+  }
+
+
   return (
     <QuizPage>
       {showScore ? (
         <ScoreView
+          resetTimer={resetTimer}
           user={user}
           score={score}
+          setIsActive={setIsActive}
           restart={resetScore}
         />
       ) : oldUser
           ? (
             <OldUser
-              setRegister={setRegister}
-              beginQuiz={beginQuiz}
+              // setRegister={setRegister}
+              transitQuiz={transitQuiz}
               loginOrRegister={loginOrRegister}
-              setOldUser={setOldUser}
+              // setOldUser={setOldUser}
+              setUser={setUser}
             />
           ) : register
             ? <AddUser
-              beginQuiz={beginQuiz}
+              transitQuiz={transitQuiz}
               user={user}
               setUser={setUser}
               setOldUser={setOldUser}
