@@ -60,4 +60,12 @@ export const fetchUser = async (email) => {
   }
 }
 
-// export const 
+export const saveUserScore = async (score, username) => {
+  try {
+    console.log("SCORE IN OPS:", score)
+    const { data } = await axios.patch(`${localUrl}/users/${username}`, { scores: score }, config)
+    return data   
+  } catch (error) {
+    console.error(error)
+  }
+}
