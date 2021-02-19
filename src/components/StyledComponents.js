@@ -517,7 +517,6 @@ export const FButton = styled.button`
           ${'' /* background-color: #333; */}
           /* background-color: #fff; */
           background-color: #43a047;
-
           color: #fff;
           // use the shadow to add a pulse animation.
           /* box-shadow: 0 0 .5rem .4rem rgba(0, 0, 0, .3); */
@@ -528,9 +527,6 @@ export const FButton = styled.button`
   span {
     margin: 0 .5em;
   }
-
-  
-
 `
 
 export const Button = ({ primary, children, bgColor }) => {

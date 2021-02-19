@@ -7,16 +7,16 @@ import {
 	questionList,
 	Input,
 	// QuizInput,
-	AuthForm,
-	ParentContainer,
+	// AuthForm,
+	// ParentContainer,
 	AuthPage,
 	FButton
 } from '../StyledComponents';
 import {
-	addSubscriber,
-	saveQuizWinner,
+	// addSubscriber,
+	// saveQuizWinner,
 	fetchUser,
-	saveOrder,
+	// saveOrder,
 	saveUserScore,
 	saveQuizUser
 } from '../../services/operations';
