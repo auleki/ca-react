@@ -23,6 +23,7 @@ export const saveOrder = async (order) => {
 
 export const saveQuizUser = async (user) => {
   try {
+    console.log('You are a champ')
     const res = await axios.post(`${baseUrl}/users`, user, config)
     // const 
     return res.data
@@ -42,7 +43,7 @@ export const addSubcriber = async (subscriber) => {
 
 export const saveQuizWinner = async (winner) => {
   try {
-    const savedWinner = await axios.post(`${baseUrl}/winners`, winner, config)
+    const savedWinner = await axios.post(`${localUrl}/quiz/winner`, winner, config)
     return savedWinner.data
   } catch (error) {
     throw new Error('Winner not saved', error)
@@ -60,12 +61,13 @@ export const fetchUser = async (email) => {
   }
 }
 
-export const saveUserScore = async (score, username) => {
+export const updateUser = async (updateData, username) => {
   try {
-    console.log("SCORE IN OPS:", score)
-    const { data } = await axios.patch(`${localUrl}/users/${username}`, { scores: score }, config)
+    // console.log("SCORE IN OPS:", score)
+    const { data } = await axios.patch(`${localUrl}/users/${username}`, updateData, config)
     return data   
   } catch (error) {
     console.error(error)
   }
 }
+

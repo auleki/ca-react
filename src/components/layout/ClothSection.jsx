@@ -9,7 +9,7 @@ const ClothSection = ({ clothes: { products, title } }) => {
 
   const settings = {
     dots: true,
-    arrows: false,
+    arrows: true,
     lazyLoad: true,
     infinite: true,
     speed: 300,

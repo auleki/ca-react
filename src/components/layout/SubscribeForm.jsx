@@ -10,9 +10,11 @@ const SubscribeSuccess = () => {
     <div className="newsletter wow fadeInRightBig">
       <div className="success-message">
         <h3 className="light">
-          You have successfully subscribed to your mailing list
+          Thanks for trusting us
         </h3>
-        <p>Thanks for trusting us</p>
+        <p className="light">
+          You have successfully subscribed to our mailing list
+        </p>
       </div>
     </div>
   )
@@ -32,11 +34,15 @@ const SubscribeForm = ({ setSubscribed, subscribed }) => {
 
   return (
     <div className="newsletter wow fadeInRightBig">
-      <h3 className="light">Subscribe to get on our mailing list</h3>
+      <div className="subscribe_title">
+        <h3 className="light">Subscribe to our mailing list</h3>
+      </div>
       <div className="subscribe">
         <form id="subscribeForm" onSubmit={saveSubscriber}>
           <div className="form_group">
-            <span className="placeholder"><MailIcon /></span>
+            <span className="placeholder">
+              <MailIcon />
+            </span>
             <input
               type="email"
               value={email}
@@ -56,7 +62,7 @@ const SubscribeForm = ({ setSubscribed, subscribed }) => {
 }
 
 const SubscribeView = () => {
-  const [subscribed, setSubscribed] = useState(true)
+  const [subscribed, setSubscribed] = useState(false)
   return (
     <>
       {subscribed

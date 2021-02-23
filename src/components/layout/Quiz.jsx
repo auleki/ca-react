@@ -14,57 +14,72 @@ import {
 } from '../StyledComponents';
 import {
 	// addSubscriber,
-	// saveQuizWinner,
+	saveQuizWinner,
 	fetchUser,
 	// saveOrder,
-	saveUserScore,
+	updateUser,
 	saveQuizUser
 } from '../../services/operations';
-import RotateLeftIcon from '@material-ui/icons/RotateLeft';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import HelpIcon from '@material-ui/icons/Help';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 // import { CodeSharp } from "@material-ui/icons";
 
 const ScoreView = ({ score, restart, user, resetTimer, setIsActive }) => {
-
-	const saveScore = async () => {
-	  // save score method by sending username & data
-	  // const scoreObject = { score }
-	  console.table(`User is being updated with ${score}...`)
-	  const response = await saveUserScore(score, user.username)
-	  console.table("Response", response)
-	}
-	// console.log("USER DATA:", user)
-	useEffect(() => {
-		// saveQuizWinner(user)
-		console.log('Score Page Loaded');
 	
-    saveScore()
-
-		setIsActive(false)
+	useEffect(() => {
 		
-		resetTimer();
+		console.log('Loaded User: ', user);
+
+    const saveScore = async () =>{
+			if (score === 10) {
+				const winnerResponse = await saveQuizWinner(user)
+				console.log(`${user.username} is a champion!`, winnerResponse)
+			}	
+			// console.table(`User is being updated with ${score}...`)
+			const scoreData = {
+				updateData: { scores: score },
+				action: "UPDATE_SCORE",
+			}
+			const response = await updateUser(scoreData, user.username)
+			console.table("Response", response)
+		}
+
+		saveScore()
+
+		// setIsActive(false)
+		
+		// resetTimer();
 	}, []);
 
 	return (
 		<QuizBox>
 			<div className="score-title">
-				<p>{user.firstName}</p>
-				<FButton onClick={restart}>
-					<RotateLeftIcon />
-				</FButton>
+				{/* <Link to="/"> */}
+				<FButton className="rotate-180"> 
+				<HelpIcon/>
+				</FButton> 
+				{/* </Link> */}
+				<p>{user.firstName || "Guest"}</p>
 			</div>
 			<div className="score-display">
 				<h2>Score</h2>
 				<h3>{score || 9}</h3>
 				<Link to="/">
-					<FButton primary>Back to shop</FButton>
+					<FButton>
+						 <span className="span_icon rotate-180"><ExitToAppIcon/></span>  <span className="span_text">EXIT QUIZ</span>
+					</FButton>
 				</Link>
 			</div>
 		</QuizBox>
 	);
 };
+
+/* 
+SIGN UP PAGE 
+*/
 
 const AddUser = ({ beginQuiz, setUser, user, loginOrRegister, setOldUser, setRegister }) => {
 	const [ email, setEmail ] = useState('');
@@ -72,7 +87,7 @@ const AddUser = ({ beginQuiz, setUser, user, loginOrRegister, setOldUser, setReg
 	const [ firstName, setFirstName ] = useState('');
 	const [ lastName, setLastName ] = useState('');
 	const [ joinMailingList, setJoinMailingList ] = useState(true);
-	const [ loading, setLoading ] = useState(false);
+	const [ loading, setLoading ] =  useState(false);
 
 	const onEmailInput = (e) => {
 		setEmail(e.target.value);
@@ -89,14 +104,6 @@ const AddUser = ({ beginQuiz, setUser, user, loginOrRegister, setOldUser, setReg
 	const onFirstName = (e) => {
 		setFirstName(e.target.value);
 	};
-
-	// useEffect(() => {
-	//   beginQuiz()
-	// }, [])
-
-	useEffect(() => {
-		// console.log(ISODate())
-	}, []);
 
 	const saveUser = async (e) => {
 		e.preventDefault();
@@ -155,9 +162,24 @@ const AddUser = ({ beginQuiz, setUser, user, loginOrRegister, setOldUser, setReg
 						value={firstName}
 						required
 					/>
-					<Input type="text" placeholder="Last Name" onChange={onLastName} value={lastName} required />
-					<Input type="text" placeholder="Username" onChange={onUsernameInput} value={username} required />
-					<Input type="text" placeholder="@" onChange={onEmailInput} value={email} required />
+					<Input 
+						type="text" 
+						placeholder="Last Name" 
+						onChange={onLastName} 
+						value={lastName} 
+						required />
+					<Input 
+						type="text" 
+						placeholder="Username" 
+						onChange={onUsernameInput} 
+						value={username} 
+						required />
+					<Input 
+						type="text" 
+						placeholder="@" 
+						onChange={onEmailInput} 
+						value={email} 
+						required />
 					<div className="quiz_actions">
 						<FormControlLabel
 							control={
@@ -165,9 +187,9 @@ const AddUser = ({ beginQuiz, setUser, user, loginOrRegister, setOldUser, setReg
 							}
 							label="Join Our Mailing List"
 						/>
-						<a className="link" onClick={() => loginOrRegister('login')}>
+						<Link className="link" onClick={() => loginOrRegister('login')}>
 							You played before? Login
-						</a>
+						</Link>
 					</div>
 
 					<FButton primary type="submit">
@@ -183,7 +205,18 @@ const AddUser = ({ beginQuiz, setUser, user, loginOrRegister, setOldUser, setReg
 	);
 };
 
-const OldUser = ({ loginOrRegister, setUser, setOldUser, setRegister, user, setCanPlay, canPlay }) => {
+/* 
+LOGIN PAGE 
+*/
+const OldUser = ({ 
+	loginOrRegister, 
+	setUser, 
+	setOldUser, 
+	setRegister, 
+	user, 
+	setCanPlay, 
+	canPlay 
+	}) => {
 	const [ email, setEmail ] = useState('');
 	const [ loading, setLoading ] = useState(false);
 	const onUserInput = (e) => setEmail(e.target.value);
@@ -210,15 +243,31 @@ const OldUser = ({ loginOrRegister, setUser, setOldUser, setRegister, user, setC
 			e.preventDefault();
 			setLoading(true);
 			const fetchedUser = await fetchUser(email);
+			console.log("FETCHED USER:", fetchedUser)
 			setUser(fetchedUser);
-      setOldUser(false);
-      setRegister(false);
 			const userCanPlay = findDayDifference(fetchedUser.lastPlayed);
-      // console.log("Can User Play", userCanPlay)
-      userCanPlay ? setCanPlay(true) : setCanPlay(false)
+      // ? update lastPlayed
+				setOldUser(false)
+				setRegister(false)
+			if (userCanPlay) {
+				setCanPlay(true);
+				const lastPlayedUpdate = {
+					updateData: { lastPlayed: new Date() },
+					action: "UPDATE_LASTPLAYED",
+				}
+				const lastPlayedResponse =  await updateUser(lastPlayedUpdate, fetchedUser.username)
+				console.log("LAST PLAYED RESPONSE", lastPlayedResponse)
+				setOldUser(false)
+				setRegister(false)
+			} else {
+				setCanPlay(false)
+			}
+			
+      // userCanPlay ? setCanPlay(true) : setCanPlay(false)
+      //! CAUSED A MEMORY LEAK
 			// setLoading(false);
 		} catch (error) {
-			console.error(error);
+			console.error(error)
 		}
 	};
 
@@ -233,9 +282,9 @@ const OldUser = ({ loginOrRegister, setUser, setOldUser, setRegister, user, setC
 					<div className="mobile_raise">
 						<Input autoFocus type="text" placeholder="@" onChange={onUserInput} value={email} required />
 						<div className="quiz_actions">
-							<a className="link" onClick={() => loginOrRegister('register')}>
+							<Link className="link" onClick={() => loginOrRegister('register')}>
 								First time playing? Register
-							</a>
+							</Link>
 						</div>
 						<FButton primary>
 							{loading ? <CircularProgress size={23} color="inherit" /> : 'Start Quiz'}
@@ -251,7 +300,7 @@ const OldUser = ({ loginOrRegister, setUser, setOldUser, setRegister, user, setC
 
 const Quiz = () => {
 	const [ questions, setQuestions ] = useState(questionList);
-	const [ questionsSet, setQuestionsSet ] = useState([]);
+	// const [ questionsSet, setQuestionsSet ] = useState([]);
 	// const randomNumber = Math.floor(Math.random() * questions.length)
 	const [ score, setScore ] = useState(0);
 	const [ currentQuestion, setCurrentQuestion ] = useState(1);
@@ -336,14 +385,17 @@ const Quiz = () => {
 
 	// console.log('Before Effect:', seconds)
 
-	const isTimeUp = () => {
-		toggle();
-		if (seconds === -1) {
-			optionHandler();
-		}
-	};
-
-	useEffect(() => isTimeUp(),	[ seconds ]);
+  
+	useEffect(() => {
+    const isTimeUp = () => {
+      toggle();
+      if (seconds === -1) {
+        optionHandler();
+      }
+    }
+    isTimeUp()
+    
+  },	[]);
 	// console.log("Function for Last Played")
 	// canPlay(user.lastPlayed)
 

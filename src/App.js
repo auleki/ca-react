@@ -1,12 +1,9 @@
-import React from 'react';
 
+import React from 'react';
 import './App.scss';
 import 'react-toastify/dist/ReactToastify.css';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
-// import CarouselElastic from './components/layout/CarouselElastic'
-// import { ClothSection } from './components/layout'
 import {
   ShoppingCart,
   // Header, 
