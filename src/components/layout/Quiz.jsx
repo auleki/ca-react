@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
 import {
 	QuizPage,
 	QuizBox,
@@ -9,6 +10,8 @@ import {
 	// QuizInput,
 	// AuthForm,
 	// ParentContainer,
+	SubTitle,
+	Title,
 	AuthPage,
 	FButton
 } from '../StyledComponents';
@@ -28,29 +31,27 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 // import { CodeSharp } from "@material-ui/icons";
 
 const ScoreView = ({ score, restart, user, resetTimer, setIsActive }) => {
-	
 	useEffect(() => {
-		
 		console.log('Loaded User: ', user);
 
-    const saveScore = async () =>{
+		const saveScore = async () => {
 			if (score === 10) {
-				const winnerResponse = await saveQuizWinner(user)
-				console.log(`${user.username} is a champion!`, winnerResponse)
-			}	
+				const winnerResponse = await saveQuizWinner(user);
+				console.log(`${user.username} is a champion!`, winnerResponse);
+			}
 			// console.table(`User is being updated with ${score}...`)
 			const scoreData = {
 				updateData: { scores: score },
-				action: "UPDATE_SCORE",
-			}
-			const response = await updateUser(scoreData, user.username)
-			console.table("Response", response)
-		}
+				action: 'UPDATE_SCORE'
+			};
+			const response = await updateUser(scoreData, user.username);
+			console.table('Response', response);
+		};
 
-		saveScore()
+		saveScore();
 
 		// setIsActive(false)
-		
+
 		// resetTimer();
 	}, []);
 
@@ -58,18 +59,23 @@ const ScoreView = ({ score, restart, user, resetTimer, setIsActive }) => {
 		<QuizBox>
 			<div className="score-title">
 				{/* <Link to="/"> */}
-				<FButton className="rotate-180"> 
-				<HelpIcon/>
-				</FButton> 
+				<FButton className="rotate-180">
+					<HelpIcon />
+				</FButton>
 				{/* </Link> */}
-				<p>{user.firstName || "Guest"}</p>
+				<p>
+					{user.firstName || 'Guest'} {user.lastName}{' '}
+				</p>
 			</div>
 			<div className="score-display">
 				<h2>Score</h2>
 				<h3>{score || 9}</h3>
 				<Link to="/">
 					<FButton>
-						 <span className="span_icon rotate-180"><ExitToAppIcon/></span>  <span className="span_text">EXIT QUIZ</span>
+						<span className="span_icon rotate-180">
+							<ExitToAppIcon />
+						</span>{' '}
+						<span className="span_text">EXIT QUIZ</span>
 					</FButton>
 				</Link>
 			</div>
@@ -87,7 +93,11 @@ const AddUser = ({ beginQuiz, setUser, user, loginOrRegister, setOldUser, setReg
 	const [ firstName, setFirstName ] = useState('');
 	const [ lastName, setLastName ] = useState('');
 	const [ joinMailingList, setJoinMailingList ] = useState(true);
-	const [ loading, setLoading ] =  useState(false);
+	const [ loading, setLoading ] = useState(false);
+
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, []);
 
 	const onEmailInput = (e) => {
 		setEmail(e.target.value);
@@ -134,8 +144,8 @@ const AddUser = ({ beginQuiz, setUser, user, loginOrRegister, setOldUser, setReg
 			const savedUser = await saveQuizUser(quizUser);
 			console.table('SAVED USER:', savedUser);
 			setUser(quizUser);
-      setOldUser(false);
-      setRegister(false);
+			setOldUser(false);
+			setRegister(false);
 			// beginQuiz();
 			// setOldUser(false)
 			// setRegister(false)
@@ -151,8 +161,14 @@ const AddUser = ({ beginQuiz, setUser, user, loginOrRegister, setOldUser, setReg
 		//   <QuizBox>
 		<AuthPage>
 			<div className="start-game register">
-				<h2 className="light">We need to know you, fill the form to start the quiz</h2>
-
+				<div className="form_header">
+					<SubTitle size={2} bold>
+						We need to know you,
+					</SubTitle>
+					<SubTitle fontColor="#999999">
+						Fill the form to start the quiz
+					</SubTitle>
+				</div>
 				<form onSubmit={saveUser}>
 					<Input
 						autoFocus
@@ -162,24 +178,9 @@ const AddUser = ({ beginQuiz, setUser, user, loginOrRegister, setOldUser, setReg
 						value={firstName}
 						required
 					/>
-					<Input 
-						type="text" 
-						placeholder="Last Name" 
-						onChange={onLastName} 
-						value={lastName} 
-						required />
-					<Input 
-						type="text" 
-						placeholder="Username" 
-						onChange={onUsernameInput} 
-						value={username} 
-						required />
-					<Input 
-						type="text" 
-						placeholder="@" 
-						onChange={onEmailInput} 
-						value={email} 
-						required />
+					<Input type="text" placeholder="Last Name" onChange={onLastName} value={lastName} required />
+					<Input type="text" placeholder="Username" onChange={onUsernameInput} value={username} required />
+					<Input type="text" placeholder="@" onChange={onEmailInput} value={email} required />
 					<div className="quiz_actions">
 						<FormControlLabel
 							control={
@@ -208,26 +209,33 @@ const AddUser = ({ beginQuiz, setUser, user, loginOrRegister, setOldUser, setReg
 /* 
 LOGIN PAGE 
 */
-const OldUser = ({ 
-	loginOrRegister, 
-	setUser, 
-	setOldUser, 
-	setRegister, 
-	user, 
-	setCanPlay, 
-	canPlay 
-	}) => {
+const OldUser = ({ loginOrRegister, setUser, setOldUser, setRegister, user, setCanPlay, canPlay }) => {
 	const [ email, setEmail ] = useState('');
 	const [ loading, setLoading ] = useState(false);
 	const onUserInput = (e) => setEmail(e.target.value);
 
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, []);
+
+	const errorAlert = (msg, type) => {
+		switch (type) {
+			case 'info':
+				return toast.info(msg);
+			case 'error':
+				return toast.error(msg);
+			default:
+				return toast.done(msg);
+		}
+	};
+
 	const findDayDifference = (date) => {
 		let currentDate = new Date();
-    console.log("Current Date: ", typeof(currentDate.getTime()), currentDate)
+		console.log('Current Date: ', typeof currentDate.getTime(), currentDate);
 		// let lastPlayed = Number(date);
 		// let lastPlayed = Number(date);
-		let lastPlayed = new Date(date);
-    console.log("Last Date: ", typeof(lastPlayed), lastPlayed)
+		let lastPlayed = new Date();
+		console.log('Last Date: ', typeof lastPlayed, lastPlayed);
 		let differenceInTime = currentDate.getTime() - lastPlayed;
 		let differenceInDays = differenceInTime / (1000 * 3600 * 24);
 		console.log('DAY DIFFERENCE: ', differenceInDays);
@@ -238,46 +246,60 @@ const OldUser = ({
 	};
 
 	const loginUser = async (e) => {
-    console.log('Tapping Login')
+		console.log('Tapping Login');
 		try {
 			e.preventDefault();
 			setLoading(true);
 			const fetchedUser = await fetchUser(email);
-			console.log("FETCHED USER:", fetchedUser)
+			console.log('FETCHED USER:', fetchedUser);
 			setUser(fetchedUser);
 			const userCanPlay = findDayDifference(fetchedUser.lastPlayed);
-      // ? update lastPlayed
-				setOldUser(false)
-				setRegister(false)
+			// ? update lastPlayed
+			// setOldUser(false)
+			// setRegister(false)
 			if (userCanPlay) {
 				setCanPlay(true);
 				const lastPlayedUpdate = {
 					updateData: { lastPlayed: new Date() },
-					action: "UPDATE_LASTPLAYED",
-				}
-				const lastPlayedResponse =  await updateUser(lastPlayedUpdate, fetchedUser.username)
-				console.log("LAST PLAYED RESPONSE", lastPlayedResponse)
-				setOldUser(false)
-				setRegister(false)
+					action: 'UPDATE_LASTPLAYED'
+				};
+
+				const lastPlayedResponse = await updateUser(lastPlayedUpdate, fetchedUser.username);
+				console.log('LAST PLAYED RESPONSE', lastPlayedResponse);
+				setOldUser(false);
+				setRegister(false);
 			} else {
-				setCanPlay(false)
+				setCanPlay(false);
 			}
-			
-      // userCanPlay ? setCanPlay(true) : setCanPlay(false)
-      //! CAUSED A MEMORY LEAK
+
+			// userCanPlay ? setCanPlay(true) : setCanPlay(false)
+			//! CAUSED A MEMORY LEAK
 			// setLoading(false);
 		} catch (error) {
-			console.error(error)
+			// console.error("Source_one:", error)
+			errorAlert(`${email} is not registered with us`, 'error');
+			setLoading(false);
 		}
 	};
+
+	// const toastOptions = {
+	// 	position:
+	// }
 
 	return (
 		// <QuizPage>
 		//   <QuizBox>
 		<AuthPage>
 			<div className="start-game login">
+				<ToastContainer position="bottom-center" />
 				<form onSubmit={loginUser}>
-					<h2 className="light">Welcome back, start the quiz with your email</h2>
+					<div className="form_header">
+						<SubTitle size={2} >
+							Welcome back,
+						</SubTitle>
+						<SubTitle fontColor="#999999">Enter your username to start the quiz</SubTitle>
+					</div>
+
 					{/* padding added in css !styled-comp */}
 					<div className="mobile_raise">
 						<Input autoFocus type="text" placeholder="@" onChange={onUserInput} value={email} required />
@@ -348,9 +370,9 @@ const Quiz = () => {
 		return () => clearInterval(interval);
 	};
 
-  useEffect(() => {
-    beginQuiz()
-  }, [])
+	useEffect(() => {
+		beginQuiz();
+	}, []);
 
 	// const transitQuiz = () => {
 	// 	setOldUser(false);
@@ -385,17 +407,15 @@ const Quiz = () => {
 
 	// console.log('Before Effect:', seconds)
 
-  
 	useEffect(() => {
-    const isTimeUp = () => {
-      toggle();
-      if (seconds === -1) {
-        optionHandler();
-      }
-    }
-    isTimeUp()
-    
-  },	[]);
+		const isTimeUp = () => {
+			toggle();
+			if (seconds === -1) {
+				optionHandler();
+			}
+		};
+		isTimeUp();
+	}, []);
 	// console.log("Function for Last Played")
 	// canPlay(user.lastPlayed)
 
@@ -444,12 +464,33 @@ const Quiz = () => {
 
 	if (!canPlay) {
 		return (
-			<AuthPage>
-				<div>
-					<h2>Too Soon</h2>
-					<p>You need to rest for a few more hours before coming</p>
+			<QuizPage>
+			<QuizBox>
+				<div className="score-title">
+					{/* <Link to="/"> */}
+					<FButton className="rotate-180">
+						<HelpIcon />
+					</FButton>
+					{/* </Link> */}
+					<p>
+						{user.firstName || 'Guest'} {user.lastName}{' '}
+					</p>
 				</div>
-			</AuthPage>
+				<div className="score-display">
+					<SubTitle size={1.5}>You get 1 try in 24 hours</SubTitle>
+					<SubTitle bold={600}>Come back soon</SubTitle>
+					{/* <h3>{score || 9}</h3> */}
+					<Link to="/">
+						<FButton>
+							<span className="span_icon rotate-180">
+								<ExitToAppIcon />
+							</span>{' '}
+							<span className="span_text">EXIT QUIZ</span>
+						</FButton>
+					</Link>
+				</div>
+			</QuizBox>
+			</QuizPage>
 		);
 	}
 

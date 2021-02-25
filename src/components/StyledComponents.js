@@ -414,12 +414,36 @@ export const Title = styled.h1`
 	color: #fff;
 	padding: 0;
 	font-size: 2.2rem;
+	font-weight: 100;
+	text-align: left;
+
+	${({ size }) => 
+		size && css `
+			font-size: ${size}em;
+		`}
 `;
 
 export const SubTitle = styled.h2`
-	color: #ddd;
+	color: #fff;
 	font-size: 1.1rem;
+	font-weight: 200;
+	margin: .2em 0;
 	/* margin-top: 1rem; */
+
+	${({ fontColor }) => 
+		fontColor && css`
+			color: ${fontColor};
+		`}
+
+	${({ bold }) => 
+		bold && css `
+			font-weight: ${bold} ;
+		`}
+
+	${({ size }) => 
+		size && css `
+			font-size: ${size}em;
+		`}
 
 	${({ uppercase }) => uppercase && css`text-transform: uppercase;`} .order_number {
 		background-color: #f36bee;
@@ -1419,8 +1443,10 @@ export const QuizBox = styled.div`
 	.score-display {
 		display: flex;
 		line-height: 55px;
-		padding-top: 3em;
+		padding: 3em 0;
+		/* background: #1a1a1a; */
 		align-items: center;
+		/* border: 3px solid #F36B2B; */
 		// add black color to background
 		flex-direction: column;
 		height: 100%;
