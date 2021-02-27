@@ -33,7 +33,7 @@ const EmptyCart = () => (
     </div>
     <SubTitle>Empty Cart</SubTitle>
     <Link to="/">
-      <FButton>
+      <FButton primary>
       <ArrowBackIcon /> <span>Go Shopping</span> 
       </FButton>
     </Link>

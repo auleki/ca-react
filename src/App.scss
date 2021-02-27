@@ -4,6 +4,7 @@
 
 html {
     scroll-behavior: smooth;
+    background: transparent;
 }
 
 * {
@@ -81,6 +82,16 @@ button {
     }
 }
 
+// .mobile-menu {
+//     display: none;
+// }
+
+.cart-icon {
+    background: #d61d1d;
+    // padding: 3em;
+}
+
+
 nav {
     padding: 1rem;
     display: flex;
@@ -96,6 +107,22 @@ nav {
     left: 0;
     width: 100%;
     z-index: 1000;
+
+    .nav-links {
+        display: flex;
+        align-items: center;
+    }
+    
+    .nav-link {
+        color: #fff;
+        transition: 200ms ease-in;
+        margin: 0 1em;   
+        
+        &:hover {
+            color: $c1;
+        }
+    }
+    
 
     .hamburger {
         position: absolute;
@@ -142,7 +169,6 @@ nav {
             width: 2.5rem;
         }
     }
-
 
     .navbar {
         display: flex;
@@ -278,6 +304,12 @@ nav {
                 transform-origin: top center;
             }
         }
+    }
+}
+
+@media (min-width: 320px) and (max-width: 720px) {
+    .mobile-menu {
+        display: block;
     }
 }
 
@@ -918,7 +950,18 @@ footer {
     }
 }
 
+
+
 @media (max-width: 600px) {
+
+    .cart-icon {
+        position: fixed;
+        padding: .5em;
+        border-radius: 5px;
+        background: rgb(37, 37, 37);
+        right: 5%;
+        top: 85%;
+    }
 
     .cloth-section {
         padding: 0 1em;
@@ -1103,16 +1146,19 @@ footer {
     // height: 100%;
 }
 
-.side-links {
-    display: flex;
-}
+// .side-links {
+//     display: flex;
+//     align-items: center;
+//     justify-content: space-between;
+//     // background: #fff;
+// }
 
-@media (max-width: 365px) {
-    .side-links {
-        display: flex;
-        flex-direction: column-reverse;
-    }
-}
+// @media (max-width: 365px) {
+//     .side-links {
+//         display: flex;
+//         flex-direction: column-reverse;
+//     }
+// }
 
 .slider:focus {
     outline: 0;

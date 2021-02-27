@@ -466,19 +466,21 @@ const Quiz = () => {
 		return (
 			<QuizPage>
 			<QuizBox>
-				<div className="score-title">
+				<div className="score-title center">
 					{/* <Link to="/"> */}
-					<FButton className="rotate-180">
+					{/* <FButton className="rotate-180">
 						<HelpIcon />
-					</FButton>
+					</FButton> */}
 					{/* </Link> */}
-					<p>
+					<SubTitle  center>
 						{user.firstName || 'Guest'} {user.lastName}{' '}
-					</p>
+					</SubTitle>
 				</div>
 				<div className="score-display">
-					<SubTitle size={1.5}>You get 1 try in 24 hours</SubTitle>
-					<SubTitle bold={600}>Come back soon</SubTitle>
+					<div className="text_box">
+						<SubTitle size={1.5}>You have exhausted your tries for the day</SubTitle>
+						<SubTitle bold={500}>Come back in 24 hours</SubTitle>
+					</div>
 					{/* <h3>{score || 9}</h3> */}
 					<Link to="/">
 						<FButton>

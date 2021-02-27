@@ -430,6 +430,11 @@ export const SubTitle = styled.h2`
 	margin: .2em 0;
 	/* margin-top: 1rem; */
 
+	${({ center }) => 
+	center && css `
+		text-align: center;
+	`}
+
 	${({ fontColor }) => 
 		fontColor && css`
 			color: ${fontColor};
@@ -1342,13 +1347,15 @@ export const AuthPage = styled.div`
 	/* height: 90vh; */
 	/* background: #907051; */
 
+
 	form {
 		width: 30rem;
+		padding-bottom: 3em;
 		height: 70vh;
 
 		@media (min-width: 320px) and (max-width: 558px) {
 			width: 100%;
-			height: 50vh;
+			/* height: 50vh; */
 
 			.mobile_raise {
 				/* background-color: #451010; */
@@ -1361,7 +1368,7 @@ export const AuthPage = styled.div`
 		/* .register {
 		} */
 		height: 100vh;
-		padding: 5em 0;
+		padding: 2em 0;
 		width: 80%;
 		display: flex;
 		align-items: center;
@@ -1435,6 +1442,10 @@ export const QuizBox = styled.div`
 		align-items: center;
 		padding: 1.5em 1rem 1em;
 
+		&.center {
+			justify-content: center;			
+		}
+
 		button {
 			margin: 0;
 		}
@@ -1450,6 +1461,12 @@ export const QuizBox = styled.div`
 		// add black color to background
 		flex-direction: column;
 		height: 100%;
+
+		.text_box {
+			/* background: #fff; */
+			padding: 0 1em;
+			text-align: center;
+		}
 	}
 
 	.quiz-title {

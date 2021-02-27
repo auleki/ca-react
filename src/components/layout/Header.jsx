@@ -15,12 +15,12 @@ const Header = () => {
   const settings = {
     dots: true,
     arrows: false,
-    lazyLoad: true,
+    lazyLoad: false,
     infinite: true,
-    speed: 300,
+    speed: 100,
     draggable: true,
     autoplay: true,
-    autoplaySpeed: 2500,
+    autoplaySpeed: 90000,
     cssEase: "linear",
   }
   
@@ -28,20 +28,18 @@ const Header = () => {
     <HeaderStyle>
       <Slider {...settings} className="slider">
 
+      <ItemForCarousel bgColor={wallFour}>        
+      </ItemForCarousel>
+
       <ItemForCarousel bgColor={wallOne}>    
       </ItemForCarousel>
 
       <ItemForCarousel bgColor={wallTwo}>
-        
       </ItemForCarousel>
 
       <ItemForCarousel bgColor={wallThree}>
-        
       </ItemForCarousel>
 
-      <ItemForCarousel bgColor={wallFour}>
-        
-      </ItemForCarousel>
 
     </Slider>
     </HeaderStyle>
