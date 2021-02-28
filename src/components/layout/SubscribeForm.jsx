@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import NavigationIcon from '@material-ui/icons/Navigation';
 import MailIcon from '@material-ui/icons/Mail';
-import { addSubcriber } from "../../services/operations";
+import { addSubscriber, errorAlert } from "../../services/operations";
 import { SubscribeInput } from "../StyledComponents";
+import { ToastContainer } from 'react-toastify';
 
 const SubscribeSuccess = () => {
 
@@ -24,16 +25,29 @@ const SubscribeSuccess = () => {
 const SubscribeForm = ({ setSubscribed, subscribed }) => {
   const [email, setEmail] = useState('')
 
+
+  
+
   const saveSubscriber = async (e) => {
     e.preventDefault()
-    // const savedSubscriber = await addSubcriber(email)
-    setSubscribed(!subscribed)
+    try {
+      const subscriberInfo = { 
+        source: "homepageForm",
+        email
+      }
+      const savedSubscriber = await addSubscriber(subscriberInfo)
+      console.log("User to be added: ", savedSubscriber)
+      setSubscribed(!subscribed)
+    } catch (error) {
+      
+    }
   }
 
   const handleInput = e => setEmail(e.target.value)
 
   return (
     <div className="newsletter wow fadeInRightBig">
+      <ToastContainer position="bottom-center" />
       <div className="subscribe_title">
         <h3 className="light">Subscribe to our mailing list</h3>
       </div>

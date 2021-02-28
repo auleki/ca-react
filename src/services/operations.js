@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const GOLDEN = process.env.REACT_APP_PS_SK
 
@@ -12,6 +13,17 @@ const config = {
   headers: { Authorization: currentToken }
 }
 
+export const errorAlert = (msg, type) => {
+  switch (type) {
+    case 'info':
+      return toast.info(msg);
+    case 'error':
+      return toast.error(msg);
+    default:
+      return toast.done(msg);
+  }
+};
+
 export const saveOrder = async (order) => {
   try {
     const res = await axios.post(`${baseUrl}/orders`, order, config)
@@ -23,7 +35,7 @@ export const saveOrder = async (order) => {
 
 export const saveQuizUser = async (user) => {
   try {
-    console.log('You are a champ')
+    // console.log('You are a champ')
     const res = await axios.post(`${baseUrl}/users`, user, config)
     // const 
     return res.data
@@ -32,9 +44,9 @@ export const saveQuizUser = async (user) => {
   }
 }
 
-export const addSubcriber = async (subscriber) => {
+export const addSubscriber = async (subscriberInfo) => {
   try {
-    const res = await axios.post(`${baseUrl}/subscribers`, subscriber, config)
+    const res = await axios.post(`${localUrl}/subscribers`, subscriberInfo, config)
     return res.data
   } catch (e) {
     throw new Error('Subscriber not saved', e)

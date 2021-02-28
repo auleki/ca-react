@@ -19,9 +19,9 @@ const TotalView = ({ price }) => (
   <div className="total-price">
     <p>Total: ₦ {formatToComma(price)}</p>
     <Link to="/confirm">
-      <Button primary>
+      <FButton>
         Create Order
-              </Button>
+      </FButton>
     </Link>
   </div>
 )

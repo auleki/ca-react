@@ -566,6 +566,7 @@ export const FButton = styled.button`
 		/* margin-top: .25em; */
     position: relative;
     left:0;
+		bottom: 3px;
 		transition: transform 300ms ease-in;	
 		/* transform: translateX(-50rem); */
 	}

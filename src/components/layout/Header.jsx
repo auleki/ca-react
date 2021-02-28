@@ -15,7 +15,7 @@ const Header = () => {
   const settings = {
     dots: true,
     arrows: false,
-    lazyLoad: false,
+    lazyLoad: true,
     infinite: true,
     speed: 100,
     draggable: true,

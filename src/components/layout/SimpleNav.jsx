@@ -24,8 +24,11 @@ const SimpleNav = () => {
          {/* <ul className="navbar"> */}
           {/* </ul>  */}
           <div className="nav-links">
+
             <Link to="/quiz" className="nav-link">
-              Quiz
+              <FButton>
+                Quiz
+              </FButton>
             </Link>
           <div className="cart-icon">
             <Link className="link-button" to="/shopping">

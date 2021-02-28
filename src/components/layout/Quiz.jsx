@@ -28,6 +28,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import HelpIcon from '@material-ui/icons/Help';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { addSubscriber } from "../../services/operations";
 // import { CodeSharp } from "@material-ui/icons";
 
 const ScoreView = ({ score, restart, user, resetTimer, setIsActive }) => {
@@ -75,7 +76,7 @@ const ScoreView = ({ score, restart, user, resetTimer, setIsActive }) => {
 						<span className="span_icon rotate-180">
 							<ExitToAppIcon />
 						</span>{' '}
-						<span className="span_text">EXIT QUIZ</span>
+						<span className="span_text">Exit Quiz</span>
 					</FButton>
 				</Link>
 			</div>
@@ -115,6 +116,17 @@ const AddUser = ({ beginQuiz, setUser, user, loginOrRegister, setOldUser, setReg
 		setFirstName(e.target.value);
 	};
 
+	const errorAlert = (msg, type) => {
+		switch (type) {
+			case 'info':
+				return toast.info(msg);
+			case 'error':
+				return toast.error(msg);
+			default:
+				return toast.done(msg);
+		}
+	};
+
 	const saveUser = async (e) => {
 		e.preventDefault();
 		setLoading(true);
@@ -130,7 +142,11 @@ const AddUser = ({ beginQuiz, setUser, user, loginOrRegister, setOldUser, setReg
 			};
 
 			if (quizUser.toSubscribe) {
-				console.log('Saving' + quizUser.email + " to subscriber's list");
+				// console.log('Saving' + quizUser.email + " to subscriber's list");
+				const subscriber = { firstName, lastName, email }
+				const savedSubscriber = await addSubscriber(subscriber)
+				console.log("IS SAVING SUBSCRIBER:", savedSubscriber)
+				
 			}
 
 			//! Check if email exists
@@ -143,14 +159,25 @@ const AddUser = ({ beginQuiz, setUser, user, loginOrRegister, setOldUser, setReg
 			console.table(quizUser);
 			const savedUser = await saveQuizUser(quizUser);
 			console.table('SAVED USER:', savedUser);
+			if (savedUser.name === "MongoError" && savedUser.code === 11000) {
+				throw new Error('Email or Username already exists, try to login')
+			}
+				
 			setUser(quizUser);
 			setOldUser(false);
 			setRegister(false);
+
 			// beginQuiz();
 			// setOldUser(false)
 			// setRegister(false)
 		} catch (error) {
-			console.log(error);
+			// console.info('thrown into error block', error)
+
+			// figure out why toast is not working			
+			// errorAlert(error, "error")
+			alert(error)
+			setOldUser(true);
+			setRegister(false);
 		}
 	};
 
@@ -162,6 +189,7 @@ const AddUser = ({ beginQuiz, setUser, user, loginOrRegister, setOldUser, setReg
 		<AuthPage>
 			<div className="start-game register">
 				<div className="form_header">
+			<ToastContainer position="bottom-center" />
 					<SubTitle size={2} bold>
 						We need to know you,
 					</SubTitle>
@@ -176,11 +204,12 @@ const AddUser = ({ beginQuiz, setUser, user, loginOrRegister, setOldUser, setReg
 						placeholder="First Name"
 						onChange={onFirstName}
 						value={firstName}
+						autoComplete
 						required
 					/>
-					<Input type="text" placeholder="Last Name" onChange={onLastName} value={lastName} required />
-					<Input type="text" placeholder="Username" onChange={onUsernameInput} value={username} required />
-					<Input type="text" placeholder="@" onChange={onEmailInput} value={email} required />
+					<Input type="text" autoComplete placeholder="Last Name" onChange={onLastName} value={lastName} required />
+					<Input type="text" autoComplete placeholder="Username" onChange={onUsernameInput} value={username} required />
+					<Input type="text" autoComplete placeholder="@" onChange={onEmailInput} value={email} required />
 					<div className="quiz_actions">
 						<FormControlLabel
 							control={
@@ -234,7 +263,7 @@ const OldUser = ({ loginOrRegister, setUser, setOldUser, setRegister, user, setC
 		console.log('Current Date: ', typeof currentDate.getTime(), currentDate);
 		// let lastPlayed = Number(date);
 		// let lastPlayed = Number(date);
-		let lastPlayed = new Date();
+		let lastPlayed = new Date(date);
 		console.log('Last Date: ', typeof lastPlayed, lastPlayed);
 		let differenceInTime = currentDate.getTime() - lastPlayed;
 		let differenceInDays = differenceInTime / (1000 * 3600 * 24);
@@ -263,7 +292,6 @@ const OldUser = ({ loginOrRegister, setUser, setOldUser, setRegister, user, setC
 					updateData: { lastPlayed: new Date() },
 					action: 'UPDATE_LASTPLAYED'
 				};
-
 				const lastPlayedResponse = await updateUser(lastPlayedUpdate, fetchedUser.username);
 				console.log('LAST PLAYED RESPONSE', lastPlayedResponse);
 				setOldUser(false);
@@ -487,7 +515,7 @@ const Quiz = () => {
 							<span className="span_icon rotate-180">
 								<ExitToAppIcon />
 							</span>{' '}
-							<span className="span_text">EXIT QUIZ</span>
+							<span className="span_text">Exit Quiz</span>
 						</FButton>
 					</Link>
 				</div>
