@@ -950,17 +950,33 @@ footer {
     }
 }
 
+.mobile-cart-icon {
+    position: fixed;
+    color: $c1;
+    height: 4rem;
+    width: 4rem;
+    border-radius: 100px;
+    border: .3rem solid $c3;
+    background: $c2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    bottom: 10%;
+    right: 5%;
+}
+
+@media (min-width: 600px) {
+    .mobile-cart-icon {
+        display: none;
+    }
+}
 
 
 @media (max-width: 600px) {
 
     .cart-icon {
-        position: fixed;
-        padding: .5em;
-        border-radius: 5px;
-        background: rgb(37, 37, 37);
-        right: 5%;
-        top: 85%;
+       display: none;
     }
 
     .cloth-section {

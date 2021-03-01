@@ -65,7 +65,7 @@ const ScoreView = ({ score, restart, user, resetTimer, setIsActive }) => {
 				</FButton>
 				{/* </Link> */}
 				<p>
-					{user.firstName || 'Guest'} {user.lastName}{' '}
+					{user.firstName || 'Guest'} {user.lastName}
 				</p>
 			</div>
 			<div className="score-display">
@@ -75,7 +75,7 @@ const ScoreView = ({ score, restart, user, resetTimer, setIsActive }) => {
 					<FButton>
 						<span className="span_icon rotate-180">
 							<ExitToAppIcon />
-						</span>{' '}
+						</span>
 						<span className="span_text">Exit Quiz</span>
 					</FButton>
 				</Link>
@@ -187,9 +187,9 @@ const AddUser = ({ beginQuiz, setUser, user, loginOrRegister, setOldUser, setReg
 		// <QuizPage>
 		//   <QuizBox>
 		<AuthPage>
+			<ToastContainer position="bottom-center" />
 			<div className="start-game register">
 				<div className="form_header">
-			<ToastContainer position="bottom-center" />
 					<SubTitle size={2} bold>
 						We need to know you,
 					</SubTitle>

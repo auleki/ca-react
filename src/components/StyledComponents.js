@@ -601,8 +601,9 @@ export const CardContainer = styled.div`
 	padding: 0 1rem;
 `;
 export const SummaryHeader = styled.div`
-	margin: 1.5rem 1rem;
-	width: 60%;
+	/* margin: 1.5rem 1rem; */
+	margin-bottom: 1rem;
+	width: 50%;
 
 	p {
 		margin: 0 1rem;
@@ -627,6 +628,7 @@ export const SummaryHeader = styled.div`
 
 		p {
 			font-size: 1rem;
+			margin: 0;
 		}
 	}
 `;
@@ -969,22 +971,23 @@ export const Form = styled.form`
 	display: flex;
 	padding: 3rem 2rem;
 	flex-direction: column;
-	margin: 0 1rem;
+	/* margin: 0 1rem 3rem 1rem; */
+
 	border-radius: .2rem;
 	width: 70%;
 	/* width: 100%; */
 	justify-content: space-between;
 	/* padding: 3rem; */
+	margin-bottom: 3em;
 	background: #1a1a1a;
 
 	@media (min-width: 315px) and (max-width: 900px) {
-		margin: 1rem 0;
+		/* margin: 1rem 0; */
 		width: 100%;
 	}
 
-	@media (max-width: 368px) {
-		margin: 0;
-	}
+	/* @media (max-width: 368px) {
+	} */
 `;
 
 export const QuizInput = styled.input`
@@ -1145,8 +1148,9 @@ export const Page = styled.div`
 		padding: 0 2rem;
 	}
 
-	@media (max-width: 340px) {
+	@media (max-width: 360px) {
 		padding: 0 .5rem;
+		/* margin-bottom: 3em; */
 	}
 `;
 

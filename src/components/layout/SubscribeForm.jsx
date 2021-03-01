@@ -25,9 +25,6 @@ const SubscribeSuccess = () => {
 const SubscribeForm = ({ setSubscribed, subscribed }) => {
   const [email, setEmail] = useState('')
 
-
-  
-
   const saveSubscriber = async (e) => {
     e.preventDefault()
     try {
