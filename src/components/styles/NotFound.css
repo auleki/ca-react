@@ -139,7 +139,7 @@ html, button, input, select, textarea {
 }
 h1 {
   text-align: center;
-  margin: 15px 15px;
+  /* margin: 15px 15px; */
 }
 .zoom-area { 
   max-width: 490px;

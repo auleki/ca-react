@@ -10,6 +10,10 @@ import { updateItems, updatePrice } from "../../features/cart/cartSlice";
 const ClothListings = () => {
   const dispatch = useDispatch();
 
+  useEffect(() => {
+		window.scrollTo(0, 0);
+	}, []);
+
   const { cartItems, products, hasErrors, loading } = useSelector((state) => state)
 
   const override = css`
@@ -46,7 +50,7 @@ const ClothListings = () => {
           loading={loading}
           css={override}
           size={200}
-          color={"#F36B2B"}
+          color={"#ffffff"}
         />
         : hasErrors
           ? "Can't load clothes, refresh your browser"

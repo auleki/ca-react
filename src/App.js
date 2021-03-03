@@ -1,10 +1,9 @@
-import React from 'react';
 
+import React from 'react';
 import './App.scss';
 import 'react-toastify/dist/ReactToastify.css';
-
-// import CarouselElastic from './components/layout/CarouselElastic'
-// import { ClothSection } from './components/layout'
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import {
   ShoppingCart,
   // Header, 
@@ -19,6 +18,7 @@ import {
 import CreateOrder from './components/layout/CreateOrder'
 import { Route, Switch } from 'react-router-dom';
 import PaymentPage from './components/layout/PaymentPage';
+import Experiment from './components/Experiment'
 import Quiz from './components/layout/Quiz'
 import { AppStyle } from "./components/StyledComponents";
 
@@ -38,6 +38,7 @@ const App = () => {
           <Route path="/order-complete" component={OrderCompleted} />
           <Route path="/quiz" component={Quiz} />
           <Route path="/payment" component={PaymentPage} />
+          <Route path="/experiment" component={Experiment} />
           <Route component={NotFound} />
         </Switch>
         <Footer />

@@ -17,6 +17,9 @@ import {
   // FButton,
   SummaryHeader,
   SummaryCard,
+  FormContainer,
+  FormCard,
+  OrderPage,
   Page
 } from "../StyledComponents";
 import { formatToComma } from "../../api/operationsAPI"
@@ -116,68 +119,71 @@ const CreateOrder = () => {
 
 
   return (
-    <div className="full">
-      <Page>
-        <SummaryHeader>
-          <Title>Confirm order and pay</Title>
-          <Paragraph>
-           Delivery is free within Lagos, outside Lagos we handle 50% of the your fee
-        </Paragraph>
-        </SummaryHeader>
+    // <div className="full">
+      <OrderPage>
+        <FormContainer>
+       
 
-        <BasicCard>
-
-          <Form onSubmit={makeOrder}>
-            <SubTitle uppercase>
-              PAYMENT INFO
-          </SubTitle>
-
-            <RowLayout>
-
-              <Input
-                placeholder="First Name"
-                onChange={firstName.onChange}
-                value={firstName.value}
-                required
-              />
-
-              <Input
-                placeholder="Last Name"
-                onChange={lastName.onChange}
-                value={lastName.value}
-                required
-              />
-
-            </RowLayout>
-
-            <Input
-              placeholder="Email"
-              onChange={email.onChange}
-              value={email.value}
-              required
-            />
-
-            <Input
-              placeholder="Phone Number"
-              onChange={phone.onChange}
-              value={phone.value}
-              required
-            />
-
-            <Input
-              placeholder="Location"
-              onChange={location.onChange}
-              value={location.value}
-              required
-            />
-
-            <div>
-              <Button primary>
-                Pay for order
-              </Button>
+        {/* <BasicCard> */}
+            <div className="form-title">
+              <SummaryHeader>
+                <Title>
+                  Confirm order and pay
+                </Title>
+                <Paragraph>
+                  Delivery is free within Lagos, outside Lagos we handle 50% of the your fee
+                </Paragraph>
+              </SummaryHeader>
+              
             </div>
+          <FormCard>
+            <Form onSubmit={makeOrder}>
+              <SubTitle uppercase>
+                PAYMENT INFO
+              </SubTitle>
+              <RowLayout>
+                <Input
+                  placeholder="First Name"
+                  onChange={firstName.onChange}
+                  value={firstName.value}
+                  required
+                />
+                <Input
+                  placeholder="Last Name"
+                  onChange={lastName.onChange}
+                  value={lastName.value}
+                  required
+                />
+              </RowLayout>
 
-          </Form>
+              <Input
+                placeholder="Email"
+                onChange={email.onChange}
+                value={email.value}
+                required
+              />
+
+              <Input
+                placeholder="Phone Number"
+                onChange={phone.onChange}
+                value={phone.value}
+                required
+              />
+
+              <Input
+                placeholder="Location"
+                onChange={location.onChange}
+                value={location.value}
+                required
+              />
+
+              {/* <div> */}
+                <Button primary>
+                  Pay for order
+                </Button>
+              {/* </div> */}
+
+            </Form>
 
           <SummaryCard>
             <h3>You are to pay</h3>
@@ -188,9 +194,12 @@ const CreateOrder = () => {
               You have selected {cartItems.length} product(s)
             </p>
           </SummaryCard>
-        </BasicCard>
-      </Page>
-    </div>
+          </FormCard> 
+          </FormContainer>
+        {/* </BasicCard> */}
+        
+      </OrderPage>
+    // </div>
 
   )
 }

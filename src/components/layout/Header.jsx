@@ -2,12 +2,11 @@ import React from 'react'
 // import Carousel from "react-elastic-carousel";
 import { ItemForCarousel, HeaderStyle } from "../StyledComponents";
 import Slider from 'react-slick'
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+
 
 const Header = () => {
   let wallOne, wallTwo, wallThree, wallFour
-
+  
   wallOne = "https://res.cloudinary.com/checkadigs-cloud/image/upload/v1606397477/IMG_20201118_183948_004_m7pato.jpg"
   wallTwo = "https://res.cloudinary.com/checkadigs-cloud/image/upload/v1606397494/IMG_E4430_ypd1zz.jpg"
   wallThree = "https://res.cloudinary.com/checkadigs-cloud/image/upload/v1606397715/IMG_20201118_183928_674_baqb0c.jpg"
@@ -18,10 +17,10 @@ const Header = () => {
     arrows: false,
     lazyLoad: true,
     infinite: true,
-    speed: 300,
+    speed: 100,
     draggable: true,
     autoplay: true,
-    autoplaySpeed: 2500,
+    autoplaySpeed: 90000,
     cssEase: "linear",
   }
   
@@ -29,20 +28,18 @@ const Header = () => {
     <HeaderStyle>
       <Slider {...settings} className="slider">
 
+      <ItemForCarousel bgColor={wallFour}>        
+      </ItemForCarousel>
+
       <ItemForCarousel bgColor={wallOne}>    
       </ItemForCarousel>
 
       <ItemForCarousel bgColor={wallTwo}>
-        
       </ItemForCarousel>
 
       <ItemForCarousel bgColor={wallThree}>
-        
       </ItemForCarousel>
 
-      <ItemForCarousel bgColor={wallFour}>
-        
-      </ItemForCarousel>
 
     </Slider>
     </HeaderStyle>

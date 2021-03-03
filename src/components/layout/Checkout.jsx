@@ -19,9 +19,9 @@ const TotalView = ({ price }) => (
   <div className="total-price">
     <p>Total: ₦ {formatToComma(price)}</p>
     <Link to="/confirm">
-      <Button primary>
+      <FButton>
         Create Order
-              </Button>
+      </FButton>
     </Link>
   </div>
 )
@@ -33,7 +33,7 @@ const EmptyCart = () => (
     </div>
     <SubTitle>Empty Cart</SubTitle>
     <Link to="/">
-      <FButton>
+      <FButton primary>
       <ArrowBackIcon /> <span>Go Shopping</span> 
       </FButton>
     </Link>
