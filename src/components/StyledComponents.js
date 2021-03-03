@@ -515,6 +515,17 @@ export const FButton = styled.button`
 	transition: background-color 150ms ease-in;
 	border: none;
 	margin: .5rem 0;
+
+	${({ uppercase }) => 
+		uppercase && css `
+			text-transform: uppercase;
+		`}
+	
+	${({ margin, x, y }) => 
+	margin && css `
+		margin: ${y}em ${x}em;
+	`}
+
 	color: #333;
 	&:hover {
 		cursor: pointer;
@@ -589,10 +600,12 @@ export const Button = ({ primary, children, bgColor }) => {
 	);
 };
 
+
 export const CardContainer = styled.div`
 	display: flex;
 	flex-direction: column;
-	background: #F36B2B;
+	/* background: #F36B2B; */
+	background: #1a1a1a;
 	/* background: #F3002B; */
 	justify-content: center;
 	margin: 3rem 0;
@@ -600,14 +613,20 @@ export const CardContainer = styled.div`
 	text-align: center;
 	padding: 0 1rem;
 `;
+
 export const SummaryHeader = styled.div`
 	/* margin: 1.5rem 1rem; */
 	margin-bottom: 1rem;
-	width: 50%;
+	width: 100%;
 
-	p {
+	${({ marginAuto }) => 
+		marginAuto && css `
+			margin: 0 auto 1rem auto;
+		`}
+
+	/* p {
 		margin: 0 1rem;
-	}
+	} */
 
 	h1 {
 		text-align: left;
@@ -663,11 +682,15 @@ export const SummaryCard = styled.div`
 			font-weight: 800;
 		}
 	}
-
-	@media (max-width: 582px) {
+	@media (max-width: 920px) {
 		width: 100%;
+		margin-bottom: 1em;
 		box-shadow: none;
 	}
+
+	/* @media (max-width: 582px) {
+		width: 100%;
+	} */
 `;
 
 export const CardStyle = styled.div`
@@ -683,7 +706,8 @@ export const CardStyle = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background-color: #f36b2b;
+	background-color: #1a1a1a;
+	/* background-color: #f36b2b; */
 	/* background-color: #e90e2B; */
 	/* box-shadow: 0px 2px 16px 6px rgba(243, 107, 43, .2); */
 	transition: transform 200ms ease-in, box-shadow 300ms ease-in;
@@ -966,16 +990,56 @@ export const FormGroup = styled.div`
 	/* background-color: #fff; */
 `;
 
+export const FormContainer = styled.div`
+	/* background: aquamarine; */
+	display: flex;
+	flex-direction: column;
+	width: 70%;
+	margin: 0 auto;
+	/* align-items: center; */
+	/* justify-content: center; */
+
+	.form-title {
+		/* background: crimson; */
+		width: 60%;
+		margin-bottom: 1em;
+	}
+
+	@media (max-width: 920px) {
+		.form-title {
+			width: 100%;
+		}
+	}
+
+`
+
+export const FormCard = styled.div`
+	display: flex;
+	/* background: magenta; */
+	/* margin: 0 auto; */
+
+	@media (max-width: 920px) {
+		flex-direction: column-reverse;
+	}
+`
+
+export const OrderPage = styled.div`
+	/* background: aquamarine; */
+
+`
+
 export const Form = styled.form`
 	height: 100%;
 	display: flex;
-	padding: 3rem 2rem;
+	/* padding: 3rem 2rem; */
+	padding: 0 0 1rem 0;
 	flex-direction: column;
+	margin-right: 1em;
 	/* margin: 0 1rem 3rem 1rem; */
 
 	border-radius: .2rem;
-	width: 70%;
-	/* width: 100%; */
+	/* width: 30%; */
+	width: 100%;
 	justify-content: space-between;
 	/* padding: 3rem; */
 	margin-bottom: 3em;
@@ -1138,7 +1202,7 @@ export const Page = styled.div`
 	padding: 0 5rem;
 	display: flex;
 	/* height: 0vh; */
-	height: 80%;
+	height: 100%;
 	flex-direction: column;
 	/* background: linear-gradient(to right, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5) ), url("https://res.cloudinary.com/checkadigs-cloud/image/upload/v1606402883/Taieri_z4cz7f.png") fixed no-repeat; */
 	/* background-size: cover; */
@@ -1256,7 +1320,8 @@ export const IframeStyle = styled.iframe`
 export const HeaderStyle = styled.div`
 	height: 100vh;
 	width: 100%;
-	background: #F36B2B;
+	/* background: #F36B2B; */
+	 background: #1a1a1a;
 	/* background: linear-gradient(to right, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5) ), url("https://res.cloudinary.com/checkadigs-cloud/image/upload/v1606397756/IMG_E4430_vzk1ol.jpg") fixed no-repeat; */
 	/* background: linear-gradient(to right, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5) ) fixed no-repeat; */
 	/* background-size: cover; */
@@ -1272,7 +1337,8 @@ export const BasicBox = styled.div`
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
-	background-color: #f36b2b;
+	background: #1a1a1a;
+	/* background-color: #f36b2b; */
 	${({ url }) =>
 		url &&
 		css`
@@ -1301,7 +1367,7 @@ export const Style404 = styled.div`
 `;
 
 export const AppStyle = styled.div`
-	background-color: #F36B2B;
+	/* background-color: #F36B2B; */
 	/* background: linear-gradient(to right, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)),
 		url("https://res.cloudinary.com/checkadigs-cloud/image/upload/v1606402883/Taieri_z4cz7f.png") fixed no-repeat;
 	background-size: cover; */

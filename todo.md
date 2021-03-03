@@ -45,3 +45,11 @@ checkout form
 - Put up an emoji of confetti busting, congratulate them on placing an order and inform them about a call to confirm their order
 
 >>>>>>> 168ca9ad28d1d1f9c854fa00b6ad17056b85eeeb
+
+
+## Quiz Page 
+ [] Make the Quiz button full with on Login & Register page 
+
+ [] Reduce the size of form on create order page 
+
+ 
