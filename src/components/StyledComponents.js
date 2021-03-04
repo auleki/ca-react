@@ -1474,11 +1474,27 @@ export const QuizPage = styled.div`
 	}
 `;
 export const QuizBox = styled.div`
-	background-color: #f36b2b;
+	/* background-color: #f36b2b; */
+	background: url("https://res.cloudinary.com/dyj6pqx6d/image/upload/v1614852691/checkadigs/dot-bg_uzhhlm.svg")fixed repeat ;
+	/* background-size: cover; */
 	height: 80%;
 	width: 60%;
+	transition: 300ms ease-in;
 	border-radius: .2em;
 
+	// only use hover effects on desktop 
+	@media (min-width: 720px) {
+		&:hover {
+		/* transform: translateY(-.1em); */
+		box-shadow: -1px 2px 13px 0px rgba(0,0,0,0.75);
+		-webkit-box-shadow: -1px 2px 13px 0px rgba(0,0,0,0.75);
+		-moz-box-shadow: -1px 2px 13px 0px rgba(0,0,0,0.75);
+		.score-title {
+			/* border-bottom: .2em dashed #f36b2b; */
+			}
+		}	
+	}
+	
 	.light {
 		font-weight: 100;
 	}
@@ -1487,12 +1503,23 @@ export const QuizBox = styled.div`
 		font-weight: 800;
 	}
 
+	.display-info {
+		background: #0d0d0d;
+		text-align: center;
+		/* padding: 3em 0; */
+	}
+
 	.score-title,
 	.quiz-title {
 		width: 100%;
 		padding: 1.5em 3rem 1em;
 		display: flex;
-		border-bottom: .4em solid #F3B70045;
+		border-bottom: .2em dashed transparent;
+		transition: 300ms ease-out;
+
+		/* &:hover {
+			border-bottom: .2em dashed #f36b2b;
+		} */
 	}
 
 	.start-game {
@@ -1510,8 +1537,19 @@ export const QuizBox = styled.div`
 
 	.score-title {
 		justify-content: space-between;
+		font-family: Stick;
 		align-items: center;
 		padding: 1.5em 1rem 1em;
+
+		.user-info {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+
+			p {
+				margin: 0 .5rem;
+			}
+		}
 
 		&.center {
 			justify-content: center;			
@@ -1525,6 +1563,7 @@ export const QuizBox = styled.div`
 	.score-display {
 		display: flex;
 		line-height: 55px;
+		font-family: Stick;
 		padding: 3em 0;
 		/* background: #1a1a1a; */
 		align-items: center;
@@ -1538,11 +1577,22 @@ export const QuizBox = styled.div`
 			padding: 0 1em;
 			text-align: center;
 		}
+
+		h2 {
+			font-size: 4em;
+			margin: .5em 0;
+			letter-spacing: 1px;
+		}
+
+		h3 {
+			font-size: 2em;
+		}
 	}
 
 	.quiz-title {
 		justify-content: space-between;
 		padding: 1.5em 3em 1em;
+		border-bottom: .2em dashed #F36B2B;
 	}
 
 	.row {
@@ -1616,4 +1666,6 @@ export const QuizBox = styled.div`
 			flex-direction: column;
 		}
 	}
+
+	
 `;

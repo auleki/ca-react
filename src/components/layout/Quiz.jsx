@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
+
 import {
 	QuizPage,
 	QuizBox,
@@ -26,9 +27,11 @@ import {
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import HelpIcon from '@material-ui/icons/Help';
+// import HelpIcon from '@material-ui/icons/Help';
+import EmailIcon from '@material-ui/icons/Email';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import { addSubscriber } from "../../services/operations";
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import { addSubscriber } from '../../services/operations';
 // import { CodeSharp } from "@material-ui/icons";
 
 const ScoreView = ({ score, restart, user, resetTimer, setIsActive }) => {
@@ -58,27 +61,38 @@ const ScoreView = ({ score, restart, user, resetTimer, setIsActive }) => {
 
 	return (
 		<QuizBox>
+			{/* add a wheel that spins upon hover  */}
 			<div className="score-title">
-				{/* <Link to="/"> */}
-				<FButton className="rotate-180">
+				
+				{/* <FButton className="rotate-180">
 					<HelpIcon />
-				</FButton>
-				{/* </Link> */}
-				<p>
-					{user.firstName || 'Guest'} {user.lastName}
-				</p>
+				</FButton> */}
+				<div className="user-info">
+					<EmailIcon /> 
+					<p>
+						{user.email || "feedthenation@gmail.com"}
+					</p>
+				</div>
+				<div className="user-info">
+					<AccountBoxIcon />
+					<p>
+						{user.firstName || 'Olusegun'} {user.lastName || "Obasanjo"}
+					</p>
+				</div>
 			</div>
 			<div className="score-display">
-				<h2>Score</h2>
-				<h3>{score || 9}</h3>
-				<Link to="/">
-					<FButton>
-						<span className="span_icon rotate-180">
-							<ExitToAppIcon />
-						</span>
-						<span className="span_text">Exit Quiz</span>
-					</FButton>
-				</Link>
+				<div className="display-info">
+					<h2>Score</h2>
+					<h3>{score || 9}</h3>
+					<Link to="/">
+						<FButton>
+							<span className="span_icon rotate-180">
+								<ExitToAppIcon />
+							</span>
+							<span className="span_text">Exit Quiz</span>
+						</FButton>
+					</Link>
+				</div>
 			</div>
 		</QuizBox>
 	);
@@ -143,10 +157,9 @@ const AddUser = ({ beginQuiz, setUser, user, loginOrRegister, setOldUser, setReg
 
 			if (quizUser.toSubscribe) {
 				// console.log('Saving' + quizUser.email + " to subscriber's list");
-				const subscriber = { firstName, lastName, email }
-				const savedSubscriber = await addSubscriber(subscriber)
-				console.log("IS SAVING SUBSCRIBER:", savedSubscriber)
-				
+				const subscriber = { firstName, lastName, email };
+				const savedSubscriber = await addSubscriber(subscriber);
+				console.log('IS SAVING SUBSCRIBER:', savedSubscriber);
 			}
 
 			//! Check if email exists
@@ -159,10 +172,10 @@ const AddUser = ({ beginQuiz, setUser, user, loginOrRegister, setOldUser, setReg
 			console.table(quizUser);
 			const savedUser = await saveQuizUser(quizUser);
 			console.table('SAVED USER:', savedUser);
-			if (savedUser.name === "MongoError" && savedUser.code === 11000) {
-				throw new Error('Email or Username already exists, try to login')
+			if (savedUser.name === 'MongoError' && savedUser.code === 11000) {
+				throw new Error('Email or Username already exists, try to login');
 			}
-				
+
 			setUser(quizUser);
 			setOldUser(false);
 			setRegister(false);
@@ -173,9 +186,9 @@ const AddUser = ({ beginQuiz, setUser, user, loginOrRegister, setOldUser, setReg
 		} catch (error) {
 			// console.info('thrown into error block', error)
 
-			// figure out why toast is not working			
+			// figure out why toast is not working
 			// errorAlert(error, "error")
-			alert(error)
+			alert(error);
 			setOldUser(true);
 			setRegister(false);
 		}
@@ -193,9 +206,7 @@ const AddUser = ({ beginQuiz, setUser, user, loginOrRegister, setOldUser, setReg
 					<SubTitle size={2} bold>
 						We need to know you,
 					</SubTitle>
-					<SubTitle fontColor="#999999">
-						Fill the form to start the quiz
-					</SubTitle>
+					<SubTitle fontColor="#999999">Fill the form to start the quiz</SubTitle>
 				</div>
 				<form onSubmit={saveUser}>
 					<Input
@@ -207,8 +218,22 @@ const AddUser = ({ beginQuiz, setUser, user, loginOrRegister, setOldUser, setReg
 						autoComplete
 						required
 					/>
-					<Input type="text" autoComplete placeholder="Last Name" onChange={onLastName} value={lastName} required />
-					<Input type="text" autoComplete placeholder="Username" onChange={onUsernameInput} value={username} required />
+					<Input
+						type="text"
+						autoComplete
+						placeholder="Last Name"
+						onChange={onLastName}
+						value={lastName}
+						required
+					/>
+					<Input
+						type="text"
+						autoComplete
+						placeholder="Username"
+						onChange={onUsernameInput}
+						value={username}
+						required
+					/>
 					<Input type="text" autoComplete placeholder="@" onChange={onEmailInput} value={email} required />
 					<div className="quiz_actions">
 						<FormControlLabel
@@ -283,24 +308,23 @@ const OldUser = ({ loginOrRegister, setUser, setOldUser, setRegister, user, setC
 			console.log('FETCHED USER:', fetchedUser);
 			setUser(fetchedUser);
 			const userCanPlay = findDayDifference(fetchedUser.lastPlayed);
-			// ? update lastPlayed
-			// setOldUser(false)
-			// setRegister(false)
+
 			if (userCanPlay) {
+				console.log('Updating last saved')
 				setCanPlay(true);
 				const lastPlayedUpdate = {
 					updateData: { lastPlayed: new Date() },
 					action: 'UPDATE_LASTPLAYED'
 				};
+				
 				const lastPlayedResponse = await updateUser(lastPlayedUpdate, fetchedUser.username);
-				console.log('LAST PLAYED RESPONSE', lastPlayedResponse);
 				setOldUser(false);
 				setRegister(false);
+				console.log('LAST PLAYED RESPONSE', lastPlayedResponse);
+
 			} else {
 				setCanPlay(false);
 			}
-
-			// userCanPlay ? setCanPlay(true) : setCanPlay(false)
 			//! CAUSED A MEMORY LEAK
 			// setLoading(false);
 		} catch (error) {
@@ -322,9 +346,7 @@ const OldUser = ({ loginOrRegister, setUser, setOldUser, setRegister, user, setC
 				<ToastContainer position="bottom-center" />
 				<form onSubmit={loginUser}>
 					<div className="form_header">
-						<SubTitle size={2} >
-							Welcome back,
-						</SubTitle>
+						<SubTitle size={2}>Welcome back,</SubTitle>
 						<SubTitle fontColor="#999999">Enter your username to start the quiz</SubTitle>
 					</div>
 
@@ -493,33 +515,33 @@ const Quiz = () => {
 	if (!canPlay) {
 		return (
 			<QuizPage>
-			<QuizBox>
-				<div className="score-title center">
-					{/* <Link to="/"> */}
-					{/* <FButton className="rotate-180">
+				<QuizBox>
+					<div className="score-title center">
+						{/* <Link to="/"> */}
+						{/* <FButton className="rotate-180">
 						<HelpIcon />
 					</FButton> */}
-					{/* </Link> */}
-					<SubTitle  center>
-						{user.firstName || 'Guest'} {user.lastName}{' '}
-					</SubTitle>
-				</div>
-				<div className="score-display">
-					<div className="text_box">
-						<SubTitle size={1.5}>You have exhausted your tries for the day</SubTitle>
-						<SubTitle bold={500}>Come back in 24 hours</SubTitle>
+						{/* </Link> */}
+						<h3 center>
+							{user.firstName || 'Guest'} {user.lastName}{' '}
+						</h3>
 					</div>
-					{/* <h3>{score || 9}</h3> */}
-					<Link to="/">
-						<FButton>
-							<span className="span_icon rotate-180">
-								<ExitToAppIcon />
-							</span>{' '}
-							<span className="span_text">Exit Quiz</span>
-						</FButton>
-					</Link>
-				</div>
-			</QuizBox>
+					<div className="score-display">
+						<div className="text_box">
+							<h3>You have exhausted your tries for the day</h3>
+							<p>Come back in 24 hours</p>
+						</div>
+						{/* <h3>{score || 9}</h3> */}
+						<Link to="/">
+							<FButton>
+								<span className="span_icon rotate-180">
+									<ExitToAppIcon />
+								</span>{' '}
+								<span className="span_text">Exit Quiz</span>
+							</FButton>
+						</Link>
+					</div>
+				</QuizBox>
 			</QuizPage>
 		);
 	}
