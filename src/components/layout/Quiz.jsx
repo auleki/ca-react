@@ -36,12 +36,12 @@ import { addSubscriber } from '../../services/operations';
 
 const ScoreView = ({ score, restart, user, resetTimer, setIsActive }) => {
 	useEffect(() => {
-		console.log('Loaded User: ', user);
+		// console.log('Loaded User: ', user);
 
 		const saveScore = async () => {
 			if (score === 10) {
 				const winnerResponse = await saveQuizWinner(user);
-				console.log(`${user.username} is a champion!`, winnerResponse);
+				// console.log(`${user.username} is a champion!`, winnerResponse);
 			}
 			// console.table(`User is being updated with ${score}...`)
 			const scoreData = {
@@ -63,20 +63,17 @@ const ScoreView = ({ score, restart, user, resetTimer, setIsActive }) => {
 		<QuizBox>
 			{/* add a wheel that spins upon hover  */}
 			<div className="score-title">
-				
 				{/* <FButton className="rotate-180">
 					<HelpIcon />
 				</FButton> */}
 				<div className="user-info">
-					<EmailIcon /> 
-					<p>
-						{user.email || "feedthenation@gmail.com"}
-					</p>
+					<EmailIcon />
+					<p>{user.email || 'feedthenation@gmail.com'}</p>
 				</div>
 				<div className="user-info">
 					<AccountBoxIcon />
 					<p>
-						{user.firstName || 'Olusegun'} {user.lastName || "Obasanjo"}
+						{user.firstName || 'Olusegun'} {user.lastName || 'Obasanjo'}
 					</p>
 				</div>
 			</div>
@@ -145,7 +142,7 @@ const AddUser = ({ beginQuiz, setUser, user, loginOrRegister, setOldUser, setReg
 		e.preventDefault();
 		setLoading(true);
 		try {
-			console.log(`User of email: ${email} saved 🎉`);
+			// console.log(`User of email: ${email} saved 🎉`);
 			const quizUser = {
 				firstName,
 				lastName,
@@ -156,15 +153,15 @@ const AddUser = ({ beginQuiz, setUser, user, loginOrRegister, setOldUser, setReg
 			};
 
 			if (quizUser.toSubscribe) {
-				// console.log('Saving' + quizUser.email + " to subscriber's list");
+				// // console.log('Saving' + quizUser.email + " to subscriber's list");
 				const subscriber = { firstName, lastName, email };
 				const savedSubscriber = await addSubscriber(subscriber);
-				console.log('IS SAVING SUBSCRIBER:', savedSubscriber);
+				// console.log('IS SAVING SUBSCRIBER:', savedSubscriber);
 			}
 
 			//! Check if email exists
 			// const emailExists = await fetchUser(email)
-			// console.log("Value of emailExists:", emailExists)
+			// // console.log("Value of emailExists:", emailExists)
 			// if (emailExists) {
 			//   throw new Error("Email already exists, try a new one")
 			// }
@@ -215,7 +212,7 @@ const AddUser = ({ beginQuiz, setUser, user, loginOrRegister, setOldUser, setReg
 						placeholder="First Name"
 						onChange={onFirstName}
 						value={firstName}
-						autoComplete
+						autoComplete="true	Try"
 						required
 					/>
 					<Input
@@ -242,7 +239,7 @@ const AddUser = ({ beginQuiz, setUser, user, loginOrRegister, setOldUser, setReg
 							}
 							label="Join Our Mailing List"
 						/>
-						<Link className="link" onClick={() => loginOrRegister('login')}>
+						<Link to="#" className="link" onClick={() => loginOrRegister('login')}>
 							You played before? Login
 						</Link>
 					</div>
@@ -285,14 +282,14 @@ const OldUser = ({ loginOrRegister, setUser, setOldUser, setRegister, user, setC
 
 	const findDayDifference = (date) => {
 		let currentDate = new Date();
-		console.log('Current Date: ', typeof currentDate.getTime(), currentDate);
+		// console.log('Current Date: ', typeof currentDate.getTime(), currentDate);
 		// let lastPlayed = Number(date);
 		// let lastPlayed = Number(date);
 		let lastPlayed = new Date(date);
-		console.log('Last Date: ', typeof lastPlayed, lastPlayed);
+		// console.log('Last Date: ', typeof lastPlayed, lastPlayed);
 		let differenceInTime = currentDate.getTime() - lastPlayed;
 		let differenceInDays = differenceInTime / (1000 * 3600 * 24);
-		console.log('DAY DIFFERENCE: ', differenceInDays);
+		// console.log('DAY DIFFERENCE: ', differenceInDays);
 		if (differenceInDays < 1) {
 			return false;
 		}
@@ -300,28 +297,27 @@ const OldUser = ({ loginOrRegister, setUser, setOldUser, setRegister, user, setC
 	};
 
 	const loginUser = async (e) => {
-		console.log('Tapping Login');
+		// console.log('Tapping Login');
 		try {
 			e.preventDefault();
 			setLoading(true);
 			const fetchedUser = await fetchUser(email);
-			console.log('FETCHED USER:', fetchedUser);
+			// console.log('FETCHED USER:', fetchedUser);
 			setUser(fetchedUser);
 			const userCanPlay = findDayDifference(fetchedUser.lastPlayed);
 
 			if (userCanPlay) {
-				console.log('Updating last saved')
+				// console.log('Updating last saved')
 				setCanPlay(true);
 				const lastPlayedUpdate = {
 					updateData: { lastPlayed: new Date() },
 					action: 'UPDATE_LASTPLAYED'
 				};
-				
+
 				const lastPlayedResponse = await updateUser(lastPlayedUpdate, fetchedUser.username);
 				setOldUser(false);
 				setRegister(false);
-				console.log('LAST PLAYED RESPONSE', lastPlayedResponse);
-
+				// // console.log('LAST PLAYED RESPONSE', lastPlayedResponse);
 			} else {
 				setCanPlay(false);
 			}
@@ -334,7 +330,6 @@ const OldUser = ({ loginOrRegister, setUser, setOldUser, setRegister, user, setC
 		}
 	};
 
-	// const toastOptions = {
 	// 	position:
 	// }
 
@@ -407,7 +402,7 @@ const Quiz = () => {
 	const beginQuiz = () => {
 		// setOldUser(false);
 		// setRegister(false);
-		// console.log('starting quiz...')
+		// // console.log('starting quiz...')
 		let interval;
 		// start timer here
 		if (isActive) {
@@ -445,17 +440,17 @@ const Quiz = () => {
 	};
 
 	const toggle = () => {
-		console.log('Back to timer');
+		// console.log('Back to timer');
 		setIsActive(true);
 	};
 
 	const resetTimer = () => {
-		console.log('resetting timer...');
+		// console.log('resetting timer...');
 		setSeconds(30);
 		setIsActive(!isActive);
 	};
 
-	// console.log('Before Effect:', seconds)
+	// // console.log('Before Effect:', seconds)
 
 	useEffect(() => {
 		const isTimeUp = () => {
@@ -466,11 +461,11 @@ const Quiz = () => {
 		};
 		isTimeUp();
 	}, []);
-	// console.log("Function for Last Played")
+	// // console.log("Function for Last Played")
 	// canPlay(user.lastPlayed)
 
 	// useEffect(() => {
-	//   console.log("Function for Last Played")
+	//   // console.log("Function for Last Played")
 	//   canPlay(user.lastPlayed)
 	// }, [])
 
@@ -478,7 +473,7 @@ const Quiz = () => {
 	// useEffect(() => {
 	//   let interval = null;
 
-	//   // console.log(canPlay(new Date()))
+	//   // // console.log(canPlay(new Date()))
 
 	//   if (isActive) {
 	//     interval = setInterval(() => {

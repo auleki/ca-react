@@ -24,4 +24,5 @@ debug.log
 dump.js
 npm-debug.log*
 yarn-debug.log*
+todo.md
 yarn-error.log*

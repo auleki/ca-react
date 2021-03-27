@@ -417,10 +417,7 @@ export const Title = styled.h1`
 	font-weight: 100;
 	text-align: left;
 
-	${({ size }) => 
-		size && css `
-			font-size: ${size}em;
-		`}
+	${({ size }) => size && css`font-size: ${size}em;`};
 `;
 
 export const SubTitle = styled.h2`
@@ -430,27 +427,10 @@ export const SubTitle = styled.h2`
 	margin: .2em 0;
 	/* margin-top: 1rem; */
 
-	${({ center }) => 
-	center && css `
-		text-align: center;
-	`}
-
-	${({ fontColor }) => 
-		fontColor && css`
-			color: ${fontColor};
-		`}
-
-	${({ bold }) => 
-		bold && css `
-			font-weight: ${bold} ;
-		`}
-
-	${({ size }) => 
-		size && css `
-			font-size: ${size}em;
-		`}
-
-	${({ uppercase }) => uppercase && css`text-transform: uppercase;`} .order_number {
+	${({ center }) => center && css`text-align: center;`} ${({ fontColor }) =>
+			fontColor && css`color: ${fontColor};`} ${({ bold }) => bold && css`font-weight: ${bold};`} ${({ size }) =>
+			size && css`font-size: ${size}em;`} ${({ uppercase }) =>
+			uppercase && css`text-transform: uppercase;`} .order_number {
 		background-color: #f36bee;
 		padding: .3em;
 		font-size: .8em;
@@ -516,26 +496,17 @@ export const FButton = styled.button`
 	border: none;
 	margin: .5rem 0;
 
-	${({ uppercase }) => 
-		uppercase && css `
-			text-transform: uppercase;
-		`}
-	
-	${({ margin, x, y }) => 
-	margin && css `
-		margin: ${y}em ${x}em;
-	`}
-
-	color: #333;
+	${({ uppercase }) => uppercase && css`text-transform: uppercase;`} ${({ margin, x, y }) =>
+			margin && css`margin: ${y}em ${x}em;`} color: #333;
 	&:hover {
 		cursor: pointer;
 		/* background-color: #43a047; */
 		background-color: #000;
 		color: #fff;
 
-    .span_icon {
-      left: -.4em;
-    }
+		.span_icon {
+			left: -.4em;
+		}
 
 		.span_icon,
 		.span_icon.rotate-180 {
@@ -565,20 +536,17 @@ export const FButton = styled.button`
           // use the shadow to add a pulse animation.
           /* box-shadow: 0 0 .5rem .4rem rgba(0, 0, 0, .3); */
         }
-      `} 
-
-      .span_icon, 
-      .span_text {
+      `} .span_icon, .span_text {
 		/* background: yellow; */
-		transition: 300ms translateX ease-in, ;
+		transition: 300ms translateX ease-in;
 	}
 
 	.span_icon {
 		/* margin-top: .25em; */
-    position: relative;
-    left:0;
+		position: relative;
+		left: 0;
 		bottom: 3px;
-		transition: transform 300ms ease-in;	
+		transition: transform 300ms ease-in;
 		/* transform: translateX(-50rem); */
 	}
 
@@ -600,7 +568,6 @@ export const Button = ({ primary, children, bgColor }) => {
 	);
 };
 
-
 export const CardContainer = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -619,16 +586,7 @@ export const SummaryHeader = styled.div`
 	margin-bottom: 1rem;
 	width: 100%;
 
-	${({ marginAuto }) => 
-		marginAuto && css `
-			margin: 0 auto 1rem auto;
-		`}
-
-	/* p {
-		margin: 0 1rem;
-	} */
-
-	h1 {
+	${({ marginAuto }) => marginAuto && css`margin: 0 auto 1rem auto;`} h1 {
 		text-align: left;
 	}
 
@@ -1010,8 +968,7 @@ export const FormContainer = styled.div`
 			width: 100%;
 		}
 	}
-
-`
+`;
 
 export const FormCard = styled.div`
 	display: flex;
@@ -1021,12 +978,9 @@ export const FormCard = styled.div`
 	@media (max-width: 920px) {
 		flex-direction: column-reverse;
 	}
-`
+`;
 
-export const OrderPage = styled.div`
-	/* background: aquamarine; */
-
-`
+export const OrderPage = styled.div`/* background: aquamarine; */`;
 
 export const Form = styled.form`
 	height: 100%;
@@ -1220,7 +1174,7 @@ export const Page = styled.div`
 
 export const ItemForCarousel = styled.div`
 	/* background-color: url("https://res.cloudinary.com/checkadigs-cloud/image/upload/v1606397756/IMG_E4430_vzk1ol.jpg") */
-		/* fixed no-repeat; */
+	/* fixed no-repeat; */
 	background-size: cover;
 	height: 100vh;
 	width: 100%;
@@ -1321,7 +1275,7 @@ export const HeaderStyle = styled.div`
 	height: 100vh;
 	width: 100%;
 	/* background: #F36B2B; */
-	 background: #1a1a1a;
+	background: #1a1a1a;
 	/* background: linear-gradient(to right, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5) ), url("https://res.cloudinary.com/checkadigs-cloud/image/upload/v1606397756/IMG_E4430_vzk1ol.jpg") fixed no-repeat; */
 	/* background: linear-gradient(to right, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5) ) fixed no-repeat; */
 	/* background-size: cover; */
@@ -1418,7 +1372,6 @@ export const AuthPage = styled.div`
 	/* height: 90vh; */
 	/* background: #907051; */
 
-
 	form {
 		width: 30rem;
 		padding-bottom: 3em;
@@ -1475,26 +1428,26 @@ export const QuizPage = styled.div`
 `;
 export const QuizBox = styled.div`
 	/* background-color: #f36b2b; */
-	background: url("https://res.cloudinary.com/dyj6pqx6d/image/upload/v1614852691/checkadigs/dot-bg_uzhhlm.svg")fixed repeat ;
+	background: url("https://res.cloudinary.com/dyj6pqx6d/image/upload/v1614852691/checkadigs/dot-bg_uzhhlm.svg")fixed repeat;
 	/* background-size: cover; */
 	height: 80%;
 	width: 60%;
 	transition: 300ms ease-in;
 	border-radius: .2em;
 
-	// only use hover effects on desktop 
+	// only use hover effects on desktop
 	@media (min-width: 720px) {
 		&:hover {
-		/* transform: translateY(-.1em); */
-		box-shadow: -1px 2px 13px 0px rgba(0,0,0,0.75);
-		-webkit-box-shadow: -1px 2px 13px 0px rgba(0,0,0,0.75);
-		-moz-box-shadow: -1px 2px 13px 0px rgba(0,0,0,0.75);
-		.score-title {
-			/* border-bottom: .2em dashed #f36b2b; */
+			/* transform: translateY(-.1em); */
+			box-shadow: -1px 2px 13px 0px rgba(0, 0, 0, 0.75);
+			-webkit-box-shadow: -1px 2px 13px 0px rgba(0, 0, 0, 0.75);
+			-moz-box-shadow: -1px 2px 13px 0px rgba(0, 0, 0, 0.75);
+			.score-title {
+				/* border-bottom: .2em dashed #f36b2b; */
 			}
-		}	
+		}
 	}
-	
+
 	.light {
 		font-weight: 100;
 	}
@@ -1552,7 +1505,7 @@ export const QuizBox = styled.div`
 		}
 
 		&.center {
-			justify-content: center;			
+			justify-content: center;
 		}
 
 		button {
@@ -1592,7 +1545,7 @@ export const QuizBox = styled.div`
 	.quiz-title {
 		justify-content: space-between;
 		padding: 1.5em 3em 1em;
-		border-bottom: .2em dashed #F36B2B;
+		border-bottom: .2em dashed #f36b2b;
 	}
 
 	.row {
@@ -1666,6 +1619,19 @@ export const QuizBox = styled.div`
 			flex-direction: column;
 		}
 	}
-
-	
 `;
+
+export const AdminPage = styled.div(
+	({ color }) => css`
+		height: 100vh;
+		width: 100%;
+		background: #333;
+	`
+);
+
+export const WrapAdmin = styled.div(
+	({ size }) => css`
+		background: #333;
+		color: #fff;
+	`
+);
