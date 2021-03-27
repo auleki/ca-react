@@ -4,30 +4,30 @@ import * as IoIcons from 'react-icons/io';
 import * as RiIcons from 'react-icons/ri';
 
 export const SidebarData = [
-	{
-		title: 'Overview',
-		path: '/overview',
-		icon: <AiIcons.AiFillHome />,
-		iconOpen: <RiIcons.RiArrowDownSFill />,
-		iconClosed: <RiIcons.RiArrowUpSFill />
-		// subNav: [
-		// 	{
-		// 		title: 'Users',
-		// 		path: '/overview/users',
-		// 		icon: <IoIcons.IoIosPaper />
-		// 	},
-		// 	{
-		// 		title: 'Guests',
-		// 		path: '/overview/guest',
-		// 		icon: <IoIcons.IoIosAlbums />
-		// 	},
-		// 	{
-		// 		title: 'Admin',
-		// 		path: '/overview/admin',
-		// 		icon: <IoIcons.IoIosBeer />
-		// 	}
-		// ]
-	},
+	// {
+	// 	title: 'Overview',
+	// 	path: '/overview',
+	// 	icon: <AiIcons.AiFillHome />,
+	// 	iconOpen: <RiIcons.RiArrowDownSFill />,
+	// 	iconClosed: <RiIcons.RiArrowUpSFill />
+	// 	// subNav: [
+	// 	// 	{
+	// 	// 		title: 'Users',
+	// 	// 		path: '/overview/users',
+	// 	// 		icon: <IoIcons.IoIosPaper />
+	// 	// 	},
+	// 	// 	{
+	// 	// 		title: 'Guests',
+	// 	// 		path: '/overview/guest',
+	// 	// 		icon: <IoIcons.IoIosAlbums />
+	// 	// 	},
+	// 	// 	{
+	// 	// 		title: 'Admin',
+	// 	// 		path: '/overview/admin',
+	// 	// 		icon: <IoIcons.IoIosBeer />
+	// 	// 	}
+	// 	// ]
+	// },
 	{
 		title: 'Merhcandise',
 		path: '/merchandise',
