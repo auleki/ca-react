@@ -24,16 +24,15 @@ const SimpleNav = () => {
          {/* <ul className="navbar"> */}
           {/* </ul>  */}
           <div className="nav-links">
-            <Link to="/admin" className="nav-link">
-              <FButton>
-                ADMIN
-              </FButton>
-            </Link>
-
             <Link to="/quiz" className="nav-link">
-              <FButton>
-                Quiz
-              </FButton>
+              {/* <FButton> */}
+                QUIZ
+              {/* </FButton> */}
+            </Link>
+            <Link to="/about" className="nav-link">
+              {/* <FButton> */}
+                ABOUT US
+              {/* </FButton> */}
             </Link>
           <div className="cart-icon">
             <Link className="link-button" to="/shopping">

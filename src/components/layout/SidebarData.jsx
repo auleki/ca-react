@@ -29,49 +29,65 @@ export const SidebarData = [
 	// 	// ]
 	// },
 	{
-		title: 'Merhcandise',
-		path: '/merchandise',
+		title: 'Clothing',
+		path: '/admin/clothing',
 		icon: <AiIcons.AiFillControl />,
 		iconOpen: <RiIcons.RiArrowDownSFill />,
 		iconClosed: <RiIcons.RiArrowUpSFill />,
 		subNav: [
 			{
-				title: 'Latest',
-				path: '/overview/latest',
+				title: 'Orders',
+				path: '/admin/clothing/orders',
 				icon: <IoIcons.IoIosBook />
 			},
 			{
-				title: 'Vintage',
-				path: '/overview/vintage',
-				icon: <IoIcons.IoIosBug />
-			},
-			{
-				title: 'Discount',
-				path: '/overview/discount',
-				icon: <IoIcons.IoIosCard />
+				title: 'Recent Sales',
+				path: '/admin/clothing/recent',
+				icon: <IoIcons.IoIosBook />
 			}
 		]
 	},
 	{
 		title: 'Users',
-		path: '/users',
+		path: '/admin/users',
+		icon: <AiIcons.AiOutlineAppstore />,
+		iconOpen: <RiIcons.RiArrowDownSFill />,
+		iconClosed: <RiIcons.RiArrowUpSFill />,
+		subNav: [
+			{
+				title: 'Subscribers',
+				path: '/users/subscribers',
+				icon: <IoIcons.IoIosPaper />
+			},
+			// difference is over here all blocked accounts and their source is showed
+			{
+				title: 'Blocked Accounts',
+				path: '/users/blocked',
+				icon: <IoIcons.IoIosBeer />
+			}
+		]
+	},
+	{
+		title: 'Quiz',
+		path: '/admin/quiz',
 		icon: <AiIcons.AiOutlineAppstore />,
 		iconOpen: <RiIcons.RiArrowDownSFill />,
 		iconClosed: <RiIcons.RiArrowUpSFill />,
 		subNav: [
 			{
 				title: 'Quiz Winners',
-				path: '/users/quiz/winners',
+				path: '/admin/quiz/winners',
 				icon: <IoIcons.IoIosPaper />
 			},
 			{
 				title: 'Highscores',
-				path: '/users/quiz/top',
+				path: '/admin/quiz/highscores',
 				icon: <IoIcons.IoIosAlbums />
 			},
+			// specific cause players can be blocked for any reason
 			{
-				title: 'Blocked Accounts',
-				path: '/users/blocked',
+				title: 'Blocked Players',
+				path: '/admin/quiz/blocked',
 				icon: <IoIcons.IoIosBeer />
 			}
 		]

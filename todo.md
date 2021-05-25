@@ -9,7 +9,7 @@ checkout form
 
 
 
-<<<<<<< HEAD
+
 - - [x] pass on the total amount of the order with an option for the user to go back a step
 
 - - [x] checkbox with an option for user to subscribe for newsletter
@@ -19,7 +19,7 @@ checkout form
 - - [] charge their account with the total amount
 
 - - [x] show user a confirmation page with the option to go back to the store. 
-=======
+
 - - [] pass on the total amount of the order with an option for the user to go back a step
 
 - - [] checkbox with an option for user to subscribe for newsletter
