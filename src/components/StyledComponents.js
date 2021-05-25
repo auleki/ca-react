@@ -434,68 +434,105 @@ const StyledButton = styled.button`
       `};
 `
 
-export const Title = styled.h1`
-  color: #fff;
-  padding: 0;
-  font-size: 2.2rem;
-  font-weight: 100;
-  text-align: left;
+// export const Title = styled.h1`
+//   color: #fff;z
+//   padding: 0;
+//   font-size: 2.2rem;
+//   font-weight: 100;
+//   text-align: left;
 
-  ${({ size }) =>
-    size &&
-    css`
-      font-size: ${size}em;
-    `};
-`
+//   ${({ size }) =>
+//     size &&
+//     css`
+//       font-size: ${size}em;
+//     `};
+// `
+export const Title = styled.h1(
+  ({ size, center, uppercase, bold }) => css`
+    padding: 0;
+    text-transform: ${uppercase ? 'uppercase' : 'none'};
+    color: ${color.white};
+    font-size: ${size || 2.2}em;
+    font-weight: ${bold ? 800 : 400};
+    text-align: ${center ? 'center' : 'left'};
+    letter-spacing: 2px;
+  `
+)
 
-export const SubTitle = styled.h2`
-	color: #fff;
-	font-size: 1.1rem;
-	font-weight: 200;
-	margin: .2em 0;
-	/* margin-top: 1rem; */
+export const SubTitle = styled.h2(
+  ({ center, fontColor, bold, size, uppercase }) => css`
+    color: ${fontColor || '#fff'};
+    font-weight: ${bold ? 800 : 400};
+    font-size: ${size || 1}em;
+    text-transform: ${uppercase ? 'uppercase' : 'none'};
+    text-align: ${center ? 'center' : 'left'};
 
-	${({ center }) =>
-    center &&
-    css`
-      text-align: center;
-    `} ${({ fontColor }) =>
-  fontColor &&
-  css`
-    color: ${fontColor};
-  `} ${({ bold }) =>
-  bold &&
-  css`
-    font-weight: ${bold};
-  `} ${({ size }) =>
-  size &&
-  css`
-    font-size: ${size}em;
-  `} ${({ uppercase }) =>
-  uppercase &&
-  css`
-    text-transform: uppercase;
-  `} .order_number {
-		background-color: #f36bee;
-		padding: .3em;
-		font-size: .8em;
-		border-radius: 5px;
-		color: #fff;
-	}
+    .order_number {
+      background-color: #f36bee;
+      padding: 0.3em;
+      font-size: 0.8em;
+      border-radius: 5px;
+      color: #fff;
+    }
 
-	@media (max-width: 473px) {
-		.order_number {
-			margin: 1em 0;
-			background-color: #f36bee;
-		}
-	}
-`
+    @media (max-width: 473px) {
+      .order_number {
+        margin: 1em 0;
+        background-color: #f36bee;
+      }
+    }
+  `
+)
+
+// export const SubTitle = styled.h2`
+// 	color: #fff;
+// 	font-size: 1.1rem;
+// 	font-weight: 200;
+// 	margin: .2em 0;
+// 	/* margin-top: 1rem; */
+
+// 	${({ center }) =>
+//     center &&
+//     css`
+//       text-align: center;
+//     `} ${({ fontColor }) =>
+//   fontColor &&
+//   css`
+//     color: ${fontColor};
+//   `} ${({ bold }) =>
+//   bold &&
+//   css`
+//     font-weight: ${bold};
+//   `} ${({ size }) =>
+//   size &&
+//   css`
+//     font-size: ${size}em;
+//   `} ${({ uppercase }) =>
+//   uppercase &&
+//   css`
+//     text-transform: uppercase;
+//   `} .order_number {
+// 		background-color: #f36bee;
+// 		padding: .3em;
+// 		font-size: .8em;
+// 		border-radius: 5px;
+// 		color: #fff;
+// 	}
+
+// 	@media (max-width: 473px) {
+// 		.order_number {
+// 			margin: 1em 0;
+// 			background-color: #f36bee;
+// 		}
+// 	}
+// `
 
 export const Paragraph = styled.p(
   ({ size, fontColor }) => css`
     color: ${fontColor || '#ddd'};
     font-size: ${size || 1.1}em;
     margin: 0.6em 0;
+    font-weight: 400;
 
     span.special {
       font-weight: 800;
@@ -524,15 +561,46 @@ export const Paragraph = styled.p(
 
 export const Container = styled.div(
   ({ size }) => css`
-    height: 100vh;
+    /* height: 100vh; */
+    /* overflow-y: scroll; */
+    padding: 0 0 1em 0;
 
     .header {
-      height: 50vh;
+      height: 25vh;
       width: 100%;
-      display: grid;
-      grid-template-columns: 2fr 2fr;
-      /* background: ${color.lightBlack}; */
-			background: linear-gradient(45deg, #BE6E0440, #FF9100C0), url("https://res.cloudinary.com/checkadigs-cloud/image/upload/v1621905212/pattern_giihet.png");
+      display: flex;
+      justify-content: center;
+      background-attachment: fixed;
+      background: linear-gradient(45deg, #be6e0440, #ff9100c0),
+        url('https://res.cloudinary.com/checkadigs-cloud/image/upload/v1621905212/pattern_giihet.png');
+    }
+
+    .aboutUs {
+      padding: 0 1rem;
+
+      .content {
+        margin-top: 1em;
+      }
+
+      .more {
+        margin-top: 3em;
+        h2 {
+          margin-bottom: 0.5em;
+        }
+      }
+
+      .title {
+        h2 {
+          line-height: 45px;
+        }
+      }
+
+      p {
+        margin: 0 0 1em;
+        line-height: 25px;
+        text-align: left;
+        font-size: 1.2em;
+      }
     }
   `
 )

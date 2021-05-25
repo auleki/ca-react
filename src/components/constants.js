@@ -6,3 +6,9 @@ export const color = {
   white: '#fff',
   purple: '#542e71'
 }
+
+export const fonts = {
+  main: '',
+  primary: '',
+  secondary: ''
+}
