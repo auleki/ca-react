@@ -6,6 +6,7 @@ import Slider from 'react-slick'
 const ClothSection = ({ clothes: { products, title } }) => {
   // eslint-disable-next-line
   const [merchs, setMerchs] = useState(products);
+  console.log("::MERCHIS::", products)
 
   const settings = {
     dots: true,
@@ -26,10 +27,10 @@ const ClothSection = ({ clothes: { products, title } }) => {
         <h3>{ title }</h3>
       </div>
       <Slider {...settings} className="center">
-        {merchs.map(
+        {/* {merchs.map(
           (cloth, i) => 
           <Clothing key={i} clothes={cloth}/>
-          )}
+          )} */}
       </Slider>
     </div>    
    )

@@ -541,17 +541,17 @@ header {
     }
 }
 
-.bg-left {
-    background: url("/images/bg-left.png") scroll center no-repeat;
-    background-color: $c2;
-    background-size: cover;
-}
+// .bg-left {
+//     background: url("/images/bg-left.png") scroll center no-repeat;
+//     background-color: $c2;
+//     background-size: cover;
+// }
 
-.bg-right {
-    background: url("/images/bg-right.png") scroll center no-repeat;
-    background-color: $c2;
-    background-size: cover;
-}
+// .bg-right {
+//     background: url("/images/bg-right.png") scroll center no-repeat;
+//     background-color: $c2;
+//     background-size: cover;
+// }
 
 .wrap {
     flex-wrap: wrap;

@@ -46,7 +46,7 @@ export const saveQuizUser = async (user) => {
 
 export const addSubscriber = async (subscriberInfo) => {
   try {
-    const res = await axios.post(`${localUrl}/subscribers`, subscriberInfo, config)
+    const res = await axios.post(`${baseUrl}/subscribers`, subscriberInfo, config)
     return res.data
   } catch (e) {
     throw new Error('Subscriber not saved', e)
@@ -55,7 +55,7 @@ export const addSubscriber = async (subscriberInfo) => {
 
 export const saveQuizWinner = async (winner) => {
   try {
-    const savedWinner = await axios.post(`${localUrl}/quiz/winner`, winner, config)
+    const savedWinner = await axios.post(`${baseUrl}/quiz/winner`, winner, config)
     return savedWinner.data
   } catch (error) {
     throw new Error('Winner not saved', error)
@@ -76,7 +76,7 @@ export const fetchUser = async (email) => {
 export const updateUser = async (updateData, username) => {
   try {
     // console.log("SCORE IN OPS:", score)
-    const { data } = await axios.patch(`${localUrl}/users/${username}`, updateData, config)
+    const { data } = await axios.patch(`${baseUrl}/users/${username}`, updateData, config)
     return data   
   } catch (error) {
     console.error(error)
