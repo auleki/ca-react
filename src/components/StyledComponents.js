@@ -907,6 +907,14 @@ export const CardInfo = styled.div`
 
 // `
 
+export const StyleIcon = styled.div(
+  ({ size }) => css`
+    height: 5rem;
+    width: 5rem;
+    background: ${color.green};
+  `
+)
+
 export const IconStyle = styled.div`
   display: inline;
   img {

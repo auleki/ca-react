@@ -13,6 +13,7 @@ import {
 	// ParentContainer,
 	SubTitle,
 	Title,
+	StyleIcon,
 	AuthPage,
 	FButton
 } from '../StyledComponents';
@@ -308,7 +309,6 @@ const OldUser = ({
 	};
 
 	const loginUser = async (e) => {
-		// console.log('Tapping Login');
 		try {
 			e.preventDefault();
 			setLoading(true);
@@ -320,16 +320,15 @@ const OldUser = ({
 
 			if (userCanPlay) {
 				// console.log('Updating last saved')
-				// setCanPlay(true);
+				setCanPlay(true);
 				const lastPlayedUpdate = {
 					updateData: { lastPlayed: new Date() },
 					action: 'UPDATE_LASTPLAYED'
 				};
-
 				const lastPlayedResponse = await updateUser(lastPlayedUpdate, fetchedUser.username);
 				setOldUser(false);
 				setRegister(false);
-				// // console.log('LAST PLAYED RESPONSE', lastPlayedResponse);
+				// console.log('LAST PLAYED RESPONSE', lastPlayedResponse);
 			} else {
 				setCanPlay(false);
 			}
@@ -340,9 +339,6 @@ const OldUser = ({
 			setLoading(false);
 		}
 	};
-
-	// 	position:
-	// }
 
 	return (
 		<AuthPage>
@@ -372,6 +368,79 @@ const OldUser = ({
 	);
 };
 
+const QuizHeader = ({ user, attempt, limit }) => {
+	return (
+		<div className="quiz-title">
+			<p>{user.firstName || 'Guest'}</p>
+			<p className="bold">
+				{attempt}/{limit} Questions
+			</p>
+		</div>
+	)
+}
+
+const QuizStats = ({ score, secondsLeft }) => {
+	return (
+		<>
+			<div className="row">
+				<p>
+					SCORE: <span className="bold">{score}</span>
+				</p>
+				{/* <p>6 ANSWERS LEFT</p> */}
+				<p className="bold">{secondsLeft}s Remaining</p>
+			</div>
+		</>
+	)
+}
+
+const RefreshIcon = () => {
+
+	return (
+		<StyleIcon>
+			<h2>Hello</h2>
+		</StyleIcon>
+	)
+}
+
+const DisplayQuestion = ({ 
+		questions, 
+		currentQuestion, 
+		optionHandler, 
+		setPauseTimer  
+	}) => {
+
+	useEffect(() => {
+		setPauseTimer(true)
+	}, [])
+	
+	return (
+		<>
+			<div className="question">
+				<p>{questions[currentQuestion]
+						? 
+							questions[currentQuestion].questionText 
+						: 
+							<RefreshIcon />}</p>
+			</div>
+
+			<div className="options">
+				{questions[currentQuestion]
+					? 	
+					questions[currentQuestion].answerOptions.map((option, i) => (
+						<button key={i} className="button" onClick={() => optionHandler(option.isCorrect)}>
+							{option.answerText}
+							{option.isCorrect ? '+' : ''}
+						</button>
+					))
+					: 
+						<RefreshIcon />
+
+			}
+			</div>
+		</>
+	)
+}
+
 const Quiz = () => {
 	const [ questions, setQuestions ] = useState(questionList);
 	// const [ questionsSet, setQuestionsSet ] = useState([]);
@@ -383,11 +452,11 @@ const Quiz = () => {
 	const [ attempt, setAttempt ] = useState(1);
 	const [ user, setUser ] = useState('');
 	const [ oldUser, setOldUser ] = useState(false);
-	const [secondsLeft, setSecondsLeft] = useState(30)
+	const [secondsLeft, setSecondsLeft] = useState(45)
 	const [ register, setRegister ] = useState(true);
 	const [ isActive, setIsActive ] = useState(false);
 	const [ canPlay, setCanPlay ] = useState(true);
-	const [pauseTimer, setPauseTimer] = useState(false)
+	const [pauseTimer, setPauseTimer] = useState(true)
 	const [ questionIndex, setQuestionIndex ] = useState(0);
 	// let timer = 30;
 
@@ -424,7 +493,6 @@ const Quiz = () => {
 	function startTimer () {
 		if(secondsLeft === 0 && !pauseTimer) {
 			clearInterval(intervalRef.current) 
-			// nextQuestion()
 			resetTimer()
 		} else {
 			intervalRef.current = setInterval(decreaseSeconds, 1000) 
@@ -441,6 +509,10 @@ const Quiz = () => {
 
 	useEffect(() => {
 		beginQuiz();
+	}, []);
+
+	useEffect(() => {
+		setPauseTimer(false)
 	}, []);
 
 	// const transitQuiz = () => {
@@ -486,39 +558,40 @@ const Quiz = () => {
 
 	// let canPlay = true
 
-	// if (!canPlay) {
-	// 	return (
-	// 		<QuizPage>
-	// 			<QuizBox>
-	// 				<div className="score-title center">
-	// 					{/* <Link to="/"> */}
-	// 					{/* <FButton className="rotate-180">
-	// 					<HelpIcon />
-	// 				</FButton> */}
-	// 					{/* </Link> */}
-	// 					<h3 center>
-	// 						{user.firstName || 'Guest'} {user.lastName}{' '}
-	// 					</h3>
-	// 				</div>
-	// 				<div className="score-display">
-	// 					<div className="text_box">
-	// 						<h3>You have exhausted your tries for the day</h3>
-	// 						<p>Come back in 24 hours</p>
-	// 					</div>
-	// 					{/* <h3>{score || 9}</h3> */}
-	// 					<Link to="/">
-	// 						<FButton>
-	// 							<span className="span_icon rotate-180">
-	// 								<ExitToAppIcon />
-	// 							</span>{' '}
-	// 							<span className="span_text">Exit Quiz</span>
-	// 						</FButton>
-	// 					</Link>
-	// 				</div>
-	// 			</QuizBox>
-	// 		</QuizPage>
-	// 	);
-	// }
+	if (!canPlay) {
+		return (
+			<QuizPage>
+				<QuizBox>
+					<div className="score-title center">
+						{/* <Link to="/"> */}
+						{/* <FButton className="rotate-180">
+						<HelpIcon />
+					</FButton> */}
+						{/* </Link> */}
+						<h3 center>
+							{user.firstName || 'Guest'} {user.lastName}{' '}
+						</h3>
+					</div>
+					<div className="score-display">
+						<div className="text_box">
+							{/* <h3>You have exhausted your tries for the day</h3> */}
+							<h3>Salvy have exhausted your tries for the day</h3>
+							<p>Come back in 24 hours</p>
+						</div>
+						{/* <h3>{score || 9}</h3> */}
+						<Link to="/">
+							<FButton>
+								<span className="span_icon rotate-180">
+									<ExitToAppIcon />
+								</span>{' '}
+								<span className="span_text">Exit Quiz</span>
+							</FButton>
+						</Link>
+					</div>
+				</QuizBox>
+			</QuizPage>
+		);
+	}
 
 	return (
 		<QuizPage>
@@ -554,30 +627,18 @@ const Quiz = () => {
 				/>
 			) : (
 				<QuizBox>
-					<div className="quiz-title">
-						<p>{user.firstName || 'Guest'}</p>
-						<p className="bold">
-							{attempt}/{limit} Questions
-						</p>
-					</div>
-					<div className="row">
-						<p>
-							SCORE: <span className="bold">{score}</span>
-						</p>
-						{/* <p>6 ANSWERS LEFT</p> */}
-						<p className="bold">{secondsLeft}s Remaining</p>
-					</div>
-					<div className="question">
-						<p>{questions[currentQuestion].questionText}</p>
-					</div>
-					<div className="options">
-						{questions[currentQuestion].answerOptions.map((option, i) => (
-							<button key={i} className="button" onClick={() => optionHandler(option.isCorrect)}>
-								{option.answerText}
-								{option.isCorrect ? ' R' : ''}
-							</button>
-						))}
-					</div>
+					<QuizHeader 
+						user={user} 
+						attempt={attempt} 
+						limit={limit}/>
+					<QuizStats 
+						score={score} 
+						secondsLeft={secondsLeft}/>
+					<DisplayQuestion 
+						optionHandler={optionHandler}
+						questions={questions} 
+						setPauseTimer={setPauseTimer}
+						currentQuestion={currentQuestion}/>
 				</QuizBox>
 			)}
 		</QuizPage>
