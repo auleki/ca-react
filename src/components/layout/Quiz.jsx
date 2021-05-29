@@ -40,8 +40,7 @@ const ScoreView = ({ score, restart, user, resetTimer, setIsActive }) => {
 
 		const saveScore = async () => {
 			if (score === 10) {
-				const winnerResponse = await saveQuizWinner(user);
-				// console.log(`${user.username} is a champion!`, winnerResponse);
+				await saveQuizWinner(user);
 			}
 			// console.table(`User is being updated with ${score}...`)
 			const scoreData = {
@@ -99,7 +98,13 @@ const ScoreView = ({ score, restart, user, resetTimer, setIsActive }) => {
 SIGN UP PAGE 
 */
 
-const AddUser = ({ beginQuiz, setUser, user, loginOrRegister, setOldUser, setRegister }) => {
+const AddUser = ({ 
+	beginQuiz, 
+	setUser, 
+	user, 
+	loginOrRegister, 
+	setOldUser, 
+	setRegister }) => {
 	const [ email, setEmail ] = useState('');
 	const [ username, setUsername ] = useState('');
 	const [ firstName, setFirstName ] = useState('');
@@ -153,7 +158,6 @@ const AddUser = ({ beginQuiz, setUser, user, loginOrRegister, setOldUser, setReg
 			};
 
 			if (quizUser.toSubscribe) {
-				// // console.log('Saving' + quizUser.email + " to subscriber's list");
 				const subscriber = { firstName, lastName, email };
 				const savedSubscriber = await addSubscriber(subscriber);
 				// console.log('IS SAVING SUBSCRIBER:', savedSubscriber);
@@ -260,7 +264,14 @@ const AddUser = ({ beginQuiz, setUser, user, loginOrRegister, setOldUser, setReg
 /* 
 LOGIN PAGE 
 */
-const OldUser = ({ loginOrRegister, setUser, setOldUser, setRegister, user, setCanPlay, canPlay }) => {
+const OldUser = ({ 
+	loginOrRegister, 
+	setUser, 
+	setOldUser, 
+	setRegister, 
+	user, 
+	setCanPlay, 
+	canPlay }) => {
 	const [ email, setEmail ] = useState('');
 	const [ loading, setLoading ] = useState(false);
 	const onUserInput = (e) => setEmail(e.target.value);
@@ -304,11 +315,12 @@ const OldUser = ({ loginOrRegister, setUser, setOldUser, setRegister, user, setC
 			const fetchedUser = await fetchUser(email);
 			// console.log('FETCHED USER:', fetchedUser);
 			setUser(fetchedUser);
-			const userCanPlay = findDayDifference(fetchedUser.lastPlayed);
+			// const userCanPlay = findDayDifference(fetchedUser.lastPlayed);
+			let userCanPlay = true
 
 			if (userCanPlay) {
 				// console.log('Updating last saved')
-				setCanPlay(true);
+				// setCanPlay(true);
 				const lastPlayedUpdate = {
 					updateData: { lastPlayed: new Date() },
 					action: 'UPDATE_LASTPLAYED'
@@ -324,7 +336,6 @@ const OldUser = ({ loginOrRegister, setUser, setOldUser, setRegister, user, setC
 			//! CAUSED A MEMORY LEAK
 			// setLoading(false);
 		} catch (error) {
-			// console.error("Source_one:", error)
 			errorAlert(`${email} is not registered with us`, 'error');
 			setLoading(false);
 		}
@@ -334,8 +345,6 @@ const OldUser = ({ loginOrRegister, setUser, setOldUser, setRegister, user, setC
 	// }
 
 	return (
-		// <QuizPage>
-		//   <QuizBox>
 		<AuthPage>
 			<div className="start-game login">
 				<ToastContainer position="bottom-center" />
@@ -360,8 +369,6 @@ const OldUser = ({ loginOrRegister, setUser, setOldUser, setRegister, user, setC
 				</form>
 			</div>
 		</AuthPage>
-		//   </QuizBox>
-		// </QuizPage>
 	);
 };
 
@@ -379,13 +386,12 @@ const Quiz = () => {
 	const [secondsLeft, setSecondsLeft] = useState(30)
 	const [ register, setRegister ] = useState(true);
 	const [ isActive, setIsActive ] = useState(false);
-	const [ seconds, setSeconds ] = useState(30);
 	const [ canPlay, setCanPlay ] = useState(true);
+	const [pauseTimer, setPauseTimer] = useState(false)
 	const [ questionIndex, setQuestionIndex ] = useState(0);
 	// let timer = 30;
 
 	const intervalRef = useRef()
-	
 
 	const shuffleQuestions = (arr) => {
 		/* this array takes in another array
@@ -404,30 +410,33 @@ const Quiz = () => {
 	};
 
 	const decreaseSeconds = () => setSecondsLeft(prev => prev - 1)
+
+	function nextQuestion () {
+		if (limit > attempt) {
+			setCurrentQuestion(currentQuestion + 1);
+			setAttempt(attempt + 1);
+			resetTimer()
+		} else {
+			setShowScore(true);
+		}
+	}
 	
-	const startTimer = () => {
-		if(secondsLeft === 0) {
+	function startTimer () {
+		if(secondsLeft === 0 && !pauseTimer) {
 			clearInterval(intervalRef.current) 
+			// nextQuestion()
+			resetTimer()
 		} else {
 			intervalRef.current = setInterval(decreaseSeconds, 1000) 
 		}
-		// setPause(prev => prev )
-	}
+	}	
+
+	useEffect(() => {
+		if(secondsLeft === 0) nextQuestion()
+	}, [secondsLeft])
 	
-	const beginQuiz = () => {
-		// setOldUser(false);
-		// setRegister(false);
-		// // console.log('starting quiz...')
-		let interval;
-		// start timer here
-		if (isActive) {
-			interval = setInterval(() => {
-				setSeconds((seconds) => seconds - 1);
-			}, 1000);
-		} else if (!isActive) {
-			clearInterval(interval);
-		}
-		return () => clearInterval(interval);
+	function beginQuiz () {
+		startTimer()
 	};
 
 	useEffect(() => {
@@ -444,7 +453,7 @@ const Quiz = () => {
 		resetTimer();
 	}, []);
 
-	const loginOrRegister = (mode) => {
+	function loginOrRegister (mode) {
 		if (mode === 'login') {
 			setOldUser(true);
 			setRegister(false);
@@ -454,65 +463,20 @@ const Quiz = () => {
 		}
 	};
 
-	const toggle = () => {
-		// console.log('Back to timer');
+	function toggle () {
 		setIsActive(true);
 	};
 
-	const resetTimer = () => {
-		// console.log('resetting timer...');
-		setSeconds(30);
-		setIsActive(!isActive);
+	function resetTimer () {
+		setSecondsLeft(30);
 	};
 
-	// // console.log('Before Effect:', seconds)
-
-	useEffect(() => {
-		const isTimeUp = () => {
-			toggle();
-			if (seconds === -1) {
-				optionHandler();
-			}
-		};
-		isTimeUp();
-	}, []);
-	// // console.log("Function for Last Played")
-	// canPlay(user.lastPlayed)
-
-	// useEffect(() => {
-	//   // console.log("Function for Last Played")
-	//   canPlay(user.lastPlayed)
-	// }, [])
-
-	//! Effect for countdown timer
-	// useEffect(() => {
-	//   let interval = null;
-
-	//   // // console.log(canPlay(new Date()))
-
-	//   if (isActive) {
-	//     interval = setInterval(() => {
-	//       setSeconds(seconds => seconds - 1);
-	//     }, 1000);
-	//   } else if (!isActive) {
-	//     clearInterval(interval);
-	//   }
-	//   return () => clearInterval(interval)
-	// }, [isActive, seconds])
-
-	const optionHandler = (isCorrect) => {
-		setQuestionIndex(questionIndex + 1);
-		setSeconds(30);
+	function optionHandler (isCorrect) {	
 		if (isCorrect) setScore(score + 1);
-		if (limit > attempt) {
-			setCurrentQuestion(currentQuestion + 1);
-			setAttempt(attempt + 1);
-		} else {
-			setShowScore(true);
-		}
+		nextQuestion()
 	};
 
-	const resetScore = () => {
+	function resetScore () {
 		setShowScore(false);
 		setScore(0);
 		setAttempt(1);
@@ -522,39 +486,39 @@ const Quiz = () => {
 
 	// let canPlay = true
 
-	if (!canPlay) {
-		return (
-			<QuizPage>
-				<QuizBox>
-					<div className="score-title center">
-						{/* <Link to="/"> */}
-						{/* <FButton className="rotate-180">
-						<HelpIcon />
-					</FButton> */}
-						{/* </Link> */}
-						<h3 center>
-							{user.firstName || 'Guest'} {user.lastName}{' '}
-						</h3>
-					</div>
-					<div className="score-display">
-						<div className="text_box">
-							<h3>You have exhausted your tries for the day</h3>
-							<p>Come back in 24 hours</p>
-						</div>
-						{/* <h3>{score || 9}</h3> */}
-						<Link to="/">
-							<FButton>
-								<span className="span_icon rotate-180">
-									<ExitToAppIcon />
-								</span>{' '}
-								<span className="span_text">Exit Quiz</span>
-							</FButton>
-						</Link>
-					</div>
-				</QuizBox>
-			</QuizPage>
-		);
-	}
+	// if (!canPlay) {
+	// 	return (
+	// 		<QuizPage>
+	// 			<QuizBox>
+	// 				<div className="score-title center">
+	// 					{/* <Link to="/"> */}
+	// 					{/* <FButton className="rotate-180">
+	// 					<HelpIcon />
+	// 				</FButton> */}
+	// 					{/* </Link> */}
+	// 					<h3 center>
+	// 						{user.firstName || 'Guest'} {user.lastName}{' '}
+	// 					</h3>
+	// 				</div>
+	// 				<div className="score-display">
+	// 					<div className="text_box">
+	// 						<h3>You have exhausted your tries for the day</h3>
+	// 						<p>Come back in 24 hours</p>
+	// 					</div>
+	// 					{/* <h3>{score || 9}</h3> */}
+	// 					<Link to="/">
+	// 						<FButton>
+	// 							<span className="span_icon rotate-180">
+	// 								<ExitToAppIcon />
+	// 							</span>{' '}
+	// 							<span className="span_text">Exit Quiz</span>
+	// 						</FButton>
+	// 					</Link>
+	// 				</div>
+	// 			</QuizBox>
+	// 		</QuizPage>
+	// 	);
+	// }
 
 	return (
 		<QuizPage>
@@ -601,7 +565,7 @@ const Quiz = () => {
 							SCORE: <span className="bold">{score}</span>
 						</p>
 						{/* <p>6 ANSWERS LEFT</p> */}
-						<p className="bold">{seconds}s Remaining</p>
+						<p className="bold">{secondsLeft}s Remaining</p>
 					</div>
 					<div className="question">
 						<p>{questions[currentQuestion].questionText}</p>
