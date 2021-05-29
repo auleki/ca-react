@@ -410,6 +410,7 @@ const StyledButton = styled.button`
 
   &:active,
   &:focus {
+    background: ${color.purple};
     outline: 0;
   }
   ${({ primary }) =>

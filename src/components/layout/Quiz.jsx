@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 
@@ -376,12 +376,16 @@ const Quiz = () => {
 	const [ attempt, setAttempt ] = useState(1);
 	const [ user, setUser ] = useState('');
 	const [ oldUser, setOldUser ] = useState(false);
+	const [secondsLeft, setSecondsLeft] = useState(30)
 	const [ register, setRegister ] = useState(true);
 	const [ isActive, setIsActive ] = useState(false);
 	const [ seconds, setSeconds ] = useState(30);
 	const [ canPlay, setCanPlay ] = useState(true);
 	const [ questionIndex, setQuestionIndex ] = useState(0);
 	// let timer = 30;
+
+	const intervalRef = useRef()
+	
 
 	const shuffleQuestions = (arr) => {
 		/* this array takes in another array
@@ -399,6 +403,17 @@ const Quiz = () => {
 		return currentQuestions;
 	};
 
+	const decreaseSeconds = () => setSecondsLeft(prev => prev - 1)
+	
+	const startTimer = () => {
+		if(secondsLeft === 0) {
+			clearInterval(intervalRef.current) 
+		} else {
+			intervalRef.current = setInterval(decreaseSeconds, 1000) 
+		}
+		// setPause(prev => prev )
+	}
+	
 	const beginQuiz = () => {
 		// setOldUser(false);
 		// setRegister(false);
