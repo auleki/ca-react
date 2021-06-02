@@ -6,7 +6,7 @@ import {
   ActionRow,
   EmptyCartStyle,
   FButton,
-  SubTitle
+  Paragraph
 } from '../StyledComponents'
 import Shopping from '../../assets/shopping.webp'
 import Box from '../../assets/box.png'
@@ -32,7 +32,7 @@ const EmptyCart = () => (
     <div className="imageBox">
       <img src={Box} alt="empty cart"/>
     </div>
-    <Title>Empty Cart</Title>
+    <Paragraph>Cart is empty!</Paragraph>
     <Link to="/">
       <FButton primary>
       <ArrowBackIcon /> <span>Go Shopping</span> 

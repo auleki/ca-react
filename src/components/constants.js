@@ -4,11 +4,12 @@ export const color = {
   black: '#1a1a1a',
   lightBlack: '#242424',
   white: '#fff',
+  gray: '#B9B9B9',
   purple: '#542e71'
 }
 
 export const fonts = {
-  main: '',
-  primary: '',
+  main: 'Signika',
+  primary: 'Limelight',
   secondary: ''
 }

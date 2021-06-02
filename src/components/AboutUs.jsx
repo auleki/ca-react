@@ -1,6 +1,13 @@
 import React, { useRef, useEffect, forwardRef, useLayoutEffect, useState } from 'react'
-import { Container, Paragraph, SubTitle, Title, Button, Input, RowLayout } from './StyledComponents'
-import { color } from './constants'
+import { 
+  Container, 
+  Paragraph, 
+  SubTitle, 
+  Title, 
+  Button, 
+  Input, 
+  RowLayout } from './StyledComponents'
+import { color, fonts } from './constants'
 import { createRef } from 'react'
 
 const CountdownTimer = () => {
@@ -45,18 +52,19 @@ const AboutUs = () => {
       </div> */}
       
       <div className="header">
-        <Title bold uppercase size={4}>About Us</Title>
+        <Title bold textFont={fonts.main} uppercase size={4}>About Us</Title>
       </div>
 
       <div className="aboutUs">
         <div className="content">
           <div className="title">
-            <h2>FROM THE EVERYDAY TO THE EXTRAORDINARY, WE BELIEVE IN DESIGNING THE FINEST CLOTHES TO EQUIP YOUR JOURNEY.</h2>
+            <h2>OUR MISSION</h2>
+            {/* <h2>FROM THE EVERYDAY TO THE EXTRAORDINARY, WE BELIEVE IN DESIGNING THE FINEST CLOTHES TO EQUIP YOUR JOURNEY.</h2> */}
           </div>
           <p>
             Welcome to Check Adigs, your number one source for online clothing. 
             We're dedicated to giving you the very best of clothing with a 
-            focus on durability,  exceptional customer service and uniqueness. 
+            focus on durability, exceptional customer service and uniqueness. 
             Founded in 2020 by Adigun Kehinde and his cofounder Omoya Oluwatimilehin.             
           </p>
           <p>
@@ -69,7 +77,7 @@ const AboutUs = () => {
 
         </div>
         <section className="more">
-          <SubTitle bold size={1.5}>PRODUCTS AND SERVICES</SubTitle>  
+          <h2>PRODUCTS AND CULTURES</h2>  
           <p>
             Check Adigs offers a <span className="special">unisex</span> clothing line that is exquisite and sophisticated, as well as practical and wearable.
             We offer a full range collection where each piece is special individually and provides chic and effortless style. We create inimitable pieces that can be worn for years, combined with basics or trends. Our primary concern is ensuring our customers are happy with the style and fit of their purchase. We provide products tailored to all shapes and styles. Every piece in our collection is made to serve as your trusted companion through a lifetime of experience.                               

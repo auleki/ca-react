@@ -1,7 +1,7 @@
 import { colors } from '@material-ui/core'
 import React from 'react'
 import styled, { css, keyframes } from 'styled-components'
-import { color } from './constants'
+import { color, fonts } from './constants'
 // import { Link } from 'react-router-dom';
 
 // @import './variables';
@@ -435,19 +435,6 @@ const StyledButton = styled.button`
       `};
 `
 
-// export const Title = styled.h1`
-//   color: #fff;z
-//   padding: 0;
-//   font-size: 2.2rem;
-//   font-weight: 100;
-//   text-align: left;
-
-//   ${({ size }) =>
-//     size &&
-//     css`
-//       font-size: ${size}em;
-//     `};
-// `
 export const Title = styled.h1(
   ({ size, center, uppercase, bold }) => css`
     padding: 0;
@@ -461,8 +448,9 @@ export const Title = styled.h1(
 )
 
 export const SubTitle = styled.h2(
-  ({ center, fontColor, bold, size, uppercase }) => css`
+  ({ center, fontColor, bold, size, uppercase, textFont }) => css`
     color: ${fontColor || '#fff'};
+    font-family: ${textFont || 'inherit'};
     font-weight: ${bold ? 800 : 400};
     font-size: ${size || 1}em;
     text-transform: ${uppercase ? 'uppercase' : 'none'};
@@ -484,49 +472,6 @@ export const SubTitle = styled.h2(
     }
   `
 )
-
-// export const SubTitle = styled.h2`
-// 	color: #fff;
-// 	font-size: 1.1rem;
-// 	font-weight: 200;
-// 	margin: .2em 0;
-// 	/* margin-top: 1rem; */
-
-// 	${({ center }) =>
-//     center &&
-//     css`
-//       text-align: center;
-//     `} ${({ fontColor }) =>
-//   fontColor &&
-//   css`
-//     color: ${fontColor};
-//   `} ${({ bold }) =>
-//   bold &&
-//   css`
-//     font-weight: ${bold};
-//   `} ${({ size }) =>
-//   size &&
-//   css`
-//     font-size: ${size}em;
-//   `} ${({ uppercase }) =>
-//   uppercase &&
-//   css`
-//     text-transform: uppercase;
-//   `} .order_number {
-// 		background-color: #f36bee;
-// 		padding: .3em;
-// 		font-size: .8em;
-// 		border-radius: 5px;
-// 		color: #fff;
-// 	}
-
-// 	@media (max-width: 473px) {
-// 		.order_number {
-// 			margin: 1em 0;
-// 			background-color: #f36bee;
-// 		}
-// 	}
-// `
 
 export const Paragraph = styled.p(
   ({ size, fontColor }) => css`
@@ -556,10 +501,6 @@ export const Paragraph = styled.p(
   `
 )
 
-// export const Paragraph = styled.p`
-
-// `
-
 export const Container = styled.div(
   ({ size }) => css`
     /* height: 100vh; */
@@ -578,6 +519,13 @@ export const Container = styled.div(
 
     .aboutUs {
       padding: 0 1rem;
+      font-family: 'Signika';
+
+      h2 {
+        font-family: 'Limelight';
+        color: ${color.white};
+        letter-spacing: 2px;
+      }
 
       .content {
         margin-top: 1em;
@@ -599,6 +547,8 @@ export const Container = styled.div(
       p {
         margin: 0 0 1em;
         line-height: 25px;
+        font-family: ${fonts.main};
+        color: ${color.gray};
         text-align: left;
         font-size: 1.2em;
       }
@@ -1506,7 +1456,7 @@ export const EmptyCartStyle = styled.div`
   width: 30em;
 
   .imageBox {
-    background: red;
+    background: transparent;
   }
 
   img {
