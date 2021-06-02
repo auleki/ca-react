@@ -405,13 +405,20 @@ const RefreshIcon = () => {
 const DisplayQuestion = ({ 
 		questions, 
 		currentQuestion, 
+		setCurrentQuestion,
 		optionHandler, 
 		setPauseTimer  
 	}) => {
 
 	useEffect(() => {
+		if (currentQuestion === 10) setCurrentQuestion(0)
+	}, [currentQuestion])
+
+	useEffect(() => {
 		setPauseTimer(true)
 	}, [])
+
+	
 	
 	return (
 		<>
@@ -426,12 +433,12 @@ const DisplayQuestion = ({
 			<div className="options">
 				{questions[currentQuestion]
 					? 	
-					questions[currentQuestion].answerOptions.map((option, i) => (
-						<button key={i} className="button" onClick={() => optionHandler(option.isCorrect)}>
-							{option.answerText}
-							{option.isCorrect ? '+' : ''}
-						</button>
-					))
+						questions[currentQuestion].answerOptions.map((option, i) => (
+							<button key={i} className="button" onClick={() => optionHandler(option.isCorrect)}>
+								{option.answerText}
+								{option.isCorrect ? '+' : ''}
+							</button>
+						))
 					: 
 						<RefreshIcon />
 
@@ -638,6 +645,7 @@ const Quiz = () => {
 						optionHandler={optionHandler}
 						questions={questions} 
 						setPauseTimer={setPauseTimer}
+						setCurrentQuestion={setCurrentQuestion}
 						currentQuestion={currentQuestion}/>
 				</QuizBox>
 			)}

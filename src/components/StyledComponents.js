@@ -1492,7 +1492,8 @@ export const AppStyle = styled.div`
 `
 
 export const EmptyCartStyle = styled.div`
-  background: #ffffff;
+  /* background: #ffffff; */
+  background: transparent;
   /* background-color: #1a1a1a; */
   margin: 0 auto;
   display: flex;
@@ -1503,6 +1504,10 @@ export const EmptyCartStyle = styled.div`
   border-radius: 0.2em;
   position: relative;
   width: 30em;
+
+  .imageBox {
+    background: red;
+  }
 
   img {
     height: auto;

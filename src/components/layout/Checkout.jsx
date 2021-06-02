@@ -9,6 +9,7 @@ import {
   SubTitle
 } from '../StyledComponents'
 import Shopping from '../../assets/shopping.webp'
+import Box from '../../assets/box.png'
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import CartLength from './CartLength'
@@ -28,10 +29,10 @@ const TotalView = ({ price }) => (
 
 const EmptyCart = () => (
   <EmptyCartStyle>
-    <div>
-      <img src={Shopping} alt="empty cart"/>
+    <div className="imageBox">
+      <img src={Box} alt="empty cart"/>
     </div>
-    <SubTitle>Empty Cart</SubTitle>
+    <Title>Empty Cart</Title>
     <Link to="/">
       <FButton primary>
       <ArrowBackIcon /> <span>Go Shopping</span> 
