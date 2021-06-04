@@ -393,7 +393,65 @@ const HoverObj = keyframes`
 }
 `
 
-const StyledButton = styled.button`
+export const SButton = styled.button(
+  ({ size }) => css`
+    background: ${color.orange};
+    color: ${color.white};
+    display: flex;
+    padding: 1em;
+    align-items: center;
+    border: 0;
+
+    border-radius: 2px;
+    transition: 500ms ease-in;
+
+    .text {
+      margin: 0 0.5em;
+      font-size: 1.1em;
+    }
+
+    .icon {
+      margin: 0 0.5em;
+      transform: scale(1.4);
+      height: 1.5em;
+      width: 1.5em;
+      /* padding: .5em; */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+
+      background: ${color.black};
+      svg {
+        font-size: 1em;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background: ${color.white};
+      /* color: ${color.black}; */
+
+      .text {
+        color: ${color.black};
+      }
+      
+      .icon {
+        background: ${color.orange};
+        transform: rotateZ('90deg');
+      }
+    }
+
+    &:disabled {
+    background-color: #333;
+    color: #ddd;
+    /* pointer-events: none; */
+    cursor: not-allowed;
+  }
+  `
+)
+
+export const StyledButton = styled.button`
   padding: 1rem 1.5rem;
   font-size: 1.2em;
   font-family: Helvetica;
@@ -508,13 +566,14 @@ export const Container = styled.div(
     padding: 0 0 1em 0;
 
     .header {
-      height: 25vh;
+      /* height: 25vh; */
+      height: 12rem;
       width: 100%;
       display: flex;
       justify-content: center;
-      background-attachment: fixed;
-      background: linear-gradient(45deg, #be6e0440, #ff9100c0),
-        url('https://res.cloudinary.com/checkadigs-cloud/image/upload/v1621905212/pattern_giihet.png');
+      background-color: #242424;
+      background-image: url("data:image/svg+xml,%3Csvg width='64' height='64' viewBox='0 0 64 64' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8 16c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8zm0-2c3.314 0 6-2.686 6-6s-2.686-6-6-6-6 2.686-6 6 2.686 6 6 6zm33.414-6l5.95-5.95L45.95.636 40 6.586 34.05.636 32.636 2.05 38.586 8l-5.95 5.95 1.414 1.414L40 9.414l5.95 5.95 1.414-1.414L41.414 8zM40 48c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8zm0-2c3.314 0 6-2.686 6-6s-2.686-6-6-6-6 2.686-6 6 2.686 6 6 6zM9.414 40l5.95-5.95-1.414-1.414L8 38.586l-5.95-5.95L.636 34.05 6.586 40l-5.95 5.95 1.414 1.414L8 41.414l5.95 5.95 1.414-1.414L9.414 40z' fill='%23f36b2b' fill-opacity='0.4' fill-rule='evenodd'/%3E%3C/svg%3E");
+      background-size: cover;
     }
 
     .aboutUs {
@@ -523,12 +582,17 @@ export const Container = styled.div(
 
       h2 {
         font-family: 'Limelight';
-        color: ${color.white};
+        color: ${color.gray};
         letter-spacing: 2px;
       }
 
       .content {
         margin-top: 1em;
+      }
+
+      .content,
+      .more {
+        margin: 3em 0 2 em;
       }
 
       .more {
@@ -548,7 +612,7 @@ export const Container = styled.div(
         margin: 0 0 1em;
         line-height: 25px;
         font-family: ${fonts.main};
-        color: ${color.gray};
+        color: ${color.white};
         text-align: left;
         font-size: 1.2em;
       }
@@ -574,6 +638,60 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
 `
+// background: #833ab4;  /* fallback for old browsers */
+// background: -webkit-linear-gradient(to right, #fcb045, #fd1d1d, #833ab4);  /* Chrome 10-25, Safari 5.1-6 */
+// background: linear-gradient(to right, #fcb045, #fd1d1d, #833ab4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+export const StyleClothCard = styled.div(
+  ({ compact }) => css`
+    background: ${color.lightBlack};
+    color: ${color.white};
+    position: relative;
+    height: 100%;
+    padding: 2em 1em;
+    border-bottom: 0.2em solid transparent;
+    /* border-image: linear-gradient(to bottom, red, rgba(0, 0, 0, 0.5)) 1 100%; */
+    /* width: 80%; */
+    transition: border-bottom 300ms ease-in, background 400ms ease-in-out;
+    border-radius: 0.3em;
+
+    .info_one,
+    .info_two {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .info_two {
+      margin-top: 2em;
+    }
+
+    .image {
+      .outOfStock {
+        position: absolute;
+        top: 30%;
+        left: 50%;
+        height: 5em;
+        width: 5em;
+      }
+      img {
+        height: auto;
+        width: 70%;
+      }
+    }
+
+    .price {
+      color: ${color.orange};
+      font-size: 1.2em;
+      /* letter-spacing: 0em; */
+    }
+
+    &:hover {
+      background: transparent;
+      border-bottom: 0.2em solid ${color.orange};
+    }
+  `
+)
 
 export const FButton = styled.button`
   padding: 1rem 1.5rem;
@@ -667,17 +785,44 @@ export const Button = ({ primary, children, bgColor }) => {
 }
 
 export const CardContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  /* background: #F36B2B; */
+  display: grid;
+  grid-template-columns: repeat(4, 2fr);
+  place-items: center;
+  grid-row-gap: 3em;
+  grid-column-gap: 1em;
   background: #1a1a1a;
-  /* background: #F3002B; */
   justify-content: center;
-  margin: 3rem 0;
+  margin: 2rem 0;
   height: 100%;
   text-align: center;
   padding: 0 1rem;
+
+  @media (min-width: 820px) and (max-width: 1130px) {
+    display: grid;
+    grid-template-columns: repeat(3, 2fr);
+  }
+
+  @media (min-width: 570px) and (max-width: 820px) {
+    display: grid;
+    grid-template-columns: repeat(2, 2fr);
+  }
+
+  @media (min-width: 320px) and (max-width: 570px) {
+    display: grid;
+    grid-template-columns: repeat(1, 2fr);
+  }
 `
+
+export const CartContainer = styled.div(
+  ({ size }) => css`
+    background: #1a1a1a;
+    justify-content: center;
+    margin: 2rem 0;
+    height: 100%;
+    text-align: center;
+    padding: 0 1rem;
+  `
+)
 
 export const SummaryHeader = styled.div`
   /* margin: 1.5rem 1rem; */

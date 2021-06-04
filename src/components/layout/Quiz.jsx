@@ -315,8 +315,8 @@ const OldUser = ({
 			const fetchedUser = await fetchUser(email);
 			// console.log('FETCHED USER:', fetchedUser);
 			setUser(fetchedUser);
-			// const userCanPlay = findDayDifference(fetchedUser.lastPlayed);
-			let userCanPlay = true
+			const userCanPlay = findDayDifference(fetchedUser.lastPlayed);
+			// let userCanPlay = true
 
 			if (userCanPlay) {
 				// console.log('Updating last saved')
@@ -575,14 +575,14 @@ const Quiz = () => {
 						<HelpIcon />
 					</FButton> */}
 						{/* </Link> */}
-						<h3 center>
+						{/* <h3 center>
 							{user.firstName || 'Guest'} {user.lastName}{' '}
-						</h3>
+						</h3> */}
 					</div>
 					<div className="score-display">
 						<div className="text_box">
 							{/* <h3>You have exhausted your tries for the day</h3> */}
-							<h3>Salvy have exhausted your tries for the day</h3>
+							<h3>{user.firstName} have exhausted your tries for the day</h3>
 							<p>Come back in 24 hours</p>
 						</div>
 						{/* <h3>{score || 9}</h3> */}
