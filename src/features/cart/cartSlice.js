@@ -114,8 +114,8 @@ export const fetchRecipes = () => {
   return async dispatch => {
     dispatch(getClothes())
     try {
-      // const uri = process.env.REACT_APP_BASE_URL
-      const uri = 'http://localhost:6500'
+      const uri = process.env.REACT_APP_BASE_URL
+      // const uri = 'http://localhost:6500'
       // console.log("ENV URI",process.env)
       const { data } = await axios.get(`${uri}/api/cloth`)
       console.log('DATA: ', data)

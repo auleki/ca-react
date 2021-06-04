@@ -443,10 +443,9 @@ export const SButton = styled.button(
     }
 
     &:disabled {
-    background-color: #333;
-    color: #ddd;
-    /* pointer-events: none; */
-    cursor: not-allowed;
+      background-color: #333;
+      color: #ddd;
+      cursor: not-allowed;
   }
   `
 )
