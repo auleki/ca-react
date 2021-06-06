@@ -8,7 +8,7 @@ import {
   Input, 
   RowLayout } from './StyledComponents'
 import { color, fonts } from './constants'
-import { createRef } from 'react'
+// import { createRef } from 'react'
 
 const CountdownTimer = () => {
   const [num, setNum] = useState(100)
@@ -19,7 +19,7 @@ const CountdownTimer = () => {
   const decreaseNum = () => setNum((prev) => prev - 1)
 
   function handleClick () {
-    console.log('action pending...')
+    // console.log('action pending...')
     if (!pause) {
       clearInterval(intervalRef.current)
     } else {

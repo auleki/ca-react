@@ -23,7 +23,6 @@ const ClothCard = ({ cloth }) => {
       </div>
       <div className="image">
         {!cloth.inStock && <img src={OutOfStock} alt="" className="outOfStock"/>}
-        
         <img src={cloth.imageUrl} alt={cloth.name} />
       </div>
       <div className="info_two">
