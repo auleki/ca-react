@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 
@@ -13,6 +13,7 @@ import {
 	// ParentContainer,
 	SubTitle,
 	Title,
+	StyleIcon,
 	AuthPage,
 	FButton
 } from '../StyledComponents';
@@ -40,8 +41,7 @@ const ScoreView = ({ score, restart, user, resetTimer, setIsActive }) => {
 
 		const saveScore = async () => {
 			if (score === 10) {
-				const winnerResponse = await saveQuizWinner(user);
-				// console.log(`${user.username} is a champion!`, winnerResponse);
+				await saveQuizWinner(user);
 			}
 			// console.table(`User is being updated with ${score}...`)
 			const scoreData = {
@@ -99,7 +99,13 @@ const ScoreView = ({ score, restart, user, resetTimer, setIsActive }) => {
 SIGN UP PAGE 
 */
 
-const AddUser = ({ beginQuiz, setUser, user, loginOrRegister, setOldUser, setRegister }) => {
+const AddUser = ({ 
+	beginQuiz, 
+	setUser, 
+	user, 
+	loginOrRegister, 
+	setOldUser, 
+	setRegister }) => {
 	const [ email, setEmail ] = useState('');
 	const [ username, setUsername ] = useState('');
 	const [ firstName, setFirstName ] = useState('');
@@ -153,7 +159,6 @@ const AddUser = ({ beginQuiz, setUser, user, loginOrRegister, setOldUser, setReg
 			};
 
 			if (quizUser.toSubscribe) {
-				// // console.log('Saving' + quizUser.email + " to subscriber's list");
 				const subscriber = { firstName, lastName, email };
 				const savedSubscriber = await addSubscriber(subscriber);
 				// console.log('IS SAVING SUBSCRIBER:', savedSubscriber);
@@ -260,7 +265,14 @@ const AddUser = ({ beginQuiz, setUser, user, loginOrRegister, setOldUser, setReg
 /* 
 LOGIN PAGE 
 */
-const OldUser = ({ loginOrRegister, setUser, setOldUser, setRegister, user, setCanPlay, canPlay }) => {
+const OldUser = ({ 
+	loginOrRegister, 
+	setUser, 
+	setOldUser, 
+	setRegister, 
+	user, 
+	setCanPlay, 
+	canPlay }) => {
 	const [ email, setEmail ] = useState('');
 	const [ loading, setLoading ] = useState(false);
 	const onUserInput = (e) => setEmail(e.target.value);
@@ -297,7 +309,6 @@ const OldUser = ({ loginOrRegister, setUser, setOldUser, setRegister, user, setC
 	};
 
 	const loginUser = async (e) => {
-		// console.log('Tapping Login');
 		try {
 			e.preventDefault();
 			setLoading(true);
@@ -305,6 +316,7 @@ const OldUser = ({ loginOrRegister, setUser, setOldUser, setRegister, user, setC
 			// console.log('FETCHED USER:', fetchedUser);
 			setUser(fetchedUser);
 			const userCanPlay = findDayDifference(fetchedUser.lastPlayed);
+			// let userCanPlay = true
 
 			if (userCanPlay) {
 				// console.log('Updating last saved')
@@ -313,29 +325,22 @@ const OldUser = ({ loginOrRegister, setUser, setOldUser, setRegister, user, setC
 					updateData: { lastPlayed: new Date() },
 					action: 'UPDATE_LASTPLAYED'
 				};
-
 				const lastPlayedResponse = await updateUser(lastPlayedUpdate, fetchedUser.username);
 				setOldUser(false);
 				setRegister(false);
-				// // console.log('LAST PLAYED RESPONSE', lastPlayedResponse);
+				// console.log('LAST PLAYED RESPONSE', lastPlayedResponse);
 			} else {
 				setCanPlay(false);
 			}
 			//! CAUSED A MEMORY LEAK
 			// setLoading(false);
 		} catch (error) {
-			// console.error("Source_one:", error)
 			errorAlert(`${email} is not registered with us`, 'error');
 			setLoading(false);
 		}
 	};
 
-	// 	position:
-	// }
-
 	return (
-		// <QuizPage>
-		//   <QuizBox>
 		<AuthPage>
 			<div className="start-game login">
 				<ToastContainer position="bottom-center" />
@@ -360,10 +365,88 @@ const OldUser = ({ loginOrRegister, setUser, setOldUser, setRegister, user, setC
 				</form>
 			</div>
 		</AuthPage>
-		//   </QuizBox>
-		// </QuizPage>
 	);
 };
+
+const QuizHeader = ({ user, attempt, limit }) => {
+	return (
+		<div className="quiz-title">
+			<p>{user.firstName || 'Guest'}</p>
+			<p className="bold">
+				{attempt}/{limit} Questions
+			</p>
+		</div>
+	)
+}
+
+const QuizStats = ({ score, secondsLeft }) => {
+	return (
+		<>
+			<div className="row">
+				<p>
+					SCORE: <span className="bold">{score}</span>
+				</p>
+				{/* <p>6 ANSWERS LEFT</p> */}
+				<p className="bold">{secondsLeft}s Remaining</p>
+			</div>
+		</>
+	)
+}
+
+const RefreshIcon = () => {
+
+	return (
+		<StyleIcon>
+			<h2>Hello</h2>
+		</StyleIcon>
+	)
+}
+
+const DisplayQuestion = ({ 
+		questions, 
+		currentQuestion, 
+		setCurrentQuestion,
+		optionHandler, 
+		setPauseTimer  
+	}) => {
+
+	useEffect(() => {
+		if (currentQuestion === 10) setCurrentQuestion(0)
+	}, [currentQuestion])
+
+	useEffect(() => {
+		setPauseTimer(true)
+	}, [])
+
+	
+	
+	return (
+		<>
+			<div className="question">
+				<p>{questions[currentQuestion]
+						? 
+							questions[currentQuestion].questionText 
+						: 
+							<RefreshIcon />}</p>
+			</div>
+
+			<div className="options">
+				{questions[currentQuestion]
+					? 	
+						questions[currentQuestion].answerOptions.map((option, i) => (
+							<button key={i} className="button" onClick={() => optionHandler(option.isCorrect)}>
+								{option.answerText}
+								{option.isCorrect ? '+' : ''}
+							</button>
+						))
+					: 
+						<RefreshIcon />
+
+			}
+			</div>
+		</>
+	)
+}
 
 const Quiz = () => {
 	const [ questions, setQuestions ] = useState(questionList);
@@ -376,12 +459,15 @@ const Quiz = () => {
 	const [ attempt, setAttempt ] = useState(1);
 	const [ user, setUser ] = useState('');
 	const [ oldUser, setOldUser ] = useState(false);
+	const [secondsLeft, setSecondsLeft] = useState(45)
 	const [ register, setRegister ] = useState(true);
 	const [ isActive, setIsActive ] = useState(false);
-	const [ seconds, setSeconds ] = useState(30);
 	const [ canPlay, setCanPlay ] = useState(true);
+	const [pauseTimer, setPauseTimer] = useState(true)
 	const [ questionIndex, setQuestionIndex ] = useState(0);
 	// let timer = 30;
+
+	const intervalRef = useRef()
 
 	const shuffleQuestions = (arr) => {
 		/* this array takes in another array
@@ -399,24 +485,41 @@ const Quiz = () => {
 		return currentQuestions;
 	};
 
-	const beginQuiz = () => {
-		// setOldUser(false);
-		// setRegister(false);
-		// // console.log('starting quiz...')
-		let interval;
-		// start timer here
-		if (isActive) {
-			interval = setInterval(() => {
-				setSeconds((seconds) => seconds - 1);
-			}, 1000);
-		} else if (!isActive) {
-			clearInterval(interval);
+	const decreaseSeconds = () => setSecondsLeft(prev => prev - 1)
+
+	function nextQuestion () {
+		if (limit > attempt) {
+			setCurrentQuestion(currentQuestion + 1);
+			setAttempt(attempt + 1);
+			resetTimer()
+		} else {
+			setShowScore(true);
 		}
-		return () => clearInterval(interval);
+	}
+	
+	function startTimer () {
+		if(secondsLeft === 0 && !pauseTimer) {
+			clearInterval(intervalRef.current) 
+			resetTimer()
+		} else {
+			intervalRef.current = setInterval(decreaseSeconds, 1000) 
+		}
+	}	
+
+	useEffect(() => {
+		if(secondsLeft === 0) nextQuestion()
+	}, [secondsLeft])
+	
+	function beginQuiz () {
+		startTimer()
 	};
 
 	useEffect(() => {
 		beginQuiz();
+	}, []);
+
+	useEffect(() => {
+		setPauseTimer(false)
 	}, []);
 
 	// const transitQuiz = () => {
@@ -429,7 +532,7 @@ const Quiz = () => {
 		resetTimer();
 	}, []);
 
-	const loginOrRegister = (mode) => {
+	function loginOrRegister (mode) {
 		if (mode === 'login') {
 			setOldUser(true);
 			setRegister(false);
@@ -439,65 +542,20 @@ const Quiz = () => {
 		}
 	};
 
-	const toggle = () => {
-		// console.log('Back to timer');
+	function toggle () {
 		setIsActive(true);
 	};
 
-	const resetTimer = () => {
-		// console.log('resetting timer...');
-		setSeconds(30);
-		setIsActive(!isActive);
+	function resetTimer () {
+		setSecondsLeft(30);
 	};
 
-	// // console.log('Before Effect:', seconds)
-
-	useEffect(() => {
-		const isTimeUp = () => {
-			toggle();
-			if (seconds === -1) {
-				optionHandler();
-			}
-		};
-		isTimeUp();
-	}, []);
-	// // console.log("Function for Last Played")
-	// canPlay(user.lastPlayed)
-
-	// useEffect(() => {
-	//   // console.log("Function for Last Played")
-	//   canPlay(user.lastPlayed)
-	// }, [])
-
-	//! Effect for countdown timer
-	// useEffect(() => {
-	//   let interval = null;
-
-	//   // // console.log(canPlay(new Date()))
-
-	//   if (isActive) {
-	//     interval = setInterval(() => {
-	//       setSeconds(seconds => seconds - 1);
-	//     }, 1000);
-	//   } else if (!isActive) {
-	//     clearInterval(interval);
-	//   }
-	//   return () => clearInterval(interval)
-	// }, [isActive, seconds])
-
-	const optionHandler = (isCorrect) => {
-		setQuestionIndex(questionIndex + 1);
-		setSeconds(30);
+	function optionHandler (isCorrect) {	
 		if (isCorrect) setScore(score + 1);
-		if (limit > attempt) {
-			setCurrentQuestion(currentQuestion + 1);
-			setAttempt(attempt + 1);
-		} else {
-			setShowScore(true);
-		}
+		nextQuestion()
 	};
 
-	const resetScore = () => {
+	function resetScore () {
 		setShowScore(false);
 		setScore(0);
 		setAttempt(1);
@@ -517,13 +575,14 @@ const Quiz = () => {
 						<HelpIcon />
 					</FButton> */}
 						{/* </Link> */}
-						<h3 center>
+						{/* <h3 center>
 							{user.firstName || 'Guest'} {user.lastName}{' '}
-						</h3>
+						</h3> */}
 					</div>
 					<div className="score-display">
 						<div className="text_box">
-							<h3>You have exhausted your tries for the day</h3>
+							{/* <h3>You have exhausted your tries for the day</h3> */}
+							<h3>{user.firstName} have exhausted your tries for the day</h3>
 							<p>Come back in 24 hours</p>
 						</div>
 						{/* <h3>{score || 9}</h3> */}
@@ -575,30 +634,19 @@ const Quiz = () => {
 				/>
 			) : (
 				<QuizBox>
-					<div className="quiz-title">
-						<p>{user.firstName || 'Guest'}</p>
-						<p className="bold">
-							{attempt}/{limit} Questions
-						</p>
-					</div>
-					<div className="row">
-						<p>
-							SCORE: <span className="bold">{score}</span>
-						</p>
-						{/* <p>6 ANSWERS LEFT</p> */}
-						<p className="bold">{seconds}s Remaining</p>
-					</div>
-					<div className="question">
-						<p>{questions[currentQuestion].questionText}</p>
-					</div>
-					<div className="options">
-						{questions[currentQuestion].answerOptions.map((option, i) => (
-							<button key={i} className="button" onClick={() => optionHandler(option.isCorrect)}>
-								{option.answerText}
-								{option.isCorrect ? ' R' : ''}
-							</button>
-						))}
-					</div>
+					<QuizHeader 
+						user={user} 
+						attempt={attempt} 
+						limit={limit}/>
+					<QuizStats 
+						score={score} 
+						secondsLeft={secondsLeft}/>
+					<DisplayQuestion 
+						optionHandler={optionHandler}
+						questions={questions} 
+						setPauseTimer={setPauseTimer}
+						setCurrentQuestion={setCurrentQuestion}
+						currentQuestion={currentQuestion}/>
 				</QuizBox>
 			)}
 		</QuizPage>

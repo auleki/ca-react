@@ -4,7 +4,8 @@ import {
   CartItemStyle,
   // Button,
   RowLayout,
-  CardContainer
+  // CardContainer
+  CartContainer
 } from '../StyledComponents'
 import CartItem from './CartItem'
 import Checkout from './Checkout'
@@ -36,7 +37,7 @@ const ShoppingCart = () => {
   }, [cartItems, totalPrice])
 
   return (
-    <CardContainer>
+    <CartContainer>
       <RowLayout>
         <ShopCartContainer>
           <CartItemStyle>
@@ -47,7 +48,7 @@ const ShoppingCart = () => {
           
         </ShopCartContainer>
       </RowLayout>
-    </CardContainer>
+    </CartContainer>
   )
 }
 export default ShoppingCart

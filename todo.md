@@ -64,3 +64,8 @@ checkout form
  - For overview add users cards and use spin up counter for numbers 
  - Amount made 
  - Clothes Sold
+
+ ## ABOUT US PAGE 
+ - change the background color of the page
+ - change the header image to another texture so as to blend with the black overall background
+ - use icons to liven up the page 
