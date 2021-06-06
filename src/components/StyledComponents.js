@@ -446,6 +446,11 @@ export const SButton = styled.button(
       background-color: #333;
       color: #ddd;
       cursor: not-allowed;
+      .icon {
+        background: ${color.red};
+        display: none;
+        transform: rotateZ('90deg');
+      }
   }
   `
 )
@@ -580,19 +585,25 @@ export const Container = styled.div(
       font-family: 'Signika';
       background-color: #262626;
       background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ff5f31' fill-opacity='0.08' fill-rule='evenodd'/%3E%3C/svg%3E");
+
       h2 {
-        font-family: 'Limelight';
+        font-family: ${fonts.primary};
         color: ${color.gray};
         letter-spacing: 2px;
         display: inline-flex;
         border-bottom: 0.1em solid ${color.orange};
         border-radius: 5%;
-        margin-bottom: 0.5em;
         transition: border-radius 400ms ease-in;
 
         &:hover {
           border-radius: 0;
         }
+      }
+
+      .titleIcon {
+        height: auto;
+        width: 3em;
+        margin-right: .5em;
       }
 
       .content {
@@ -607,23 +618,57 @@ export const Container = styled.div(
       .more {
         margin-top: 3em;
         h2 {
-          margin-bottom: 0.5em;
+          /* margin-bottom: 0.5em; */
         }
       }
 
       .title {
+        display: flex;
+        align-items: center;
+        /* justify-content: center; */
+        /* background: ${color.green}; */
         h2 {
-          line-height: 45px;
+          /* line-height: 45px; */
         }
       }
 
       p {
-        margin: 0 0 1em;
+        margin: 1em 0 1em;
         line-height: 25px;
         font-family: ${fonts.main};
         color: ${color.white};
-        text-align: left;
+        font-weight: 200;
+        /* text-align: left; */
         font-size: 1.2em;
+      }
+    }
+
+    @media (min-width: 501px) and (max-width: 700px) {
+      section {
+        padding: 0;
+      }
+    }
+
+    @media (min-width: 320px) and (max-width: 540px) {
+      .title {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        font-size: .9em;
+
+        .titleIcon {
+          margin-bottom: 1em;
+        }
+      }
+
+      p {
+        text-align: center;
+      }
+    }
+
+    @media (min-width: 320px) and (max-width: 356px) {
+      .title {
+        font-size: .7em;
       }
     }
   `
@@ -652,7 +697,7 @@ export const Wrapper = styled.div`
 // background: linear-gradient(to right, #fcb045, #fd1d1d, #833ab4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
 export const StyleClothCard = styled.div(
-  ({ compact }) => css`
+  ({ compact, inStock }) => css`
     background: ${color.lightBlack};
     color: ${color.white};
     position: relative;
@@ -697,7 +742,7 @@ export const StyleClothCard = styled.div(
 
     &:hover {
       background: transparent;
-      border-bottom: 0.2em solid ${color.orange};
+      border-bottom: 0.2em solid ${inStock ? color.orange : color.red};
     }
   `
 )

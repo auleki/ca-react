@@ -7,6 +7,7 @@ export const color = {
   lightBlack: '#242424',
   white: '#fff',
   gray: '#E9E9E9',
+  red: '#FF2626',
   purple: '#542e71'
 }
 

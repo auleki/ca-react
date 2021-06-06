@@ -16,7 +16,7 @@ const ClothCard = ({ cloth }) => {
   const isDisabled = cloth.inStock ? false : true
   
   return (
-    <StyleClothCard>
+    <StyleClothCard inStock={cloth.inStock}>
       <div className="info_one">
         <h4>{cloth.name}</h4>
         <p>{cloth.category}</p>
@@ -28,7 +28,7 @@ const ClothCard = ({ cloth }) => {
       <div className="info_two">
         <p className="price">₦{formatToComma(cloth.price)}</p> 
         <SButton disabled={isDisabled} onClick={() => dispatch(addToCart(cloth))} >
-          <span className="text">Add to cart</span>
+          <span className="text">{isDisabled ? "Out of stock" : "Add to cart"}</span>
           <span className="icon">{icons.plus}</span>
         </SButton>
         {/* <IconButton 

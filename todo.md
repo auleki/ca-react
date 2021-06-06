@@ -67,5 +67,5 @@ checkout form
 
  ## ABOUT US PAGE 
  - change the background color of the page
- - change the header image to another texture so as to blend with the black overall background
+ [x] change the header image to another texture so as to blend with the black overall background
  - use icons to liven up the page 
