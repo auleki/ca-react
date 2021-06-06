@@ -8,7 +8,7 @@ import {
   Input, 
   RowLayout } from './StyledComponents'
 import { color, fonts } from './constants'
-// import { createRef } from 'react'
+import { motion } from "framer-motion";
 
 const CountdownTimer = () => {
   const [num, setNum] = useState(100)
@@ -19,7 +19,6 @@ const CountdownTimer = () => {
   const decreaseNum = () => setNum((prev) => prev - 1)
 
   function handleClick () {
-    // console.log('action pending...')
     if (!pause) {
       clearInterval(intervalRef.current)
     } else {
@@ -46,17 +45,23 @@ const AboutUs = () => {
   
   return (
     <Container>
-      {/* <CountdownTimer />
-      <div>
-        <h2>HEY</h2>
-      </div> */}
-      
       <div className="header">
-        <Title bold textFont={fonts.main} uppercase size={4}>About Us</Title>
+        <Title 
+          bold 
+          textFont={fonts.main} 
+          uppercase 
+          size={4}>
+          About Us
+        </Title>
       </div>
 
       <div className="aboutUs">
-        <div className="content">
+        <motion.div 
+          className="content"
+          initial={{ opacity: 0}}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.5 }}
+          >
           <div className="title">
             <h2>OUR MISSION</h2>
             {/* <h2>FROM THE EVERYDAY TO THE EXTRAORDINARY, WE BELIEVE IN DESIGNING THE FINEST CLOTHES TO EQUIP YOUR JOURNEY.</h2> */}
@@ -75,8 +80,13 @@ const AboutUs = () => {
             Check Adigs now serve customers around the world, we continue to make our customers feel confident, smart, attractive and fashion sound, join the trend, place your order
           </p>
 
-        </div>
-        <section className="more">
+        </motion.div>
+        <motion.section 
+          className="more"
+          initial={{ y: '100vh'}}
+          animate={{ y: 0 }}
+          transition={{ duration: 1 }}
+          >
           <h2>PRODUCTS AND CULTURES</h2>  
           <p>
             Check Adigs offers a <span className="special">unisex</span> clothing line that is exquisite and sophisticated, as well as practical and wearable.
@@ -88,7 +98,7 @@ const AboutUs = () => {
             <p>
               Fabrics: Our fabrics are of premium blends which are durable and appropriate for everyday use. We use beautifully coloured natural fabrics with wrinkle resistant qualities. They are machine washable  and easy to care for.
             </p>
-        </section>
+        </motion.section>
       </div>
     </Container>
   )
