@@ -118,7 +118,7 @@ export const fetchRecipes = () => {
       // const uri = 'http://localhost:6500'
       // console.log("ENV URI",process.env)
       const { data } = await axios.get(`${uri}/api/cloth`)
-      console.log('DATA: ', data)
+      // console.log('DATA: ', data)
       dispatch(getClothesSuccess(data))
     } catch (error) {
       dispatch(getClothesFailure())

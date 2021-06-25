@@ -403,7 +403,7 @@ export const SButton = styled.button(
     border: 0;
 
     border-radius: 2px;
-    transition: 500ms ease-in;
+    transition: 10ms ease-in;
 
     .text {
       margin: 0 0.5em;
@@ -430,6 +430,7 @@ export const SButton = styled.button(
     &:hover {
       cursor: pointer;
       background: ${color.white};
+      /* transform: translateY(.3em); */
       /* color: ${color.black}; */
 
       .text {
@@ -439,6 +440,14 @@ export const SButton = styled.button(
       .icon {
         background: ${color.orange};
         transform: rotateZ('90deg');
+      }
+    }
+
+    &:active {
+      background: ${color.orange};
+      
+      .text {
+        color: ${color.white};        
       }
     }
 
@@ -629,6 +638,7 @@ export const Container = styled.div(
         /* background: ${color.green}; */
         h2 {
           /* line-height: 45px; */
+          text-align: center;
         }
       }
 
