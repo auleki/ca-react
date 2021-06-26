@@ -82,10 +82,9 @@ button {
     }
 }
 
-// .mobile-menu {
-//     display: none;
-// }
-
+.mobile-menu {
+    display: none;
+}
 // .cart-icon {
 //     // background: #d61d1d;
 //     // padding: 5em 0;
@@ -349,11 +348,46 @@ nav {
     }
 }
 
-@media (min-width: 320px) and (max-width: 720px) {
+
+@media (min-width: 320px) and (max-width: 520px) {
     .mobile-menu {
-        display: block;
+        display: flex;
+    }
+
+    nav .nav-links {
+        // display: none;
+        display: flex;
+        height: 100vh;
+        overflow-y: hidden;
+        background: #1a1a1a;
+        width: 100%;
+        left: -100%;
+        gap: 5em;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        position: absolute;
+        transition: 300ms ease-in;
+        padding: 0;
+        top: 80px;
+
+        &.active {
+            padding: 1em 0;
+            z-index: 30;
+            left: 0;
+            border-bottom: 2px solid $c1;
+
+            .nav-link {
+                font-size: 2em;
+            }
+        }
     }
 }
+// @media (min-width: 320px) and (max-width: 720px) {
+//     .mobile-menu {
+//         display: block;
+//     }
+// }
 
 @keyframes grownDown {
     0% {
@@ -1000,7 +1034,7 @@ footer {
     width: 4rem;
     border-radius: 100px;
     border: .3rem solid $c1;
-    background: $c3;
+    background: $c4;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1377,4 +1411,25 @@ footer {
 
 .mobile_raise {
     padding-top: 10%;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: .3;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.blinker {
+    // animation-name: blink;
+    // animation-duration: 10s;
+    // animation-timing-function: ease-in;
+    animation: blink 2s infinite forwards;
 }

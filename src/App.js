@@ -26,7 +26,7 @@ import AdminDashboard from './components/layout/AdminDashboard'
 import UBlocked from './components/AdminPages/Users/UBlocked'
 import Winners from './components/AdminPages/Quiz/Winners'
 import Highscores from './components/AdminPages/Quiz/Highscores'
-import QBlocked from './components/AdminPages/Quiz/QBlocked'
+// import QBlocked from './components/AdminPages/Quiz/QBlocked'
 import COrders from './components/AdminPages/Clothing/COrders'
 import CRecent from './components/AdminPages/Clothing/CRecent'
 import Settings from './components/AdminPages/Settings/Settings'
@@ -51,7 +51,7 @@ const App = () => {
         <Route path='/admin/users/blocked' component={UBlocked} />
         <Route path='/admin/quiz/winners' component={Winners} />
         <Route path='/admin/quiz/highscores' component={Highscores} />
-        <Route path='/admin/quiz/blocked' component={QBlocked} />
+        {/* <Route path='/admin/quiz/blocked' component={QBlocked} /> */}
         <Route path='/admin/clothing/orders' component={COrders} />
         <Route path='/admin/clothing/recent' component={CRecent} />
         <Route path='/admin/settings' component={Settings} />

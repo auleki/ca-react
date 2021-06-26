@@ -36,13 +36,13 @@ const CreateOrder = () => {
     window.scrollTo(0, 0)
   }, [])
 
-  const { cartItems, price } = useSelector(state => state)
+  const { cartItems, price, items } = useSelector(state => state)
 
   // eslint-disable-next-line
-  function openNewTab (url) {
-    const win = window.open(url, '_blank')
-    win.focus()
-  }
+  // function openNewTab (url) {
+  //   const win = window.open(url, '_blank')
+  //   win.focus()
+  // }
 
   function saveUrlToStorage (load, key) {
     if (localStorage.getItem(key)) {
@@ -120,13 +120,11 @@ const CreateOrder = () => {
   }
 
   return (
-    // <div className="full">
     <OrderPage>
       <FormContainer>
-        {/* <BasicCard> */}
         <div className='form-title'>
           <SummaryHeader>
-            <Title>Confirm order and pay</Title>
+            <Title className='blinker'>Confirm order and pay</Title>
             <Paragraph>
               Delivery is free within Lagos, outside Lagos we handle 50% of the
               your fee
@@ -183,15 +181,11 @@ const CreateOrder = () => {
               <span>N</span>
               {formatToComma(price)}
             </p>
-            <p className='info'>
-              You have selected {cartItems.length} product(s)
-            </p>
+            <p className='info'>You have selected {items} product(s)</p>
           </SummaryCard>
         </FormCard>
       </FormContainer>
-      {/* </BasicCard> */}
     </OrderPage>
-    // </div>
   )
 }
 

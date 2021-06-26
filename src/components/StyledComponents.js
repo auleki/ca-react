@@ -1,373 +1,9 @@
-import { colors } from '@material-ui/core'
 import React from 'react'
 import styled, { css, keyframes } from 'styled-components'
-import { color, fonts } from './constants'
+import { styleColors, fonts } from './constants'
 // import { Link } from 'react-router-dom';
 
 // @import './variables';
-export const questionList = [
-  {
-    questionText:
-      '__________ is a general term referring to actual objects related to the human body?',
-    answerOptions: [
-      { answerText: 'Costume', isCorrect: false },
-      { answerText: 'Wardrobe', isCorrect: false },
-      { answerText: 'Clothing', isCorrect: true },
-      { answerText: 'Wear Ability', isCorrect: false }
-    ]
-  },
-  {
-    questionText:
-      'Ritu Kumar was one of the earliest pioneers of fashion with extensive research in to block prints and innovative application of the technique of ________',
-    answerOptions: [
-      { answerText: 'Phulkari', isCorrect: false },
-      { answerText: 'Mirror Work', isCorrect: false },
-      { answerText: 'Zardosiembroidery', isCorrect: true },
-      { answerText: 'Dye-Prints', isCorrect: false }
-    ]
-  },
-  {
-    questionText: '__________ is more than just clothing ?',
-    answerOptions: [
-      { answerText: 'Apparel', isCorrect: false },
-      { answerText: 'Garment', isCorrect: false },
-      { answerText: 'Clothing', isCorrect: false },
-      { answerText: 'Fashion', isCorrect: true }
-    ]
-  },
-  {
-    questionText:
-      'Historians have propounded 4 different explanations regarding factors affecting clothing ?',
-    answerOptions: [
-      { answerText: 'Protection', isCorrect: false },
-      { answerText: 'Rituals', isCorrect: false },
-      { answerText: 'Identification', isCorrect: false },
-      { answerText: 'All Of The Above', isCorrect: true }
-    ]
-  },
-  {
-    questionText:
-      '________ and _________ are also indicating of the social and marital status of women ?',
-    answerOptions: [
-      { answerText: 'Dress and Ornaments', isCorrect: true },
-      { answerText: 'Sindoor', isCorrect: false },
-      { answerText: 'Black Scarf', isCorrect: false },
-      { answerText: 'Mangalsutra', isCorrect: false }
-    ]
-  },
-  {
-    questionText:
-      'In India, the coloured powder put in the hair parting is called _______ is a visual indicator of married status of women ?',
-    answerOptions: [
-      { answerText: 'Sandal Powder', isCorrect: false },
-      { answerText: 'Sindoor Powder', isCorrect: true },
-      { answerText: 'Perfume', isCorrect: false },
-      { answerText: 'Tumeric', isCorrect: false }
-    ]
-  },
-  {
-    questionText:
-      'From the late 19th century a dust coloured light weight cotton fabric is called _______ was used by the Indian Army during the British Raj ?',
-    answerOptions: [
-      { answerText: 'Poplin', isCorrect: false },
-      { answerText: 'Khaki', isCorrect: true },
-      { answerText: 'Silk', isCorrect: false },
-      { answerText: 'Polyester', isCorrect: false }
-    ]
-  },
-  {
-    questionText:
-      '_________ waist belted, tucked or slashed to give excessive looseness to give comfort to the wearer ?',
-    answerOptions: [
-      { answerText: 'Phyjama', isCorrect: false },
-      { answerText: 'Flat Front', isCorrect: false },
-      { answerText: 'Churida', isCorrect: false },
-      { answerText: 'Patiala Salwar', isCorrect: true }
-    ]
-  },
-  {
-    questionText: '__________ draped lower garment for men and women ?',
-    answerOptions: [
-      { answerText: 'Angarkha', isCorrect: false },
-      { answerText: 'Flat-front', isCorrect: false },
-      { answerText: 'Antariya', isCorrect: true },
-      { answerText: 'Patiala Salwar', isCorrect: false }
-    ]
-  },
-  {
-    questionText:
-      '__________ French term for exclusive one-of-kind high fashion ?',
-    answerOptions: [
-      { answerText: 'Bespoke-shop', isCorrect: false },
-      { answerText: "Haute Coutre's", isCorrect: true },
-      { answerText: 'Boutique', isCorrect: false },
-      { answerText: 'Showroom', isCorrect: false }
-    ]
-  },
-  {
-    questionText:
-      '_______ is the process of transforming a design into its constituent flat pattern pieces and then drafting them out ?',
-    answerOptions: [
-      { answerText: 'Pattern Making', isCorrect: true },
-      { answerText: 'Draping', isCorrect: false },
-      { answerText: 'Template', isCorrect: false },
-      { answerText: 'Blocks', isCorrect: false }
-    ]
-  },
-  {
-    questionText: 'The highest point on the bust is __________ ?',
-    answerOptions: [
-      { answerText: 'Gorge-point', isCorrect: false },
-      { answerText: 'Pleat', isCorrect: false },
-      { answerText: 'Dart', isCorrect: false },
-      { answerText: 'Apex', isCorrect: true }
-    ]
-  },
-  {
-    questionText: '_______ refers to the amount of roominess in a garment ?',
-    answerOptions: [
-      { answerText: 'Grain line', isCorrect: false },
-      { answerText: 'Dart', isCorrect: false },
-      { answerText: 'Ease', isCorrect: true },
-      { answerText: 'Tuck', isCorrect: false }
-    ]
-  },
-  {
-    questionText:
-      'One of the first ________ that is done on muslin at the time when the pattern is made ?',
-    answerOptions: [
-      { answerText: 'Fullness', isCorrect: false },
-      { answerText: 'Test-fit', isCorrect: true },
-      { answerText: 'Final', isCorrect: false },
-      { answerText: 'Finishing', isCorrect: false }
-    ]
-  },
-  {
-    questionText:
-      'Dart manipulation of the front bodice consists of _____ types ?',
-    answerOptions: [
-      { answerText: '13', isCorrect: true },
-      { answerText: '4', isCorrect: false },
-      { answerText: '6', isCorrect: false },
-      { answerText: '8', isCorrect: false }
-    ]
-  },
-  {
-    questionText:
-      '________ is the dress fitted through the bodice, waist, and hips, and flaring out from the knees ?',
-    answerOptions: [
-      { answerText: 'Empire', isCorrect: false },
-      { answerText: 'Mermaid', isCorrect: true },
-      { answerText: 'Ball Gown', isCorrect: false },
-      { answerText: 'A-line', isCorrect: false }
-    ]
-  },
-  {
-    questionText: 'A straight, form fitting silhouette is _______ ?',
-    answerOptions: [
-      { answerText: 'Trumpet', isCorrect: false },
-      { answerText: 'Mermaid', isCorrect: false },
-      { answerText: 'Sheath', isCorrect: true },
-      { answerText: 'Tulip', isCorrect: false }
-    ]
-  },
-  {
-    questionText:
-      '__________ is a high neck line that cuts straight across the collar bone ?',
-    answerOptions: [
-      { answerText: 'Jewel', isCorrect: false },
-      { answerText: 'Cowl Neck', isCorrect: false },
-      { answerText: 'Scoop', isCorrect: false },
-      { answerText: 'Boat Neck', isCorrect: true }
-    ]
-  },
-  {
-    questionText:
-      'A sleeve cut wide at the armhole and tapering to the wrist is _________ ?',
-    answerOptions: [
-      { answerText: 'Dolman sleeve', isCorrect: true },
-      { answerText: 'Puff sleeve', isCorrect: false },
-      { answerText: 'Plain sleeve', isCorrect: false },
-      { answerText: 'Tulip sleeve', isCorrect: false }
-    ]
-  },
-  {
-    questionText:
-      ' _______ hugs tight against the body with hook, snap or laced back securing ?',
-    answerOptions: [
-      { answerText: 'Midriff', isCorrect: false },
-      { answerText: 'Empire', isCorrect: false },
-      { answerText: 'Surplice', isCorrect: false },
-      { answerText: 'Corset', isCorrect: true }
-    ]
-  },
-  {
-    questionText:
-      'A sheer soft knit fabric, most often 100% cotton as an informal fabric at weddings ?',
-    answerOptions: [
-      { answerText: 'Moire', isCorrect: false },
-      { answerText: 'Organdie', isCorrect: false },
-      { answerText: 'Jersey', isCorrect: true },
-      { answerText: 'Organza', isCorrect: false }
-    ]
-  },
-  {
-    questionText: '_______ is the thicker fabric ribbing in the weave ?',
-    answerOptions: [
-      { answerText: 'Taffeta', isCorrect: true },
-      { answerText: 'Tulle', isCorrect: false },
-      { answerText: 'Laces', isCorrect: false },
-      { answerText: 'Velvet', isCorrect: false }
-    ]
-  },
-  {
-    questionText: 'The hem falls right above the ankles ?',
-    answerOptions: [
-      { answerText: 'Mini', isCorrect: false },
-      { answerText: 'Floor', isCorrect: false },
-      { answerText: 'Ballerina', isCorrect: true },
-      { answerText: 'Street', isCorrect: false }
-    ]
-  },
-  {
-    questionText:
-      '________ is smooth, heavy and shin, long honoured bridal fibre ?',
-    answerOptions: [
-      { answerText: 'Satin', isCorrect: true },
-      { answerText: 'Chantily', isCorrect: false },
-      { answerText: 'Trulle', isCorrect: false },
-      { answerText: 'Crepe', isCorrect: false }
-    ]
-  },
-  {
-    questionText: 'What date was Check Adigs website launched ?',
-    answerOptions: [
-      { answerText: '7th of August 2020', isCorrect: false },
-      { answerText: '5th of June 2020', isCorrect: false },
-      { answerText: '10th of August 2020', isCorrect: true },
-      { answerText: '21st November 2020', isCorrect: false }
-    ]
-  },
-  {
-    questionText:
-      'Check Adigs – Elegeance is not standing out but being ______ ?',
-    answerOptions: [
-      { answerText: 'Remembered', isCorrect: true },
-      { answerText: 'Unique', isCorrect: false },
-      { answerText: 'Exempted', isCorrect: false },
-      { answerText: 'Gallant', isCorrect: false }
-    ]
-  },
-  {
-    questionText: 'Style is more about being _______ ?',
-    answerOptions: [
-      { answerText: 'Beautiful', isCorrect: false },
-      { answerText: 'Cute', isCorrect: false },
-      { answerText: 'Yourself', isCorrect: true },
-      { answerText: 'Generous', isCorrect: false }
-    ]
-  },
-  {
-    questionText: 'What is the call line for Check Adigs ?',
-    answerOptions: [
-      { answerText: '08130267643', isCorrect: true },
-      { answerText: '08065843658', isCorrect: false },
-      { answerText: '0815243019', isCorrect: false },
-      { answerText: '09044577875', isCorrect: false }
-    ]
-  },
-  {
-    questionText:
-      'What is the name of a long piece of cloth worn by women over the shoulder ?',
-    answerOptions: [
-      { answerText: 'Laid', isCorrect: true },
-      { answerText: 'Granville', isCorrect: false },
-      { answerText: 'Plaid', isCorrect: false },
-      { answerText: 'Sooth', isCorrect: false }
-    ]
-  },
-  {
-    questionText:
-      'What do you mean by Camlet also commonly known as Camelot or camblet in the fashion industry ?',
-    answerOptions: [
-      { answerText: 'The helmet on the king’s head', isCorrect: false },
-      {
-        answerText: 'The material in making the king’s cloth',
-        isCorrect: false
-      },
-      { answerText: 'The waterproof cloth of camel’s hair', isCorrect: true },
-      {
-        answerText: 'The material in making the slave’s cloth',
-        isCorrect: false
-      }
-    ]
-  },
-  {
-    questionText:
-      'Who drafts the shapes and sizes of a garment’s pieces with paper and measuring tools ?',
-    answerOptions: [
-      { answerText: 'Stylist', isCorrect: false },
-      { answerText: 'Textile Designer', isCorrect: false },
-      { answerText: 'Pattern Maker', isCorrect: true },
-      { answerText: 'Tailor', isCorrect: false }
-    ]
-  },
-  {
-    questionText: 'What is the name of strong shiny cotton ?',
-    answerOptions: [
-      { answerText: 'Poplin', isCorrect: true },
-      { answerText: 'Violin', isCorrect: false },
-      { answerText: 'Foflin', isCorrect: false },
-      { answerText: 'Shint', isCorrect: false }
-    ]
-  },
-  {
-    questionText: 'What is the colour of aquamarine, a precious stone ?',
-    answerOptions: [
-      { answerText: 'Bluish Green', isCorrect: true },
-      { answerText: 'Pinkish', isCorrect: false },
-      { answerText: 'Greenish', isCorrect: false },
-      { answerText: 'Greenish Blue', isCorrect: false }
-    ]
-  },
-  {
-    questionText: 'What is the name of the garment having a front opening ?',
-    answerOptions: [
-      { answerText: 'Polero', isCorrect: false },
-      { answerText: 'Folero', isCorrect: false },
-      { answerText: 'Bolero', isCorrect: true },
-      { answerText: 'Dolero', isCorrect: false }
-    ]
-  },
-  {
-    questionText: 'Fedora lies in which category of accessories ?',
-    answerOptions: [
-      { answerText: 'A kind of cap', isCorrect: true },
-      { answerText: 'A kind of feather', isCorrect: false },
-      { answerText: 'A kind of clothing material', isCorrect: false },
-      { answerText: 'A kind of weather', isCorrect: false }
-    ]
-  },
-  {
-    questionText:
-      'Which of the following is suitable for making evening gown ?',
-    answerOptions: [
-      { answerText: 'Satin', isCorrect: true },
-      { answerText: 'Flannel', isCorrect: false },
-      { answerText: 'Garbadine', isCorrect: false },
-      { answerText: 'Silk tweet', isCorrect: false }
-    ]
-  },
-  {
-    questionText: 'A celebrity fashion designer from Florida born in Italy ?',
-    answerOptions: [
-      { answerText: 'Christian Dior', isCorrect: false },
-      { answerText: 'Gianni Versace', isCorrect: true },
-      { answerText: 'Giuseppi Zanotti', isCorrect: false },
-      { answerText: 'Kanye West', isCorrect: false }
-    ]
-  }
-]
 
 const FadeIn = keyframes`
   0% {
@@ -393,10 +29,52 @@ const HoverObj = keyframes`
 }
 `
 
+export const TextButton = styled.button(
+  ({ color }) => css`
+    /* background: ${styleColors.orange}; */
+    background: transparent;
+    width: 100%;
+    padding: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: 200ms ease-in;
+
+    .text {
+      font-size: 1.2em;
+      color: orange;
+    }
+
+    .icon {
+      font-size: 1.2em;
+      transform: scale(2);
+      margin: .5em 1em;
+      color: ${styleColors.white};
+    }
+
+    &:hover {
+      cursor: pointer;
+      .text,
+      .icon {
+        color: ${styleColors.red};
+      }
+    }
+
+    @media (min-width: 315px) and (max-width: 626px) {
+      width: 10em;
+      border-radius: 0;
+      
+      .icon {
+        display: none;
+      }
+    }
+  `
+)
+
 export const SButton = styled.button(
   ({ size }) => css`
-    background: ${color.orange};
-    color: ${color.white};
+    background: ${styleColors.orange};
+    color: ${styleColors.white};
     display: flex;
     padding: 1em;
     align-items: center;
@@ -421,7 +99,7 @@ export const SButton = styled.button(
       justify-content: center;
       border-radius: 50%;
 
-      background: ${color.black};
+      background: ${styleColors.black};
       svg {
         font-size: 1em;
       }
@@ -429,25 +107,25 @@ export const SButton = styled.button(
 
     &:hover {
       cursor: pointer;
-      background: ${color.white};
+      background: ${styleColors.white};
       /* transform: translateY(.3em); */
-      /* color: ${color.black}; */
+      /* color: ${styleColors.black}; */
 
       .text {
-        color: ${color.black};
+        color: ${styleColors.black};
       }
       
       .icon {
-        background: ${color.orange};
+        background: ${styleColors.orange};
         transform: rotateZ('90deg');
       }
     }
 
     &:active {
-      background: ${color.orange};
+      background: ${styleColors.orange};
       
       .text {
-        color: ${color.white};        
+        color: ${styleColors.white};        
       }
     }
 
@@ -456,7 +134,7 @@ export const SButton = styled.button(
       color: #ddd;
       cursor: not-allowed;
       .icon {
-        background: ${color.red};
+        background: ${styleColors.red};
         display: none;
         transform: rotateZ('90deg');
       }
@@ -481,7 +159,7 @@ export const StyledButton = styled.button`
 
   &:active,
   &:focus {
-    background: ${color.purple};
+    background: ${styleColors.purple};
     outline: 0;
   }
   ${({ primary }) =>
@@ -510,7 +188,7 @@ export const Title = styled.h1(
   ({ size, center, uppercase, bold }) => css`
     padding: 0;
     text-transform: ${uppercase ? 'uppercase' : 'none'};
-    color: ${color.white};
+    color: ${styleColors.white};
     font-size: ${size || 2.2}em;
     font-weight: ${bold ? 800 : 400};
     text-align: ${center ? 'center' : 'left'};
@@ -590,17 +268,16 @@ export const Container = styled.div(
     }
 
     .aboutUs {
-      padding: 1em 1em;
+      padding: 3em 1em;
       font-family: 'Signika';
-      background-color: #262626;
-      background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ff5f31' fill-opacity='0.08' fill-rule='evenodd'/%3E%3C/svg%3E");
-
+      background-color: #030304;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23f09c14' fill-opacity='0.06'%3E%3Cpath d='M0 38.59l2.83-2.83 1.41 1.41L1.41 40H0v-1.41zM0 1.4l2.83 2.83 1.41-1.41L1.41 0H0v1.41zM38.59 40l-2.83-2.83 1.41-1.41L40 38.59V40h-1.41zM40 1.41l-2.83 2.83-1.41-1.41L38.59 0H40v1.41zM20 18.6l2.83-2.83 1.41 1.41L21.41 20l2.83 2.83-1.41 1.41L20 21.41l-2.83 2.83-1.41-1.41L18.59 20l-2.83-2.83 1.41-1.41L20 18.59z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
       h2 {
         font-family: ${fonts.primary};
-        color: ${color.gray};
+        color: ${styleColors.gray};
         letter-spacing: 2px;
         display: inline-flex;
-        border-bottom: 0.1em solid ${color.orange};
+        border-bottom: 0.1em solid ${styleColors.orange};
         border-radius: 5%;
         transition: border-radius 400ms ease-in;
 
@@ -635,7 +312,7 @@ export const Container = styled.div(
         display: flex;
         align-items: center;
         /* justify-content: center; */
-        /* background: ${color.green}; */
+        /* background: ${styleColors.green}; */
         h2 {
           /* line-height: 45px; */
           text-align: center;
@@ -646,7 +323,7 @@ export const Container = styled.div(
         margin: 1em 0 1em;
         line-height: 25px;
         font-family: ${fonts.main};
-        color: ${color.white};
+        color: ${styleColors.white};
         font-weight: 200;
         /* text-align: left; */
         font-size: 1.2em;
@@ -708,8 +385,8 @@ export const Wrapper = styled.div`
 
 export const StyleClothCard = styled.div(
   ({ compact, inStock }) => css`
-    background: ${color.lightBlack};
-    color: ${color.white};
+    background: ${styleColors.lightBlack};
+    color: ${styleColors.white};
     position: relative;
     height: 100%;
     padding: 2em 1em;
@@ -745,14 +422,15 @@ export const StyleClothCard = styled.div(
     }
 
     .price {
-      color: ${color.orange};
+      color: ${styleColors.orange};
       font-size: 1.2em;
       /* letter-spacing: 0em; */
     }
 
     &:hover {
       background: transparent;
-      border-bottom: 0.2em solid ${inStock ? color.orange : color.red};
+      border-bottom: 0.2em solid
+        ${inStock ? styleColors.orange : styleColors.red};
     }
   `
 )
@@ -912,11 +590,13 @@ export const SummaryHeader = styled.div`
     h1 {
       font-size: 1.5rem;
       margin: 0.5rem 0;
+      text-align: center;
     }
 
     p {
       font-size: 1rem;
       margin: 0;
+      text-align: center;
     }
   }
 `
@@ -1070,7 +750,7 @@ export const StyleIcon = styled.div(
   ({ size }) => css`
     height: 5rem;
     width: 5rem;
-    background: ${color.green};
+    background: ${styleColors.green};
   `
 )
 
@@ -1217,7 +897,7 @@ export const CartCard = styled.div`
     align-items: center;
     justify-content: center;
     margin: 1rem 0;
-    width: 80%;
+    width: 95%;
     margin: 2rem auto;
 
     .name {
@@ -1381,6 +1061,17 @@ export const CheckoutCard = styled.div`
   flex-direction: column;
   padding: 1em 3rem;
 
+  .total-price,
+  .items-length {
+    display: flex;
+    padding: 1em;
+    flex-direction: column;
+    border-radius: 0.2em;
+    align-items: center;
+    background: ${styleColors.lightBlack};
+    justify-content: center;
+  }
+
   h2 {
     font-weight: 400;
     text-align: center;
@@ -1445,8 +1136,23 @@ export const ActionRow = styled.div`
     padding: 1.5rem 0;
     justify-content: center;
 
+    .items-length,
+    .total-price {
+      border-radius: 0;
+    }
+
+    .total-price {
+      padding: 1em 1em 0em 1em;
+    }
+
     .items-length {
-      /* background-color: #904154; */
+      padding: 0 1em;
+      p {
+        display: none;
+      }
+    }
+
+    /* .items-length {
       width: 100%;
       display: flex;
       flex-direction: column;
@@ -1454,20 +1160,16 @@ export const ActionRow = styled.div`
       p {
         display: none;
       }
-    }
-    .total-price {
+    } */
+
+    /* .total-price {
       width: 100%;
-      /* background-color: #549815; */
       display: flex;
       flex-direction: column;
       align-items: center;
       p {
         font-size: 1.5rem;
       }
-    }
-    /* div:last-child {
-      display: flex;
-      flex-direction: column-reverse;
     } */
   }
 `

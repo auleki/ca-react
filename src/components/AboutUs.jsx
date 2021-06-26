@@ -1,9 +1,4 @@
-import React from // useRef,
-// useEffect,
-// forwardRef,
-// useLayoutEffect,
-// useState
-'react'
+import React from 'react' // useState // useLayoutEffect, // forwardRef, // useEffect, // useRef,
 import {
   Container,
   // Paragraph,
@@ -72,7 +67,7 @@ const AboutUs = () => {
           transition={{ duration: 1.5 }}
         >
           <div className='title'>
-            <img class='titleIcon' src={MissionIcon} alt='' srcset='' />
+            <img className='titleIcon' src={MissionIcon} alt='icon' />
             <h2>OUR MISSION</h2>
             {/* <h2>FROM THE EVERYDAY TO THE EXTRAORDINARY, WE BELIEVE IN DESIGNING THE FINEST CLOTHES TO EQUIP YOUR JOURNEY.</h2> */}
           </div>
@@ -102,7 +97,7 @@ const AboutUs = () => {
           transition={{ duration: 1 }}
         >
           <div className='title'>
-            <img class='titleIcon' src={CultureIcon} alt='' srcset='' />
+            <img className='titleIcon' src={CultureIcon} alt='' />
             <h2>PRODUCTS AND CULTURES</h2>
           </div>
           <p>
@@ -126,7 +121,7 @@ const AboutUs = () => {
           transition={{ duration: 1 }}
         >
           <div className='title'>
-            <img class='titleIcon' src={BalanceIcon} alt='' srcset='' />
+            <img className='titleIcon' src={BalanceIcon} alt='' />
             <h2>CHECK ADIGS IS UNDERPINNED BY THREE PRINCIPLES</h2>
           </div>
           <p>
@@ -150,7 +145,7 @@ const AboutUs = () => {
           transition={{ duration: 1 }}
         >
           <div className='title'>
-            <img class='titleIcon' src={CustomerCareIcon} alt='' srcset='' />
+            <img className='titleIcon' src={CustomerCareIcon} alt='' />
             <h2>CUSTOMER RELATIONSHIP</h2>
           </div>
 
@@ -160,7 +155,7 @@ const AboutUs = () => {
             give you the best trends and outfit, our customer care center is one
             of the best handling customer complaints are our first priority, in
             as much as we try to avoid complaints when we get them we act on
-            them swiftly to make our relationships the best (990876Z5 – 2014)
+            them swiftly to make our relationships the best.
           </p>
         </motion.section>
       </div>

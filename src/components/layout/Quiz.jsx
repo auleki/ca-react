@@ -6,7 +6,7 @@ import {
   QuizPage,
   QuizBox,
   // Form,
-  questionList,
+  // questionList,
   Input,
   // QuizInput,
   // AuthForm,
@@ -17,6 +17,7 @@ import {
   AuthPage,
   FButton
 } from '../StyledComponents'
+import { questionList } from '../constants'
 import {
   // addSubscriber,
   saveQuizWinner,
@@ -57,6 +58,7 @@ const ScoreView = ({ score, restart, user, resetTimer, setIsActive }) => {
     // setIsActive(false)
 
     // resetTimer();
+    // eslint-disable-next-line
   }, [])
 
   return (
@@ -161,6 +163,7 @@ const AddUser = ({
 
       if (quizUser.toSubscribe) {
         const subscriber = { firstName, lastName, email }
+        // eslint-disable-next-line
         const savedSubscriber = await addSubscriber(subscriber)
         // console.log('IS SAVING SUBSCRIBER:', savedSubscriber);
       }
@@ -220,12 +223,12 @@ const AddUser = ({
             placeholder='First Name'
             onChange={onFirstName}
             value={firstName}
-            autoComplete='true	Try'
+            autoComplete='false'
             required
           />
           <Input
             type='text'
-            autoComplete
+            autoComplete='false'
             placeholder='Last Name'
             onChange={onLastName}
             value={lastName}
@@ -233,7 +236,7 @@ const AddUser = ({
           />
           <Input
             type='text'
-            autoComplete
+            autoComplete='off'
             placeholder='Username'
             onChange={onUsernameInput}
             value={username}
@@ -241,8 +244,8 @@ const AddUser = ({
           />
           <Input
             type='text'
-            autoComplete
-            placeholder='@'
+            autoComplete='off'
+            placeholder='Email'
             onChange={onEmailInput}
             value={email}
             required
@@ -348,6 +351,7 @@ const OldUser = ({
           updateData: { lastPlayed: new Date() },
           action: 'UPDATE_LASTPLAYED'
         }
+        // eslint-disable-next-line
         const lastPlayedResponse = await updateUser(
           lastPlayedUpdate,
           fetchedUser.username
@@ -452,11 +456,11 @@ const DisplayQuestion = ({
 }) => {
   useEffect(() => {
     if (currentQuestion === 10) setCurrentQuestion(0)
-  }, [currentQuestion])
+  }, [currentQuestion, setCurrentQuestion])
 
   useEffect(() => {
     setPauseTimer(true)
-  }, [])
+  }, [setPauseTimer])
 
   return (
     <>
@@ -497,16 +501,17 @@ const Quiz = () => {
   const [score, setScore] = useState(0)
   const [currentQuestion, setCurrentQuestion] = useState(1)
   const [showScore, setShowScore] = useState(false)
-  const [limit, setLimit] = useState(10)
+  const [limit] = useState(10)
   const [attempt, setAttempt] = useState(1)
   const [user, setUser] = useState('')
   const [oldUser, setOldUser] = useState(false)
   const [secondsLeft, setSecondsLeft] = useState(45)
   const [register, setRegister] = useState(true)
+  // eslint-disable-next-line
   const [isActive, setIsActive] = useState(false)
   const [canPlay, setCanPlay] = useState(true)
   const [pauseTimer, setPauseTimer] = useState(true)
-  const [questionIndex, setQuestionIndex] = useState(0)
+  // const [questionIndex, setQuestionIndex] = useState(0)
   // let timer = 30;
 
   const intervalRef = useRef()
@@ -550,6 +555,7 @@ const Quiz = () => {
 
   useEffect(() => {
     if (secondsLeft === 0) nextQuestion()
+    // eslint-disable-next-line
   }, [secondsLeft])
 
   function beginQuiz () {
@@ -558,6 +564,7 @@ const Quiz = () => {
 
   useEffect(() => {
     beginQuiz()
+    // eslint-disable-next-line
   }, [])
 
   useEffect(() => {
@@ -584,9 +591,9 @@ const Quiz = () => {
     }
   }
 
-  function toggle () {
-    setIsActive(true)
-  }
+  // function toggle () {
+  //   setIsActive(true)
+  // }
 
   function resetTimer () {
     setSecondsLeft(30)
