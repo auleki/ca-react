@@ -38,15 +38,12 @@ checkout form
 - - [] add discountCode and ones not added to the db model
 
 ## Confirmation Page 
-<<<<<<< HEAD
 - Put up an emoji of confetti bursting, congratulate them on placing an order and inform them about a call to confirm their order
 
 ## Quiz Page 
 [x] Save scores on all quiz -> Transfer winner into the winner collection 
-=======
 - Put up an emoji of confetti busting, congratulate them on placing an order and inform them about a call to confirm their order
 
->>>>>>> 168ca9ad28d1d1f9c854fa00b6ad17056b85eeeb
 
 
 ## Quiz Page 
@@ -67,5 +64,9 @@ checkout form
 
  ## ABOUT US PAGE 
  - change the background color of the page
- - change the header image to another texture so as to blend with the black overall background
- - use icons to liven up the page 
+ [x] change the header image to another texture so as to blend with the black overall background
+ [x] use icons to liven up the page 
+
+ ## Shopping Cart
+ [] - change bordered button to text but (Create Order & co)
+

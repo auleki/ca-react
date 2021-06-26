@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react'
-import { ParentContainer, FButton } from './StyledComponents'
+import React from 'react'
+import { ParentContainer } from './StyledComponents'
 
-const Experiment = () => { 
-  
-  const dateOne = new Date("02/07/2021")
+const Experiment = () => {
+  const dateOne = new Date('02/07/2021')
   const dateTwo = new Date()
 
   const differenceInTime = dateTwo.getTime() - dateOne.getTime()
@@ -19,12 +18,12 @@ const Experiment = () => {
       </ParentContainer>
     )
   }
-  
-    return (
-      <ParentContainer>
-       <h2>Begin Game...</h2>
-       <p>Now we start the game</p>
-      </ParentContainer>
+
+  return (
+    <ParentContainer>
+      <h2>Begin Game...</h2>
+      <p>Now we start the game</p>
+    </ParentContainer>
   )
 }
 

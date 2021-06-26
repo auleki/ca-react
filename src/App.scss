@@ -82,15 +82,56 @@ button {
     }
 }
 
-// .mobile-menu {
-//     display: none;
-// }
-
+.mobile-menu {
+    display: none;
+}
 // .cart-icon {
 //     // background: #d61d1d;
 //     // padding: 5em 0;
 // }
 
+.toast {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    bottom: 30px;
+
+    .show {
+        visibility: visible;
+        animation: fadein .5s, fadeout .5s 2.5s;
+    }
+}
+
+@keyframes fadein {
+    from {
+        bottom: 0;
+        opacity: 0;
+    }
+
+    to {
+        bottom: 30px;
+        opacity: 1;
+    }
+}
+
+@keyframes fadeout {
+    from {
+        bottom: 30px;
+        opacity: 1;
+    }
+
+    to {
+        bottom: 0;
+        opacity: 0;
+    }
+}
 
 nav {
     padding: 1rem;
@@ -307,11 +348,46 @@ nav {
     }
 }
 
-@media (min-width: 320px) and (max-width: 720px) {
+
+@media (min-width: 320px) and (max-width: 520px) {
     .mobile-menu {
-        display: block;
+        display: flex;
+    }
+
+    nav .nav-links {
+        // display: none;
+        display: flex;
+        height: 100vh;
+        overflow-y: hidden;
+        background: #1a1a1a;
+        width: 100%;
+        left: -100%;
+        gap: 5em;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        position: absolute;
+        transition: 300ms ease-in;
+        padding: 0;
+        top: 80px;
+
+        &.active {
+            padding: 1em 0;
+            z-index: 30;
+            left: 0;
+            border-bottom: 2px solid $c1;
+
+            .nav-link {
+                font-size: 2em;
+            }
+        }
     }
 }
+// @media (min-width: 320px) and (max-width: 720px) {
+//     .mobile-menu {
+//         display: block;
+//     }
+// }
 
 @keyframes grownDown {
     0% {
@@ -682,7 +758,7 @@ header {
     width: 100%;
     padding: 1rem 0;
     // margin: 5rem 0 2em;
-    border-top: 3px solid $c1;
+    // border-top: 3px solid $c1;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -958,7 +1034,7 @@ footer {
     width: 4rem;
     border-radius: 100px;
     border: .3rem solid $c1;
-    background: $c3;
+    background: $c4;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1335,4 +1411,25 @@ footer {
 
 .mobile_raise {
     padding-top: 10%;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: .3;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.blinker {
+    // animation-name: blink;
+    // animation-duration: 10s;
+    // animation-timing-function: ease-in;
+    animation: blink 2s infinite forwards;
 }

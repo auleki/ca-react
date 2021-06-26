@@ -1,41 +1,44 @@
 import React, { useEffect } from 'react'
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack'
 import {
-  Button,
+  // Button,
   CheckoutCard,
   ActionRow,
   EmptyCartStyle,
   FButton,
-  Paragraph
+  Paragraph,
+  TextButton
 } from '../StyledComponents'
-import Shopping from '../../assets/shopping.webp'
 import Box from '../../assets/box.png'
-import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { icons } from '../constants'
+import { Link } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 import CartLength from './CartLength'
-import { formatToComma } from "../../api/operationsAPI";
-import { updateItems, updatePrice } from "../../features/cart/cartSlice";
+import { formatToComma } from '../../api/operationsAPI'
+import { updateItems, updatePrice } from '../../features/cart/cartSlice'
 
 const TotalView = ({ price }) => (
-  <div className="total-price">
+  <div className='total-price'>
     <p>Total: ₦ {formatToComma(price)}</p>
-    <Link to="/confirm">
-      <FButton>
-        Create Order
-      </FButton>
+    <Link to='/confirm'>
+      <TextButton>
+        <span className='text'>Create Order</span>
+        <span className='icon'>{icons.create}</span>
+      </TextButton>
+      {/* <FButton>Create Order</FButton> */}
     </Link>
   </div>
 )
 
 const EmptyCart = () => (
   <EmptyCartStyle>
-    <div className="imageBox">
-      <img src={Box} alt="empty cart"/>
+    <div className='imageBox'>
+      <img src={Box} alt='empty cart' />
     </div>
     <Paragraph>Cart is empty!</Paragraph>
-    <Link to="/">
+    <Link to='/'>
       <FButton primary>
-      <ArrowBackIcon /> <span>Go Shopping</span> 
+        <ArrowBackIcon /> <span>Go Shopping</span>
       </FButton>
     </Link>
   </EmptyCartStyle>
@@ -58,7 +61,6 @@ const TOTAL_ITEMS = () => {
     })
     dispatch(updateItems(itemCount))
     dispatch(updatePrice(totalPrice))
-
   }, [cartItems, totalPrice, itemCount])
 
   return (
@@ -75,12 +77,7 @@ const Checkout = () => {
   return (
     <CheckoutCard>
       <ActionRow>
-        {
-          cartItems.length !== 0
-            ? <TOTAL_ITEMS />
-            : <EmptyCart />
-        }
-
+        {cartItems.length !== 0 ? <TOTAL_ITEMS /> : <EmptyCart />}
       </ActionRow>
     </CheckoutCard>
   )

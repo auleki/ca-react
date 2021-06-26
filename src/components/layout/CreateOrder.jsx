@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
 import axios from 'axios'
 import { useField } from '../../hooks/'
-import { useHistory } from "react-router-dom";
+import { useHistory } from 'react-router-dom'
 import { generateId } from '../../services/idGen'
 import { useSelector } from 'react-redux'
-import { saveOrder } from "../../services/operations";
+import { saveOrder } from '../../services/operations'
 import {
-  BasicCard,
+  // BasicCard,
   Form,
   RowLayout,
   SubTitle,
@@ -19,10 +19,10 @@ import {
   SummaryCard,
   FormContainer,
   FormCard,
-  OrderPage,
-  Page
-} from "../StyledComponents";
-import { formatToComma } from "../../api/operationsAPI"
+  OrderPage
+  // Page
+} from '../StyledComponents'
+import { formatToComma } from '../../api/operationsAPI'
 
 const CreateOrder = () => {
   const firstName = useField('text')
@@ -33,18 +33,18 @@ const CreateOrder = () => {
   const history = useHistory()
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo(0, 0)
   }, [])
 
-  const { cartItems, price } = useSelector(state => state)
+  const { cartItems, price, items } = useSelector(state => state)
 
   // eslint-disable-next-line
-  function openNewTab(url) {
-    const win = window.open(url, '_blank')
-    win.focus()
-  }
+  // function openNewTab (url) {
+  //   const win = window.open(url, '_blank')
+  //   win.focus()
+  // }
 
-  function saveUrlToStorage(load, key) {
+  function saveUrlToStorage (load, key) {
     if (localStorage.getItem(key)) {
       localStorage.removeItem(key)
       localStorage.setItem(key, JSON.stringify(load))
@@ -69,13 +69,13 @@ const CreateOrder = () => {
     },
     discountCode: null,
     orderNumber: `${vuid}CA`,
-    price,
+    price
   }
 
   const returnToken = token => `Bearer ${token}`
 
-  // speak to paystack API  
-  const makeOrder = async (e) => {
+  // speak to paystack API
+  const makeOrder = async e => {
     e.preventDefault()
     let tRef, paymentUrl
     let baseUrl = process.env.REACT_APP_PS_INIT
@@ -84,7 +84,7 @@ const CreateOrder = () => {
     const padPrice = parseInt(`${price}00`)
     const paystackLoad = {
       amount: padPrice,
-      email: email.value.toLowerCase(),
+      email: email.value.toLowerCase()
     }
 
     const currentToken = returnToken(GOLDEN)
@@ -102,105 +102,90 @@ const CreateOrder = () => {
         saveOrder(dbLoad)
           .then(data => data)
           .catch(e => console.log(e))
-        saveUrlToStorage(payInfo, "payInfo")
-        history.push("/payment")
+        saveUrlToStorage(payInfo, 'payInfo')
+        history.push('/payment')
       } else {
-        console.log("Transaction failed " + firstName.value + ' please try again')
+        console.log(
+          'Transaction failed ' + firstName.value + ' please try again'
+        )
       }
     } catch (error) {
-      console.log("WE HAVE A PROBLEM")
+      console.log('WE HAVE A PROBLEM')
       console.log(error.message)
-      console.log("-------------------")
+      console.log('-------------------')
     }
     // if transaction successful, then we save new order to database
     //else we tell user transaction failed and have them try again
     // verify transaction
   }
 
-
   return (
-    // <div className="full">
-      <OrderPage>
-        <FormContainer>
-       
-
-        {/* <BasicCard> */}
-            <div className="form-title">
-              <SummaryHeader>
-                <Title>
-                  Confirm order and pay
-                </Title>
-                <Paragraph>
-                  Delivery is free within Lagos, outside Lagos we handle 50% of the your fee
-                </Paragraph>
-              </SummaryHeader>
-              
-            </div>
-          <FormCard>
-            <Form onSubmit={makeOrder}>
-              <SubTitle uppercase>
-                PAYMENT INFO
-              </SubTitle>
-              <RowLayout>
-                <Input
-                  placeholder="First Name"
-                  onChange={firstName.onChange}
-                  value={firstName.value}
-                  required
-                />
-                <Input
-                  placeholder="Last Name"
-                  onChange={lastName.onChange}
-                  value={lastName.value}
-                  required
-                />
-              </RowLayout>
-
+    <OrderPage>
+      <FormContainer>
+        <div className='form-title'>
+          <SummaryHeader>
+            <Title className='blinker'>Confirm order and pay</Title>
+            <Paragraph>
+              Delivery is free within Lagos, outside Lagos we handle 50% of the
+              your fee
+            </Paragraph>
+          </SummaryHeader>
+        </div>
+        <FormCard>
+          <Form onSubmit={makeOrder}>
+            <SubTitle uppercase>PAYMENT INFO</SubTitle>
+            <RowLayout>
               <Input
-                placeholder="Email"
-                onChange={email.onChange}
-                value={email.value}
+                placeholder='First Name'
+                onChange={firstName.onChange}
+                value={firstName.value}
                 required
               />
-
               <Input
-                placeholder="Phone Number"
-                onChange={phone.onChange}
-                value={phone.value}
+                placeholder='Last Name'
+                onChange={lastName.onChange}
+                value={lastName.value}
                 required
               />
+            </RowLayout>
 
-              <Input
-                placeholder="Location"
-                onChange={location.onChange}
-                value={location.value}
-                required
-              />
+            <Input
+              placeholder='Email'
+              onChange={email.onChange}
+              value={email.value}
+              required
+            />
 
-              {/* <div> */}
-                <Button primary>
-                  Pay for order
-                </Button>
-              {/* </div> */}
+            <Input
+              placeholder='Phone Number'
+              onChange={phone.onChange}
+              value={phone.value}
+              required
+            />
 
-            </Form>
+            <Input
+              placeholder='Location'
+              onChange={location.onChange}
+              value={location.value}
+              required
+            />
+
+            {/* <div> */}
+            <Button primary>Pay for order</Button>
+            {/* </div> */}
+          </Form>
 
           <SummaryCard>
             <h3>You are to pay</h3>
-            <p className="totalPrice">
-              <span>N</span>{formatToComma(price)}
+            <p className='totalPrice'>
+              <span>N</span>
+              {formatToComma(price)}
             </p>
-            <p className="info">
-              You have selected {cartItems.length} product(s)
-            </p>
+            <p className='info'>You have selected {items} product(s)</p>
           </SummaryCard>
-          </FormCard> 
-          </FormContainer>
-        {/* </BasicCard> */}
-        
-      </OrderPage>
-    // </div>
-
+        </FormCard>
+      </FormContainer>
+    </OrderPage>
   )
 }
 
