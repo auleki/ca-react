@@ -185,10 +185,10 @@ export const StyledButton = styled.button`
 `
 
 export const Title = styled.h1(
-  ({ size, center, uppercase, bold }) => css`
+  ({ size, center, uppercase, bold, color }) => css`
     padding: 0;
     text-transform: ${uppercase ? 'uppercase' : 'none'};
-    color: ${styleColors.white};
+    color: ${color || styleColors.white};
     font-size: ${size || 2.2}em;
     font-weight: ${bold ? 800 : 400};
     text-align: ${center ? 'center' : 'left'};
@@ -383,6 +383,35 @@ export const Wrapper = styled.div`
 // background: -webkit-linear-gradient(to right, #fcb045, #fd1d1d, #833ab4);  /* Chrome 10-25, Safari 5.1-6 */
 // background: linear-gradient(to right, #fcb045, #fd1d1d, #833ab4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
+export const ImageSliderContainer = styled.div(
+  ({ minimized, color }) => css`
+    display: flex;
+    max-width: 300px;
+
+    .productImage {
+      height: auto;
+      /* width: 200px; */
+    }
+
+    .swiper-pagination-bullet-active {
+      background-color: ${styleColors.orange};
+    }
+
+    .swiper-container-horizontal {
+      padding-bottom: 1.2em;
+      /* background: ${styleColors.green}; */
+    }
+
+    .swiper-container-horizontal > .swiper-pagination-bullets {
+      /* position: relative; */
+      transform: rotateZ(90deg) translatey(-1em);
+      top: .2em;
+      z-index: 0;
+      /* background-color: ${styleColors.white}; */
+    }
+  `
+)
+
 export const StyleClothCard = styled.div(
   ({ compact, inStock }) => css`
     background: ${styleColors.lightBlack};
@@ -396,6 +425,11 @@ export const StyleClothCard = styled.div(
     transition: border-bottom 300ms ease-in, background 400ms ease-in-out;
     border-radius: 0.3em;
 
+    .productImage {
+      height: auto;
+      width: 200px;
+    }
+    
     .info_one,
     .info_two {
       display: flex;
@@ -404,7 +438,65 @@ export const StyleClothCard = styled.div(
     }
 
     .info_two {
-      margin-top: 2em;
+      margin-top: 1em;
+    }
+
+    .size_select {
+      font-size: 12px;
+      padding: 1em;
+
+      h4 {
+        margin: 0 0 1.5em;
+      }
+
+      input[type='radio'] {
+        display: none;
+      }
+
+      .radio_container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /* background: ${styleColors.orange}; */
+      }
+
+      label {
+        position: relative;
+        cursor: pointer;
+        font-weight: 400;
+        padding-right: 32px;
+      }
+
+      label:nth-last-child(1) {
+        padding-right: 0;
+      }
+
+      label::before {
+        content: '';
+        border: 2px solid #fff;
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        margin: -8px 20px -4px 0;
+      }
+
+      label::after {
+        content: '';
+        display: inline-block;
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(26, 26, 26, 0);
+        width: 7px;
+        height: 7px;
+        left: 3.5px;
+        top: 12.5px;
+        margin: -8px 20px -8px 0;
+      }
+
+      input[type='radio']:checked + label::after {
+        background: rgba(255, 255, 255, 1);
+      }
     }
 
     .image {
@@ -417,14 +509,17 @@ export const StyleClothCard = styled.div(
       }
       img {
         height: auto;
-        width: 70%;
+        width: 200px;
       }
     }
 
-    .price {
+    .category {
       color: ${styleColors.orange};
+    }
+
+    .price {
       font-size: 1.2em;
-      /* letter-spacing: 0em; */
+      font-weight: 600;
     }
 
     &:hover {
