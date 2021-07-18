@@ -1,6 +1,6 @@
 [
   {
-    "sizes": [],
+    "sizes": ["Medium","Large"],
     "name": "Sweat 01",
     "price": 8000,
     "category": "Sweatshirts",
@@ -13,7 +13,7 @@
     "productId": "00X62157CA"
   },
   {
-    "sizes": [],
+    "sizes": ["Small","Large"],
     "name": "Sweat 02",
     "price": 8000,
     "category": "Sweatshirts",
@@ -26,7 +26,7 @@
     "productId": "00X53874CA"
   },
   {
-    "sizes": [],
+    "sizes": ["Small", "Medium","Large"],
     "name": "Sweat 03",
     "price": 8000,
     "category": "Sweatshirts",
@@ -39,7 +39,7 @@
     "productId": "00X90610CA"
   },
   {
-    "sizes": [],
+    "sizes": ["Small", "Medium","Large"],
     "name": "Sweat 04",
     "price": 8000,
     "category": "Sweatshirts",
@@ -52,7 +52,7 @@
     "productId": "00X99776CA"
   },
   {
-    "sizes": [],
+    "sizes": ["Large"],
     "name": "Sweat 05",
     "price": 8000,
     "category": "Sweatshirts",
@@ -65,7 +65,7 @@
     "productId": "00X72782CA"
   },
   {
-    "sizes": [],
+    "sizes": ["Small", "Medium","Large"],
     "name": "Polo 01",
     "price": 8000,
     "category": "Polos",
@@ -78,7 +78,7 @@
     "productId": "00X13073CA"
   },
   {
-    "sizes": [],
+    "sizes": ["Small", "Medium","Large"],
     "name": "Polo 03",
     "price": 8000,
     "category": "Polos",
@@ -91,7 +91,7 @@
     "productId": "00X97670CA"
   },
   {
-    "sizes": [],
+    "sizes": ["Small"],
     "name": "Polo 04",
     "price": 8000,
     "category": "Polos",
@@ -104,7 +104,7 @@
     "productId": "00X15246CA"
   },
   {
-    "sizes": [],
+    "sizes": ["Small", "Medium","Large"],
     "name": "Polo 05",
     "price": 8000,
     "category": "Polos",
@@ -117,7 +117,7 @@
     "productId": "00X1253CA"
   },
   {
-    "sizes": [],
+    "sizes": ["Small", "Medium","Large"],
     "name": "Polo 06",
     "price": 8000,
     "category": "Polos",
@@ -130,7 +130,7 @@
     "productId": "00X31196CA"
   },
   {
-    "sizes": [],
+    "sizes": ["Medium","Large"],
     "name": "T-Shirt 01",
     "price": 6000,
     "category": "T-Shirts",
@@ -143,7 +143,7 @@
     "productId": "00X9200CA"
   },
   {
-    "sizes": [],
+    "sizes": ["Small", "Medium","Large"],
     "name": "T-Shirt 02",
     "price": 6000,
     "category": "T-Shirts",
@@ -156,7 +156,7 @@
     "productId": "00X78408CA"
   },
   {
-    "sizes": [],
+    "sizes": ["Large"],
     "name": "T-Shirt 03",
     "price": 6000,
     "category": "T-Shirts",
@@ -169,7 +169,7 @@
     "productId": "00X53472CA"
   },
   {
-    "sizes": [],
+    "sizes": ["Medium","Large"],
     "name": "T-Shirt 04",
     "price": 6000,
     "category": "T-Shirts",
@@ -182,7 +182,7 @@
     "productId": "00X58502CA"
   },
   {
-    "sizes": [],
+    "sizes": ["Small", "Medium"],
     "name": "T-Shirt 05",
     "price": 6000,
     "category": "T-Shirts",
@@ -195,7 +195,7 @@
     "productId": "00X65937CA"
   },
   {
-    "sizes": [],
+    "sizes": ["Medium","Large"],
     "name": "T-Shirt 06",
     "price": 6000,
     "category": "T-Shirts",

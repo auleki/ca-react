@@ -1,6 +1,7 @@
 import React from 'react'
 import styled, { css, keyframes } from 'styled-components'
 import { styleColors, fonts } from './constants'
+import TickIcon from './tick.png'
 // import { Link } from 'react-router-dom';
 
 // @import './variables';
@@ -289,7 +290,7 @@ export const Container = styled.div(
       .titleIcon {
         height: auto;
         width: 3em;
-        margin-right: .5em;
+        margin-right: 0.5em;
       }
 
       .content {
@@ -311,10 +312,7 @@ export const Container = styled.div(
       .title {
         display: flex;
         align-items: center;
-        /* justify-content: center; */
-        /* background: ${styleColors.green}; */
         h2 {
-          /* line-height: 45px; */
           text-align: center;
         }
       }
@@ -341,7 +339,7 @@ export const Container = styled.div(
         display: flex;
         flex-direction: column;
         justify-content: center;
-        font-size: .9em;
+        font-size: 0.9em;
 
         .titleIcon {
           margin-bottom: 1em;
@@ -355,7 +353,7 @@ export const Container = styled.div(
 
     @media (min-width: 320px) and (max-width: 356px) {
       .title {
-        font-size: .7em;
+        font-size: 0.7em;
       }
     }
   `
@@ -379,9 +377,6 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
 `
-// background: #833ab4;  /* fallback for old browsers */
-// background: -webkit-linear-gradient(to right, #fcb045, #fd1d1d, #833ab4);  /* Chrome 10-25, Safari 5.1-6 */
-// background: linear-gradient(to right, #fcb045, #fd1d1d, #833ab4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
 export const ImageSliderContainer = styled.div(
   ({ minimized, color }) => css`
@@ -390,7 +385,6 @@ export const ImageSliderContainer = styled.div(
 
     .productImage {
       height: auto;
-      /* width: 200px; */
     }
 
     .swiper-pagination-bullet-active {
@@ -399,15 +393,12 @@ export const ImageSliderContainer = styled.div(
 
     .swiper-container-horizontal {
       padding-bottom: 1.2em;
-      /* background: ${styleColors.green}; */
     }
 
     .swiper-container-horizontal > .swiper-pagination-bullets {
-      /* position: relative; */
       transform: rotateZ(90deg) translatey(-1em);
-      top: .2em;
+      top: 0.2em;
       z-index: 0;
-      /* background-color: ${styleColors.white}; */
     }
   `
 )
@@ -418,6 +409,7 @@ export const StyleClothCard = styled.div(
     color: ${styleColors.white};
     position: relative;
     height: 100%;
+    
     padding: 2em 1em;
     border-bottom: 0.2em solid transparent;
     /* border-image: linear-gradient(to bottom, red, rgba(0, 0, 0, 0.5)) 1 100%; */
@@ -439,6 +431,64 @@ export const StyleClothCard = styled.div(
 
     .info_two {
       margin-top: 1em;
+    }
+
+    .select_size {
+      
+      h4 {
+        font-weight: 400;
+      }
+
+      .classccalsxx
+      p {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .checkbox {
+        opacity: 0;
+        transition: all 300ms ease-in;
+      }
+
+      .checkbox, label {
+        --webkit-tap-highlight-color: transparent;
+      }
+
+      .checkbox + label {
+        position: relative;
+        padding-left: 2em;
+        line-height: 1.5em;
+        cursor: pointer;
+      }
+
+      .checkbox + label::before {
+        content: "";
+        left: 0;
+        top: 0;
+        position: absolute;
+        width: 1em;
+        height: 1em;
+        outline: .15em solid ${styleColors.white};
+        background: transparent;
+      }
+      
+      .checkbox:checked + label::after {
+        content: "";
+        left: 0;
+        top: 0;
+        position: absolute;
+        width: 1.2em;
+        height: 1.2em;
+        outline: .15em solid transparent;
+        background: ${styleColors.orange};
+      }
+      .checkbox_container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1em 0;
+      }
     }
 
     .size_select {

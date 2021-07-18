@@ -21,14 +21,14 @@ const cartSlice = createSlice({
     },
     addToCart: (state, { payload }) => {
       // eslint-disable-next-line
+      // console.log('PL FROM - RTK', payload)
       const productItem = state.products.find(
         prod => prod.name === payload.name
       )
+
       const inCart = state.cartItems.find(item =>
         item.name === payload.name ? true : false
       )
-
-      // inCart ? console.log("YaaaaaY!") : console.log('Booo')
 
       return {
         ...state,
