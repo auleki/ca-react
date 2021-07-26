@@ -7,7 +7,7 @@ import {
   EmptyCartStyle,
   FButton,
   Paragraph,
-  TextButton
+  SButton
 } from '../StyledComponents'
 import Box from '../../assets/box.png'
 import { icons } from '../constants'
@@ -21,10 +21,10 @@ const TotalView = ({ price }) => (
   <div className='total-price'>
     <p>Total: ₦ {formatToComma(price)}</p>
     <Link to='/confirm'>
-      <TextButton>
+      <SButton transparent>
         <span className='text'>Create Order</span>
         <span className='icon'>{icons.create}</span>
-      </TextButton>
+      </SButton>
       {/* <FButton>Create Order</FButton> */}
     </Link>
   </div>
@@ -65,6 +65,19 @@ const TOTAL_ITEMS = () => {
 
   return (
     <>
+      <div className='total-items-mobile'>
+        <Link to='/'>
+          <SButton transparent>
+            <span className='icon'>{icons.back}</span>
+          </SButton>
+        </Link>
+        <p>Total: ₦{formatToComma(price)}</p>
+        <Link to='/confirm'>
+          <SButton transparent>
+            <span className='icon'>{icons.create}</span>
+          </SButton>
+        </Link>
+      </div>
       <CartLength />
       <TotalView price={price} />
     </>

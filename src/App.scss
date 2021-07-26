@@ -1038,7 +1038,7 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 1000;
+    z-index: 100;
     bottom: 10%;
     right: 5%;
 }
@@ -1061,13 +1061,11 @@ footer {
     }
 
     nav {
-        // position: relative;
         width: 100%;
 
         .links {
             font-size: 1.3rem;
             text-align: center;
-
         }
 
         .navbar {
@@ -1428,8 +1426,26 @@ footer {
 }
 
 .blinker {
-    // animation-name: blink;
-    // animation-duration: 10s;
-    // animation-timing-function: ease-in;
+    color: $c1;
     animation: blink 2s infinite forwards;
+}
+
+.checkbox {
+    height: 3em;
+    width: 3em;
+}
+
+.check_text {
+    font-size: 1.5em;
+}
+
+.check_area {
+    display: flex;
+    align-items: center;
+    margin-top: 1.5em;
+    gap: .5em;
+}
+
+.checkboxes {
+    padding-left: 1em;
 }

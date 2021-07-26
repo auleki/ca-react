@@ -6,7 +6,6 @@ import { generateId } from '../../services/idGen'
 import { useSelector } from 'react-redux'
 import { saveOrder } from '../../services/operations'
 import {
-  // BasicCard,
   Form,
   RowLayout,
   SubTitle,
@@ -14,15 +13,14 @@ import {
   Title,
   Input,
   Button,
-  // FButton,
   SummaryHeader,
   SummaryCard,
   FormContainer,
   FormCard,
   OrderPage
-  // Page
 } from '../StyledComponents'
 import { formatToComma } from '../../api/operationsAPI'
+import { styleColors } from '../constants'
 
 const CreateOrder = () => {
   const firstName = useField('text')
@@ -124,7 +122,9 @@ const CreateOrder = () => {
       <FormContainer>
         <div className='form-title'>
           <SummaryHeader>
-            <Title className='blinker'>Confirm order and pay</Title>
+            <Title color={styleColors.orange} className='blinker'>
+              Confirm order and pay
+            </Title>
             <Paragraph>
               Delivery is free within Lagos, outside Lagos we handle 50% of the
               your fee

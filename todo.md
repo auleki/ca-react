@@ -70,3 +70,6 @@ checkout form
  ## Shopping Cart
  [] - change bordered button to text but (Create Order & co)
 
+ ##Clothlisting Page 
+ [] - complete select size feature
+

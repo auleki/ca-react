@@ -1,6 +1,7 @@
 import React from 'react'
 import styled, { css, keyframes } from 'styled-components'
 import { styleColors, fonts } from './constants'
+import TickIcon from './tick.png'
 // import { Link } from 'react-router-dom';
 
 // @import './variables';
@@ -31,13 +32,15 @@ const HoverObj = keyframes`
 
 export const TextButton = styled.button(
   ({ color }) => css`
-    /* background: ${styleColors.orange}; */
-    background: transparent;
+    background: ${styleColors.orange};
+    /* background: transparent; */
     width: 100%;
     padding: 1em;
     display: flex;
+    gap: 0.6em;
+    /* margin-top: 1em; */
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     transition: 200ms ease-in;
 
     .text {
@@ -46,9 +49,10 @@ export const TextButton = styled.button(
     }
 
     .icon {
-      font-size: 1.2em;
-      transform: scale(2);
-      margin: .5em 1em;
+      font-size: 1.6em;
+      /* transform: scale(2); */
+      /* margin: .5em 1em; */
+      /* top: 1em; */
       color: ${styleColors.white};
     }
 
@@ -63,7 +67,7 @@ export const TextButton = styled.button(
     @media (min-width: 315px) and (max-width: 626px) {
       width: 10em;
       border-radius: 0;
-      
+
       .icon {
         display: none;
       }
@@ -72,8 +76,8 @@ export const TextButton = styled.button(
 )
 
 export const SButton = styled.button(
-  ({ size }) => css`
-    background: ${styleColors.orange};
+  ({ size, transparent }) => css`
+    background: ${transparent ? styleColors.black : styleColors.orange};
     color: ${styleColors.white};
     display: flex;
     padding: 1em;
@@ -135,7 +139,7 @@ export const SButton = styled.button(
       cursor: not-allowed;
       .icon {
         background: ${styleColors.red};
-        display: none;
+        /* display: none; */
         transform: rotateZ('90deg');
       }
   }
@@ -185,10 +189,10 @@ export const StyledButton = styled.button`
 `
 
 export const Title = styled.h1(
-  ({ size, center, uppercase, bold }) => css`
+  ({ size, center, uppercase, bold, color }) => css`
     padding: 0;
     text-transform: ${uppercase ? 'uppercase' : 'none'};
-    color: ${styleColors.white};
+    color: ${color || styleColors.white};
     font-size: ${size || 2.2}em;
     font-weight: ${bold ? 800 : 400};
     text-align: ${center ? 'center' : 'left'};
@@ -289,7 +293,7 @@ export const Container = styled.div(
       .titleIcon {
         height: auto;
         width: 3em;
-        margin-right: .5em;
+        margin-right: 0.5em;
       }
 
       .content {
@@ -311,10 +315,7 @@ export const Container = styled.div(
       .title {
         display: flex;
         align-items: center;
-        /* justify-content: center; */
-        /* background: ${styleColors.green}; */
         h2 {
-          /* line-height: 45px; */
           text-align: center;
         }
       }
@@ -341,7 +342,7 @@ export const Container = styled.div(
         display: flex;
         flex-direction: column;
         justify-content: center;
-        font-size: .9em;
+        font-size: 0.9em;
 
         .titleIcon {
           margin-bottom: 1em;
@@ -355,7 +356,7 @@ export const Container = styled.div(
 
     @media (min-width: 320px) and (max-width: 356px) {
       .title {
-        font-size: .7em;
+        font-size: 0.7em;
       }
     }
   `
@@ -379,32 +380,205 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
 `
-// background: #833ab4;  /* fallback for old browsers */
-// background: -webkit-linear-gradient(to right, #fcb045, #fd1d1d, #833ab4);  /* Chrome 10-25, Safari 5.1-6 */
-// background: linear-gradient(to right, #fcb045, #fd1d1d, #833ab4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+export const ImageSliderContainer = styled.div(
+  ({ minimized, color }) => css`
+    display: flex;
+    /* max-width: 300px; */
+    /* background-color: ${styleColors.white}; */
+    max-width: 300px;
+    max-height: 500px;
+
+    /* .productImage {
+      height: auto;
+      width: 400px;
+    } */
+
+    .swiper-slide {
+      /* background: ${styleColors.green}; */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 0 1em;
+      img {
+        /* border-top-right-radius: .3em;
+        border-top-left-radius: .3em; */
+        /* padding: 0 1em; */
+        border-radius: .3em;
+        object-fit: cover;
+        object-position: top;
+        height: 100%;
+        width: 100%;
+        /* border: 1px solid ${styleColors.black}; */
+      }
+    }
+
+    .swiper-pagination-bullet-active {
+      background-color: ${styleColors.orange};
+    }
+
+    .swiper-container-horizontal {
+      padding-bottom: 2em;
+    }
+
+    .swiper-container-horizontal > .swiper-pagination-bullets {
+      /* transform: rotateZ(90deg); */
+       bottom: 0.2em;
+      z-index: 100;
+      position: absolute;
+    }
+  `
+)
 
 export const StyleClothCard = styled.div(
   ({ compact, inStock }) => css`
-    background: ${styleColors.lightBlack};
-    color: ${styleColors.white};
+    /* background: ${styleColors.lightBlack}; */
+    background: ${styleColors.white};
+    /* background: transparent; */
+    color: ${styleColors.black};
     position: relative;
     height: 100%;
-    padding: 2em 1em;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    /* padding: 2em 1em; */
+    border: .2em solid transparent;
     border-bottom: 0.2em solid transparent;
-    /* border-image: linear-gradient(to bottom, red, rgba(0, 0, 0, 0.5)) 1 100%; */
-    /* width: 80%; */
-    transition: border-bottom 300ms ease-in, background 400ms ease-in-out;
+    transition: border-bottom 300ms ease-in, 
+    background 100ms ease-in;
     border-radius: 0.3em;
-
+    
+    /* .info_one,
+    .info_two,
+    .select_size {
+      background: ${styleColors.white};
+    } */
+    
     .info_one,
     .info_two {
       display: flex;
+      padding: 1em 1em 2em;
       align-items: center;
       justify-content: space-between;
     }
 
     .info_two {
-      margin-top: 2em;
+      /* margin-top: 1em; */
+    }
+
+    .select_size {
+      
+      h4 {
+        font-weight: 400;
+      }
+
+      p {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .checkbox {
+        opacity: 0;
+        transition: all 300ms ease-in;
+      }
+
+      .checkbox, label {
+        --webkit-tap-highlight-color: transparent;
+      }
+
+      .checkbox + label {
+        position: relative;
+        padding-left: 2em;
+        line-height: 1.5em;
+        cursor: pointer;
+      }
+
+      .checkbox + label::before {
+        content: "";
+        left: 0;
+        top: 0;
+        position: absolute;
+        width: 1em;
+        height: 1em;
+        outline: .15em solid ${styleColors.white};
+        background: transparent;
+      }
+      
+      .checkbox:checked + label::after {
+        content: "";
+        left: 0;
+        top: 0;
+        position: absolute;
+        width: 1.2em;
+        height: 1.2em;
+        outline: .15em solid transparent;
+        background: ${styleColors.orange};
+      }
+      .checkbox_container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1em 0;
+      }
+    }
+
+    .size_select {
+      font-size: 12px;
+      padding: 1em;
+
+      h4 {
+        margin: 0 0 1.5em;
+      }
+
+      input[type='radio'] {
+        display: none;
+      }
+
+      .radio_container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /* background: ${styleColors.orange}; */
+      }
+
+      label {
+        position: relative;
+        cursor: pointer;
+        font-weight: 400;
+        padding-right: 32px;
+      }
+
+      label:nth-last-child(1) {
+        padding-right: 0;
+      }
+
+      label::before {
+        content: '';
+        border: 2px solid #fff;
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        margin: -8px 20px -4px 0;
+      }
+
+      label::after {
+        content: '';
+        display: inline-block;
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(26, 26, 26, 0);
+        width: 7px;
+        height: 7px;
+        left: 3.5px;
+        top: 12.5px;
+        margin: -8px 20px -8px 0;
+      }
+
+      input[type='radio']:checked + label::after {
+        background: rgba(255, 255, 255, 1);
+      }
     }
 
     .image {
@@ -417,18 +591,29 @@ export const StyleClothCard = styled.div(
       }
       img {
         height: auto;
-        width: 70%;
+        width: 200px;
       }
     }
 
+    .cloth_name {
+      /* font-family: ${fonts.workSans}; */
+    }
+
+    .category, .cloth_name {
+      letter-spacing: .05em;
+    }
+    
     .price {
-      color: ${styleColors.orange};
       font-size: 1.2em;
-      /* letter-spacing: 0em; */
+      color: ${styleColors.orange};
+      font-family: ${fonts.bitter}, cursive;
+      /* font-weight: 600; */
     }
 
     &:hover {
       background: transparent;
+      color: ${styleColors.white};
+      /* border: 0.2em solid ${styleColors.orange}; */
       border-bottom: 0.2em solid
         ${inStock ? styleColors.orange : styleColors.red};
     }
@@ -528,7 +713,7 @@ export const Button = ({ primary, children, bgColor }) => {
 
 export const CardContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 2fr);
+  grid-template-columns: repeat(4, 400px);
   place-items: center;
   grid-row-gap: 3em;
   grid-column-gap: 1em;
@@ -537,7 +722,7 @@ export const CardContainer = styled.div`
   margin: 2rem 0;
   height: 100%;
   text-align: center;
-  padding: 0 1rem;
+  /* padding: 0 2rem; */
 
   @media (min-width: 820px) and (max-width: 1130px) {
     display: grid;
@@ -840,6 +1025,23 @@ export const CartCard = styled.div`
     font-weight: 600;
   }
 
+  .sizes-selected {
+    display: flex;
+    list-style-type: none;
+    margin-top: 0.5em;
+    /* gap: 1em; */
+
+    .size-selected {
+      padding: 0.5em;
+      border-radius: 0.1em;
+      background: ${styleColors.orange};
+
+      &:not(:last-child) {
+        margin-right: 0.5em;
+      }
+    }
+  }
+
   .card-info {
     display: flex;
     /* background: #fff; */
@@ -1053,22 +1255,27 @@ export const Input = styled.input`
 
 export const CheckoutCard = styled.div`
   /* Return the gray background on mobile ... MAYBE?  */
-  /* background-color: #212121; */
+  /* background-color: #ffd900; */
   color: #fff;
   text-align: left;
   display: flex;
   width: 100%;
   flex-direction: column;
-  padding: 1em 3rem;
+  /* padding: 1em 3rem; */
+
+  .total-items-mobile {
+    display: none;
+  }
 
   .total-price,
   .items-length {
     display: flex;
     padding: 1em;
     flex-direction: column;
+    gap: 1em;
     border-radius: 0.2em;
     align-items: center;
-    background: ${styleColors.lightBlack};
+    background: transparent;
     justify-content: center;
   }
 
@@ -1076,6 +1283,22 @@ export const CheckoutCard = styled.div`
     font-weight: 400;
     text-align: center;
     padding: 1rem 0;
+  }
+
+  @media (max-width: 626px) {
+    padding: 1em 0;
+
+    .total-price,
+    .items-length {
+      display: none;
+    }
+
+    .total-items-mobile {
+      display: inline-flex;
+      align-items: center;
+      width: 100%;
+      justify-content: space-between;
+    }
   }
 
   /* @media (max-width: 720px) {
@@ -1304,6 +1527,10 @@ export const HeaderStyle = styled.div`
   /* background: linear-gradient(to right, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5) ), url("https://res.cloudinary.com/checkadigs-cloud/image/upload/v1606397756/IMG_E4430_vzk1ol.jpg") fixed no-repeat; */
   /* background: linear-gradient(to right, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5) ) fixed no-repeat; */
   /* background-size: cover; */
+
+  .swiper-slide {
+    /* height: 600px; */
+  }
 
   @media (max-width: 530px) {
     height: 30%;
