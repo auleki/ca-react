@@ -14,13 +14,15 @@ export const styleColors = {
 export const fonts = {
   main: 'Signika',
   primary: 'Limelight',
-  secondary: ''
+  secondary: '',
+  workSans: 'Work Sans',
+  bitter: 'Bitter'
 }
 
 export const icons = {
   plus: <IoIcons.IoAdd />,
   back: <IoIcons.IoChevronBack />,
-  create: <IoIcons.IoAddCircleOutline />
+  create: <IoIcons.IoAddSharp />
 }
 
 export const questionList = [

@@ -20,8 +20,8 @@ const cartSlice = createSlice({
       state.items = 0
     },
     addToCart: (state, { payload }) => {
+      console.log('PL FROM - RTK', payload)
       // eslint-disable-next-line
-      // console.log('PL FROM - RTK', payload)
       const productItem = state.products.find(
         prod => prod.name === payload.name
       )

@@ -42,7 +42,7 @@ const ImageSlider = ({ imageUrls }) => {
       ))} */}
         {imageUrls.map((url, i) => (
           <SwiperSlide key={i}>
-            <img className='productImage' src={url} alt={url} />
+            <img src={url} alt={url} />
           </SwiperSlide>
         ))}
       </Swiper>
@@ -56,78 +56,81 @@ const SizeInput = ({ size, onChange }) => {
       {/* <div className='size_select' onClick={onSizeSelect}> */}
       <input
         type='radio'
-        value={size}
+        value={size.size}
         name='wear_size'
-        id={size}
+        id={size.size}
         //
         // isSelect
         onChange={onChange}
       />
-      <label htmlFor={size}>{size}</label>
+      <label htmlFor={size.size}>{size.sizeAbbreviation}</label>
     </>
   )
 }
 
-const ClothCard = ({ cloth }) => {
-  const [pickedSizes, setPickedSizes] = useState(['Small', 'Medium'])
-  const dispatch = useDispatch()
-  const isDisabled = cloth.inStock ? false : true
+const SelectSize = ({ size, cloth }) => {
+  console.log('PL - SELECT SIZE', size)
 
-  console.log('CLOTH OBJECTS', cloth)
-
-  const cartContent = { ...cloth, selectedSizes: pickedSizes }
-
-  // console.log('cartContent:', cartContent)
-
-  function onSizeSelect (e) {
-    console.log('RADIO SELECTION', e.target.value)
-    setPickedSizes(e.target.value)
+  function onSelect (e) {
+    console.log(`${cloth.productId} is selected of size ${e.target.value}`)
   }
 
   return (
+    <p>
+      <input
+        type='checkbox'
+        className='checkbox'
+        // checked={}
+        onChange={onSelect}
+        name={cloth.productId}
+        id={`${cloth.productId}-${size.size}`}
+        value={size.size}
+      />
+      <label htmlFor={`${cloth.productId}-${size.size}`}>
+        {size.sizeAbbreviation}
+      </label>
+    </p>
+  )
+}
+
+const ClothCard = ({ cloth }) => {
+  // const [pickedSizes, setPickedSizes] = useState(
+  //   new Array(cloth.sizes.length).fill({ ...cloth.sizes, selected: false })
+  // )
+  const [check, setCheck] = useState(cloth.sizes.map(_ => false))
+  // console.log('TESTING SIZE', cloth)
+  const dispatch = useDispatch()
+  const isDisabled = cloth.inStock ? false : true
+
+  console.log(check)
+
+  // const cartContent = {
+  //   ...cloth,
+  //   price: cloth.price * pickedSizes.length
+  // }
+
+  // function onSizeSelect (e) {
+  //   console.log('RADIO SELECTION', e.target.value)
+  //   setPickedSizes(e.target.value)
+  // }
+
+  return (
     <StyleClothCard inStock={cloth.inStock}>
+      {/* <div className='image'> */}
+      {/* {!cloth.inStock && <img src={OutOfStock} alt='' className='outOfStock' />} */}
+      <ImageSlider imageUrls={cloth.imageUrls} />
+      {/* </div> */}
       <div className='info_one'>
         <p className='cloth_name'>{cloth.name}</p>
         <p className='price'>₦{formatToComma(cloth.price)}</p>
       </div>
-      <div className='image'>
-        {/* {!cloth.inStock && (
-          <img src={OutOfStock} alt='' className='outOfStock' />
-        )} */}
-        <ImageSlider imageUrls={cloth.imageUrls} />
-      </div>
-      {/* RADIO FOR SIZES COMPONENT GOES HERE  */}
-      {/* <div className='size_select' onChange={onSizeSelect}>
-        <div className='radio_container'>
-        {cloth.sizes.map((size, id) => (
-          <SizeInput key={id} onChange={onSizeSelect} size={size} />
-          ))}
-          </div>
-        </div> */}
       {/* TRYING OUT SELECT BOX  */}
       <div className='select_size'>
-        <h4>Select your size</h4>
+        {/* <h4>Select your size</h4> */}
         <div className='checkbox_container'>
-          <p>
-            <input
-              type='checkbox'
-              className='checkbox'
-              name={cloth.productId}
-              id={`${cloth.productId}-${cloth.sizes[0]}`}
-              value='large'
-            />
-            <label htmlFor={`${cloth.productId}-${cloth.sizes[0]}`}>L</label>
-          </p>
-          <p>
-            <input
-              type='checkbox'
-              className='checkbox'
-              name={cloth.productId}
-              id={`${cloth.productId}-${cloth.sizes[1]}`}
-              value='extraLarge'
-            />
-            <label htmlFor={`${cloth.productId}-${cloth.sizes[1]}`}>XL</label>
-          </p>
+          {cloth.sizes.map((size, i) => (
+            <SelectSize key={i} size={size} cloth={cloth} />
+          ))}
         </div>
       </div>
       <div className='info_two'>
@@ -135,6 +138,7 @@ const ClothCard = ({ cloth }) => {
         <SButton
           disabled={isDisabled}
           onClick={() => dispatch(addToCart(cloth))}
+          // onClick={() => dispatch(addToCart(cartContent))}
         >
           <span className='text'>
             {isDisabled ? 'Out of stock' : 'Add to cart'}
@@ -157,8 +161,10 @@ const ClothListings = () => {
     state => state
   )
 
+  // const clothesToLoad = products ?
+
   const override = css`
-    display: block;
+    width: 100%;
     margin: 0 auto;
   `
 
@@ -178,6 +184,8 @@ const ClothListings = () => {
   }, [cartItems, totalPrice])
 
   useEffect(() => {
+    // if (products.length === 0) {
+    // }
     dispatch(fetchRecipes())
   }, [dispatch])
 

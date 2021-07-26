@@ -1429,3 +1429,23 @@ footer {
     color: $c1;
     animation: blink 2s infinite forwards;
 }
+
+.checkbox {
+    height: 3em;
+    width: 3em;
+}
+
+.check_text {
+    font-size: 1.5em;
+}
+
+.check_area {
+    display: flex;
+    align-items: center;
+    margin-top: 1.5em;
+    gap: .5em;
+}
+
+.checkboxes {
+    padding-left: 1em;
+}

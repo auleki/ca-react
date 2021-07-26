@@ -1,6 +1,17 @@
 [
   {
-    "sizes": ["Medium","Large"],
+    "sizes": [
+      {
+        "size":"Large",
+        "sizeAbbreviation":"L",
+        "isChecked": false
+      },
+      {
+        "size":"Extra Large",
+        "sizeAbbreviation":"XL",
+        "isChecked": false
+      }
+    ],
     "name": "Sweat 01",
     "price": 8000,
     "category": "Sweatshirts",
@@ -13,7 +24,23 @@
     "productId": "00X62157CA"
   },
   {
-    "sizes": ["Small","Large"],
+    "sizes": [
+      {
+        "size":"Large",
+        "sizeAbbreviation":"L",
+        "isChecked": false
+      },
+      {
+        "size":"Extra Extra Large",
+        "sizeAbbreviation":"XXL",
+        "isChecked": false
+      },
+      {
+        "size":"Small",
+        "sizeAbbreviation":"S",
+        "isChecked": false
+      }
+    ],
     "name": "Sweat 02",
     "price": 8000,
     "category": "Sweatshirts",
@@ -26,7 +53,18 @@
     "productId": "00X53874CA"
   },
   {
-    "sizes": ["Small", "Medium","Large"],
+    "sizes": [
+       {
+      "size":"Large",
+      "sizeAbbreviation":"L",
+      "isChecked": false
+    },
+    {
+      "size":"Extra Large",
+      "sizeAbbreviation":"XL",
+      "isChecked": false
+    }
+    ],
     "name": "Sweat 03",
     "price": 8000,
     "category": "Sweatshirts",
@@ -39,7 +77,18 @@
     "productId": "00X90610CA"
   },
   {
-    "sizes": ["Small", "Medium","Large"],
+    "sizes": [
+      {
+        "size":"Extra Extra Large",
+        "sizeAbbreviation":"XXL",
+        "isChecked": false
+      },
+      {
+        "size":"Small",
+        "sizeAbbreviation":"S",
+        "isChecked": false
+      }
+    ],
     "name": "Sweat 04",
     "price": 8000,
     "category": "Sweatshirts",
@@ -52,7 +101,13 @@
     "productId": "00X99776CA"
   },
   {
-    "sizes": ["Large"],
+    "sizes": [
+      {
+        "size":"Small",
+        "sizeAbbreviation":"S",
+        "isChecked": false
+      }
+    ],
     "name": "Sweat 05",
     "price": 8000,
     "category": "Sweatshirts",
@@ -65,7 +120,18 @@
     "productId": "00X72782CA"
   },
   {
-    "sizes": ["Small", "Medium","Large"],
+    "sizes": [
+      {
+        "size":"Large",
+        "sizeAbbreviation":"L",
+        "isChecked": false
+      },
+      {
+        "size":"Small",
+        "sizeAbbreviation":"S",
+        "isChecked": false
+      }
+    ],
     "name": "Polo 01",
     "price": 8000,
     "category": "Polos",
@@ -78,7 +144,18 @@
     "productId": "00X13073CA"
   },
   {
-    "sizes": ["Small", "Medium","Large"],
+    "sizes": [
+      {
+        "size":"Large",
+        "sizeAbbreviation":"L",
+        "isChecked": false
+      },
+      {
+        "size":"Extra Large",
+        "sizeAbbreviation":"XL",
+        "isChecked": false
+      }
+    ],
     "name": "Polo 03",
     "price": 8000,
     "category": "Polos",
@@ -91,7 +168,23 @@
     "productId": "00X97670CA"
   },
   {
-    "sizes": ["Small"],
+    "sizes":[
+      {
+        "size":"Extra Large",
+        "sizeAbbreviation":"XL",
+        "isChecked": false
+      },
+      {
+        "size":"Extra Extra Large",
+        "isChecked": false,
+        "sizeAbbreviation":"XXL"
+      },
+      {
+        "size":"Small",
+        "sizeAbbreviation":"S",
+        "isChecked": false
+      }
+    ],
     "name": "Polo 04",
     "price": 8000,
     "category": "Polos",
@@ -104,7 +197,13 @@
     "productId": "00X15246CA"
   },
   {
-    "sizes": ["Small", "Medium","Large"],
+    "sizes": [
+      {
+        "size":"Small",
+        "sizeAbbreviation":"S",
+        "isChecked": false
+      }
+    ],
     "name": "Polo 05",
     "price": 8000,
     "category": "Polos",
@@ -117,7 +216,18 @@
     "productId": "00X1253CA"
   },
   {
-    "sizes": ["Small", "Medium","Large"],
+    "sizes": [
+      {
+        "size":"Extra Extra Large",
+        "sizeAbbreviation":"XXL",
+        "isChecked": false
+      },
+      {
+        "size":"Small",
+        "sizeAbbreviation":"S",
+        "isChecked": false
+      }
+    ],
     "name": "Polo 06",
     "price": 8000,
     "category": "Polos",
@@ -130,7 +240,18 @@
     "productId": "00X31196CA"
   },
   {
-    "sizes": ["Medium","Large"],
+    "sizes": [
+      {
+        "size":"Extra Extra Large",
+        "sizeAbbreviation":"XXL",
+        "isChecked": false
+      },
+      {
+        "size":"Small",
+        "sizeAbbreviation":"S",
+        "isChecked": false
+      }
+    ],
     "name": "T-Shirt 01",
     "price": 6000,
     "category": "T-Shirts",
@@ -143,7 +264,13 @@
     "productId": "00X9200CA"
   },
   {
-    "sizes": ["Small", "Medium","Large"],
+    "sizes": [
+      {
+        "size":"Small",
+        "sizeAbbreviation":"S",
+        "isChecked": false
+      }
+    ],
     "name": "T-Shirt 02",
     "price": 6000,
     "category": "T-Shirts",
@@ -156,7 +283,18 @@
     "productId": "00X78408CA"
   },
   {
-    "sizes": ["Large"],
+    "sizes": [
+      {
+        "size":"Extra Extra Large",
+        "sizeAbbreviation":"XXL",
+        "isChecked": false
+      },
+      {
+        "size":"Small",
+        "sizeAbbreviation":"S",
+        "isChecked": false
+      }
+    ],
     "name": "T-Shirt 03",
     "price": 6000,
     "category": "T-Shirts",
@@ -169,7 +307,18 @@
     "productId": "00X53472CA"
   },
   {
-    "sizes": ["Medium","Large"],
+    "sizes": [
+      {
+        "size":"Extra Extra Large",
+        "isChecked": false,
+        "sizeAbbreviation":"XXL"
+      },
+      {
+        "size":"Small",
+        "sizeAbbreviation":"S",
+        "isChecked": false
+      }
+    ],
     "name": "T-Shirt 04",
     "price": 6000,
     "category": "T-Shirts",
@@ -182,7 +331,13 @@
     "productId": "00X58502CA"
   },
   {
-    "sizes": ["Small", "Medium"],
+    "sizes": [
+      {
+        "size":"Large",
+        "sizeAbbreviation":"L",
+        "isChecked": false
+      }
+    ],
     "name": "T-Shirt 05",
     "price": 6000,
     "category": "T-Shirts",
@@ -195,7 +350,28 @@
     "productId": "00X65937CA"
   },
   {
-    "sizes": ["Medium","Large"],
+    "sizes": [
+      {
+        "size":"Large",
+        "sizeAbbreviation":"L",
+        "isChecked": false
+      },
+      {
+        "size":"Extra Large",
+        "sizeAbbreviation":"XL",
+        "isChecked": false
+      },
+      {
+        "size":"Extra Extra Large",
+        "sizeAbbreviation":"XXL",
+        "isChecked": false
+      },
+      {
+        "size":"Small",
+        "sizeAbbreviation":"S",
+        "isChecked": false
+      }
+    ],
     "name": "T-Shirt 06",
     "price": 6000,
     "category": "T-Shirts",
